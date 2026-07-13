@@ -3,6 +3,8 @@ import { Link, useLocation } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useCart } from "../context/CartContext";
 import { useStoreSettings } from "../hooks/useStoreSettings";
+import { Icon } from "./Icon";
+import { supabase } from "../lib/supabase";
 
 
 type LayoutProps = {
@@ -53,14 +55,27 @@ export function Layout({ children }: LayoutProps) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [footerForm, setFooterForm] = useState({ name: "", email: "", subject: "", message: "" });
   const [footerSubmitted, setFooterSubmitted] = useState(false);
+  const [footerError, setFooterError] = useState<string | null>(null);
+  const [footerSubmitting, setFooterSubmitting] = useState(false);
 
-  const handleFooterSubmit = (e: React.FormEvent) => {
+  const handleFooterSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setFooterError(null);
+    setFooterSubmitting(true);
+    const { error: err } = await supabase.from("contact_requests").insert({
+      name: footerForm.name.trim(),
+      email: footerForm.email.trim(),
+      subject: footerForm.subject.trim() || null,
+      message: footerForm.message.trim(),
+    });
+    setFooterSubmitting(false);
+    if (err) {
+      setFooterError(err.message);
+      return;
+    }
     setFooterSubmitted(true);
-    // Reset form
-    setTimeout(() => {
-      setFooterSubmitted(false);
-    }, 5000);
+    setFooterForm({ name: "", email: "", subject: "", message: "" });
+    setTimeout(() => setFooterSubmitted(false), 6000);
   };
   const storeName = getStoreName(settings);
   const logoUrl = getLogoUrl(settings);
@@ -103,13 +118,7 @@ export function Layout({ children }: LayoutProps) {
               to="/"
               className="flex items-center gap-2.5 transition-opacity hover:opacity-80 shrink-0"
             >
-              <img
-                src="/assets/svg/Imago.svg"
-                alt="All On Deck"
-                width={36}
-                height={36}
-                className="h-9 w-auto object-contain"
-              />
+              <Icon name="logo" width={36} height={41} />
               <span className="font-heading text-base font-bold tracking-widest text-[#76abbf] uppercase leading-tight">
                 ALL ON DECK
               </span>
@@ -153,11 +162,7 @@ export function Layout({ children }: LayoutProps) {
                   className="relative flex items-center justify-center rounded-lg p-2 text-[#f6ebd4] hover:bg-[#066175]/35 transition-colors"
                   aria-label="Cart"
                 >
-                  <img
-                    src="/assets/svg/icono carrito compra.svg"
-                    alt="Cart"
-                    className="h-6 w-auto object-contain"
-                  />
+                  <Icon name="cart" size={24} color="currentColor" />
                   {itemCount > 0 && (
                     <span className="absolute -top-0.5 -right-0.5 flex h-4.5 min-w-[18px] items-center justify-center rounded-full bg-[#e38622] px-1 text-[10px] font-bold text-white leading-none">
                       {itemCount}
@@ -172,11 +177,7 @@ export function Layout({ children }: LayoutProps) {
                     className="flex items-center justify-center rounded-lg p-2 text-[#f6ebd4] hover:bg-[#066175]/35 transition-colors"
                     aria-label={user ? "Account" : "Sign in"}
                   >
-                    <img
-                      src="/assets/svg/icono perfil.svg"
-                      alt="Profile"
-                      className="h-6 w-auto object-contain"
-                    />
+                    <Icon name="profile" size={24} color="currentColor" />
                   </Link>
                 )}
 
@@ -199,11 +200,7 @@ export function Layout({ children }: LayoutProps) {
                 className="relative flex items-center justify-center rounded-lg p-2 text-[#f6ebd4] hover:bg-[#066175]/35"
                 aria-label="Cart"
               >
-                <img
-                  src="/assets/svg/icono carrito compra.svg"
-                  alt="Cart"
-                  className="h-5 w-auto object-contain"
-                />
+                <Icon name="cart" size={20} color="currentColor" />
                 {itemCount > 0 && (
                   <span className="absolute -top-0.5 -right-0.5 flex h-4 min-w-[16px] items-center justify-center rounded-full bg-[#e38622] px-0.5 text-[9px] font-bold text-white leading-none">
                     {itemCount}
@@ -270,7 +267,7 @@ export function Layout({ children }: LayoutProps) {
                     onClick={() => setMenuOpen(false)}
                     className="flex min-h-[44px] w-full items-center gap-3 rounded-lg px-4 py-3 text-sm font-semibold text-[#f6ebd4]/80 hover:bg-[#066175]/25 hover:text-white transition-colors"
                   >
-                    <img src="/assets/svg/icono perfil.svg" alt="" className="h-5 w-auto object-contain" />
+                    <Icon name="profile" size={20} color="currentColor" />
                     {user ? "Account" : "Sign in"}
                   </Link>
                 )}
@@ -395,6 +392,11 @@ export function Layout({ children }: LayoutProps) {
               </div>
             ) : (
               <form onSubmit={handleFooterSubmit} className="mt-6 w-full">
+                {footerError && (
+                  <div className="mb-3 rounded-lg bg-red-900/60 px-3 py-2 text-xs text-red-200">
+                    {footerError}
+                  </div>
+                )}
                 <div className="border-4 border-[#044155] bg-[#055b6d] rounded-2xl p-4 grid grid-cols-1 md:grid-cols-2 gap-3 w-full">
                   <div className="flex flex-col gap-2">
                     <input
@@ -415,8 +417,7 @@ export function Layout({ children }: LayoutProps) {
                     />
                     <input
                       type="text"
-                      required
-                      placeholder="Subject"
+                      placeholder="Subject (optional)"
                       value={footerForm.subject}
                       onChange={(e) => setFooterForm({ ...footerForm, subject: e.target.value })}
                       className="bg-[#044155] text-white placeholder-brand-cream/40 px-3 py-2 text-sm rounded-lg focus:outline-none focus:ring-1 focus:ring-[#e38622] font-sans"
@@ -434,9 +435,10 @@ export function Layout({ children }: LayoutProps) {
                     <div className="flex justify-end">
                       <button
                         type="submit"
-                        className="bg-[#e38622] hover:bg-orange-600 text-white text-xs font-bold uppercase tracking-wider px-6 py-2 rounded-lg transition-transform hover:scale-105"
+                        disabled={footerSubmitting}
+                        className="bg-[#e38622] hover:bg-orange-600 text-white text-xs font-bold uppercase tracking-wider px-6 py-2 rounded-lg transition-transform hover:scale-105 disabled:opacity-70"
                       >
-                        SEND
+                        {footerSubmitting ? "SENDING…" : "SEND"}
                       </button>
                     </div>
                   </div>

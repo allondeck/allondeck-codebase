@@ -173,6 +173,9 @@ export type ContactRequestRow = {
   name: string;
   email: string;
   message: string;
+  phone: string | null;
+  subject: string | null;
+  notes: string | null;
   created_at: string;
 };
 export type ContactRequestInsert = Partial<ContactRequestRow>;

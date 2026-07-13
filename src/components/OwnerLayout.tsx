@@ -16,7 +16,7 @@ export function OwnerLayout() {
   const location = useLocation();
 
   return (
-    <div className="mx-auto max-w-[1400px] px-6 lg:px-12 pb-20">
+    <div className="mx-auto max-w-[1400px] px-6 lg:px-12 pb-20 pt-8">
       <div className="flex flex-col gap-6 md:flex-row md:gap-8">
         {/* Vertical sidebar - desktop */}
         <aside className="hidden w-48 shrink-0 md:block text-left">

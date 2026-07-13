@@ -167,13 +167,13 @@ NAVIGATION LINKS (use these when directing users):
 - Shop / Products: [Shop](/products)
 - About & Team: [About](/about)
 - Get an Estimate: [Free Estimate](/estimate)
-- Contact: [Contact Us](/contact)
+- Contact / Estimate: [Get in Touch](/estimate)
 - Track Order: [Look Up Order](/lookup-order)
 - Account: [My Account](/account)
 ${productSection}${categorySection}
 
 POLICIES & SUPPORT:
-- Returns: Customers should reach out to the team. Link: [Contact Us](/contact)
+- Returns: Customers should reach out to the team. Link: [Get in Touch](/estimate)
 - Shipping: We ship to ${shippingCountries}. Estimated delivery is ${estimatedDelivery}.
 - Payments: Standard online payment methods accepted at checkout.
 - Order tracking: [Look Up Order](/lookup-order)

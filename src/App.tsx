@@ -16,7 +16,7 @@ import Signup from "./pages/Signup";
 import Setup from "./pages/Setup";
 import LookupOrder from "./pages/LookupOrder";
 import About from "./pages/About";
-import Contact from "./pages/Contact";
+import NotFound from "./pages/NotFound";
 
 const Products = lazy(() => import("./pages/Products"));
 const ProductDetail = lazy(() => import("./pages/ProductDetail"));
@@ -115,7 +115,7 @@ function App() {
             <Route path="/account/orders/:id" element={<OrderDetail />} />
             <Route path="/lookup-order" element={<LookupOrder />} />
             <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
+
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/setup" element={<Setup />} />
@@ -179,6 +179,7 @@ function App() {
               />
               <Route path="orders/:id" element={<OwnerOrderDetail />} />
             </Route>
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>
       </Layout>

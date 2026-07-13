@@ -214,7 +214,7 @@ export default function Designs() {
                   {design.label}
                 </h3>
                 <Link
-                  to="/contact"
+                  to="/estimate"
                   className="mt-2 inline-block text-xs font-bold uppercase tracking-wider text-[#e38622] hover:text-orange-400 transition-colors font-sans"
                 >
                   Get this design →
