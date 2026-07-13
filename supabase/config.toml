@@ -1,0 +1,12 @@
+# Supabase project config (used by CLI for deploy, etc.)
+# See https://supabase.com/docs/guides/cli/config
+
+# Allow OPTIONS (CORS preflight) to reach the function without a JWT.
+# The function still validates the JWT for POST and only sends email for owner@example.com.
+[functions.test-owner-login]
+verify_jwt = false
+
+# Browser CORS preflight (OPTIONS) does not send Authorization; Supabase would reject it with JWT verify on.
+# This function uses the service role server-side only; it still requires a valid orderId from your app.
+[functions.create-checkout-session]
+verify_jwt = false

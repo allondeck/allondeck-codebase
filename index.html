@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/logo.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Store – Online store" />
+    <title>Store</title>
+    <!-- Preload LCP image so it starts with the document (logo or fallback) -->
+    <link rel="preload" as="image" href="/logo.png" fetchpriority="high" />
+  </head>
+  <body>
+    <div id="root">
+      <!-- Static shell: first paint before JS. React replaces this on mount. -->
+      <div
+        style="
+          min-height: 100vh;
+          display: flex;
+          flex-direction: column;
+          background: #f9fafb;
+        "
+      >
+        <header
+          style="
+            height: 4rem;
+            flex-shrink: 0;
+            border-bottom: 1px solid #e5e7eb;
+            background: rgba(255, 255, 255, 0.95);
+            display: flex;
+            align-items: center;
+            padding-left: 1rem;
+            padding-right: 1rem;
+          "
+        >
+          <img
+            src="/logo.png"
+            alt=""
+            width="140"
+            height="36"
+            fetchpriority="high"
+            style="
+              height: 36px;
+              width: auto;
+              max-width: 140px;
+              object-fit: contain;
+              object-position: left;
+            "
+          />
+        </header>
+        <main
+          style="
+            flex: 1;
+            max-width: 1280px;
+            margin: 0 auto;
+            width: 100%;
+            padding: 1.5rem 1rem;
+          "
+        >
+          <div
+            style="
+              height: 1.25rem;
+              width: 12rem;
+              max-width: 100%;
+              background: #e5e7eb;
+              border-radius: 0.375rem;
+            "
+            aria-hidden="true"
+          ></div>
+        </main>
+      </div>
+    </div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
