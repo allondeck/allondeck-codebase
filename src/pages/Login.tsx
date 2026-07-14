@@ -26,35 +26,6 @@ export default function Login() {
     // else: browser redirects to Google, then back to app
   }
 
-  const TEST_OWNER_EMAIL = "owner@example.com";
-  const TEST_OWNER_PASSWORD = "ownerAccount!";
-
-  async function handleTestOwnerLogin() {
-    setError(null);
-    setLoading(true);
-    const { error: err } = await signIn(TEST_OWNER_EMAIL, TEST_OWNER_PASSWORD);
-    setLoading(false);
-    if (err) {
-      setError(err.message);
-      return;
-    }
-    // Notify store owner by email (await so request is sent with session)
-    try {
-      const { error: notifyErr } = await supabase.functions.invoke(
-        "test-owner-login",
-        { method: "POST" }
-      );
-      if (notifyErr) {
-        console.warn(
-          "Test owner login notification failed:",
-          notifyErr.message
-        );
-      }
-    } catch (e) {
-      console.warn("Test owner login notification failed:", e);
-    }
-    navigate(redirectTo);
-  }
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -91,15 +62,7 @@ export default function Login() {
           <GoogleIcon className="h-5 w-5" />
           Continue with Google
         </Button>
-        <Button
-          type="button"
-          variant="secondary"
-          disabled={loading}
-          onClick={handleTestOwnerLogin}
-          className="w-full py-3 border border-[#e38622]/50 bg-[#e38622]/10 text-[#e38622] hover:bg-[#e38622]/20 focus:ring-[#e38622] focus:ring-offset-[#044155] hover:scale-105 active:scale-95 transition-all duration-200"
-        >
-          Login with test owner
-        </Button>
+
         <div className="relative">
           <div
             className="absolute inset-0 flex items-center"

@@ -4,7 +4,8 @@ import type { ProductRow } from '../types/database'
 import type { CategoryRow } from '../types/database'
 
 export type ProductWithCategories = ProductRow & {
-  product_categories?: { categories: CategoryRow | null }[]
+  product_categories?: { categories: CategoryRow | null }[];
+  product_variants?: { stock_quantity: number; is_active: boolean }[];
 }
 
 export type ProductSortBy = 'newest' | 'price_asc' | 'price_desc' | 'stock_asc' | 'stock_desc'
@@ -25,8 +26,8 @@ export function useProductsAdmin(options?: {
     void (async () => {
       setLoading(true)
       const selectFields = options?.categoryId
-        ? '*, product_categories!inner(categories(id, name, slug))'
-        : '*, product_categories(categories(id, name, slug))'
+        ? '*, product_categories!inner(categories(id, name, slug)), product_variants(stock_quantity, is_active)'
+        : '*, product_categories(categories(id, name, slug)), product_variants(stock_quantity, is_active)'
       const sortBy = options?.sortBy ?? 'newest'
       const sortByStock = sortBy === 'stock_asc' || sortBy === 'stock_desc'
 
@@ -59,6 +60,11 @@ export function useProductsAdmin(options?: {
       if (options?.lowStockOnly) {
         raw = raw.filter((p) => {
           const threshold = (p as ProductWithCategories & { low_stock_threshold?: number | null }).low_stock_threshold ?? DEFAULT_LOW_STOCK_THRESHOLD
+          const activeVariants = p.product_variants?.filter(v => v.is_active) || []
+          
+          if (activeVariants.length > 0) {
+            return activeVariants.some(v => v.stock_quantity <= threshold)
+          }
           return p.stock_quantity <= threshold
         })
       }

@@ -58,7 +58,7 @@ function saveCartToStorage(items: CartItem[]) {
 type CartContextValue = {
   items: CartItem[];
   itemCount: number;
-  addItem: (product: ProductRow, quantity?: number) => void;
+  addItem: (product: ProductRow, quantity?: number, variantId?: string | null, variantName?: string | null, variantPrice?: number | null, variantImageUrl?: string | null) => void;
   addCombo: (
     deal: {
       dealId: string;
@@ -77,26 +77,40 @@ const CartContext = createContext<CartContextValue | null>(null);
 
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [items, setItems] = useState<CartItem[]>(loadCartFromStorage);
+  const [isCartOpen, setIsCartOpen] = useState(false);
 
   useEffect(() => {
     saveCartToStorage(items);
   }, [items]);
 
-  const addItem = useCallback((product: ProductRow, quantity = 1) => {
-    setItems((prev) => {
-      const existing = prev.find(
-        (i) => i.type === "product" && i.product.id === product.id,
-      );
-      if (existing && existing.type === "product") {
-        return prev.map((i) =>
-          i.type === "product" && i.product.id === product.id
-            ? { ...i, quantity: i.quantity + quantity }
-            : i,
-        );
-      }
-      return [...prev, { type: "product" as const, product, quantity }];
-    });
-  }, []);
+  const addItem = useCallback(
+    (product: ProductRow, quantity = 1, variantId: string | null = null, variantName: string | null = null, variantPrice: number | null = null, variantImageUrl: string | null = null) => {
+      setItems((prev) => {
+        const itemKey = variantId ? `${product.id}-${variantId}` : product.id;
+        const existingIndex = prev.findIndex((i) => i.type === "product" && getCartLineKey(i) === itemKey);
+        
+        if (existingIndex >= 0) {
+          const clone = [...prev];
+          clone[existingIndex] = {
+            ...clone[existingIndex],
+            quantity: clone[existingIndex].quantity + quantity,
+          } as ProductCartItem;
+          return clone;
+        }
+        return [...prev, { 
+          type: "product", 
+          product, 
+          quantity,
+          variant_id: variantId,
+          variant_name: variantName,
+          variant_price: variantPrice,
+          variant_image_url: variantImageUrl
+        } as ProductCartItem];
+      });
+      setIsCartOpen(true);
+    },
+    [],
+  );
 
   const addCombo = useCallback(
     (

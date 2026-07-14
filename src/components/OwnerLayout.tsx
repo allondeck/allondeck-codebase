@@ -9,6 +9,7 @@ const navItems = [
   { to: "/account/owner/categories", label: "Categories" },
   { to: "/account/owner/coupons", label: "Discounts" },
   { to: "/account/owner/contact", label: "Contact" },
+  { to: "/account/owner/designs", label: "Designs" },
   { to: "/account/owner/settings", label: "Store Settings" },
 ];
 

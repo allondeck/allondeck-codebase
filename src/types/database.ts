@@ -37,9 +37,37 @@ export type ProductRow = {
   category_id: string | null;
   created_at: string;
   updated_at: string;
+  product_variants?: ProductVariantRow[];
 };
 export type ProductInsert = Partial<ProductRow>;
 export type ProductUpdate = Partial<ProductRow>;
+
+export type ProductVariantRow = {
+  id: string;
+  product_id: string;
+  name: string;
+  sku: string | null;
+  price: number | null;
+  compare_at_price: number | null;
+  stock_quantity: number;
+  is_default: boolean;
+  is_active: boolean;
+  created_at: string;
+  updated_at: string;
+};
+export type ProductVariantInsert = Partial<ProductVariantRow>;
+export type ProductVariantUpdate = Partial<ProductVariantRow>;
+
+export type CartItemRow = {
+  id: string;
+  user_id: string | null;
+  session_id: string | null;
+  product_id: string;
+  variant_id: string | null;
+  quantity: number;
+  created_at: string;
+  updated_at: string;
+};
 
 export type ProductWithCategory = ProductRow & {
   categories?: CategoryRow | null;
@@ -94,8 +122,10 @@ export type OrderItemRow = {
   id: string;
   order_id: string;
   product_id: string | null;
+  variant_id: string | null;
   product_name: string;
-  product_price: number | string;
+  variant_name: string | null;
+  product_price: number;
   deal_id: string | null;
   quantity: number;
   created_at: string;
@@ -245,6 +275,19 @@ export type Database = {
             foreignKeyName: "products_category_id_fkey";
             columns: ["category_id"];
             referencedRelation: "categories";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      product_variants: {
+        Row: ProductVariantRow;
+        Insert: ProductVariantInsert;
+        Update: ProductVariantUpdate;
+        Relationships: [
+          {
+            foreignKeyName: "product_variants_product_id_fkey";
+            columns: ["product_id"];
+            referencedRelation: "products";
             referencedColumns: ["id"];
           },
         ];

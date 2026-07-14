@@ -22,7 +22,7 @@ export function useProductBySlug(slug: string | undefined) {
       try {
         const { data, error: err } = await supabase
           .from('products')
-          .select('*, product_categories(category_id)')
+          .select('*, product_categories(category_id), product_variants(*)')
           .eq('slug', slug)
           .eq('is_published', true)
           .single()

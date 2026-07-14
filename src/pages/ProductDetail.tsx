@@ -29,7 +29,28 @@ function getEstimatedDeliveryText(settings: Record<string, unknown>): string {
 export default function ProductDetail() {
   const { slug } = useParams<{ slug: string }>();
   const { product, categoryIds, loading, error } = useProductBySlug(slug);
-  const price = product ? parsePrice(product.price) : 0;
+  
+  const [selectedVariantId, setSelectedVariantId] = useState<string | null>(null);
+  
+  const activeVariants = useMemo(() => {
+    return product?.product_variants?.filter(v => v.is_active).sort((a, b) => {
+      if (a.is_default) return -1;
+      if (b.is_default) return 1;
+      return a.created_at.localeCompare(b.created_at);
+    }) || [];
+  }, [product]);
+
+  useEffect(() => {
+    if (activeVariants.length > 0 && !selectedVariantId) {
+      setSelectedVariantId(activeVariants[0].id);
+    }
+  }, [activeVariants, selectedVariantId]);
+
+  const selectedVariant = useMemo(() => {
+    return activeVariants.find(v => v.id === selectedVariantId) || null;
+  }, [activeVariants, selectedVariantId]);
+
+  const price = selectedVariant?.price != null ? parsePrice(selectedVariant.price) : (product ? parsePrice(product.price) : 0);
   const { products: suggested, loading: suggestedLoading } =
     useSuggestedProducts(
       product?.id ?? null,
@@ -118,14 +139,16 @@ export default function ProductDetail() {
     );
   }
 
-  const productPrice = parsePrice(product.price);
-  const compareAtPrice = parsePrice(product.compare_at_price);
+  const productPrice = price;
+  const compareAtPrice = selectedVariant?.compare_at_price != null ? parsePrice(selectedVariant.compare_at_price) : parsePrice(product.compare_at_price);
   const hasComparePrice = compareAtPrice > 0 && compareAtPrice > productPrice;
-  const inStock = product.stock_quantity > 0;
+  const currentStock = selectedVariant ? selectedVariant.stock_quantity : product.stock_quantity;
+  const inStock = currentStock > 0;
 
   function handleAddToCart() {
     if (!product) return;
-    addItem(product, quantity);
+    const variantPrice = selectedVariant?.price != null ? Number(selectedVariant.price) : undefined;
+    addItem(product, quantity, selectedVariant?.id, selectedVariant?.name, variantPrice, selectedVariant?.image_url);
     setAdded(true);
     setTimeout(() => setAdded(false), 2000);
   }
@@ -190,9 +213,9 @@ export default function ProductDetail() {
     <div className="mx-auto max-w-[1400px] px-6 lg:px-12 py-8 sm:px-6 lg:px-8 w-full">
       <div className="flex flex-col gap-8 lg:flex-row">
         <div className="aspect-square w-full max-w-lg shrink-0 overflow-hidden rounded-lg bg-[#052631]">
-          {product.image_url ? (
+          {selectedVariant?.image_url || product.image_url ? (
             <img
-              src={getSupabaseImageTransformUrl(product.image_url, {
+              src={getSupabaseImageTransformUrl(selectedVariant?.image_url || product.image_url, {
                 width: 600,
                 height: 600,
                 bucket: "products",
@@ -243,7 +266,7 @@ export default function ProductDetail() {
           {!inStock && <p className="mt-2 text-red-400">Out of stock</p>}
           {inStock && (
             <p className="mt-2 text-sm text-[#76abbf]">
-              {product.stock_quantity} in stock
+              {currentStock} in stock
               {estimatedDelivery && (
                 <span className="block mt-1">Ships in {estimatedDelivery}</span>
               )}
@@ -253,6 +276,35 @@ export default function ProductDetail() {
             <p className="mt-2 text-sm text-[#76abbf]">
               Ships in {estimatedDelivery}
             </p>
+          )}
+
+          {activeVariants.length > 0 && (
+            <div className="mt-6">
+              <h3 className="text-sm font-medium text-white mb-3">Select Option</h3>
+              <div className="flex flex-wrap gap-2">
+                {activeVariants.map(variant => {
+                  const isSelected = selectedVariantId === variant.id;
+                  const isVariantOutOfStock = variant.stock_quantity <= 0;
+                  return (
+                    <button
+                      key={variant.id}
+                      onClick={() => setSelectedVariantId(variant.id)}
+                      disabled={isVariantOutOfStock}
+                      className={`
+                        px-4 py-2 rounded-lg border text-sm font-medium transition-all duration-200
+                        ${isSelected 
+                          ? 'border-[#e38622] bg-[#e38622]/10 text-[#e38622]' 
+                          : 'border-[#066175]/40 bg-[#052631] text-white hover:border-[#76abbf]/50'
+                        }
+                        ${isVariantOutOfStock ? 'opacity-50 cursor-not-allowed line-through' : ''}
+                      `}
+                    >
+                      {variant.name}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
           )}
 
           {inStock && (
@@ -269,7 +321,7 @@ export default function ProductDetail() {
                 <button
                   type="button"
                   onClick={() =>
-                    setQuantity((q) => Math.min(product.stock_quantity, q + 1))
+                    setQuantity((q) => Math.min(currentStock, q + 1))
                   }
                   className="px-4 py-2 text-[#f6ebd4] hover:bg-[#066175]/30 transition-colors"
                 >

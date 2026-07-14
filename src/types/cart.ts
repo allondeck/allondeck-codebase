@@ -9,6 +9,10 @@ export type ComboCartItemEntry = {
 export type ProductCartItem = {
   type: "product";
   product: ProductRow;
+  variant_id?: string | null;
+  variant_name?: string | null;
+  variant_price?: number | null;
+  variant_image_url?: string | null;
   quantity: number;
 };
 
@@ -31,7 +35,10 @@ export function isComboCartItem(i: CartItem): i is ComboCartItem {
   return i.type === "combo";
 }
 
-/** Unique key for a cart line (for remove/update). Products: product.id, Combos: 'combo-' + dealId */
+/** Unique key for a cart line (for remove/update). Products: product.id + variant, Combos: 'combo-' + dealId */
 export function getCartLineKey(item: CartItem): string {
-  return item.type === "product" ? item.product.id : `combo-${item.dealId}`;
+  if (item.type === "product") {
+    return item.variant_id ? `${item.product.id}-${item.variant_id}` : item.product.id;
+  }
+  return `combo-${item.dealId}`;
 }

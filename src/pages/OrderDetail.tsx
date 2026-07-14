@@ -241,6 +241,11 @@ export default function OrderDetail() {
                   <h3 className="font-medium text-white">
                     {item.product_name || item.products?.name}
                   </h3>
+                  {(item as any).variant_name && (
+                    <p className="mt-0.5 text-sm text-[#76abbf]">
+                      {(item as any).variant_name}
+                    </p>
+                  )}
                   <div className="mt-1 flex items-center justify-between">
                     <p className="text-sm text-[#f6ebd4]">
                       {formatPrice(unit)} × {item.quantity}

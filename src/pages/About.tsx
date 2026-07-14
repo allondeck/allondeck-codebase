@@ -1,11 +1,6 @@
 import { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 
-function scrollToBio(id: string) {
-  const el = document.getElementById(id);
-  if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-}
-
 export default function About() {
   const location = useLocation();
 
@@ -22,11 +17,17 @@ export default function About() {
       window.scrollTo(0, 0);
     }
   }, [location]);
+  const scrollToSection = (id: string) => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  };
 
   return (
     <div className="bg-[#044155] text-white font-sans">
-      {/* ── HEADER SECTION ────────────────────────────────────────── */}
-      <div className="mx-auto max-w-[1400px] px-6 lg:px-12 text-center pt-16 pb-16">
+      {/* ── HERO SECTION ────────────────────────────────────────── */}
+      <div className="mx-auto max-w-[1000px] px-6 lg:px-12 pt-16 pb-20 text-center">
         <h1 className="font-heading text-5xl font-black tracking-widest text-[#f6ebd4] uppercase sm:text-6xl lg:text-7xl">
           MEET OUR TEAM
         </h1>
@@ -34,198 +35,251 @@ export default function About() {
           A dedicated team with one shared goal: perfection in every detail.
           Discover the crew that makes it all happen.
         </p>
+
+        {/* Hero Teaser Cards Grid */}
+        <div className="mt-16 flex flex-col sm:flex-row justify-center items-center gap-16 sm:gap-10 max-w-[800px] mx-auto">
+          
+          {/* Teaser 1: Ernesto Alvarez */}
+          <div className="flex flex-col items-center text-center w-full max-w-[280px]">
+            {/* Portrait Photo Container */}
+            <div className="relative w-full aspect-[3/4] rounded-[2rem] overflow-hidden border border-[#066175]/35 bg-[#052631] shadow-xl">
+              <img
+                src="/assets/images/8.jpeg"
+                alt="Ernesto Alvarez"
+                className="h-full w-full object-cover"
+              />
+              {/* Wave decoration overlapping bottom-left */}
+              <div className="absolute -bottom-2 -left-2 w-28 pointer-events-none z-20">
+                <svg viewBox="0 0 380.442 62.684" className="w-full h-auto text-[#76abbf]" fill="currentColor">
+                  <path d="M380.437,15.6a4.388,4.388,0,0,0-6.319-3.88c-10.453,4.8-19.785,1.364-28.981-4.008-.894-.522-1.909-.894-2.833-1.383C328.072-1.2,313.45-1.45,299.969,6.776c-14.137,8.628-26.9,8.967-41.157.237C245.143-1.359,230.1-1.622,215.963,6.46a72.2,72.2,0,0,1-8.834,4.334c-8.749,3.522-17.668,4.336-27.3.326-.792-.318-1.581-.652-2.367-1.019q-.972-.453-1.94-.95-1.05-.538-2.1-1.122c-.519-.289-1.038-.579-1.556-.881-.894-.522-1.909-.894-2.833-1.383C154.8-1.764,140.181-2.012,126.7,6.214c-14.137,8.628-26.9,8.966-41.157.237C71.875-1.922,56.836-2.185,42.7,5.9,30.953,12.609,19.3,16.126,6.311,10.614A4.348,4.348,0,0,0,.272,14.681a41.477,41.477,0,0,1-.213,5.4c-.465,3.926,1.845,5.278,6.512,6.4a55.747,55.747,0,0,0,37.374-4.266q5.23-2.549,10.491-5.056a20.369,20.369,0,0,1,18.1-.135c5.432,2.524,10.784,5.174,16.243,7.654a41.316,41.316,0,0,0,33.52.355c5.6-2.434,11.045-5.142,16.508-7.8a21.456,21.456,0,0,1,18.648-.021c6.076,2.906,12.1,5.918,18.374,8.494.13.053.262.09.392.142.808.322,1.618.613,2.431.881a61.814,61.814,0,0,0,7.53,1.681,44.616,44.616,0,0,0,27.331-3.824q7.074-3.46,14.189-6.862a20.371,20.371,0,0,1,18.1-.135c5.431,2.524,10.783,5.173,16.242,7.654a41.308,41.308,0,0,0,33.52.355c5.6-2.434,11.045-5.142,16.508-7.8a21.456,21.456,0,0,1,18.648-.021c6.077,2.906,12.1,5.918,18.374,8.494a36.531,36.531,0,0,0,27.191.631c1.569-.576,3.8-1.868,3.9-2.944C380.427,21.268,380.457,18.572,380.437,15.6Z" />
+                  <path d="M380.437,49.068a4.388,4.388,0,0,0-6.319-3.881c-10.453,4.8-19.785,1.364-28.981-4.008-.894-.522-1.909-.894-2.833-1.382-14.232-7.53-28.854-7.778-42.335.449-14.137,8.627-26.9,8.966-41.157.236-13.669-8.372-28.708-8.635-42.849-.553a72.2,72.2,0,0,1-8.834,4.334c-8.749,3.522-17.668,4.336-27.3.326-.792-.317-1.581-.651-2.367-1.018q-.972-.454-1.94-.95-1.05-.54-2.1-1.123c-.519-.289-1.038-.579-1.556-.881-.894-.522-1.909-.894-2.833-1.383-14.232-7.529-28.855-7.777-42.335.449-14.137,8.628-26.9,8.967-41.157.237-13.669-8.372-28.708-8.635-42.849-.553C30.953,46.079,19.3,49.6,6.311,44.083A4.349,4.349,0,0,0,.272,48.15a41.477,41.477,0,0,1-.213,5.4c-.465,3.926,1.845,5.279,6.512,6.4a55.747,55.747,0,0,0,37.374-4.266q5.23-2.549,10.491-5.056a20.369,20.369,0,0,1,18.1-.135c5.432,2.524,10.784,5.174,16.243,7.654a41.312,41.312,0,0,0,33.52.355c5.6-2.433,11.045-5.142,16.508-7.8a21.456,21.456,0,0,1,18.648-.021c6.076,2.906,12.1,5.918,18.374,8.494.13.053.262.09.392.142q1.212.483,2.431.881a61.814,61.814,0,0,0,7.53,1.681,44.616,44.616,0,0,0,27.331-3.824q7.074-3.46,14.189-6.862a20.375,20.375,0,0,1,18.1-.135c5.431,2.524,10.783,5.174,16.242,7.654a41.308,41.308,0,0,0,33.52.355c5.6-2.433,11.045-5.142,16.508-7.8a21.452,21.452,0,0,1,18.648-.02c6.077,2.905,12.1,5.917,18.374,8.493a36.531,36.531,0,0,0,27.191.631c1.569-.576,3.8-1.867,3.9-2.944C380.427,54.737,380.457,52.042,380.437,49.068Z" />
+                </svg>
+              </div>
+            </div>
+            
+            {/* Teaser Info */}
+            <div className="mt-4 w-full">
+              <span className="block text-xs text-[#8fc5db] font-bold tracking-widest uppercase">
+                PRESIDENT.
+              </span>
+              <span className="block text-lg font-black tracking-widest text-[#f6ebd4] uppercase mt-1">
+                Ernesto Alvarez
+              </span>
+              
+              {/* Teaser CTA & Contact */}
+              <div className="mt-4 flex items-center justify-center gap-3">
+                <button
+                  onClick={() => scrollToSection("ernesto-bio")}
+                  className="px-5 py-2.5 rounded-2xl bg-[#f6ebd4] text-[#05586d] text-xs font-bold uppercase tracking-wider hover:bg-white hover:scale-105 transition-all shadow-md"
+                >
+                  View Bio
+                </button>
+                <a
+                  href="https://wa.me/18005550199"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center text-[#e38622] hover:text-[#d2751b] transition-all hover:scale-105 drop-shadow-md rounded-full"
+                  aria-label="WhatsApp"
+                >
+                  <svg className="h-10 w-10" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12.001 2C17.5238 2 22.001 6.47715 22.001 12C22.001 17.5228 17.5238 22 12.001 22C10.1671 22 8.44851 21.5064 6.97086 20.6447L2.00516 22L3.35712 17.0315C2.49494 15.5536 2.00098 13.8345 2.00098 12C2.00098 6.47715 6.47813 2 12.001 2ZM8.59339 7.30019L8.39232 7.30833C8.26293 7.31742 8.13607 7.34902 8.02057 7.40811C7.93392 7.45244 7.85348 7.51651 7.72709 7.63586C7.60774 7.74855 7.53857 7.84697 7.46569 7.94186C7.09599 8.4232 6.89729 9.01405 6.90098 9.62098C6.90299 10.1116 7.03043 10.5884 7.23169 11.0336C7.63982 11.9364 8.31288 12.8908 9.20194 13.7759C9.4155 13.9885 9.62473 14.2034 9.85034 14.402C10.9538 15.3736 12.2688 16.0742 13.6907 16.4482C13.6907 16.4482 14.2507 16.5342 14.2589 16.5347C14.4444 16.5447 14.6296 16.5313 14.8153 16.5218C15.1066 16.5068 15.391 16.428 15.6484 16.2909C15.8139 16.2028 15.8922 16.159 16.0311 16.0714C16.0311 16.0714 16.0737 16.0426 16.1559 15.9814C16.2909 15.8808 16.3743 15.81 16.4866 15.6934C16.5694 15.6074 16.6406 15.5058 16.6956 15.3913C16.7738 15.2281 16.8525 14.9166 16.8838 14.6579C16.9077 14.4603 16.9005 14.3523 16.8979 14.2854C16.8936 14.1778 16.8047 14.0671 16.7073 14.0201L16.1258 13.7587C16.1258 13.7587 15.2563 13.3803 14.7245 13.1377C14.6691 13.1124 14.6085 13.1007 14.5476 13.097C14.4142 13.0888 14.2647 13.1236 14.1696 13.2238C14.1646 13.2218 14.0984 13.279 13.3749 14.1555C13.335 14.2032 13.2415 14.3069 13.0798 14.2972C13.0554 14.2955 13.0311 14.292 13.0074 14.2858C12.9419 14.2685 12.8781 14.2457 12.8157 14.2193C12.692 14.1668 12.6486 14.1469 12.5641 14.1105C11.9868 13.8583 11.457 13.5209 10.9887 13.108C10.8631 12.9974 10.7463 12.8783 10.6259 12.7616C10.2057 12.3543 9.86169 11.9211 9.60577 11.4938C9.5918 11.4705 9.57027 11.4368 9.54708 11.3991C9.50521 11.331 9.45903 11.25 9.44455 11.1944C9.40738 11.0473 9.50599 10.9291 9.50599 10.9291C9.50599 10.9291 9.74939 10.663 9.86248 10.5183C9.97128 10.379 10.0652 10.2428 10.125 10.1457C10.2428 9.95633 10.2801 9.76062 10.2182 9.60963C9.93764 8.92565 9.64818 8.24536 9.34986 7.56894C9.29098 7.43545 9.11585 7.33846 8.95659 7.32007C8.90265 7.31384 8.84875 7.30758 8.79459 7.30402C8.66053 7.29748 8.5262 7.29892 8.39232 7.30833L8.59339 7.30019Z" />
+                  </svg>
+                </a>
+                <a
+                  href="mailto:ernesto@allondeck.com"
+                  className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#e38622] text-[#05586d] hover:bg-[#d2751b] transition-all hover:scale-105 shadow-md"
+                  aria-label="Email"
+                >
+                  <svg className="h-5.5 w-5.5" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          {/* Teaser 2: Roselena Oropesa */}
+          <div className="flex flex-col items-center text-center w-full max-w-[280px]">
+            {/* Portrait Photo Container */}
+            <div className="relative w-full aspect-[3/4] rounded-[2rem] overflow-hidden border border-[#066175]/35 bg-[#052631] shadow-xl">
+              <img
+                src="/assets/images/6.jpeg"
+                alt="Roselena Oropesa"
+                className="h-full w-full object-cover"
+              />
+              {/* Wave decoration overlapping bottom-right */}
+              <div className="absolute -bottom-2 -right-2 w-28 pointer-events-none z-20">
+                <svg viewBox="0 0 380.442 62.684" className="w-full h-auto text-[#76abbf]" fill="currentColor">
+                  <path d="M380.437,15.6a4.388,4.388,0,0,0-6.319-3.88c-10.453,4.8-19.785,1.364-28.981-4.008-.894-.522-1.909-.894-2.833-1.383C328.072-1.2,313.45-1.45,299.969,6.776c-14.137,8.628-26.9,8.967-41.157.237C245.143-1.359,230.1-1.622,215.963,6.46a72.2,72.2,0,0,1-8.834,4.334c-8.749,3.522-17.668,4.336-27.3.326-.792-.318-1.581-.652-2.367-1.019q-.972-.453-1.94-.95-1.05-.538-2.1-1.122c-.519-.289-1.038-.579-1.556-.881-.894-.522-1.909-.894-2.833-1.383C154.8-1.764,140.181-2.012,126.7,6.214c-14.137,8.628-26.9,8.966-41.157.237C71.875-1.922,56.836-2.185,42.7,5.9,30.953,12.609,19.3,16.126,6.311,10.614A4.348,4.348,0,0,0,.272,14.681a41.477,41.477,0,0,1-.213,5.4c-.465,3.926,1.845,5.278,6.512,6.4a55.747,55.747,0,0,0,37.374-4.266q5.23-2.549,10.491-5.056a20.369,20.369,0,0,1,18.1-.135c5.432,2.524,10.784,5.174,16.243,7.654a41.316,41.316,0,0,0,33.52.355c5.6-2.434,11.045-5.142,16.508-7.8a21.456,21.456,0,0,1,18.648-.021c6.076,2.906,12.1,5.918,18.374,8.494.13.053.262.09.392.142.808.322,1.618.613,2.431.881a61.814,61.814,0,0,0,7.53,1.681,44.616,44.616,0,0,0,27.331-3.824q7.074-3.46,14.189-6.862a20.371,20.371,0,0,1,18.1-.135c5.431,2.524,10.783,5.173,16.242,7.654a41.308,41.308,0,0,0,33.52.355c5.6-2.434,11.045-5.142,16.508-7.8a21.456,21.456,0,0,1,18.648-.021c6.077,2.906,12.1,5.918,18.374,8.494a36.531,36.531,0,0,0,27.191.631c1.569-.576,3.8-1.868,3.9-2.944C380.427,21.268,380.457,18.572,380.437,15.6Z" />
+                  <path d="M380.437,49.068a4.388,4.388,0,0,0-6.319-3.881c-10.453,4.8-19.785,1.364-28.981-4.008-.894-.522-1.909-.894-2.833-1.382-14.232-7.53-28.854-7.778-42.335.449-14.137,8.627-26.9,8.966-41.157.236-13.669-8.372-28.708-8.635-42.849-.553a72.2,72.2,0,0,1-8.834,4.334c-8.749,3.522-17.668,4.336-27.3.326-.792-.317-1.581-.651-2.367-1.018q-.972-.454-1.94-.95-1.05-.54-2.1-1.123c-.519-.289-1.038-.579-1.556-.881-.894-.522-1.909-.894-2.833-1.383-14.232-7.529-28.855-7.777-42.335.449-14.137,8.628-26.9,8.967-41.157.237-13.669-8.372-28.708-8.635-42.849-.553C30.953,46.079,19.3,49.6,6.311,44.083A4.349,4.349,0,0,0,.272,48.15a41.477,41.477,0,0,1-.213,5.4c-.465,3.926,1.845,5.279,6.512,6.4a55.747,55.747,0,0,0,37.374-4.266q5.23-2.549,10.491-5.056a20.369,20.369,0,0,1,18.1-.135c5.432,2.524,10.784,5.174,16.243,7.654a41.312,41.312,0,0,0,33.52.355c5.6-2.433,11.045-5.142,16.508-7.8a21.456,21.456,0,0,1,18.648-.021c6.076,2.906,12.1,5.918,18.374,8.494.13.053.262.09.392.142q1.212.483,2.431.881a61.814,61.814,0,0,0,7.53,1.681,44.616,44.616,0,0,0,27.331-3.824q7.074-3.46,14.189-6.862a20.375,20.375,0,0,1,18.1-.135c5.431,2.524,10.783,5.174,16.242,7.654a41.308,41.308,0,0,0,33.52.355c5.6-2.433,11.045-5.142,16.508-7.8a21.452,21.452,0,0,1,18.648-.02c6.077,2.905,12.1,5.917,18.374,8.493a36.531,36.531,0,0,0,27.191.631c1.569-.576,3.8-1.867,3.9-2.944C380.427,54.737,380.457,52.042,380.437,49.068Z" />
+                </svg>
+              </div>
+            </div>
+            
+            {/* Teaser Info */}
+            <div className="mt-4 w-full">
+              <span className="block text-xs text-[#8fc5db] font-bold tracking-widest uppercase">
+                VICE PRESIDENT.
+              </span>
+              <span className="block text-lg font-black tracking-widest text-[#f6ebd4] uppercase mt-1">
+                Mng. Roselena Oropesa
+              </span>
+              
+              {/* Teaser CTA & Contact */}
+              <div className="mt-4 flex items-center justify-center gap-3">
+                <button
+                  onClick={() => scrollToSection("roselena-bio")}
+                  className="px-5 py-2.5 rounded-2xl bg-[#e38622] text-[#f6ebd4] text-xs font-bold uppercase tracking-wider hover:bg-orange-600 hover:scale-105 transition-all shadow-md"
+                >
+                  View Bio
+                </button>
+                <a
+                  href="https://wa.me/18005550198"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center text-[#e38622] hover:text-[#d2751b] transition-all hover:scale-105 drop-shadow-md rounded-full"
+                  aria-label="WhatsApp"
+                >
+                  <svg className="h-10 w-10" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12.001 2C17.5238 2 22.001 6.47715 22.001 12C22.001 17.5228 17.5238 22 12.001 22C10.1671 22 8.44851 21.5064 6.97086 20.6447L2.00516 22L3.35712 17.0315C2.49494 15.5536 2.00098 13.8345 2.00098 12C2.00098 6.47715 6.47813 2 12.001 2ZM8.59339 7.30019L8.39232 7.30833C8.26293 7.31742 8.13607 7.34902 8.02057 7.40811C7.93392 7.45244 7.85348 7.51651 7.72709 7.63586C7.60774 7.74855 7.53857 7.84697 7.46569 7.94186C7.09599 8.4232 6.89729 9.01405 6.90098 9.62098C6.90299 10.1116 7.03043 10.5884 7.23169 11.0336C7.63982 11.9364 8.31288 12.8908 9.20194 13.7759C9.4155 13.9885 9.62473 14.2034 9.85034 14.402C10.9538 15.3736 12.2688 16.0742 13.6907 16.4482C13.6907 16.4482 14.2507 16.5342 14.2589 16.5347C14.4444 16.5447 14.6296 16.5313 14.8153 16.5218C15.1066 16.5068 15.391 16.428 15.6484 16.2909C15.8139 16.2028 15.8922 16.159 16.0311 16.0714C16.0311 16.0714 16.0737 16.0426 16.1559 15.9814C16.2909 15.8808 16.3743 15.81 16.4866 15.6934C16.5694 15.6074 16.6406 15.5058 16.6956 15.3913C16.7738 15.2281 16.8525 14.9166 16.8838 14.6579C16.9077 14.4603 16.9005 14.3523 16.8979 14.2854C16.8936 14.1778 16.8047 14.0671 16.7073 14.0201L16.1258 13.7587C16.1258 13.7587 15.2563 13.3803 14.7245 13.1377C14.6691 13.1124 14.6085 13.1007 14.5476 13.097C14.4142 13.0888 14.2647 13.1236 14.1696 13.2238C14.1646 13.2218 14.0984 13.279 13.3749 14.1555C13.335 14.2032 13.2415 14.3069 13.0798 14.2972C13.0554 14.2955 13.0311 14.292 13.0074 14.2858C12.9419 14.2685 12.8781 14.2457 12.8157 14.2193C12.692 14.1668 12.6486 14.1469 12.5641 14.1105C11.9868 13.8583 11.457 13.5209 10.9887 13.108C10.8631 12.9974 10.7463 12.8783 10.6259 12.7616C10.2057 12.3543 9.86169 11.9211 9.60577 11.4938C9.5918 11.4705 9.57027 11.4368 9.54708 11.3991C9.50521 11.331 9.45903 11.25 9.44455 11.1944C9.40738 11.0473 9.50599 10.9291 9.50599 10.9291C9.50599 10.9291 9.74939 10.663 9.86248 10.5183C9.97128 10.379 10.0652 10.2428 10.125 10.1457C10.2428 9.95633 10.2801 9.76062 10.2182 9.60963C9.93764 8.92565 9.64818 8.24536 9.34986 7.56894C9.29098 7.43545 9.11585 7.33846 8.95659 7.32007C8.90265 7.31384 8.84875 7.30758 8.79459 7.30402C8.66053 7.29748 8.5262 7.29892 8.39232 7.30833L8.59339 7.30019Z" />
+                  </svg>
+                </a>
+                <a
+                  href="mailto:roselena@allondeck.com"
+                  className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#e38622] text-[#05586d] hover:bg-[#d2751b] transition-all hover:scale-105 shadow-md"
+                  aria-label="Email"
+                >
+                  <svg className="h-5.5 w-5.5" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+
+        </div>
       </div>
 
-      {/* ── TEASER CARDS MATCHING DESIGN SCREENSHOT ────────────────── */}
-      <div className="mx-auto max-w-[1400px] px-6 lg:px-12 pb-24">
-        <div className="grid gap-12 grid-cols-1 md:grid-cols-2">
+      {/* ── TEAM CARDS SECTION ────────────────── */}
+      <div className="mx-auto max-w-[900px] px-6 lg:px-12 pb-24">
+        <div className="flex flex-col gap-36 md:gap-32">
 
           {/* Card 1: Ernesto Alvarez */}
-          <div className="flex flex-col text-left">
-            <div className="relative">
+          <div id="ernesto-bio" className="relative mt-20 md:mt-0 bg-[#05586d] rounded-[2rem] border border-[#066175]/35 px-6 py-8 md:py-6 md:pl-0 md:pr-12 flex flex-col md:flex-row items-center gap-6 md:gap-10 shadow-lg text-white">
+            
+            {/* Photo & Wave wrapper */}
+            <div className="relative w-48 md:w-52 aspect-[3/4] shrink-0 -mt-24 md:-mt-12 md:-mb-12 md:-ml-12 z-10">
               {/* Photo Box */}
-              <div className="aspect-[4/5] w-full overflow-hidden rounded-3xl border border-[#066175]/35 bg-[#052631] shadow-lg">
+              <div className="w-full h-full overflow-hidden rounded-[2rem] border border-[#066175]/35 bg-[#052631] shadow-xl">
                 <img
                   src="/assets/images/8.jpeg"
                   alt="Ernesto Alvarez"
                   className="h-full w-full object-cover"
                 />
               </div>
-              {/* Overlay Wave Decor on Bottom-Left */}
-              <div className="absolute -bottom-4 -left-4 w-32 h-10 pointer-events-none opacity-80">
-                <img src="/assets/svg/recurso olas, 2 olas.svg" alt="" className="w-full h-full object-contain" />
+              {/* Wave decoration overlapping bottom-right */}
+              <div className="absolute -bottom-4 -right-4 w-32 pointer-events-none z-20">
+                <svg viewBox="0 0 380.442 62.684" className="w-full h-auto text-[#76abbf]" fill="currentColor">
+                  <path d="M380.437,15.6a4.388,4.388,0,0,0-6.319-3.88c-10.453,4.8-19.785,1.364-28.981-4.008-.894-.522-1.909-.894-2.833-1.383C328.072-1.2,313.45-1.45,299.969,6.776c-14.137,8.628-26.9,8.967-41.157.237C245.143-1.359,230.1-1.622,215.963,6.46a72.2,72.2,0,0,1-8.834,4.334c-8.749,3.522-17.668,4.336-27.3.326-.792-.318-1.581-.652-2.367-1.019q-.972-.453-1.94-.95-1.05-.538-2.1-1.122c-.519-.289-1.038-.579-1.556-.881-.894-.522-1.909-.894-2.833-1.383C154.8-1.764,140.181-2.012,126.7,6.214c-14.137,8.628-26.9,8.966-41.157.237C71.875-1.922,56.836-2.185,42.7,5.9,30.953,12.609,19.3,16.126,6.311,10.614A4.348,4.348,0,0,0,.272,14.681a41.477,41.477,0,0,1-.213,5.4c-.465,3.926,1.845,5.278,6.512,6.4a55.747,55.747,0,0,0,37.374-4.266q5.23-2.549,10.491-5.056a20.369,20.369,0,0,1,18.1-.135c5.432,2.524,10.784,5.174,16.243,7.654a41.316,41.316,0,0,0,33.52.355c5.6-2.434,11.045-5.142,16.508-7.8a21.456,21.456,0,0,1,18.648-.021c6.076,2.906,12.1,5.918,18.374,8.494.13.053.262.09.392.142.808.322,1.618.613,2.431.881a61.814,61.814,0,0,0,7.53,1.681,44.616,44.616,0,0,0,27.331-3.824q7.074-3.46,14.189-6.862a20.371,20.371,0,0,1,18.1-.135c5.431,2.524,10.783,5.173,16.242,7.654a41.308,41.308,0,0,0,33.52.355c5.6-2.434,11.045-5.142,16.508-7.8a21.456,21.456,0,0,1,18.648-.021c6.077,2.906,12.1,5.918,18.374,8.494a36.531,36.531,0,0,0,27.191.631c1.569-.576,3.8-1.868,3.9-2.944C380.427,21.268,380.457,18.572,380.437,15.6Z" />
+                  <path d="M380.437,49.068a4.388,4.388,0,0,0-6.319-3.881c-10.453,4.8-19.785,1.364-28.981-4.008-.894-.522-1.909-.894-2.833-1.382-14.232-7.53-28.854-7.778-42.335.449-14.137,8.627-26.9,8.966-41.157.236-13.669-8.372-28.708-8.635-42.849-.553a72.2,72.2,0,0,1-8.834,4.334c-8.749,3.522-17.668,4.336-27.3.326-.792-.317-1.581-.651-2.367-1.018q-.972-.454-1.94-.95-1.05-.54-2.1-1.123c-.519-.289-1.038-.579-1.556-.881-.894-.522-1.909-.894-2.833-1.383-14.232-7.529-28.855-7.777-42.335.449-14.137,8.628-26.9,8.967-41.157.237-13.669-8.372-28.708-8.635-42.849-.553C30.953,46.079,19.3,49.6,6.311,44.083A4.349,4.349,0,0,0,.272,48.15a41.477,41.477,0,0,1-.213,5.4c-.465,3.926,1.845,5.279,6.512,6.4a55.747,55.747,0,0,0,37.374-4.266q5.23-2.549,10.491-5.056a20.369,20.369,0,0,1,18.1-.135c5.432,2.524,10.784,5.174,16.243,7.654a41.312,41.312,0,0,0,33.52.355c5.6-2.433,11.045-5.142,16.508-7.8a21.456,21.456,0,0,1,18.648-.021c6.076,2.906,12.1,5.918,18.374,8.494.13.053.262.09.392.142q1.212.483,2.431.881a61.814,61.814,0,0,0,7.53,1.681,44.616,44.616,0,0,0,27.331-3.824q7.074-3.46,14.189-6.862a20.375,20.375,0,0,1,18.1-.135c5.431,2.524,10.783,5.174,16.242,7.654a41.308,41.308,0,0,0,33.52.355c5.6-2.433,11.045-5.142,16.508-7.8a21.452,21.452,0,0,1,18.648-.02c6.077,2.905,12.1,5.917,18.374,8.493a36.531,36.531,0,0,0,27.191.631c1.569-.576,3.8-1.867,3.9-2.944C380.427,54.737,380.457,52.042,380.437,49.068Z" />
+                </svg>
               </div>
             </div>
-            {/* Meta Text */}
-            <div className="mt-6">
-              <span className="text-xs font-bold uppercase tracking-widest text-[#76abbf]">
-                PRESIDENT.
-              </span>
-              <h2 className="mt-1 font-heading text-xl font-black tracking-wider text-[#f6ebd4] uppercase leading-tight">
-                Ernesto Alvarez
-              </h2>
-            </div>
-            {/* Action Row */}
-            <div className="mt-5 flex items-center gap-3">
-              <button
-                type="button"
-                onClick={() => scrollToBio("bio-ernesto")}
-                className="inline-flex items-center justify-center rounded-full bg-[#f6ebd4] hover:bg-white px-8 py-3 text-xs font-black uppercase tracking-wider text-[#044155] shadow-md transition-all hover:scale-105 leading-none"
-              >
-                View Bio
-              </button>
-              
-              {/* Phone Icon */}
-              <a
-                href="tel:+18005550199"
-                className="flex h-9 w-9 items-center justify-center rounded-full bg-[#e38622] text-[#044155] hover:bg-orange-600 hover:text-white transition-all hover:scale-105"
-                aria-label="Phone"
-              >
-                <svg className="h-4.5 w-4.5" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
-                </svg>
-              </a>
 
-              {/* Email Icon */}
-              <a
-                href="mailto:ernesto@allondeck.com"
-                className="flex h-9 w-9 items-center justify-center rounded-full bg-[#e38622] text-[#044155] hover:bg-orange-600 hover:text-white transition-all hover:scale-105"
-                aria-label="Email"
-              >
-                <svg className="h-4.5 w-4.5" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
-                  <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
-                </svg>
-              </a>
+            {/* Text & Contact Info */}
+            <div className="w-full text-center md:text-left flex-1">
+              <h3 className="font-heading text-lg md:text-xl font-bold tracking-widest leading-tight uppercase">
+                <span className="text-[#8fc5db] mr-2">PRESIDENT.</span>
+                <span className="text-[#f6ebd4]">Ernesto Alvarez</span>
+              </h3>
+              <p className="mt-3 text-sm md:text-base leading-relaxed text-white/90 font-sans">
+                A strategist with a vision for nautical innovation. He leads the expansion of All On Deck and ensures that every project combines cutting-edge materials with the highest standards of safety and comfort at sea.
+              </p>
+              
+              {/* Contact Icons */}
+              <div className="mt-5 flex justify-center md:justify-start items-center gap-4">
+                <a
+                  href="https://wa.me/18005550199"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center text-[#e38622] hover:text-[#d2751b] transition-all hover:scale-105 drop-shadow-md rounded-full"
+                  aria-label="WhatsApp"
+                >
+                  <svg className="h-12 w-12" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12.001 2C17.5238 2 22.001 6.47715 22.001 12C22.001 17.5228 17.5238 22 12.001 22C10.1671 22 8.44851 21.5064 6.97086 20.6447L2.00516 22L3.35712 17.0315C2.49494 15.5536 2.00098 13.8345 2.00098 12C2.00098 6.47715 6.47813 2 12.001 2ZM8.59339 7.30019L8.39232 7.30833C8.26293 7.31742 8.13607 7.34902 8.02057 7.40811C7.93392 7.45244 7.85348 7.51651 7.72709 7.63586C7.60774 7.74855 7.53857 7.84697 7.46569 7.94186C7.09599 8.4232 6.89729 9.01405 6.90098 9.62098C6.90299 10.1116 7.03043 10.5884 7.23169 11.0336C7.63982 11.9364 8.31288 12.8908 9.20194 13.7759C9.4155 13.9885 9.62473 14.2034 9.85034 14.402C10.9538 15.3736 12.2688 16.0742 13.6907 16.4482C13.6907 16.4482 14.2507 16.5342 14.2589 16.5347C14.4444 16.5447 14.6296 16.5313 14.8153 16.5218C15.1066 16.5068 15.391 16.428 15.6484 16.2909C15.8139 16.2028 15.8922 16.159 16.0311 16.0714C16.0311 16.0714 16.0737 16.0426 16.1559 15.9814C16.2909 15.8808 16.3743 15.81 16.4866 15.6934C16.5694 15.6074 16.6406 15.5058 16.6956 15.3913C16.7738 15.2281 16.8525 14.9166 16.8838 14.6579C16.9077 14.4603 16.9005 14.3523 16.8979 14.2854C16.8936 14.1778 16.8047 14.0671 16.7073 14.0201L16.1258 13.7587C16.1258 13.7587 15.2563 13.3803 14.7245 13.1377C14.6691 13.1124 14.6085 13.1007 14.5476 13.097C14.4142 13.0888 14.2647 13.1236 14.1696 13.2238C14.1646 13.2218 14.0984 13.279 13.3749 14.1555C13.335 14.2032 13.2415 14.3069 13.0798 14.2972C13.0554 14.2955 13.0311 14.292 13.0074 14.2858C12.9419 14.2685 12.8781 14.2457 12.8157 14.2193C12.692 14.1668 12.6486 14.1469 12.5641 14.1105C11.9868 13.8583 11.457 13.5209 10.9887 13.108C10.8631 12.9974 10.7463 12.8783 10.6259 12.7616C10.2057 12.3543 9.86169 11.9211 9.60577 11.4938C9.5918 11.4705 9.57027 11.4368 9.54708 11.3991C9.50521 11.331 9.45903 11.25 9.44455 11.1944C9.40738 11.0473 9.50599 10.9291 9.50599 10.9291C9.50599 10.9291 9.74939 10.663 9.86248 10.5183C9.97128 10.379 10.0652 10.2428 10.125 10.1457C10.2428 9.95633 10.2801 9.76062 10.2182 9.60963C9.93764 8.92565 9.64818 8.24536 9.34986 7.56894C9.29098 7.43545 9.11585 7.33846 8.95659 7.32007C8.90265 7.31384 8.84875 7.30758 8.79459 7.30402C8.66053 7.29748 8.5262 7.29892 8.39232 7.30833L8.59339 7.30019Z" />
+                  </svg>
+                </a>
+                <a
+                  href="mailto:ernesto@allondeck.com"
+                  className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#e38622] text-[#05586d] hover:bg-[#d2751b] transition-all hover:scale-105 shadow-md"
+                  aria-label="Email"
+                >
+                  <svg className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                </a>
+              </div>
             </div>
           </div>
 
           {/* Card 2: Roselena Oropesa */}
-          <div className="flex flex-col text-left">
-            <div className="relative">
+          <div id="roselena-bio" className="relative mt-20 md:mt-0 bg-[#05586d] rounded-[2rem] border border-[#066175]/35 px-6 py-8 md:py-6 md:pl-0 md:pr-12 flex flex-col md:flex-row items-center gap-6 md:gap-10 shadow-lg text-white">
+            
+            {/* Photo & Wave wrapper */}
+            <div className="relative w-48 md:w-52 aspect-[3/4] shrink-0 -mt-24 md:-mt-12 md:-mb-12 md:-ml-12 z-10">
               {/* Photo Box */}
-              <div className="aspect-[4/5] w-full overflow-hidden rounded-3xl border border-[#066175]/35 bg-[#052631] shadow-lg">
+              <div className="w-full h-full overflow-hidden rounded-[2rem] border border-[#066175]/35 bg-[#052631] shadow-xl">
                 <img
                   src="/assets/images/6.jpeg"
                   alt="Roselena Oropesa"
                   className="h-full w-full object-cover"
                 />
               </div>
-              {/* Overlay Wave Decor on Bottom-Right */}
-              <div className="absolute -bottom-4 -right-4 w-32 h-10 pointer-events-none opacity-80">
-                <img src="/assets/svg/recurso olas, 2 olas.svg" alt="" className="w-full h-full object-contain scale-x-[-1]" />
+              {/* Wave decoration overlapping bottom-right */}
+              <div className="absolute -bottom-4 -right-4 w-32 pointer-events-none z-20">
+                <svg viewBox="0 0 380.442 62.684" className="w-full h-auto text-[#76abbf]" fill="currentColor">
+                  <path d="M380.437,15.6a4.388,4.388,0,0,0-6.319-3.88c-10.453,4.8-19.785,1.364-28.981-4.008-.894-.522-1.909-.894-2.833-1.383C328.072-1.2,313.45-1.45,299.969,6.776c-14.137,8.628-26.9,8.967-41.157.237C245.143-1.359,230.1-1.622,215.963,6.46a72.2,72.2,0,0,1-8.834,4.334c-8.749,3.522-17.668,4.336-27.3.326-.792-.318-1.581-.652-2.367-1.019q-.972-.453-1.94-.95-1.05-.538-2.1-1.122c-.519-.289-1.038-.579-1.556-.881-.894-.522-1.909-.894-2.833-1.383C154.8-1.764,140.181-2.012,126.7,6.214c-14.137,8.628-26.9,8.966-41.157.237C71.875-1.922,56.836-2.185,42.7,5.9,30.953,12.609,19.3,16.126,6.311,10.614A4.348,4.348,0,0,0,.272,14.681a41.477,41.477,0,0,1-.213,5.4c-.465,3.926,1.845,5.278,6.512,6.4a55.747,55.747,0,0,0,37.374-4.266q5.23-2.549,10.491-5.056a20.369,20.369,0,0,1,18.1-.135c5.432,2.524,10.784,5.174,16.243,7.654a41.316,41.316,0,0,0,33.52.355c5.6-2.434,11.045-5.142,16.508-7.8a21.456,21.456,0,0,1,18.648-.021c6.076,2.906,12.1,5.918,18.374,8.494.13.053.262.09.392.142.808.322,1.618.613,2.431.881a61.814,61.814,0,0,0,7.53,1.681,44.616,44.616,0,0,0,27.331-3.824q7.074-3.46,14.189-6.862a20.371,20.371,0,0,1,18.1-.135c5.431,2.524,10.783,5.173,16.242,7.654a41.308,41.308,0,0,0,33.52.355c5.6-2.434,11.045-5.142,16.508-7.8a21.456,21.456,0,0,1,18.648-.021c6.077,2.906,12.1,5.918,18.374,8.494a36.531,36.531,0,0,0,27.191.631c1.569-.576,3.8-1.868,3.9-2.944C380.427,21.268,380.457,18.572,380.437,15.6Z" />
+                  <path d="M380.437,49.068a4.388,4.388,0,0,0-6.319-3.881c-10.453,4.8-19.785,1.364-28.981-4.008-.894-.522-1.909-.894-2.833-1.382-14.232-7.53-28.854-7.778-42.335.449-14.137,8.627-26.9,8.966-41.157.236-13.669-8.372-28.708-8.635-42.849-.553a72.2,72.2,0,0,1-8.834,4.334c-8.749,3.522-17.668,4.336-27.3.326-.792-.317-1.581-.651-2.367-1.018q-.972-.454-1.94-.95-1.05-.54-2.1-1.123c-.519-.289-1.038-.579-1.556-.881-.894-.522-1.909-.894-2.833-1.383-14.232-7.529-28.855-7.777-42.335.449-14.137,8.628-26.9,8.967-41.157.237-13.669-8.372-28.708-8.635-42.849-.553C30.953,46.079,19.3,49.6,6.311,44.083A4.349,4.349,0,0,0,.272,48.15a41.477,41.477,0,0,1-.213,5.4c-.465,3.926,1.845,5.279,6.512,6.4a55.747,55.747,0,0,0,37.374-4.266q5.23-2.549,10.491-5.056a20.369,20.369,0,0,1,18.1-.135c5.432,2.524,10.784,5.174,16.243,7.654a41.312,41.312,0,0,0,33.52.355c5.6-2.433,11.045-5.142,16.508-7.8a21.456,21.456,0,0,1,18.648-.021c6.076,2.906,12.1,5.918,18.374,8.494.13.053.262.09.392.142q1.212.483,2.431.881a61.814,61.814,0,0,0,7.53,1.681,44.616,44.616,0,0,0,27.331-3.824q7.074-3.46,14.189-6.862a20.375,20.375,0,0,1,18.1-.135c5.431,2.524,10.783,5.174,16.242,7.654a41.308,41.308,0,0,0,33.52.355c5.6-2.433,11.045-5.142,16.508-7.8a21.452,21.452,0,0,1,18.648-.02c6.077,2.905,12.1,5.917,18.374,8.493a36.531,36.531,0,0,0,27.191.631c1.569-.576,3.8-1.867,3.9-2.944C380.427,54.737,380.457,52.042,380.437,49.068Z" />
+                </svg>
               </div>
             </div>
-            {/* Meta Text */}
-            <div className="mt-6">
-              <span className="text-xs font-bold uppercase tracking-widest text-[#76abbf]">
-                VICE PRESIDENT.
-              </span>
-              <h2 className="mt-1 font-heading text-xl font-black tracking-wider text-[#f6ebd4] uppercase leading-tight">
-                Mng. Roselena Oropesa
-              </h2>
-            </div>
-            {/* Action Row */}
-            <div className="mt-5 flex items-center gap-3">
-              <button
-                type="button"
-                onClick={() => scrollToBio("bio-roselena")}
-                className="inline-flex items-center justify-center rounded-full bg-[#e38622] hover:bg-orange-600 px-8 py-3 text-xs font-black uppercase tracking-wider text-white shadow-md transition-all hover:scale-105 leading-none"
-              >
-                View Bio
-              </button>
-              
-              {/* Phone Icon */}
-              <a
-                href="tel:+18005550198"
-                className="flex h-9 w-9 items-center justify-center rounded-full bg-[#e38622] text-[#044155] hover:bg-orange-600 hover:text-white transition-all hover:scale-105"
-                aria-label="Phone"
-              >
-                <svg className="h-4.5 w-4.5" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
-                </svg>
-              </a>
 
-              {/* Email Icon */}
-              <a
-                href="mailto:roselena@allondeck.com"
-                className="flex h-9 w-9 items-center justify-center rounded-full bg-[#e38622] text-[#044155] hover:bg-orange-600 hover:text-white transition-all hover:scale-105"
-                aria-label="Email"
-              >
-                <svg className="h-4.5 w-4.5" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
-                  <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
-                </svg>
-              </a>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-      {/* ── ERNESTO BIO SECTION ────────────────────────────────── */}
-      <div
-        id="bio-ernesto"
-        className="scroll-mt-24 bg-[#066175] py-20 relative overflow-hidden"
-      >
-        <div className="absolute inset-0 opacity-10">
-          <img src="/assets/svg/recurso olas, 1 ola.svg" alt="" className="w-full h-full object-cover" />
-        </div>
-        <div className="relative mx-auto max-w-[1400px] px-6 lg:px-12">
-          <div className="grid gap-12 grid-cols-1 md:grid-cols-2 items-center">
-            <div className="overflow-hidden rounded-3xl shadow-xl border border-[#044155]/30 aspect-square max-w-sm mx-auto w-full">
-              <img
-                src="/assets/images/8.jpeg"
-                alt="Ernesto Alvarez"
-                className="h-full w-full object-cover"
-              />
-            </div>
-            <div>
-              <span className="text-xs font-bold uppercase tracking-widest text-[#f6ebd4]/70">
-                Meet our team
-              </span>
-              <h2 className="mt-2 font-heading text-3xl font-black tracking-wider text-[#f6ebd4] sm:text-4xl uppercase">
-                President. Ernesto Alvarez
-              </h2>
-              <div className="mt-4 h-1 w-12 bg-[#e38622]" />
-              <p className="mt-6 text-base leading-relaxed text-white/90 font-sans">
-                A strategist with a vision for nautical innovation. He leads the expansion of All On Deck and ensures that every project combines cutting-edge materials with the highest standards of safety and comfort at sea.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* ── ROSELENA BIO SECTION ───────────────────────────────── */}
-      <div
-        id="bio-roselena"
-        className="scroll-mt-24 bg-[#044155] py-20 relative overflow-hidden border-t border-[#066175]/30"
-      >
-        <div className="absolute inset-0 opacity-10">
-          <img src="/assets/svg/recurso olas, 2 olas.svg" alt="" className="w-full h-full object-cover" />
-        </div>
-        <div className="relative mx-auto max-w-[1400px] px-6 lg:px-12">
-          <div className="grid gap-12 grid-cols-1 md:grid-cols-2 items-center">
-            <div className="md:order-last overflow-hidden rounded-3xl shadow-xl border border-[#066175]/30 aspect-square max-w-sm mx-auto w-full">
-              <img
-                src="/assets/images/6.jpeg"
-                alt="Roselena Oropesa"
-                className="h-full w-full object-cover"
-              />
-            </div>
-            <div>
-              <span className="text-xs font-bold uppercase tracking-widest text-[#f6ebd4]/70">
-                Meet our team
-              </span>
-              <h2 className="mt-2 font-heading text-3xl font-black tracking-wider text-[#f6ebd4] sm:text-4xl uppercase">
-                Vice President. Roselena Oropesa
-              </h2>
-              <div className="mt-4 h-1 w-12 bg-[#e38622]" />
-              <p className="mt-6 text-base leading-relaxed text-white/90 font-sans">
+            {/* Text & Contact Info */}
+            <div className="w-full text-center md:text-left flex-1">
+              <h3 className="font-heading text-lg md:text-xl font-bold tracking-widest leading-tight uppercase">
+                <span className="text-[#8fc5db] mr-2">VICE PRESIDENT.</span>
+                <span className="text-[#f6ebd4]">Roselena Oropesa</span>
+              </h3>
+              <p className="mt-3 text-sm md:text-base leading-relaxed text-white/90 font-sans">
                 Responsible for process optimization and technical precision. She oversees digital measurement and computer aided design, ensuring efficient workflows that result in millimeter-precise, high-end finishes.
               </p>
+              
+              {/* Contact Icons */}
+              <div className="mt-5 flex justify-center md:justify-start items-center gap-4">
+                <a
+                  href="https://wa.me/18005550198"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center text-[#e38622] hover:text-[#d2751b] transition-all hover:scale-105 drop-shadow-md rounded-full"
+                  aria-label="WhatsApp"
+                >
+                  <svg className="h-12 w-12" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12.001 2C17.5238 2 22.001 6.47715 22.001 12C22.001 17.5228 17.5238 22 12.001 22C10.1671 22 8.44851 21.5064 6.97086 20.6447L2.00516 22L3.35712 17.0315C2.49494 15.5536 2.00098 13.8345 2.00098 12C2.00098 6.47715 6.47813 2 12.001 2ZM8.59339 7.30019L8.39232 7.30833C8.26293 7.31742 8.13607 7.34902 8.02057 7.40811C7.93392 7.45244 7.85348 7.51651 7.72709 7.63586C7.60774 7.74855 7.53857 7.84697 7.46569 7.94186C7.09599 8.4232 6.89729 9.01405 6.90098 9.62098C6.90299 10.1116 7.03043 10.5884 7.23169 11.0336C7.63982 11.9364 8.31288 12.8908 9.20194 13.7759C9.4155 13.9885 9.62473 14.2034 9.85034 14.402C10.9538 15.3736 12.2688 16.0742 13.6907 16.4482C13.6907 16.4482 14.2507 16.5342 14.2589 16.5347C14.4444 16.5447 14.6296 16.5313 14.8153 16.5218C15.1066 16.5068 15.391 16.428 15.6484 16.2909C15.8139 16.2028 15.8922 16.159 16.0311 16.0714C16.0311 16.0714 16.0737 16.0426 16.1559 15.9814C16.2909 15.8808 16.3743 15.81 16.4866 15.6934C16.5694 15.6074 16.6406 15.5058 16.6956 15.3913C16.7738 15.2281 16.8525 14.9166 16.8838 14.6579C16.9077 14.4603 16.9005 14.3523 16.8979 14.2854C16.8936 14.1778 16.8047 14.0671 16.7073 14.0201L16.1258 13.7587C16.1258 13.7587 15.2563 13.3803 14.7245 13.1377C14.6691 13.1124 14.6085 13.1007 14.5476 13.097C14.4142 13.0888 14.2647 13.1236 14.1696 13.2238C14.1646 13.2218 14.0984 13.279 13.3749 14.1555C13.335 14.2032 13.2415 14.3069 13.0798 14.2972C13.0554 14.2955 13.0311 14.292 13.0074 14.2858C12.9419 14.2685 12.8781 14.2457 12.8157 14.2193C12.692 14.1668 12.6486 14.1469 12.5641 14.1105C11.9868 13.8583 11.457 13.5209 10.9887 13.108C10.8631 12.9974 10.7463 12.8783 10.6259 12.7616C10.2057 12.3543 9.86169 11.9211 9.60577 11.4938C9.5918 11.4705 9.57027 11.4368 9.54708 11.3991C9.50521 11.331 9.45903 11.25 9.44455 11.1944C9.40738 11.0473 9.50599 10.9291 9.50599 10.9291C9.50599 10.9291 9.74939 10.663 9.86248 10.5183C9.97128 10.379 10.0652 10.2428 10.125 10.1457C10.2428 9.95633 10.2801 9.76062 10.2182 9.60963C9.93764 8.92565 9.64818 8.24536 9.34986 7.56894C9.29098 7.43545 9.11585 7.33846 8.95659 7.32007C8.90265 7.31384 8.84875 7.30758 8.79459 7.30402C8.66053 7.29748 8.5262 7.29892 8.39232 7.30833L8.59339 7.30019Z" />
+                  </svg>
+                </a>
+                <a
+                  href="mailto:roselena@allondeck.com"
+                  className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#e38622] text-[#05586d] hover:bg-orange-600 transition-all hover:scale-105 shadow-md"
+                  aria-label="Email"
+                >
+                  <svg className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                </a>
+              </div>
             </div>
           </div>
+
         </div>
       </div>
 

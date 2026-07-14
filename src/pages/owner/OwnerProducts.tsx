@@ -48,13 +48,25 @@ export default function OwnerProducts() {
     return cats?.length ? cats.join(", ") : "—";
   }
 
-  function isLowStock(product: {
-    stock_quantity: number;
-    low_stock_threshold?: number | null;
-  }): boolean {
+  function isLowStock(product: any): boolean {
     const threshold =
       product.low_stock_threshold ?? DEFAULT_LOW_STOCK_THRESHOLD;
+    
+    const activeVariants = product.product_variants?.filter((v: any) => v.is_active) || [];
+    if (activeVariants.length > 0) {
+      return activeVariants.some((v: any) => v.stock_quantity <= threshold);
+    }
+    
     return product.stock_quantity <= threshold;
+  }
+  
+  function getStockDisplay(product: any) {
+    const activeVariants = product.product_variants?.filter((v: any) => v.is_active) || [];
+    if (activeVariants.length > 0) {
+      const totalStock = activeVariants.reduce((sum: number, v: any) => sum + v.stock_quantity, 0);
+      return `${totalStock} in ${activeVariants.length} variants`;
+    }
+    return product.stock_quantity;
   }
 
   if (loading) {
@@ -184,14 +196,12 @@ export default function OwnerProducts() {
                 <td className="px-4 py-3">
                   <span
                     className={
-                      product.stock_quantity === 0
-                        ? "text-sm font-medium text-red-400"
-                        : isLowStock(product)
+                      isLowStock(product)
                         ? "text-sm font-medium text-[#e38622]"
                         : "text-sm text-white"
                     }
                   >
-                    {product.stock_quantity}
+                    {getStockDisplay(product)}
                   </span>
                 </td>
                 <td className="px-4 py-3">

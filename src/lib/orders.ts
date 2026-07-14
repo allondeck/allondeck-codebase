@@ -130,12 +130,15 @@ export async function createOrder(params: {
     if (isCartLine(item)) {
       if (isProductCartItem(item)) {
         const p = item.product;
+        const price = item.variant_price != null ? item.variant_price : parsePrice(p.price);
         orderItems.push({
           order_id: orderId,
           product_id: p.id,
           product_name: p.name,
-          product_price: parsePrice(p.price),
+          product_price: price,
           quantity: item.quantity,
+          variant_id: item.variant_id || null,
+          variant_name: item.variant_name || null,
         });
       } else if (isComboCartItem(item)) {
         const totalUnitQty = item.items.reduce((s, e) => s + e.quantity, 0);

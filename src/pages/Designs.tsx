@@ -1,67 +1,40 @@
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-
-// ─── Data ─────────────────────────────────────────────────────────────────────
-const BOAT_DESIGNS = [
-  {
-    id: 1,
-    label: "TEAK CLASSIC",
-    tag: "Most Popular",
-    image: "/assets/images/2.jpg",
-  },
-  {
-    id: 2,
-    label: "CARBON WEAVE",
-    tag: "Premium",
-    image: "/assets/images/3.jpg",
-  },
-  {
-    id: 3,
-    label: "ARCTIC WHITE",
-    tag: "Clean Look",
-    image: "/assets/images/4.jpg",
-  },
-  {
-    id: 4,
-    label: "NAVY STRIPE",
-    tag: "Custom",
-    image: "/assets/images/5.jpg",
-  },
-  {
-    id: 5,
-    label: "CORAL DRIFT",
-    tag: "Trending",
-    image: "/assets/images/10.jpg",
-  },
-  {
-    id: 6,
-    label: "EBONY MARINE",
-    tag: "Bold",
-    image: "/assets/images/11.jpg",
-  },
-];
-
-const COLOR_SWATCHES = [
-  { name: "Classic Teak",    hex: "#c19a6b" },
-  { name: "Arctic White",    hex: "#f5f5f0" },
-  { name: "Carbon Black",    hex: "#1a1a1a" },
-  { name: "Ocean Navy",      hex: "#1b3a6b" },
-  { name: "Coral Drift",     hex: "#d4704a" },
-  { name: "Desert Sand",     hex: "#c2a06e" },
-  { name: "Slate Grey",      hex: "#5a6475" },
-  { name: "Ivory Pearl",     hex: "#ede8d9" },
-  { name: "Deep Ebony",      hex: "#2c1810" },
-  { name: "Sea Foam",        hex: "#4a9e8b" },
-  { name: "Driftwood",       hex: "#8b7355" },
-  { name: "Marine Blue",     hex: "#044155" },
-];
-
+import { supabase } from "../lib/supabase";
 
 function scrollToSection(id: string) {
   const el = document.getElementById(id);
   if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
+export type DesignColor = {
+  id: string;
+  name: string;
+  hex_color: string | null;
+  image_url: string | null;
+};
+
+export type DesignPattern = {
+  id: string;
+  name: string;
+  image_url: string | null;
+};
+
 export default function Designs() {
+  const [colors, setColors] = useState<DesignColor[]>([]);
+  const [patterns, setPatterns] = useState<DesignPattern[]>([]);
+
+  useEffect(() => {
+    async function loadData() {
+      const [colorsRes, patternsRes] = await Promise.all([
+        supabase.from("design_colors" as any).select("*").order("created_at"),
+        supabase.from("design_patterns" as any).select("*").order("created_at")
+      ]);
+      if (colorsRes.data) setColors(colorsRes.data as any);
+      if (patternsRes.data) setPatterns(patternsRes.data as any);
+    }
+    loadData();
+  }, []);
   return (
     <div className="bg-[#044155] text-white font-sans">
 
@@ -128,7 +101,9 @@ export default function Designs() {
               <div className="absolute bottom-0 left-0 right-0 flex flex-col items-center justify-end pb-4 h-24">
                 {/* Wave decor */}
                 <div className="absolute bottom-6 left-0 right-0 opacity-40 px-2 pointer-events-none">
-                  <img src="/assets/svg/recurso olas, 2 olas.svg" alt="" className="w-full h-8 object-cover" />
+                  <svg viewBox="0 0 200 32" preserveAspectRatio="none" className="w-full h-8" xmlns="http://www.w3.org/2000/svg">
+                    <path fill="white" d="M0,16 C50,28 100,4 150,16 C175,22 190,10 200,16 L200,32 L0,32 Z" />
+                  </svg>
                 </div>
                 <button
                   type="button"
@@ -157,7 +132,9 @@ export default function Designs() {
               <div className="absolute bottom-0 left-0 right-0 flex flex-col items-center justify-end pb-4 h-24">
                 {/* Wave decor */}
                 <div className="absolute bottom-6 left-0 right-0 opacity-40 px-2 pointer-events-none">
-                  <img src="/assets/svg/recurso olas, 2 olas.svg" alt="" className="w-full h-8 object-cover" />
+                  <svg viewBox="0 0 200 32" preserveAspectRatio="none" className="w-full h-8" xmlns="http://www.w3.org/2000/svg">
+                    <path fill="white" d="M0,16 C50,28 100,4 150,16 C175,22 190,10 200,16 L200,32 L0,32 Z" />
+                  </svg>
                 </div>
                 <button
                   type="button"
@@ -174,113 +151,113 @@ export default function Designs() {
       </div>
 
       {/* ── DESIGN GALLERY (PATTERNS) ────────────────────────────────────── */}
-      <div id="gallery" className="scroll-mt-20 mx-auto max-w-[1400px] px-6 lg:px-12 py-20 border-t border-[#066175]/30">
-        <div className="text-center mb-12">
-          <span className="text-xs font-bold uppercase tracking-widest text-[#e38622]">
-            Patterns
-          </span>
-          <h2 className="mt-2 font-heading text-3xl font-black tracking-wider text-[#f6ebd4] sm:text-4xl">
-            BOAT DESIGNS
-          </h2>
-          <div className="mx-auto mt-3 h-1 w-10 bg-[#e38622]" />
-          <p className="mt-4 text-sm text-[#76abbf] max-w-xl mx-auto leading-relaxed">
-            Every deck is unique. Browse a selection of our completed projects and
-            get inspired for your next build.
-          </p>
-        </div>
+      <div id="gallery" className="scroll-mt-20 border-t border-[#066175]/30 bg-[#066175] py-20 relative overflow-hidden">
+        <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
+          <div className="flex flex-col-reverse lg:flex-row items-center gap-12 lg:gap-20">
+            {/* Patterns Grid */}
+            <div className="flex-1 w-full relative z-10">
+              <div className="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-7 gap-x-4 gap-y-6">
+                {patterns.map((pattern) => (
+                  <div key={pattern.id} className="group flex flex-col items-center">
+                    <div className="relative w-12 h-20 sm:w-14 sm:h-24 md:w-16 md:h-28 overflow-hidden rounded-t-[50px] bg-white shadow-xl flex flex-col group-hover:-translate-y-2 transition-transform duration-300">
+                      {/* Image/Texture Area */}
+                      <div className="flex-1 w-full bg-gray-200">
+                        {pattern.image_url ? (
+                          <img src={pattern.image_url} alt={pattern.name} className="w-full h-full object-cover" />
+                        ) : (
+                          <div className="w-full h-full bg-[#e38622]" />
+                        )}
+                      </div>
+                      {/* White bottom block */}
+                      <div className="h-3 sm:h-4 md:h-5 w-full bg-white flex-shrink-0 border-t border-gray-100" />
+                    </div>
+                    <span className="mt-2 text-center text-[10px] sm:text-[11px] font-semibold text-[#f6ebd4] opacity-0 group-hover:opacity-100 transition-opacity font-sans leading-tight">
+                      {pattern.name}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
 
-        <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-          {BOAT_DESIGNS.map((design) => (
-            <div
-              key={design.id}
-              className="group relative overflow-hidden rounded-2xl border border-[#066175]/30 bg-[#052631] shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 aspect-[4/3]"
-            >
-              <img
-                src={design.image}
-                alt={design.label}
-                className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-              />
-              {/* Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-[#033040]/90 via-[#033040]/20 to-transparent" />
-
-              {/* Tag */}
-              <span className="absolute top-3 right-3 rounded-full bg-[#e38622] px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-white shadow">
-                {design.tag}
-              </span>
-
-              {/* Label */}
-              <div className="absolute bottom-0 left-0 right-0 p-5">
-                <h3 className="font-heading text-lg font-black tracking-wider text-[#f6ebd4]">
-                  {design.label}
-                </h3>
+            {/* Text Content */}
+            <div className="lg:w-[450px] flex-shrink-0 text-left relative z-10">
+              <h2 className="font-heading text-6xl md:text-7xl lg:text-[90px] font-bold tracking-tight text-[#f6ebd4] uppercase leading-none">
+                PATTERNS
+              </h2>
+              <p className="mt-8 text-sm md:text-base text-white font-sans leading-relaxed text-justify hyphens-auto tracking-wide">
+                Every deck is unique. Browse a selection of our premium pattern designs
+                and get inspired for your next build. Our patterns are precision routed
+                for a perfect finish that elevates the aesthetics of any vessel.
+              </p>
+              
+              <div className="mt-8 flex flex-col items-start">
+                <img src="/assets/svg/recurso olas, 2 olas.svg" alt="" className="w-64 opacity-50 mb-6" />
                 <Link
                   to="/estimate"
-                  className="mt-2 inline-block text-xs font-bold uppercase tracking-wider text-[#e38622] hover:text-orange-400 transition-colors font-sans"
+                  className="rounded-lg bg-[#e38622] hover:bg-orange-500 px-8 py-3.5 text-sm font-bold uppercase tracking-wider text-white shadow-lg transition-transform hover:scale-105"
                 >
-                  Get this design →
+                  GET THIS DESIGN
                 </Link>
               </div>
             </div>
-          ))}
-        </div>
-
-        <div className="mt-12 text-center">
-          <p className="text-sm text-[#76abbf] mb-4">
-            Don't see what you're looking for? We do fully custom builds.
-          </p>
-          <Link
-            to="/contact"
-            className="inline-flex items-center justify-center rounded-full bg-[#e38622] hover:bg-orange-600 px-10 py-3.5 text-sm font-bold uppercase tracking-wider text-white transition-transform hover:scale-105 shadow-lg leading-none"
-          >
-            Request Custom Design
-          </Link>
+          </div>
         </div>
       </div>
 
       {/* ── COLOR PALETTE (COLORS) ───────────────────────────────────────── */}
-      <div id="colors" className="scroll-mt-20 bg-[#052631] border-t border-[#066175]/30 py-20">
+      <div id="colors" className="scroll-mt-20 border-t border-[#066175]/30 bg-[#0C5A6D] py-20 relative overflow-hidden">
         <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
-          <div className="text-center mb-12">
-            <span className="text-xs font-bold uppercase tracking-widest text-[#e38622]">
-              Palette
-            </span>
-            <h2 className="mt-2 font-heading text-3xl font-black tracking-wider text-[#f6ebd4] sm:text-4xl">
-              COLORS
-            </h2>
-            <div className="mx-auto mt-3 h-1 w-10 bg-[#e38622]" />
-            <p className="mt-4 text-sm text-[#76abbf] max-w-xl mx-auto leading-relaxed">
-              Our marine-grade color range. Each pigment is formulated to resist
-              UV fading, saltwater, and extreme temperatures.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-4">
-            {COLOR_SWATCHES.map((swatch) => (
-              <div
-                key={swatch.name}
-                className="group flex flex-col items-center gap-2 cursor-pointer"
-              >
-                <div
-                  className="h-16 w-16 rounded-full border-2 border-[#066175]/40 shadow-lg ring-2 ring-transparent group-hover:ring-[#e38622] transition-all duration-200"
-                  style={{ backgroundColor: swatch.hex }}
-                />
-                <span className="text-center text-[11px] font-semibold text-[#f6ebd4]/80 leading-tight group-hover:text-[#f6ebd4] transition-colors font-sans">
-                  {swatch.name}
-                </span>
+          <div className="flex flex-col-reverse lg:flex-row items-center gap-12 lg:gap-20">
+            {/* Color Swatch Grid */}
+            <div className="flex-1 w-full relative z-10">
+              <div className="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-7 gap-x-4 gap-y-6">
+                {colors.map((color) => (
+                  <div key={color.id} className="group flex flex-col items-center">
+                    <div className="relative w-12 h-20 sm:w-14 sm:h-24 md:w-16 md:h-28 overflow-hidden rounded-t-[50px] bg-white shadow-xl flex flex-col group-hover:-translate-y-2 transition-transform duration-300">
+                      {/* Color/Texture Area */}
+                      <div 
+                        className="flex-1 w-full relative"
+                        style={{ backgroundColor: color.hex_color || 'transparent' }}
+                      >
+                        {color.image_url && (
+                          <img src={color.image_url} alt={color.name} className="absolute inset-0 w-full h-full object-cover mix-blend-multiply opacity-90" />
+                        )}
+                      </div>
+                      {/* White bottom block */}
+                      <div className="h-3 sm:h-4 md:h-5 w-full bg-white flex-shrink-0 border-t border-gray-100" />
+                    </div>
+                    <span className="mt-2 text-center text-[10px] sm:text-[11px] font-semibold text-[#f6ebd4] opacity-0 group-hover:opacity-100 transition-opacity font-sans leading-tight">
+                      {color.name}
+                    </span>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
+            </div>
 
-          <div className="mt-12 text-center">
-            <p className="text-sm text-[#76abbf] mb-4">
-              Need a custom color match? We can match any RAL or Pantone code.
-            </p>
-            <Link
-              to="/contact"
-              className="inline-flex items-center justify-center rounded-full border-2 border-[#e38622] px-8 py-3.5 text-sm font-bold uppercase tracking-wider text-[#e38622] hover:bg-[#e38622] hover:text-white transition-all leading-none"
-            >
-              Match My Color
-            </Link>
+            {/* Text Content */}
+            <div className="lg:w-[450px] flex-shrink-0 text-left relative z-10">
+              <h2 className="font-heading text-6xl md:text-7xl lg:text-[90px] font-bold tracking-tight text-[#f6ebd4] uppercase leading-none">
+                COLORS
+              </h2>
+              <p className="mt-8 text-sm md:text-base text-white font-sans leading-relaxed text-justify hyphens-auto tracking-wide">
+                Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy
+                nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi
+                enim ad Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
+                nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+                Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit
+                lobortis nisl ut aliquip
+              </p>
+              
+              <div className="mt-8 flex flex-col items-start">
+                <img src="/assets/svg/recurso olas, 2 olas.svg" alt="" className="w-64 opacity-50 mb-6" />
+                <Link
+                  to="/contact"
+                  className="rounded-lg bg-[#e38622] hover:bg-orange-500 px-8 py-3.5 text-sm font-bold uppercase tracking-wider text-white shadow-lg transition-transform hover:scale-105"
+                >
+                  MATCH COLOR
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </div>

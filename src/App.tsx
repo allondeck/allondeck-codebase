@@ -58,6 +58,7 @@ const OwnerReviews = lazy(() => import("./pages/owner/OwnerReviews"));
 const ProductForm = lazy(() => import("./pages/owner/ProductForm"));
 const CategoryForm = lazy(() => import("./pages/owner/CategoryForm"));
 const CouponForm = lazy(() => import("./pages/owner/CouponForm"));
+const OwnerDesigns = lazy(() => import("./pages/owner/OwnerDesigns"));
 
 function RedirectOwnerOrderId() {
   const { id } = useParams();
@@ -137,6 +138,7 @@ function App() {
               <Route path="products/:id" element={<ProductForm />} />
               <Route path="categories" element={<OwnerCategories />} />
               <Route path="categories/:id" element={<CategoryForm />} />
+              <Route path="designs" element={<OwnerDesigns />} />
               <Route path="coupons" element={<OwnerCoupons />} />
               <Route path="coupons/:id" element={<CouponForm />} />
 

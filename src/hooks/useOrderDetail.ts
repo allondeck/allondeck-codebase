@@ -8,6 +8,8 @@ export type OrderItemRow = {
   product_name: string
   product_price: number | string
   quantity: number
+  variant_id?: string | null
+  variant_name?: string | null
 }
 
 export type OrderDetailRow = {

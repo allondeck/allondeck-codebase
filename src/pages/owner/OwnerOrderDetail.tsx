@@ -283,7 +283,12 @@ export default function OwnerOrderDetail() {
               key={item.id}
               className="flex flex-wrap items-center justify-between gap-2 border-b border-[#066175]/25 pb-3 last:border-0"
             >
-              <span className="text-white">{item.product_name}</span>
+              <div className="flex flex-col">
+                <span className="text-white">{item.product_name}</span>
+                {item.variant_name && (
+                  <span className="text-sm text-[#76abbf]">{item.variant_name}</span>
+                )}
+              </div>
               <div className="flex items-center gap-2">
                 <span className="text-sm text-[#76abbf]">×{item.quantity}</span>
                 <span className="font-medium text-[#f6ebd4]">

@@ -13,6 +13,19 @@ import { slugify } from "../../lib/utils";
 import type { ProductRow } from "../../types/database";
 
 const MAX_CATEGORIES = 3;
+
+type VariantFormData = {
+  id?: string;
+  name: string;
+  sku: string;
+  price: string;
+  compare_at_price: string;
+  stock_quantity: string;
+  stock_quantity: string;
+  is_default: boolean;
+  image_url: string;
+};
+
 type ProductFormData = {
   name: string;
   slug: string;
@@ -26,6 +39,7 @@ type ProductFormData = {
   is_featured: boolean;
   category_ids: string[];
   image_url: string;
+  variants: VariantFormData[];
 };
 
 const initial: ProductFormData = {
@@ -41,6 +55,7 @@ const initial: ProductFormData = {
   is_featured: false,
   category_ids: [],
   image_url: "",
+  variants: [],
 };
 
 export default function ProductForm() {
@@ -78,6 +93,14 @@ export default function ProductForm() {
         const categoryIds = (pcData ?? []).map(
           (r) => (r as { category_id: string }).category_id,
         );
+
+        const { data: variantsData } = await supabase
+          .from("product_variants")
+          .select("*")
+          .eq("product_id", id)
+          .eq("is_active", true)
+          .order("created_at", { ascending: true });
+
         setForm({
           name: p.name,
           slug: p.slug,
@@ -95,6 +118,16 @@ export default function ProductForm() {
           is_featured: p.is_featured,
           category_ids: categoryIds,
           image_url: p.image_url ?? "",
+          variants: (variantsData || []).map((v: any) => ({
+            id: v.id,
+            name: v.name,
+            sku: v.sku || "",
+            price: v.price ? String(v.price) : "",
+            compare_at_price: v.compare_at_price ? String(v.compare_at_price) : "",
+            stock_quantity: String(v.stock_quantity),
+            is_default: v.is_default,
+            image_url: v.image_url || "",
+          })),
         });
         setLoading(false);
       })();
@@ -143,6 +176,46 @@ export default function ProductForm() {
     setForm((f) => ({ ...f, image_url: urlData.publicUrl }));
   }
 
+  async function handleVariantFileUpload(e: React.ChangeEvent<HTMLInputElement>, index: number) {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const validTypes = ["image/jpeg", "image/png", "image/webp", "image/gif"];
+    if (!validTypes.includes(file.type)) {
+      setError("Please upload a JPEG, PNG, WebP, or GIF image.");
+      return;
+    }
+    if (!isImageSizeWithinLimit(file, MAX_IMAGE_SIZE_PRODUCTS)) {
+      setError(
+        `Image must be under ${getMaxImageSizeLabel(MAX_IMAGE_SIZE_PRODUCTS)}.`,
+      );
+      return;
+    }
+    setError(null);
+    setUploading(true);
+    const ext = file.name.split(".").pop() || "jpg";
+    const path = `${crypto.randomUUID()}.${ext}`;
+    const { data, error: err } = await supabase.storage
+      .from("products")
+      .upload(path, file, {
+        cacheControl: "3600",
+        upsert: false,
+      });
+    setUploading(false);
+    e.target.value = "";
+    if (err) {
+      setError(err.message);
+      return;
+    }
+    const { data: urlData } = supabase.storage
+      .from("products")
+      .getPublicUrl(data.path);
+    setForm((f) => {
+      const newVariants = [...f.variants];
+      newVariants[index].image_url = urlData.publicUrl;
+      return { ...f, variants: newVariants };
+    });
+  }
+
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError(null);
@@ -182,8 +255,8 @@ export default function ProductForm() {
         .insert(payload)
         .select("id")
         .single();
-      setSaving(false);
       if (err) {
+        setSaving(false);
         setError(err.message);
         return;
       }
@@ -197,14 +270,30 @@ export default function ProductForm() {
           })) as never,
         );
       }
+      
+      for (const v of form.variants) {
+        await supabase.from("product_variants").insert({
+          product_id: productId,
+          name: v.name,
+          sku: v.sku || null,
+          price: v.price ? parseFloat(v.price) : null,
+          compare_at_price: v.compare_at_price ? parseFloat(v.compare_at_price) : null,
+          stock_quantity: parseInt(v.stock_quantity, 10) || 0,
+          is_default: v.is_default,
+          image_url: v.image_url || null,
+          is_active: true
+        });
+      }
+      
+      setSaving(false);
       navigate("/account/owner/products");
     } else if (id) {
       const { error: err } = await supabase
         .from("products")
         .update(payload)
         .eq("id", id);
-      setSaving(false);
       if (err) {
+        setSaving(false);
         setError(err.message);
         return;
       }
@@ -221,6 +310,42 @@ export default function ProductForm() {
       if (oldImageUrl && oldImageUrl !== form.image_url) {
         await deleteStorageFileIfOurs("products", oldImageUrl);
       }
+
+      // Handle variants update
+      const { data: existingVariants } = await supabase
+        .from("product_variants")
+        .select("id")
+        .eq("product_id", id);
+      
+      const existingIds = existingVariants?.map(v => v.id) || [];
+      const currentIds = form.variants.map(v => v.id).filter(Boolean) as string[];
+      const toDelete = existingIds.filter(eId => !currentIds.includes(eId));
+      
+      if (toDelete.length > 0) {
+        await supabase.from("product_variants").update({ is_active: false }).in("id", toDelete);
+      }
+
+      for (const v of form.variants) {
+        const vPayload = {
+          product_id: id,
+          name: v.name,
+          sku: v.sku || null,
+          price: v.price ? parseFloat(v.price) : null,
+          compare_at_price: v.compare_at_price ? parseFloat(v.compare_at_price) : null,
+          stock_quantity: parseInt(v.stock_quantity, 10) || 0,
+          is_default: v.is_default,
+          image_url: v.image_url || null,
+          is_active: true
+        };
+        
+        if (v.id) {
+          await supabase.from("product_variants").update(vPayload).eq("id", v.id);
+        } else {
+          await supabase.from("product_variants").insert(vPayload);
+        }
+      }
+
+      setSaving(false);
       navigate("/account/owner/products");
     }
   }
@@ -565,6 +690,202 @@ export default function ProductForm() {
           </label>
         </div>
       </div>
+      
+      <div className="space-y-4 rounded-lg border border-[#066175]/35 bg-[#052631] p-6">
+        <div className="flex items-center justify-between">
+          <div>
+            <h3 className="text-lg font-medium text-white">Variants (Colors/Options)</h3>
+            <p className="mt-1 text-xs text-[#76abbf]">
+              Add variants to track separate prices and inventory per option. If no variants exist, the product's base price and stock are used.
+            </p>
+          </div>
+          <Button
+            type="button"
+            variant="secondary"
+            onClick={() => {
+              setForm(f => ({
+                ...f,
+                variants: [
+                  ...f.variants, 
+                  { name: "", sku: "", price: "", compare_at_price: "", stock_quantity: "0", is_default: f.variants.length === 0, image_url: "" }
+                ]
+              }))
+            }}
+          >
+            Add variant
+          </Button>
+        </div>
+        
+        {form.variants.length > 0 && (
+          <div className="space-y-4 mt-4">
+            {form.variants.map((variant, index) => (
+              <div key={variant.id || `new-${index}`} className="relative rounded-lg border border-[#066175]/60 bg-[#044155] p-4">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setForm(f => {
+                      const newVariants = [...f.variants];
+                      newVariants.splice(index, 1);
+                      if (variant.is_default && newVariants.length > 0) {
+                        newVariants[0].is_default = true;
+                      }
+                      return { ...f, variants: newVariants };
+                    });
+                  }}
+                  className="absolute top-4 right-4 text-[#76abbf] hover:text-red-400"
+                  title="Remove variant"
+                >
+                  <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                  </svg>
+                </button>
+                
+                <div className="grid gap-4 sm:grid-cols-2 mt-2">
+                  <div className="sm:col-span-2">
+                    <label className="block text-sm font-medium text-white">Variant Name <span className="text-[#e38622]">*</span></label>
+                    <input
+                      type="text"
+                      required
+                      placeholder="e.g. Teak over Black"
+                      value={variant.name}
+                      onChange={(e) => {
+                        const newVariants = [...form.variants];
+                        newVariants[index].name = e.target.value;
+                        setForm({ ...form, variants: newVariants });
+                      }}
+                      className="mt-1 w-full rounded-lg bg-[#052631] border border-[#066175]/60 text-white px-3 py-2 text-sm focus:border-[#e38622] focus:outline-none"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-white">SKU</label>
+                    <input
+                      type="text"
+                      value={variant.sku}
+                      onChange={(e) => {
+                        const newVariants = [...form.variants];
+                        newVariants[index].sku = e.target.value;
+                        setForm({ ...form, variants: newVariants });
+                      }}
+                      className="mt-1 w-full rounded-lg bg-[#052631] border border-[#066175]/60 text-white px-3 py-2 text-sm focus:border-[#e38622] focus:outline-none"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-white">Stock Quantity <span className="text-[#e38622]">*</span></label>
+                    <input
+                      type="number"
+                      required
+                      min="0"
+                      value={variant.stock_quantity}
+                      onChange={(e) => {
+                        const newVariants = [...form.variants];
+                        newVariants[index].stock_quantity = e.target.value;
+                        setForm({ ...form, variants: newVariants });
+                      }}
+                      className="mt-1 w-full rounded-lg bg-[#052631] border border-[#066175]/60 text-white px-3 py-2 text-sm focus:border-[#e38622] focus:outline-none"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-white">Override Price (optional)</label>
+                    <input
+                      type="number"
+                      step="0.01"
+                      min="0"
+                      value={variant.price}
+                      onChange={(e) => {
+                        const newVariants = [...form.variants];
+                        newVariants[index].price = e.target.value;
+                        setForm({ ...form, variants: newVariants });
+                      }}
+                      placeholder="Leave empty for base price"
+                      className="mt-1 w-full rounded-lg bg-[#052631] border border-[#066175]/60 text-white px-3 py-2 text-sm focus:border-[#e38622] focus:outline-none"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-white">Override Compare At Price (optional)</label>
+                    <input
+                      type="number"
+                      step="0.01"
+                      min="0"
+                      value={variant.compare_at_price}
+                      onChange={(e) => {
+                        const newVariants = [...form.variants];
+                        newVariants[index].compare_at_price = e.target.value;
+                        setForm({ ...form, variants: newVariants });
+                      }}
+                      className="mt-1 w-full rounded-lg bg-[#052631] border border-[#066175]/60 text-white px-3 py-2 text-sm focus:border-[#e38622] focus:outline-none"
+                    />
+                  </div>
+                  <div className="sm:col-span-2">
+                    <label className="block text-sm font-medium text-white">Override Image (optional)</label>
+                    <div className="mt-1 flex items-center gap-3">
+                      {variant.image_url && (
+                        <div className="relative shrink-0">
+                          <img src={variant.image_url} alt="Variant" className="h-12 w-12 rounded object-cover border border-[#066175]/35" />
+                          <button
+                            type="button"
+                            onClick={() => {
+                              const newVariants = [...form.variants];
+                              newVariants[index].image_url = "";
+                              setForm({ ...form, variants: newVariants });
+                            }}
+                            className="absolute -top-1.5 -right-1.5 rounded-full bg-red-500 p-0.5 text-white"
+                          >
+                            <svg className="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                          </button>
+                        </div>
+                      )}
+                      <div className="flex-1 space-y-2 min-w-0">
+                        <label className="flex cursor-pointer items-center justify-center gap-2 rounded-lg border border-[#066175]/35 bg-[#052631] px-3 py-2 text-sm font-medium text-white hover:bg-[#066175]/30">
+                          <input
+                            type="file"
+                            accept="image/jpeg,image/png,image/webp,image/gif"
+                            onChange={(e) => handleVariantFileUpload(e, index)}
+                            disabled={uploading}
+                            className="hidden"
+                          />
+                          {uploading ? "Uploading..." : "Upload from device"}
+                        </label>
+                        <input
+                          type="url"
+                          value={variant.image_url}
+                          onChange={(e) => {
+                            const newVariants = [...form.variants];
+                            newVariants[index].image_url = e.target.value;
+                            setForm({ ...form, variants: newVariants });
+                          }}
+                          placeholder="Or paste image URL"
+                          className="w-full rounded-lg bg-[#052631] border border-[#066175]/60 text-white px-3 py-2 text-sm focus:border-[#e38622] focus:outline-none"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="sm:col-span-2 pt-2">
+                    <label className="flex items-center gap-2 cursor-pointer">
+                      <input
+                        type="radio"
+                        name="default_variant"
+                        checked={variant.is_default}
+                        onChange={() => {
+                          const newVariants = form.variants.map((v, i) => ({
+                            ...v,
+                            is_default: i === index
+                          }));
+                          setForm({ ...form, variants: newVariants });
+                        }}
+                        className="rounded-full border-[#066175]/60 bg-[#052631] text-[#e38622] focus:ring-[#e38622]"
+                      />
+                      <span className="text-sm font-medium text-white">Default selection</span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+
       <div className="flex gap-4">
         <Button type="submit" disabled={saving}>
           {saving ? "Saving..." : isNew ? "Create product" : "Save"}

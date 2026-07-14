@@ -12,8 +12,10 @@ export default function Cart() {
   const { items, itemCount, updateQuantity, removeItem } = useCart();
 
   const subtotal = items.reduce((sum, i) => {
-    if (isProductCartItem(i))
-      return sum + parsePrice(i.product.price) * i.quantity;
+    if (isProductCartItem(i)) {
+      const price = i.variant_price != null ? Number(i.variant_price) : parsePrice(i.product.price);
+      return sum + price * i.quantity;
+    }
     if (isComboCartItem(i)) return sum + i.totalPrice * i.quantity;
     return sum;
   }, 0);
@@ -56,9 +58,9 @@ export default function Cart() {
                       className="flex gap-4 rounded-lg border border-[#066175]/35 bg-[#052631] p-4"
                     >
                       <div className="h-24 w-24 shrink-0 overflow-hidden rounded bg-[#044155]">
-                        {product.image_url ? (
+                        {item.variant_image_url || product.image_url ? (
                           <img
-                            src={getSupabaseImageTransformUrl(product.image_url, {
+                            src={getSupabaseImageTransformUrl((item.variant_image_url || product.image_url)!, {
                               width: 96,
                               height: 96,
                               bucket: "products",
@@ -95,8 +97,13 @@ export default function Cart() {
                         >
                           {product.name}
                         </Link>
+                        {item.variant_name && (
+                          <p className="mt-0.5 text-sm text-[#76abbf]">
+                            {item.variant_name}
+                          </p>
+                        )}
                         <p className="mt-1 text-[#f6ebd4]">
-                          {formatPrice(product.price)} × {quantity}
+                          {formatPrice(item.variant_price != null ? item.variant_price : parsePrice(product.price))} × {quantity}
                         </p>
                       </div>
                       <div className="flex items-center gap-2">
@@ -141,7 +148,7 @@ export default function Cart() {
                         </button>
                       </div>
                       <div className="w-20 text-right font-medium text-[#f6ebd4]">
-                        {formatPrice(parsePrice(product.price) * quantity)}
+                        {formatPrice((item.variant_price != null ? item.variant_price : parsePrice(product.price)) * quantity)}
                       </div>
                     </div>
                   );
