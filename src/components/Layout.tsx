@@ -24,27 +24,7 @@ function getStoreName(settings: Record<string, unknown>): string {
   return trimmed || "Store";
 }
 
-function getLogoUrl(settings: Record<string, unknown>): string | null {
-  const v = settings.logo_url;
-  const url = parseSettingString(v);
-  return url || null;
-}
 
-
-
-/** Updates favicon from logo URL or falls back to default */
-function useFavicon(logoUrl: string | null) {
-  useEffect(() => {
-    let link = document.querySelector<HTMLLinkElement>('link[rel="icon"]');
-    if (!link) {
-      link = document.createElement("link");
-      link.rel = "icon";
-      document.head.appendChild(link);
-    }
-    link.href = logoUrl || "/log.png";
-    link.type = logoUrl?.match(/\.svg$/i) ? "image/svg+xml" : "image/png";
-  }, [logoUrl]);
-}
 
 export function Layout({ children }: LayoutProps) {
   const { itemCount } = useCart();
@@ -78,10 +58,7 @@ export function Layout({ children }: LayoutProps) {
     setTimeout(() => setFooterSubmitted(false), 6000);
   };
   const storeName = getStoreName(settings);
-  const logoUrl = getLogoUrl(settings);
 
-
-  useFavicon(logoUrl);
 
   useEffect(() => {
     document.title = storeName;
