@@ -3,7 +3,7 @@ import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { Button } from "../components/Button";
 import { GoogleIcon } from "../components/GoogleIcon";
 import { useAuth } from "../context/AuthContext";
-import { supabase } from "../lib/supabase";
+
 
 export default function Login() {
   const [email, setEmail] = useState("");

@@ -21,7 +21,6 @@ type VariantFormData = {
   price: string;
   compare_at_price: string;
   stock_quantity: string;
-  stock_quantity: string;
   is_default: boolean;
   image_url: string;
 };

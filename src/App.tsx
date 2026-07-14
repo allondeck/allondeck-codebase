@@ -8,7 +8,7 @@ import {
 import { ScrollToTop } from "./components/ScrollToTop";
 import { useAuth } from "./context/AuthContext";
 import { Layout } from "./components/Layout";
-import { Chatbox } from "./components/chatbox";
+// import { Chatbox } from "./components/chatbox";
 import Home from "./pages/Home";
 import Account from "./pages/Account";
 import Login from "./pages/Login";
@@ -94,7 +94,7 @@ function App() {
   return (
     <>
       <ScrollToTop />
-      <Chatbox />
+      {/* <Chatbox /> */}
       <Layout>
         <Suspense fallback={<PageFallback />}>
           <Routes>

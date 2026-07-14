@@ -77,7 +77,6 @@ const CartContext = createContext<CartContextValue | null>(null);
 
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [items, setItems] = useState<CartItem[]>(loadCartFromStorage);
-  const [isCartOpen, setIsCartOpen] = useState(false);
 
   useEffect(() => {
     saveCartToStorage(items);
@@ -107,7 +106,6 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
           variant_image_url: variantImageUrl
         } as ProductCartItem];
       });
-      setIsCartOpen(true);
     },
     [],
   );

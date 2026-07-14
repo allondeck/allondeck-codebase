@@ -25,6 +25,9 @@ This version is pre-seeded with beautiful **fishing and boating merch** (Rods & 
 - **Persistent Cart**: Works instantly for guests and signed-in accounts.
 - **Stripe Checkout**: Seamlessly redirects to Stripe Checkout with automatic stock reservation.
 
+### 🤖 AI Features (Optional/Hidden)
+- **AI Chatbox**: The codebase includes a customizable `Chatbox` component (located at `src/components/chatbox.tsx`) designed to provide intelligent assistance to your users. It is currently hidden by default but can be easily enabled in `App.tsx`.
+
 ### 👤 Customer Accounts
 - Sign up, sign in, address book management, and rich order history logs.
 

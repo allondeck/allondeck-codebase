@@ -2,9 +2,7 @@ import { useState } from "react";
 import { supabase } from "../../lib/supabase";
 import { useContactRequests } from "../../hooks/useContactRequests";
 
-const SOURCE_LABEL: Record<string, string> = {
-  "Free estimate request": "Estimate",
-};
+
 
 export default function OwnerContact() {
   const { requests, loading, error, refetch } = useContactRequests();

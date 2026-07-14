@@ -256,7 +256,7 @@ export async function createOrderFromInvoice(
         order_id: orderId,
         product_id: pId,
         product_name: pName,
-        product_price: pPrice,
+        product_price: parsePrice(pPrice),
         quantity: item.quantity,
       };
     },
