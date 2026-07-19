@@ -1,19 +1,86 @@
 import { Link } from "react-router-dom";
 import { useProducts } from "../hooks/useProducts";
+import { useRef, useState } from "react";
 
 export default function Home() {
   const { products, loading } = useProducts({ limit: 4 });
+  const heroCardRef = useRef<HTMLDivElement>(null);
+
+  // Ripple state
+  const [ripples, setRipples] = useState<{ id: number; x: number; y: number }[]>([]);
+  const rippleCount = useRef(0);
+
+  const handleSectionMouseMove = (e: React.MouseEvent<HTMLElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    if (Math.random() > 0.4) {
+      const newRipple = { id: rippleCount.current++, x, y };
+      setRipples((prev) => [...prev.slice(-15), newRipple]);
+
+      setTimeout(() => {
+        setRipples((prev) => prev.filter((r) => r.id !== newRipple.id));
+      }, 1000);
+    }
+  };
+
+  const handleCardMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!heroCardRef.current) return;
+    const rect = heroCardRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    
+    // Calculate rotation (-5 to 5 degrees)
+    const rotateX = ((y - centerY) / centerY) * -5;
+    const rotateY = ((x - centerX) / centerX) * 5;
+    
+    heroCardRef.current.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(0)`;
+    heroCardRef.current.style.transition = "transform 0.1s ease-out";
+  };
+
+  const handleCardMouseLeave = () => {
+    if (!heroCardRef.current) return;
+    heroCardRef.current.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0)`;
+    heroCardRef.current.style.transition = "transform 0.5s ease-out";
+  };
 
   return (
     <div className="relative overflow-hidden bg-brand-dark text-white font-sans">
       {/* 1. HERO SECTION */}
-      <section className="relative flex flex-col items-center justify-center px-4 py-32 text-center md:py-48 min-h-[90vh] overflow-hidden bg-black">
+      <section 
+        className="relative flex flex-col items-center justify-center px-4 py-32 text-center md:py-48 min-h-[90vh] overflow-hidden bg-black cursor-crosshair"
+        onMouseMove={handleSectionMouseMove}
+      >
         {/* Background Image (Rotated 90deg CCW and scaled to cover) */}
-        <div className="absolute top-1/2 left-1/2 w-[150vw] h-[150vw] md:w-[120vw] md:h-[120vw] -translate-x-1/2 -translate-y-1/2 -rotate-90">
-          <img src="/assets/images/1.jpg" alt="All On Deck Hero" className="w-full h-full object-cover" />
+        <div className="absolute top-1/2 left-1/2 w-[150vw] h-[150vw] md:w-[120vw] md:h-[120vw] -translate-x-1/2 -translate-y-1/2 -rotate-90 pointer-events-none">
+          <img src="/assets/images/1.jpg" alt="All On Deck Hero" className="w-full h-full object-cover opacity-80" />
         </div>
 
-        <div className="relative z-10 mx-auto max-w-4xl flex flex-col items-center bg-[#044155]/85 backdrop-blur-md rounded-[3rem] p-8 md:p-16 shadow-2xl border border-white/10 mt-12">
+        {/* Ripples */}
+        {ripples.map((r) => (
+          <div
+            key={r.id}
+            className="absolute rounded-full border-2 border-[#76abbf]/30 pointer-events-none mix-blend-screen"
+            style={{
+              left: r.x - 20,
+              top: r.y - 20,
+              width: 40,
+              height: 40,
+              animation: "ripple-fade 1s ease-out forwards",
+            }}
+          />
+        ))}
+
+        <div 
+          ref={heroCardRef}
+          onMouseMove={handleCardMouseMove}
+          onMouseLeave={handleCardMouseLeave}
+          className="relative z-10 mx-auto max-w-4xl flex flex-col items-center bg-[#044155]/85 backdrop-blur-md rounded-[3rem] p-8 md:p-16 shadow-2xl border border-white/10 mt-12 transition-transform duration-500 ease-out cursor-default"
+          style={{ transformStyle: 'preserve-3d' }}
+        >
           <h2 className="font-heading text-6xl md:text-8xl font-black tracking-widest text-[#e38622] uppercase drop-shadow-md">
             WELCOME
           </h2>
@@ -47,6 +114,13 @@ export default function Home() {
             </div>
           </div>
         </div>
+
+        <style>{`
+          @keyframes ripple-fade {
+            0% { transform: scale(0.5); opacity: 1; }
+            100% { transform: scale(3.5); opacity: 0; }
+          }
+        `}</style>
       </section>
 
       {/* 2. SERVICES SECTION (Medium Teal Bg) */}
