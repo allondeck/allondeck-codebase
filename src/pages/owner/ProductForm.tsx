@@ -379,7 +379,7 @@ export default function ProductForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="mx-auto max-w-2xl space-y-6">
+    <form onSubmit={handleSubmit} className="max-w-2xl space-y-6">
       <div className="flex items-center justify-between">
         <h2 className="text-xl font-semibold text-[#f6ebd4]">
           {isNew ? "Add product" : "Edit product"}

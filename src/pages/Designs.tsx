@@ -56,7 +56,7 @@ export default function Designs() {
           <div className="mt-16 grid gap-8 grid-cols-1 md:grid-cols-3 max-w-6xl mx-auto text-left">
             
             {/* Card 1: Colors */}
-            <div className="relative rounded-3xl border border-[#066175] bg-[#052631] p-5 pb-20 overflow-hidden flex flex-col h-full shadow-lg hover:shadow-xl transition-all">
+            <div className="relative rounded-3xl border border-[#066175] bg-[#052631] p-5 pb-20 overflow-hidden flex flex-col h-full shadow-lg">
               <div className="aspect-[4/3] w-full overflow-hidden rounded-2xl">
                 <img
                   src="/assets/images/5.2.jpg"
@@ -85,7 +85,7 @@ export default function Designs() {
             </div>
 
             {/* Card 2: Patterns */}
-            <div className="relative rounded-3xl border border-[#066175] bg-[#052631] p-5 pb-20 overflow-hidden flex flex-col h-full shadow-lg hover:shadow-xl transition-all">
+            <div className="relative rounded-3xl border border-[#066175] bg-[#052631] p-5 pb-20 overflow-hidden flex flex-col h-full shadow-lg">
               <div className="aspect-[4/3] w-full overflow-hidden rounded-2xl">
                 <img
                   src="/assets/images/1.jpg"
@@ -116,7 +116,7 @@ export default function Designs() {
             </div>
 
             {/* Card 3: Materials */}
-            <div className="relative rounded-3xl border border-[#066175] bg-[#052631] p-5 pb-20 overflow-hidden flex flex-col h-full shadow-lg hover:shadow-xl transition-all">
+            <div className="relative rounded-3xl border border-[#066175] bg-[#052631] p-5 pb-20 overflow-hidden flex flex-col h-full shadow-lg">
               <div className="aspect-[4/3] w-full overflow-hidden rounded-2xl">
                 <img
                   src="/assets/images/9.jpg"
@@ -159,7 +159,7 @@ export default function Designs() {
               <div className="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-7 gap-x-4 gap-y-6">
                 {patterns.map((pattern) => (
                   <div key={pattern.id} className="group flex flex-col items-center">
-                    <div className="relative w-12 h-20 sm:w-14 sm:h-24 md:w-16 md:h-28 overflow-hidden rounded-t-[50px] bg-white shadow-xl flex flex-col group-hover:-translate-y-2 transition-transform duration-300">
+                    <div className="relative w-12 h-20 sm:w-14 sm:h-24 md:w-16 md:h-28 overflow-hidden rounded-t-[50px] bg-white shadow-xl flex flex-col">
                       {/* Image/Texture Area */}
                       <div className="flex-1 w-full bg-gray-200">
                         {pattern.image_url ? (
@@ -171,7 +171,7 @@ export default function Designs() {
                       {/* White bottom block */}
                       <div className="h-3 sm:h-4 md:h-5 w-full bg-white flex-shrink-0 border-t border-gray-100" />
                     </div>
-                    <span className="mt-2 text-center text-[10px] sm:text-[11px] font-semibold text-[#f6ebd4] opacity-0 group-hover:opacity-100 transition-opacity font-sans leading-tight">
+                    <span className="mt-2 text-center text-[10px] sm:text-[11px] font-semibold text-[#f6ebd4] opacity-80 font-sans leading-tight">
                       {pattern.name}
                     </span>
                   </div>
@@ -213,7 +213,7 @@ export default function Designs() {
               <div className="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-7 gap-x-4 gap-y-6">
                 {colors.map((color) => (
                   <div key={color.id} className="group flex flex-col items-center">
-                    <div className="relative w-12 h-20 sm:w-14 sm:h-24 md:w-16 md:h-28 overflow-hidden rounded-t-[50px] bg-white shadow-xl flex flex-col group-hover:-translate-y-2 transition-transform duration-300">
+                    <div className="relative w-12 h-20 sm:w-14 sm:h-24 md:w-16 md:h-28 overflow-hidden rounded-t-[50px] bg-white shadow-xl flex flex-col">
                       {/* Color/Texture Area */}
                       <div 
                         className="flex-1 w-full relative"
@@ -226,7 +226,7 @@ export default function Designs() {
                       {/* White bottom block */}
                       <div className="h-3 sm:h-4 md:h-5 w-full bg-white flex-shrink-0 border-t border-gray-100" />
                     </div>
-                    <span className="mt-2 text-center text-[10px] sm:text-[11px] font-semibold text-[#f6ebd4] opacity-0 group-hover:opacity-100 transition-opacity font-sans leading-tight">
+                    <span className="mt-2 text-center text-[10px] sm:text-[11px] font-semibold text-[#f6ebd4] opacity-80 font-sans leading-tight">
                       {color.name}
                     </span>
                   </div>

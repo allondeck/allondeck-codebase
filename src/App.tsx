@@ -1,7 +1,8 @@
-import { lazy, Suspense } from "react";
+import { Suspense } from "react";
 import {
-  Routes,
-  Route,
+  createBrowserRouter,
+  RouterProvider,
+  Outlet,
   Navigate,
   useParams,
 } from "react-router-dom";
@@ -17,48 +18,6 @@ import Setup from "./pages/Setup";
 import LookupOrder from "./pages/LookupOrder";
 import About from "./pages/About";
 import NotFound from "./pages/NotFound";
-
-const Products = lazy(() => import("./pages/Products"));
-const ProductDetail = lazy(() => import("./pages/ProductDetail"));
-const Cart = lazy(() => import("./pages/Cart"));
-const Wishlist = lazy(() => import("./pages/Wishlist"));
-const Checkout = lazy(() => import("./pages/Checkout"));
-const OrderConfirmation = lazy(() => import("./pages/OrderConfirmation"));
-const OrderDetail = lazy(() => import("./pages/OrderDetail"));
-const AccountOrders = lazy(() => import("./pages/AccountOrders"));
-const Services = lazy(() => import("./pages/Services"));
-const Designs = lazy(() => import("./pages/Designs"));
-const Estimate = lazy(() => import("./pages/Estimate"));
-const OwnerLayout = lazy(() =>
-  import("./components/OwnerLayout").then((m) => ({ default: m.OwnerLayout })),
-);
-const OwnerDashboardHome = lazy(
-  () => import("./pages/owner/OwnerDashboardHome"),
-);
-const OwnerProducts = lazy(() => import("./pages/owner/OwnerProducts"));
-const OwnerStockImport = lazy(() => import("./pages/owner/OwnerStockImport"));
-const OwnerCategories = lazy(() => import("./pages/owner/OwnerCategories"));
-const OwnerOrdersLayout = lazy(() => import("./pages/owner/OwnerOrdersLayout"));
-const OwnerOrders = lazy(() => import("./pages/owner/OwnerOrders"));
-const OwnerCustomers = lazy(() => import("./pages/owner/OwnerCustomers"));
-const OwnerCustomerDetail = lazy(
-  () => import("./pages/owner/OwnerCustomerDetail"),
-);
-const OwnerContact = lazy(() => import("./pages/owner/OwnerContact"));
-const OwnerOrderFromInvoice = lazy(
-  () => import("./pages/owner/OwnerOrderFromInvoice"),
-);
-const OwnerOrderCreateManual = lazy(
-  () => import("./pages/owner/OwnerOrderCreateManual"),
-);
-const OwnerOrderDetail = lazy(() => import("./pages/owner/OwnerOrderDetail"));
-const OwnerSettings = lazy(() => import("./pages/owner/OwnerSettings"));
-const OwnerCoupons = lazy(() => import("./pages/owner/OwnerCoupons"));
-const OwnerReviews = lazy(() => import("./pages/owner/OwnerReviews"));
-const ProductForm = lazy(() => import("./pages/owner/ProductForm"));
-const CategoryForm = lazy(() => import("./pages/owner/CategoryForm"));
-const CouponForm = lazy(() => import("./pages/owner/CouponForm"));
-const OwnerDesigns = lazy(() => import("./pages/owner/OwnerDesigns"));
 
 function RedirectOwnerOrderId() {
   const { id } = useParams();
@@ -90,103 +49,127 @@ function OwnerGuard({ children }: { children: React.ReactNode }) {
   return <>{children}</>;
 }
 
-function App() {
+function RootLayout() {
   return (
     <>
       <ScrollToTop />
       {/* <Chatbox /> */}
       <Layout>
         <Suspense fallback={<PageFallback />}>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/services" element={<Services />} />
-            <Route path="/designs" element={<Designs />} />
-            <Route path="/estimate" element={<Estimate />} />
-            <Route path="/products" element={<Products />} />
-            <Route path="/products/:slug" element={<ProductDetail />} />
-            <Route path="/cart" element={<Cart />} />
-            <Route path="/wishlist" element={<Wishlist />} />
-            <Route path="/checkout" element={<Checkout />} />
-            <Route
-              path="/order-confirmation/:id"
-              element={<OrderConfirmation />}
-            />
-            <Route path="/account" element={<Account />} />
-            <Route path="/account/orders" element={<AccountOrders />} />
-            <Route path="/account/orders/:id" element={<OrderDetail />} />
-            <Route path="/lookup-order" element={<LookupOrder />} />
-            <Route path="/about" element={<About />} />
-
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
-            <Route path="/setup" element={<Setup />} />
-            <Route
-              path="/account/owner"
-              element={
-                <OwnerGuard>
-                  <OwnerLayout />
-                </OwnerGuard>
-              }
-            >
-              <Route index element={<OwnerDashboardHome />} />
-              <Route
-                path="widgets"
-                element={<OwnerDashboardHome showAllWidgets />}
-              />
-              <Route path="products" element={<OwnerProducts />} />
-              <Route path="products/import" element={<OwnerStockImport />} />
-              <Route path="products/:id" element={<ProductForm />} />
-              <Route path="categories" element={<OwnerCategories />} />
-              <Route path="categories/:id" element={<CategoryForm />} />
-              <Route path="designs" element={<OwnerDesigns />} />
-              <Route path="coupons" element={<OwnerCoupons />} />
-              <Route path="coupons/:id" element={<CouponForm />} />
-
-              <Route
-                path="orders/create-manual"
-                element={<Navigate to="/owner/orders/create-manual" replace />}
-              />
-              <Route path="orders/:id" element={<RedirectOwnerOrderId />} />
-              <Route
-                path="orders"
-                element={<Navigate to="/owner/orders" replace />}
-              />
-              <Route path="customers" element={<OwnerCustomers />} />
-              <Route
-                path="customers/:customerKey"
-                element={<OwnerCustomerDetail />}
-              />
-              <Route path="reviews" element={<OwnerReviews />} />
-              <Route path="contact" element={<OwnerContact />} />
-              <Route path="settings" element={<OwnerSettings />} />
-            </Route>
-            <Route
-              path="/owner"
-              element={
-                <OwnerGuard>
-                  <OwnerLayout />
-                </OwnerGuard>
-              }
-            >
-              <Route path="orders" element={<OwnerOrdersLayout />}>
-              <Route index element={<OwnerOrders />} />
-              </Route>
-              <Route
-                path="orders/from-invoice"
-                element={<OwnerOrderFromInvoice />}
-              />
-              <Route
-                path="orders/create-manual"
-                element={<OwnerOrderCreateManual />}
-              />
-              <Route path="orders/:id" element={<OwnerOrderDetail />} />
-            </Route>
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+          <Outlet />
         </Suspense>
       </Layout>
     </>
   );
+}
+
+export const router = createBrowserRouter([
+  {
+    element: <RootLayout />,
+    children: [
+      { path: "/", element: <Home /> },
+      { path: "/services", lazy: async () => ({ Component: (await import("./pages/Services")).default }) },
+      { path: "/designs", lazy: async () => ({ Component: (await import("./pages/Designs")).default }) },
+      { path: "/estimate", lazy: async () => ({ Component: (await import("./pages/Estimate")).default }) },
+      { path: "/products", lazy: async () => ({ Component: (await import("./pages/Products")).default }) },
+      { path: "/products/:slug", lazy: async () => ({ Component: (await import("./pages/ProductDetail")).default }) },
+      { path: "/cart", lazy: async () => ({ Component: (await import("./pages/Cart")).default }) },
+      { path: "/wishlist", lazy: async () => ({ Component: (await import("./pages/Wishlist")).default }) },
+      { path: "/checkout", lazy: async () => ({ Component: (await import("./pages/Checkout")).default }) },
+      { path: "/order-confirmation/:id", lazy: async () => ({ Component: (await import("./pages/OrderConfirmation")).default }) },
+      { path: "/account", element: <Account /> },
+      { path: "/account/orders", lazy: async () => ({ Component: (await import("./pages/AccountOrders")).default }) },
+      { path: "/account/orders/:id", lazy: async () => ({ Component: (await import("./pages/OrderDetail")).default }) },
+      { path: "/lookup-order", element: <LookupOrder /> },
+      { path: "/about", element: <About /> },
+
+      { path: "/login", element: <Login /> },
+      { path: "/signup", element: <Signup /> },
+      { path: "/setup", element: <Setup /> },
+
+      {
+        path: "/account/owner",
+        element: (
+          <OwnerGuard>
+            <Suspense fallback={<PageFallback />}>
+              <Outlet />
+            </Suspense>
+          </OwnerGuard>
+        ),
+        children: [
+          {
+            path: "",
+            lazy: async () => ({ Component: (await import("./components/OwnerLayout")).OwnerLayout }),
+            children: [
+              { index: true, lazy: async () => ({ Component: (await import("./pages/owner/OwnerDashboardHome")).default }) },
+              {
+                path: "widgets",
+                lazy: async () => {
+                  const module = await import("./pages/owner/OwnerDashboardHome");
+                  return {
+                    Component: () => <module.default showAllWidgets />
+                  };
+                }
+              },
+              { path: "products", lazy: async () => ({ Component: (await import("./pages/owner/OwnerProducts")).default }) },
+              { path: "products/import", lazy: async () => ({ Component: (await import("./pages/owner/OwnerStockImport")).default }) },
+              { path: "products/:id", lazy: async () => ({ Component: (await import("./pages/owner/ProductForm")).default }) },
+              { path: "categories", lazy: async () => ({ Component: (await import("./pages/owner/OwnerCategories")).default }) },
+              { path: "categories/:id", lazy: async () => ({ Component: (await import("./pages/owner/CategoryForm")).default }) },
+              { path: "designs", lazy: async () => ({ Component: (await import("./pages/owner/OwnerDesigns")).default }) },
+              { path: "coupons", lazy: async () => ({ Component: (await import("./pages/owner/OwnerCoupons")).default }) },
+              { path: "coupons/:id", lazy: async () => ({ Component: (await import("./pages/owner/CouponForm")).default }) },
+
+              { path: "orders/create-manual", element: <Navigate to="/owner/orders/create-manual" replace /> },
+              { path: "orders/:id", element: <RedirectOwnerOrderId /> },
+              { path: "orders", element: <Navigate to="/owner/orders" replace /> },
+
+              { path: "customers", lazy: async () => ({ Component: (await import("./pages/owner/OwnerCustomers")).default }) },
+              { path: "customers/:customerKey", lazy: async () => ({ Component: (await import("./pages/owner/OwnerCustomerDetail")).default }) },
+              { path: "reviews", lazy: async () => ({ Component: (await import("./pages/owner/OwnerReviews")).default }) },
+              { path: "contact", lazy: async () => ({ Component: (await import("./pages/owner/OwnerContact")).default }) },
+              { path: "settings", lazy: async () => ({ Component: (await import("./pages/owner/OwnerSettings")).default }) },
+            ]
+          }
+        ]
+      },
+
+      {
+        path: "/owner",
+        element: (
+          <OwnerGuard>
+            <Suspense fallback={<PageFallback />}>
+              <Outlet />
+            </Suspense>
+          </OwnerGuard>
+        ),
+        children: [
+          {
+            path: "",
+            lazy: async () => ({ Component: (await import("./components/OwnerLayout")).OwnerLayout }),
+            children: [
+              {
+                path: "orders",
+                lazy: async () => ({ Component: (await import("./pages/owner/OwnerOrdersLayout")).default }),
+                children: [
+                  { index: true, lazy: async () => ({ Component: (await import("./pages/owner/OwnerOrders")).default }) }
+                ]
+              },
+              { path: "orders/from-invoice", lazy: async () => ({ Component: (await import("./pages/owner/OwnerOrderFromInvoice")).default }) },
+              { path: "orders/create-manual", lazy: async () => ({ Component: (await import("./pages/owner/OwnerOrderCreateManual")).default }) },
+              { path: "orders/:id", lazy: async () => ({ Component: (await import("./pages/owner/OwnerOrderDetail")).default }) },
+            ]
+          }
+        ]
+      },
+
+      { path: "*", element: <NotFound /> }
+    ]
+  }
+]);
+
+function App() {
+  return <RouterProvider router={router} />;
 }
 
 export default App;

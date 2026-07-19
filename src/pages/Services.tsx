@@ -34,7 +34,7 @@ export default function Services() {
         <div className="mt-16 grid gap-8 grid-cols-1 md:grid-cols-3 max-w-6xl mx-auto text-left">
           
           {/* Card 1: Custom Deck Designs */}
-          <div className="relative rounded-3xl border border-[#066175] bg-[#052631] p-5 pb-20 overflow-hidden flex flex-col h-full shadow-lg hover:shadow-xl transition-all">
+          <div className="relative rounded-3xl border border-[#066175] bg-[#052631] p-5 pb-20 overflow-hidden flex flex-col h-full shadow-lg">
             <div className="aspect-[4/3] w-full overflow-hidden rounded-2xl">
               <img
                 src="/assets/images/1.jpg"
@@ -63,7 +63,7 @@ export default function Services() {
           </div>
 
           {/* Card 2: Floor Manufacturing */}
-          <div className="relative rounded-3xl border border-[#066175] bg-[#052631] p-5 pb-20 overflow-hidden flex flex-col h-full shadow-lg hover:shadow-xl transition-all">
+          <div className="relative rounded-3xl border border-[#066175] bg-[#052631] p-5 pb-20 overflow-hidden flex flex-col h-full shadow-lg">
             <div className="aspect-[4/3] w-full overflow-hidden rounded-2xl">
               <img
                 src="/assets/images/2.jpg"
@@ -92,7 +92,7 @@ export default function Services() {
           </div>
 
           {/* Card 3: Cutting and Installation */}
-          <div className="relative rounded-3xl border border-[#066175] bg-[#052631] p-5 pb-20 overflow-hidden flex flex-col h-full shadow-lg hover:shadow-xl transition-all">
+          <div className="relative rounded-3xl border border-[#066175] bg-[#052631] p-5 pb-20 overflow-hidden flex flex-col h-full shadow-lg">
             <div className="aspect-[4/3] w-full overflow-hidden rounded-2xl">
               <img
                 src="/assets/images/3.jpg"

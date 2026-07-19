@@ -1,10 +1,40 @@
 import { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, matchRoutes, LinkProps } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useCart } from "../context/CartContext";
 import { useStoreSettings } from "../hooks/useStoreSettings";
 import { Icon } from "./Icon";
 import { supabase } from "../lib/supabase";
+import { router } from "../App";
+
+function PrefetchLink(props: LinkProps) {
+  const prefetchRoute = () => {
+    if (typeof props.to === "string") {
+      const matches = matchRoutes(router.routes, props.to);
+      if (matches) {
+        for (const match of matches) {
+          if (match.route.lazy) {
+            match.route.lazy();
+          }
+        }
+      }
+    }
+  };
+
+  return (
+    <Link
+      {...props}
+      onMouseEnter={(e) => {
+        prefetchRoute();
+        props.onMouseEnter?.(e);
+      }}
+      onFocus={(e) => {
+        prefetchRoute();
+        props.onFocus?.(e);
+      }}
+    />
+  );
+}
 
 
 type LayoutProps = {
@@ -91,7 +121,7 @@ export function Layout({ children }: LayoutProps) {
           <div className="flex h-16 items-center justify-between">
 
             {/* LEFT: Logo + Brand */}
-            <Link
+            <PrefetchLink
               to="/"
               className="flex items-center gap-2.5 transition-opacity hover:opacity-80 shrink-0"
             >
@@ -99,7 +129,7 @@ export function Layout({ children }: LayoutProps) {
               <span className="font-heading text-base font-bold tracking-widest text-[#76abbf] uppercase leading-tight">
                 ALL ON DECK
               </span>
-            </Link>
+            </PrefetchLink>
 
             {/* RIGHT: Nav links & Icon buttons (desktop) */}
             <div className="hidden md:flex items-center gap-8">
@@ -116,7 +146,7 @@ export function Layout({ children }: LayoutProps) {
                       ? location.pathname === "/"
                       : location.pathname.startsWith(to);
                   return (
-                    <Link
+                    <PrefetchLink
                       key={to}
                       to={to}
                       className={`relative text-sm font-semibold tracking-wider transition-colors pb-1
@@ -126,7 +156,7 @@ export function Layout({ children }: LayoutProps) {
                         }`}
                     >
                       {label}
-                    </Link>
+                    </PrefetchLink>
                   );
                 })}
               </div>
@@ -221,7 +251,7 @@ export function Layout({ children }: LayoutProps) {
                       ? location.pathname === "/"
                       : location.pathname.startsWith(to);
                   return (
-                    <Link
+                    <PrefetchLink
                       key={to}
                       to={to}
                       onClick={() => setMenuOpen(false)}
@@ -232,7 +262,7 @@ export function Layout({ children }: LayoutProps) {
                         }`}
                     >
                       {label}
-                    </Link>
+                    </PrefetchLink>
                   );
                 })}
 

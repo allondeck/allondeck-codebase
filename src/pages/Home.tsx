@@ -64,7 +64,7 @@ export default function Home() {
 
           <div className="mt-16 grid gap-8 grid-cols-1 md:grid-cols-3">
             {/* Card 1 */}
-            <div className="group relative overflow-hidden rounded-3xl bg-brand-dark p-6 md:p-8 shadow-md border border-brand-light/10 transition-all hover:-translate-y-1 hover:shadow-xl">
+            <Link to="/services#service-1" className="group block relative overflow-hidden rounded-3xl bg-brand-dark p-6 md:p-8 shadow-md border border-brand-light/10 transition-all hover:-translate-y-1 hover:shadow-xl">
               <div className="mb-6 overflow-hidden rounded-2xl">
                 <img src="/assets/images/1.jpg" alt="Custom DECK Designs" className="h-48 w-full object-cover transition-transform group-hover:scale-105" />
               </div>
@@ -72,13 +72,13 @@ export default function Home() {
               <p className="mt-3 text-sm text-brand-cream/80 leading-relaxed font-sans">
                 Tailored marine flooring layouts styled perfectly to suit your boat. We create beautiful bespoke visual drafts.
               </p>
-              <Link to="/services#service-1" className="mt-6 inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-brand-orange hover:underline">
+              <span className="mt-6 inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-brand-orange group-hover:underline">
                 See More →
-              </Link>
-            </div>
+              </span>
+            </Link>
 
             {/* Card 2 */}
-            <div className="group relative overflow-hidden rounded-3xl bg-brand-dark p-6 md:p-8 shadow-md border border-brand-light/10 transition-all hover:-translate-y-1 hover:shadow-xl">
+            <Link to="/services#service-2" className="group block relative overflow-hidden rounded-3xl bg-brand-dark p-6 md:p-8 shadow-md border border-brand-light/10 transition-all hover:-translate-y-1 hover:shadow-xl">
               <div className="mb-6 overflow-hidden rounded-2xl">
                 <img src="/assets/images/2.jpg" alt="Floor Manufacturing" className="h-48 w-full object-cover transition-transform group-hover:scale-105" />
               </div>
@@ -86,13 +86,13 @@ export default function Home() {
               <p className="mt-3 text-sm text-brand-cream/80 leading-relaxed font-sans">
                 High-quality fabrication using state of the art materials engineered to withstand the harshest ocean environments.
               </p>
-              <Link to="/services#service-2" className="mt-6 inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-brand-orange hover:underline">
+              <span className="mt-6 inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-brand-orange group-hover:underline">
                 See More →
-              </Link>
-            </div>
+              </span>
+            </Link>
 
             {/* Card 3 */}
-            <div className="group relative overflow-hidden rounded-3xl bg-brand-dark p-6 md:p-8 shadow-md border border-brand-light/10 transition-all hover:-translate-y-1 hover:shadow-xl">
+            <Link to="/services#service-3" className="group block relative overflow-hidden rounded-3xl bg-brand-dark p-6 md:p-8 shadow-md border border-brand-light/10 transition-all hover:-translate-y-1 hover:shadow-xl">
               <div className="mb-6 overflow-hidden rounded-2xl">
                 <img src="/assets/images/3.jpg" alt="Cutting & Installation" className="h-48 w-full object-cover transition-transform group-hover:scale-105" />
               </div>
@@ -100,10 +100,10 @@ export default function Home() {
               <p className="mt-3 text-sm text-brand-cream/80 leading-relaxed font-sans">
                 Millimeter-precise CAD/CAM CNC cutting and clean expert installation for the ultimate seamless look and longevity.
               </p>
-              <Link to="/services#service-3" className="mt-6 inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-brand-orange hover:underline">
+              <span className="mt-6 inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-brand-orange group-hover:underline">
                 See More →
-              </Link>
-            </div>
+              </span>
+            </Link>
           </div>
         </div>
       </section>

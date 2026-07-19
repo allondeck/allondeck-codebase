@@ -334,148 +334,7 @@ export default function OwnerSettings() {
           </div>
         )}
 
-        {/* Store identity */}
-        <section className={sectionCard}>
-          <div className="p-4 sm:p-6">
-            <div className={sectionHeader}>
-              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#066175]/30 text-white">
-                <svg
-                  className="h-5 w-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
-                  />
-                </svg>
-              </span>
-              <div className="min-w-0 flex-1">
-                <h2 className={sectionTitle}>Store identity</h2>
-                <p className={sectionDesc}>
-                  Name and logo shown to customers in the navbar and across the
-                  site.
-                </p>
-              </div>
-            </div>
-            <div className="space-y-5">
-              <div>
-                <label className={fieldLabel}>Store name</label>
-                <input
-                  type="text"
-                  value={storeName}
-                  onChange={(e) => setStoreName(e.target.value)}
-                  className="mt-1.5 w-full min-h-[44px] rounded-lg bg-[#044155] border border-[#066175]/60 px-3 py-2.5 text-white placeholder-[#76abbf] focus:border-[#e38622] focus:outline-none focus:ring-1 focus:ring-[#e38622]"
-                  placeholder="e.g. My Store"
-                />
-              </div>
-              <div>
-                <label className={fieldLabel}>Company logo</label>
-                <div className="mt-1.5 flex flex-col gap-4 sm:flex-row sm:items-start">
-                  <div className="shrink-0">
-                    {logoUrl ? (
-                      <div className="relative">
-                        <img
-                          src={logoUrl}
-                          alt="Store logo preview"
-                          width={140}
-                          height={80}
-                          loading="lazy"
-                          decoding="async"
-                          className="h-20 w-auto max-w-[140px] rounded-lg border border-[#066175]/35 object-contain"
-                        />
-                        <button
-                          type="button"
-                          onClick={() => {
-                            setLogoUrl("");
-                            setLogoUrlInput("");
-                            if (logoFileInputRef.current)
-                              logoFileInputRef.current.value = "";
-                          }}
-                          className="absolute left-1 top-1 rounded-full bg-red-500 p-1 text-white hover:bg-red-600 sm:left-auto sm:-right-2 sm:-top-2"
-                          aria-label="Remove logo"
-                        >
-                          <svg
-                            className="h-4 w-4"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M6 18L18 6M6 6l12 12"
-                            />
-                          </svg>
-                        </button>
-                      </div>
-                    ) : (
-                      <div className="flex h-20 w-20 items-center justify-center rounded-lg border border-dashed border-[#066175]/35 bg-[#044155] text-[#76abbf]">
-                        <svg
-                          className="h-10 w-10"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={1.5}
-                            d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14"
-                          />
-                        </svg>
-                      </div>
-                    )}
-                  </div>
-                  <div className="min-w-0 flex-1 space-y-2">
-                    <label className="flex min-h-[44px] cursor-pointer items-center justify-center gap-2 rounded-lg border border-[#066175]/35 bg-[#052631] px-4 py-2.5 text-sm font-medium text-white hover:bg-[#066175]/30">
-                      <input
-                        ref={logoFileInputRef}
-                        type="file"
-                        accept="image/jpeg,image/png,image/webp,image/gif,image/svg+xml"
-                        onChange={handleLogoUpload}
-                        disabled={uploading}
-                        className="hidden"
-                      />
-                      {uploading ? "Uploading..." : "Upload from device"}
-                    </label>
-                    <input
-                      type="url"
-                      value={logoUrlInput}
-                      onChange={(e) => {
-                        const v = e.target.value;
-                        setLogoUrlInput(v);
-                        setLogoUrl(v);
-                      }}
-                      placeholder="Or paste image URL"
-                      className="w-full rounded-lg bg-[#044155] border border-[#066175]/60 text-white px-3 py-2 text-sm focus:border-[#e38622] focus:outline-none"
-                    />
-                  </div>
-                </div>
-                <p className={fieldHint}>
-                  Navbar and favicon. Max{" "}
-                  {getMaxImageSizeLabel(MAX_IMAGE_SIZE_STORE)}. Replacing the
-                  logo removes the previous one.
-                </p>
-                <label className="mt-3 flex min-h-[44px] cursor-pointer items-center gap-3 rounded-lg border border-[#066175]/35 bg-[#052631] px-3 py-3 sm:py-2.5">
-                  <input
-                    type="checkbox"
-                    checked={showStoreNameInNav}
-                    onChange={(e) => setShowStoreNameInNav(e.target.checked)}
-                    className="h-4 w-4 shrink-0 rounded border-[#066175]/60 bg-[#044155] text-[#e38622] focus:ring-[#e38622]"
-                  />
-                  <span className="text-sm font-medium text-white">
-                    Display store name next to logo in navbar
-                  </span>
-                </label>
-              </div>
-            </div>
-          </div>
-        </section>
+
 
         {/* Shipping & info */}
         <section className={sectionCard}>
@@ -733,64 +592,11 @@ export default function OwnerSettings() {
                   </div>
                 </div>
               </div>
-              <div className="rounded-lg border border-[#066175]/35 bg-[#066175]/15 p-4">
-                <h3 className="text-sm font-semibold text-[#f6ebd4]">
-                  Footer categories
-                </h3>
-                <p className="mt-1 text-xs text-[#76abbf]">
-                  Up to {MAX_FOOTER_CATEGORIES} categories in the footer. Leave
-                  blank to hide the block.
-                </p>
-                <div className="mt-3 flex flex-wrap gap-2">
-                  {categories.map((cat) => {
-                    const checked = footerCategorySlugs.includes(cat.slug);
-                    const disabled =
-                      !checked &&
-                      footerCategorySlugs.length >= MAX_FOOTER_CATEGORIES;
-                    return (
-                      <label
-                        key={cat.id}
-                        className={`flex cursor-pointer items-center gap-2 rounded-lg border px-3 py-2 text-sm font-medium ${
-                          disabled
-                            ? "cursor-not-allowed border-[#066175]/10 bg-[#066175]/10 text-[#76abbf]"
-                            : "border-[#066175]/35 bg-[#052631] text-white hover:bg-[#066175]/30"
-                        }`}
-                      >
-                        <input
-                          type="checkbox"
-                          checked={checked}
-                          disabled={disabled}
-                          onChange={(e) => {
-                            if (e.target.checked) {
-                              setFooterCategorySlugs((prev) =>
-                                prev.length < MAX_FOOTER_CATEGORIES
-                                  ? [...prev, cat.slug]
-                                  : prev,
-                              );
-                            } else {
-                              setFooterCategorySlugs((prev) =>
-                                prev.filter((s) => s !== cat.slug),
-                              );
-                            }
-                          }}
-                          className="h-4 w-4 rounded border-[#066175]/60 bg-[#044155] text-[#e38622]"
-                        />
-                        {cat.name}
-                      </label>
-                    );
-                  })}
-                </div>
-                {categories.length === 0 && (
-                  <p className="mt-2 text-sm text-[#76abbf]">
-                    No categories yet. Create them in Categories first.
-                  </p>
-                )}
-              </div>
             </div>
           </div>
         </section>
 
-        {/* Store Assistant */}
+        {/* Store Assistant 
         <section className={sectionCard}>
           <div className="p-4 sm:p-6">
             <div className={sectionHeader}>
@@ -832,6 +638,7 @@ export default function OwnerSettings() {
             </div>
           </div>
         </section>
+        */}
 
         {/* Dashboard */}
         <section className={sectionCard}>
