@@ -6,18 +6,18 @@ import {
   Navigate,
   useParams,
 } from "react-router-dom";
-import { ScrollToTop } from "./components/ScrollToTop";
+import { ScrollToTop } from "./components/features/ScrollToTop";
 import { useAuth } from "./context/AuthContext";
-import { Layout } from "./components/Layout";
-// import { Chatbox } from "./components/chatbox";
-import Home from "./pages/Home";
-import Account from "./pages/Account";
-import Login from "./pages/Login";
-import Signup from "./pages/Signup";
-import Setup from "./pages/Setup";
-import LookupOrder from "./pages/LookupOrder";
-import About from "./pages/About";
-import NotFound from "./pages/NotFound";
+import { Layout } from "./components/layouts/Layout";
+// import { Chatbox } from "./components/features/chatbox";
+import Home from "./pages/public/Home";
+import Account from "./pages/account/Account";
+import Login from "./pages/auth/Login";
+import Signup from "./pages/auth/Signup";
+import Setup from "./pages/auth/Setup";
+import LookupOrder from "./pages/account/LookupOrder";
+import About from "./pages/public/About";
+import NotFound from "./pages/public/NotFound";
 
 function RedirectOwnerOrderId() {
   const { id } = useParams();
@@ -68,18 +68,18 @@ export const router = createBrowserRouter([
     element: <RootLayout />,
     children: [
       { path: "/", element: <Home /> },
-      { path: "/services", lazy: async () => ({ Component: (await import("./pages/Services")).default }) },
-      { path: "/designs", lazy: async () => ({ Component: (await import("./pages/Designs")).default }) },
-      { path: "/estimate", lazy: async () => ({ Component: (await import("./pages/Estimate")).default }) },
-      { path: "/products", lazy: async () => ({ Component: (await import("./pages/Products")).default }) },
-      { path: "/products/:slug", lazy: async () => ({ Component: (await import("./pages/ProductDetail")).default }) },
-      { path: "/cart", lazy: async () => ({ Component: (await import("./pages/Cart")).default }) },
-      { path: "/wishlist", lazy: async () => ({ Component: (await import("./pages/Wishlist")).default }) },
-      { path: "/checkout", lazy: async () => ({ Component: (await import("./pages/Checkout")).default }) },
-      { path: "/order-confirmation/:id", lazy: async () => ({ Component: (await import("./pages/OrderConfirmation")).default }) },
+      { path: "/services", lazy: async () => ({ Component: (await import("./pages/public/Services")).default }) },
+      { path: "/designs", lazy: async () => ({ Component: (await import("./pages/public/Designs")).default }) },
+      { path: "/estimate", lazy: async () => ({ Component: (await import("./pages/public/Estimate")).default }) },
+      { path: "/products", lazy: async () => ({ Component: (await import("./pages/public/Products")).default }) },
+      { path: "/products/:slug", lazy: async () => ({ Component: (await import("./pages/public/ProductDetail")).default }) },
+      { path: "/cart", lazy: async () => ({ Component: (await import("./pages/public/Cart")).default }) },
+      { path: "/wishlist", lazy: async () => ({ Component: (await import("./pages/account/Wishlist")).default }) },
+      { path: "/checkout", lazy: async () => ({ Component: (await import("./pages/public/Checkout")).default }) },
+      { path: "/order-confirmation/:id", lazy: async () => ({ Component: (await import("./pages/public/OrderConfirmation")).default }) },
       { path: "/account", element: <Account /> },
-      { path: "/account/orders", lazy: async () => ({ Component: (await import("./pages/AccountOrders")).default }) },
-      { path: "/account/orders/:id", lazy: async () => ({ Component: (await import("./pages/OrderDetail")).default }) },
+      { path: "/account/orders", lazy: async () => ({ Component: (await import("./pages/account/AccountOrders")).default }) },
+      { path: "/account/orders/:id", lazy: async () => ({ Component: (await import("./pages/account/OrderDetail")).default }) },
       { path: "/lookup-order", element: <LookupOrder /> },
       { path: "/about", element: <About /> },
 
@@ -99,7 +99,7 @@ export const router = createBrowserRouter([
         children: [
           {
             path: "",
-            lazy: async () => ({ Component: (await import("./components/OwnerLayout")).OwnerLayout }),
+            lazy: async () => ({ Component: (await import("./components/layouts/OwnerLayout")).OwnerLayout }),
             children: [
               { index: true, lazy: async () => ({ Component: (await import("./pages/owner/OwnerDashboardHome")).default }) },
               {
@@ -146,7 +146,7 @@ export const router = createBrowserRouter([
         children: [
           {
             path: "",
-            lazy: async () => ({ Component: (await import("./components/OwnerLayout")).OwnerLayout }),
+            lazy: async () => ({ Component: (await import("./components/layouts/OwnerLayout")).OwnerLayout }),
             children: [
               {
                 path: "orders",

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
-import { Select } from "../../components/Select";
+import { Select } from "../../components/ui/Select";
 import {
   useProductsAdmin,
   type ProductSortBy,
@@ -72,7 +72,7 @@ export default function OwnerProducts() {
   if (loading) {
     return (
       <div className="flex justify-center py-12">
-        <div className="h-8 w-8 animate-spin rounded-full border-2 border-[#066175]/35 border-t-[#e38622]" />
+        <div className="h-8 w-8 animate-spin rounded-full border-2 border-brand-medium/35 border-t-brand-orange" />
       </div>
     );
   }
@@ -88,7 +88,7 @@ export default function OwnerProducts() {
   return (
     <div>
       <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
-        <h2 className="text-xl font-semibold text-[#f6ebd4]">Products</h2>
+        <h2 className="text-xl font-semibold text-brand-cream">Products</h2>
         <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-3">
           <Select
             value={categoryId}
@@ -135,69 +135,69 @@ export default function OwnerProducts() {
           </Select>
           <Link
             to="/account/owner/products/import"
-            className="w-full rounded-lg border border-[#066175]/35 bg-[#052631] px-4 py-2 text-center text-sm font-medium text-white hover:bg-[#066175]/30 sm:w-auto"
+            className="w-full rounded-lg border border-brand-medium/35 bg-brand-dark-alt px-4 py-2 text-center text-sm font-medium text-white hover:bg-brand-medium/30 sm:w-auto"
           >
             Import stock (CSV)
           </Link>
           <Link
             to="/account/owner/products/new"
-            className="w-full rounded-lg bg-[#e38622] px-4 py-2 text-center text-sm font-medium text-white hover:bg-[#e38622]/80 sm:w-auto"
+            className="w-full rounded-lg bg-brand-orange px-4 py-2 text-center text-sm font-medium text-white hover:bg-brand-orange/80 sm:w-auto"
           >
             Add product
           </Link>
         </div>
       </div>
-      <div className="overflow-x-auto rounded-lg border border-[#066175]/35 bg-[#052631]">
-        <table className="w-full min-w-[600px] divide-y divide-[#066175]/35">
-          <thead className="bg-[#066175]/30">
+      <div className="overflow-x-auto rounded-lg border border-brand-medium/35 bg-brand-dark-alt">
+        <table className="w-full min-w-[600px] divide-y divide-brand-medium/35">
+          <thead className="bg-brand-medium/30">
             <tr>
-              <th className="px-4 py-3 text-left text-xs font-medium uppercase text-[#76abbf]">
+              <th className="px-4 py-3 text-left text-xs font-medium uppercase text-brand-light">
                 Product
               </th>
-              <th className="px-4 py-3 text-left text-xs font-medium uppercase text-[#76abbf]">
+              <th className="px-4 py-3 text-left text-xs font-medium uppercase text-brand-light">
                 Category
               </th>
-              <th className="px-4 py-3 text-left text-xs font-medium uppercase text-[#76abbf]">
+              <th className="px-4 py-3 text-left text-xs font-medium uppercase text-brand-light">
                 Price
               </th>
-              <th className="px-4 py-3 text-left text-xs font-medium uppercase text-[#76abbf]">
+              <th className="px-4 py-3 text-left text-xs font-medium uppercase text-brand-light">
                 Stock
               </th>
-              <th className="px-4 py-3 text-left text-xs font-medium uppercase text-[#76abbf]">
+              <th className="px-4 py-3 text-left text-xs font-medium uppercase text-brand-light">
                 Status
               </th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-[#066175]/35 bg-[#052631]">
+          <tbody className="divide-y divide-brand-medium/35 bg-brand-dark-alt">
             {products.map((product) => (
               <tr
                 key={product.id}
                 onClick={() =>
                   navigate(`/account/owner/products/${product.id}`)
                 }
-                className="cursor-pointer hover:bg-[#066175]/20"
+                className="cursor-pointer hover:bg-brand-medium/20"
               >
                 <td className="px-4 py-3">
                   <span className="font-medium text-white">
                     {product.name}
                   </span>
                   {product.is_featured && (
-                    <span className="ml-2 rounded bg-amber-950/40 px-1.5 py-0.5 text-xs text-[#e38622] border border-amber-900/30">
+                    <span className="ml-2 rounded bg-amber-950/40 px-1.5 py-0.5 text-xs text-brand-orange border border-amber-900/30">
                       Featured
                     </span>
                   )}
                 </td>
-                <td className="px-4 py-3 text-sm text-[#76abbf]">
+                <td className="px-4 py-3 text-sm text-brand-light">
                   {getCategoryNames(product)}
                 </td>
-                <td className="px-4 py-3 text-sm text-[#76abbf]">
+                <td className="px-4 py-3 text-sm text-brand-light">
                   {formatPrice(product.price)}
                 </td>
                 <td className="px-4 py-3">
                   <span
                     className={
                       isLowStock(product)
-                        ? "text-sm font-medium text-[#e38622]"
+                        ? "text-sm font-medium text-brand-orange"
                         : "text-sm text-white"
                     }
                   >
@@ -209,7 +209,7 @@ export default function OwnerProducts() {
                     className={`inline-flex rounded-full px-2 py-0.5 text-xs font-medium ${
                       product.is_published
                         ? "bg-green-950/40 text-green-400 border border-green-900/30"
-                        : "bg-[#066175]/30 text-[#76abbf] border border-[#066175]/35"
+                        : "bg-brand-medium/30 text-brand-light border border-brand-medium/35"
                     }`}
                   >
                     {product.is_published ? "Published" : "Draft"}
@@ -221,7 +221,7 @@ export default function OwnerProducts() {
         </table>
       </div>
       {products.length === 0 && (
-        <p className="mt-6 text-center text-[#76abbf]">No products yet.</p>
+        <p className="mt-6 text-center text-brand-light">No products yet.</p>
       )}
     </div>
   );

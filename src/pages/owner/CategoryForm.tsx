@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { Button } from "../../components/Button";
+import { Button } from "../../components/ui/Button";
 import { supabase } from "../../lib/supabase";
 import { slugify } from "../../lib/utils";
 import type { CategoryRow } from "../../types/database";
@@ -115,7 +115,7 @@ export default function CategoryForm() {
   if (loading) {
     return (
       <div className="flex justify-center py-12">
-        <div className="h-8 w-8 animate-spin rounded-full border-2 border-[#066175]/35 border-t-[#e38622]" />
+        <div className="h-8 w-8 animate-spin rounded-full border-2 border-brand-medium/35 border-t-brand-orange" />
       </div>
     );
   }
@@ -123,7 +123,7 @@ export default function CategoryForm() {
   return (
     <form onSubmit={handleSubmit} className="mx-auto max-w-2xl space-y-6">
       <div className="flex items-center justify-between">
-        <h2 className="text-xl font-semibold text-[#f6ebd4]">
+        <h2 className="text-xl font-semibold text-brand-cream">
           {isNew ? "Add category" : "Edit category"}
         </h2>
         {!isNew && (
@@ -142,7 +142,7 @@ export default function CategoryForm() {
           {error}
         </div>
       )}
-      <div className="space-y-4 rounded-lg border border-[#066175]/35 bg-[#052631] p-6">
+      <div className="space-y-4 rounded-lg border border-brand-medium/35 bg-brand-dark-alt p-6">
         <div>
           <label className="block text-sm font-medium text-white">
             Name
@@ -152,7 +152,7 @@ export default function CategoryForm() {
             required
             value={form.name}
             onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
-            className="mt-1 w-full rounded-lg bg-[#044155] border border-[#066175]/60 text-white px-3 py-2 focus:border-[#e38622] focus:outline-none focus:ring-1 focus:ring-[#e38622]"
+            className="mt-1 w-full rounded-lg bg-brand-dark border border-brand-medium/60 text-white px-3 py-2 focus:border-brand-orange focus:outline-none focus:ring-1 focus:ring-brand-orange"
           />
         </div>
         <div>
@@ -168,14 +168,14 @@ export default function CategoryForm() {
                 setAutoSlug(false);
                 setForm((f) => ({ ...f, slug: e.target.value }));
               }}
-              className="flex-1 rounded-lg bg-[#044155] border border-[#066175]/60 text-white px-3 py-2 focus:border-[#e38622] focus:outline-none focus:ring-1 focus:ring-[#e38622]"
+              className="flex-1 rounded-lg bg-brand-dark border border-brand-medium/60 text-white px-3 py-2 focus:border-brand-orange focus:outline-none focus:ring-1 focus:ring-brand-orange"
             />
-            <label className="flex items-center gap-1 text-sm text-[#76abbf]">
+            <label className="flex items-center gap-1 text-sm text-brand-light">
               <input
                 type="checkbox"
                 checked={autoSlug}
                 onChange={(e) => setAutoSlug(e.target.checked)}
-                className="rounded border-[#066175]/60 bg-[#044155] text-[#e38622] focus:ring-[#e38622]"
+                className="rounded border-brand-medium/60 bg-brand-dark text-brand-orange focus:ring-brand-orange"
               />
               Auto
             </label>
@@ -191,7 +191,7 @@ export default function CategoryForm() {
             onChange={(e) =>
               setForm((f) => ({ ...f, description: e.target.value }))
             }
-            className="mt-1 w-full rounded-lg bg-[#044155] border border-[#066175]/60 text-white px-3 py-2 focus:border-[#e38622] focus:outline-none focus:ring-1 focus:ring-[#e38622]"
+            className="mt-1 w-full rounded-lg bg-brand-dark border border-brand-medium/60 text-white px-3 py-2 focus:border-brand-orange focus:outline-none focus:ring-1 focus:ring-brand-orange"
           />
         </div>
         <div>
@@ -205,7 +205,7 @@ export default function CategoryForm() {
             onChange={(e) =>
               setForm((f) => ({ ...f, sort_order: e.target.value }))
             }
-            className="mt-1 w-full rounded-lg bg-[#044155] border border-[#066175]/60 text-white px-3 py-2 focus:border-[#e38622] focus:outline-none focus:ring-1 focus:ring-[#e38622]"
+            className="mt-1 w-full rounded-lg bg-brand-dark border border-brand-medium/60 text-white px-3 py-2 focus:border-brand-orange focus:outline-none focus:ring-1 focus:ring-brand-orange"
           />
         </div>
         <label className="flex items-center gap-2">
@@ -215,7 +215,7 @@ export default function CategoryForm() {
             onChange={(e) =>
               setForm((f) => ({ ...f, is_visible: e.target.checked }))
             }
-            className="rounded border-[#066175]/60 bg-[#044155] text-[#e38622] focus:ring-[#e38622]"
+            className="rounded border-brand-medium/60 bg-brand-dark text-brand-orange focus:ring-brand-orange"
           />
           <span className="text-sm text-white">Visible on storefront</span>
         </label>

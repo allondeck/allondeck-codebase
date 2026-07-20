@@ -65,7 +65,7 @@ export default function OwnerDashboardHome({
   if (loading) {
     return (
       <div className="flex justify-center py-16">
-        <div className="h-10 w-10 animate-spin rounded-full border-2 border-[#066175]/35 border-t-[#e38622]" />
+        <div className="h-10 w-10 animate-spin rounded-full border-2 border-brand-medium/35 border-t-brand-orange" />
       </div>
     );
   }
@@ -100,13 +100,13 @@ export default function OwnerDashboardHome({
       <Link
         key="revenue_card"
         to="/owner/orders"
-        className="rounded-xl border border-[#066175]/35 bg-[#052631] p-5 shadow-sm transition hover:border-[#066175]/70 hover:shadow"
+        className="rounded-xl border border-brand-medium/35 bg-brand-dark-alt p-5 shadow-sm transition hover:border-brand-medium/70 hover:shadow"
       >
-        <p className="text-sm font-medium text-[#76abbf]">Total Revenue</p>
-        <p className="mt-1 text-2xl font-bold text-[#f6ebd4]">
+        <p className="text-sm font-medium text-brand-light">Total Revenue</p>
+        <p className="mt-1 text-2xl font-bold text-brand-cream">
           {formatCurrency(stats.revenue)}
         </p>
-        <p className="mt-1 text-xs text-[#76abbf]">From paid/shipped orders</p>
+        <p className="mt-1 text-xs text-brand-light">From paid/shipped orders</p>
       </Link>
     );
   }
@@ -115,13 +115,13 @@ export default function OwnerDashboardHome({
       <Link
         key="orders_card"
         to="/owner/orders"
-        className="rounded-xl border border-[#066175]/35 bg-[#052631] p-5 shadow-sm transition hover:border-[#066175]/70 hover:shadow"
+        className="rounded-xl border border-brand-medium/35 bg-brand-dark-alt p-5 shadow-sm transition hover:border-brand-medium/70 hover:shadow"
       >
-        <p className="text-sm font-medium text-[#76abbf]">Total Orders</p>
+        <p className="text-sm font-medium text-brand-light">Total Orders</p>
         <p className="mt-1 text-2xl font-bold text-white">
           {stats.totalOrders}
         </p>
-        <p className="mt-1 text-xs text-[#76abbf]">{pendingOrders} pending</p>
+        <p className="mt-1 text-xs text-brand-light">{pendingOrders} pending</p>
       </Link>
     );
   }
@@ -134,16 +134,16 @@ export default function OwnerDashboardHome({
             ? "/account/owner/products?low_stock=1"
             : "/account/owner/products"
         }
-        className="rounded-xl border border-[#066175]/35 bg-[#052631] p-5 shadow-sm transition hover:border-[#066175]/70 hover:shadow"
+        className="rounded-xl border border-brand-medium/35 bg-brand-dark-alt p-5 shadow-sm transition hover:border-brand-medium/70 hover:shadow"
       >
-        <p className="text-sm font-medium text-[#76abbf]">Product Catalog</p>
+        <p className="text-sm font-medium text-brand-light">Product Catalog</p>
         <p className="mt-1 text-2xl font-bold text-white">
           {products.length}
         </p>
-        <p className="mt-1 text-xs text-[#76abbf]">
+        <p className="mt-1 text-xs text-brand-light">
           {publishedCount} published
           {stats.lowStockCount > 0 && (
-            <span className="ml-1 font-medium text-[#e38622]">
+            <span className="ml-1 font-medium text-brand-orange">
               · {stats.lowStockCount} low stock
             </span>
           )}
@@ -156,13 +156,13 @@ export default function OwnerDashboardHome({
       <Link
         key="low_stock_card"
         to="/account/owner/products?low_stock=1"
-        className="rounded-xl border border-[#066175]/35 bg-[#052631] p-5 shadow-sm transition hover:border-[#066175]/70 hover:shadow"
+        className="rounded-xl border border-brand-medium/35 bg-brand-dark-alt p-5 shadow-sm transition hover:border-brand-medium/70 hover:shadow"
       >
-        <p className="text-sm font-medium text-[#76abbf]">Low Stock Summary</p>
-        <p className="mt-1 text-2xl font-bold text-[#e38622]">
+        <p className="text-sm font-medium text-brand-light">Low Stock Summary</p>
+        <p className="mt-1 text-2xl font-bold text-brand-orange">
           {stats.lowStockCount}
         </p>
-        <p className="mt-1 text-xs text-[#76abbf]">
+        <p className="mt-1 text-xs text-brand-light">
           Stock at or below threshold
         </p>
       </Link>
@@ -190,22 +190,22 @@ export default function OwnerDashboardHome({
   const topProductsWidget = showWidget("top_products") && (
     <div
       key="top_products"
-      className="rounded-xl border border-[#066175]/35 bg-[#052631] p-5 shadow-sm"
+      className="rounded-xl border border-brand-medium/35 bg-brand-dark-alt p-5 shadow-sm"
     >
-      <h3 className="font-semibold text-[#f6ebd4]">Top Selling Products</h3>
+      <h3 className="font-semibold text-brand-cream">Top Selling Products</h3>
       {stats.topProducts.length > 0 ? (
         <div className="mt-4 space-y-3">
           {stats.topProducts.map((p, i) => (
             <div
               key={i}
-              className="flex items-center justify-between rounded-lg bg-[#066175]/30 px-3 py-2"
+              className="flex items-center justify-between rounded-lg bg-brand-medium/30 px-3 py-2"
             >
               <span className="truncate font-medium text-white font-semibold">
                 {p.name}
               </span>
               <div className="ml-2 flex shrink-0 items-center gap-3">
-                <span className="text-sm text-[#76abbf]">{p.quantity} sold</span>
-                <span className="text-sm font-medium text-[#f6ebd4]">
+                <span className="text-sm text-brand-light">{p.quantity} sold</span>
+                <span className="text-sm font-medium text-brand-cream">
                   {formatCurrency(p.revenue)}
                 </span>
               </div>
@@ -213,7 +213,7 @@ export default function OwnerDashboardHome({
           ))}
         </div>
       ) : (
-        <p className="mt-4 text-[#76abbf]">No sales yet</p>
+        <p className="mt-4 text-brand-light">No sales yet</p>
       )}
     </div>
   );
@@ -221,9 +221,9 @@ export default function OwnerDashboardHome({
   const lowStockWidget = showWidget("low_stock_list") && (
     <div
       key="low_stock_list"
-      className="rounded-xl border border-[#066175]/35 bg-[#052631] p-5 shadow-sm"
+      className="rounded-xl border border-brand-medium/35 bg-brand-dark-alt p-5 shadow-sm"
     >
-      <h3 className="font-semibold text-[#f6ebd4]">Low Stock Alerts</h3>
+      <h3 className="font-semibold text-brand-cream">Low Stock Alerts</h3>
       {stats.lowStockProducts.length > 0 ? (
         <div className="mt-4 space-y-3">
           {stats.lowStockProducts.map((p) => (
@@ -237,7 +237,7 @@ export default function OwnerDashboardHome({
               </span>
               <span
                 className={`shrink-0 text-sm font-medium ${
-                  p.stock_quantity === 0 ? "text-red-400" : "text-[#e38622]"
+                  p.stock_quantity === 0 ? "text-red-400" : "text-brand-orange"
                 }`}
               >
                 {p.stock_quantity} left
@@ -246,7 +246,7 @@ export default function OwnerDashboardHome({
           ))}
         </div>
       ) : (
-        <p className="mt-4 text-[#76abbf]">All products have sufficient stock</p>
+        <p className="mt-4 text-brand-light">All products have sufficient stock</p>
       )}
     </div>
   );
@@ -273,14 +273,14 @@ export default function OwnerDashboardHome({
   return (
     <div className="space-y-8">
       <div className="flex flex-wrap items-center justify-between gap-2">
-        <h2 className="text-xl font-semibold text-[#f6ebd4]">
+        <h2 className="text-xl font-semibold text-brand-cream">
           {isAllWidgetsPage ? "All widgets" : "Overview"}
         </h2>
         <div className="flex items-center gap-3">
           {isAllWidgetsPage ? (
             <Link
               to="/account/owner"
-              className="text-sm font-medium text-[#76abbf] hover:text-white"
+              className="text-sm font-medium text-brand-light hover:text-white"
             >
               ← Back to overview
             </Link>
@@ -288,13 +288,13 @@ export default function OwnerDashboardHome({
             <>
               <Link
                 to="/account/owner/widgets"
-                className="rounded-lg border border-[#066175]/35 bg-[#052631] px-3 py-2 text-sm font-medium text-white hover:bg-[#066175]/30"
+                className="rounded-lg border border-brand-medium/35 bg-brand-dark-alt px-3 py-2 text-sm font-medium text-white hover:bg-brand-medium/30"
               >
                 View all widgets
               </Link>
               <Link
                 to="/account/owner/settings"
-                className="text-sm font-medium text-[#76abbf] hover:text-white"
+                className="text-sm font-medium text-brand-light hover:text-white"
               >
                 Customize dashboard →
               </Link>
@@ -313,8 +313,8 @@ export default function OwnerDashboardHome({
         <Suspense
           fallback={
             <div className="grid gap-6 lg:grid-cols-2">
-              <div className="h-80 animate-pulse rounded-xl bg-[#066175]/30" />
-              <div className="h-80 animate-pulse rounded-xl bg-[#066175]/30" />
+              <div className="h-80 animate-pulse rounded-xl bg-brand-medium/30" />
+              <div className="h-80 animate-pulse rounded-xl bg-brand-medium/30" />
             </div>
           }
         >
@@ -338,11 +338,11 @@ export default function OwnerDashboardHome({
       {displayedStatCards.length === 0 &&
         !hasCharts &&
         displayedListWidgets.length === 0 && (
-          <p className="rounded-lg border border-dashed border-[#066175]/35 bg-[#052631] p-8 text-center text-[#76abbf]">
+          <p className="rounded-lg border border-dashed border-brand-medium/35 bg-brand-dark-alt p-8 text-center text-brand-light">
             No dashboard widgets enabled. Go to{" "}
             <Link
               to="/account/owner/settings"
-              className="font-medium text-[#f6ebd4] hover:underline"
+              className="font-medium text-brand-cream hover:underline"
             >
               Store settings
             </Link>{" "}

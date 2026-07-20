@@ -45,7 +45,7 @@ export default function OwnerOrders() {
 
   if (loading)
     return (
-      <div className="py-8 text-center text-[#76abbf]">Loading orders...</div>
+      <div className="py-8 text-center text-brand-light">Loading orders...</div>
     );
   if (error)
     return <div className="py-8 text-center text-red-400">{error}</div>;
@@ -53,26 +53,26 @@ export default function OwnerOrders() {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h2 className="text-2xl font-bold text-[#f6ebd4]">Orders</h2>
+        <h2 className="text-2xl font-bold text-brand-cream">Orders</h2>
       </div>
 
-      <div className="overflow-x-auto rounded-lg border border-[#066175]/35 bg-[#052631]">
-        <table className="min-w-full divide-y divide-[#066175]/35">
-          <thead className="bg-[#066175]/30">
+      <div className="overflow-x-auto rounded-lg border border-brand-medium/35 bg-brand-dark-alt">
+        <table className="min-w-full divide-y divide-brand-medium/35">
+          <thead className="bg-brand-medium/30">
             <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-[#76abbf]">
+              <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-brand-light">
                 Order
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-[#76abbf]">
+              <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-brand-light">
                 Customer
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-[#76abbf]">
+              <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-brand-light">
                 Total
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-[#76abbf]">
+              <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-brand-light">
                 Status
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-[#76abbf]">
+              <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-brand-light">
                 Date
               </th>
               <th className="relative px-6 py-3">
@@ -80,13 +80,13 @@ export default function OwnerOrders() {
               </th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-[#066175]/35 bg-[#052631]">
+          <tbody className="divide-y divide-brand-medium/35 bg-brand-dark-alt">
             {orders.map((order) => (
-              <tr key={order.id} className="hover:bg-[#066175]/20">
+              <tr key={order.id} className="hover:bg-brand-medium/20">
                 <td className="whitespace-nowrap px-6 py-4">
                   <Link
                     to={`/owner/orders/${order.id}`}
-                    className="font-medium text-white hover:text-[#76abbf]"
+                    className="font-medium text-white hover:text-brand-light"
                   >
                     #{order.id.slice(0, 8)}
                   </Link>
@@ -96,7 +96,7 @@ export default function OwnerOrders() {
                     {order.customer_email || order.guest_email || "N/A"}
                   </div>
                 </td>
-                <td className="whitespace-nowrap px-6 py-4 text-sm text-[#f6ebd4]">
+                <td className="whitespace-nowrap px-6 py-4 text-sm text-brand-cream">
                   {formatPrice(order.total)}
                 </td>
                 <td className="whitespace-nowrap px-6 py-4">
@@ -111,22 +111,22 @@ export default function OwnerOrders() {
                           : order.status === "shipped"
                             ? "bg-blue-950/40 text-blue-400 border-blue-900/30"
                             : "bg-yellow-950/40 text-yellow-400 border-yellow-900/30"
-                    } focus:outline-none focus:ring-1 focus:ring-[#e38622]`}
+                    } focus:outline-none focus:ring-1 focus:ring-brand-orange`}
                   >
-                    <option className="bg-[#052631] text-white" value="pending">Pending</option>
-                    <option className="bg-[#052631] text-white" value="processing">Processing</option>
-                    <option className="bg-[#052631] text-white" value="shipped">Shipped</option>
-                    <option className="bg-[#052631] text-white" value="completed">Completed</option>
-                    <option className="bg-[#052631] text-white" value="cancelled">Cancelled</option>
+                    <option className="bg-brand-dark-alt text-white" value="pending">Pending</option>
+                    <option className="bg-brand-dark-alt text-white" value="processing">Processing</option>
+                    <option className="bg-brand-dark-alt text-white" value="shipped">Shipped</option>
+                    <option className="bg-brand-dark-alt text-white" value="completed">Completed</option>
+                    <option className="bg-brand-dark-alt text-white" value="cancelled">Cancelled</option>
                   </select>
                 </td>
-                <td className="whitespace-nowrap px-6 py-4 text-sm text-[#76abbf]">
+                <td className="whitespace-nowrap px-6 py-4 text-sm text-brand-light">
                   {new Date(order.created_at).toLocaleDateString()}
                 </td>
                 <td className="whitespace-nowrap px-6 py-4 text-right text-sm font-medium">
                   <Link
                     to={`/owner/orders/${order.id}`}
-                    className="text-[#76abbf] hover:text-white"
+                    className="text-brand-light hover:text-white"
                   >
                     View
                   </Link>
@@ -136,7 +136,7 @@ export default function OwnerOrders() {
           </tbody>
         </table>
         {orders.length === 0 && (
-          <div className="py-12 text-center text-[#76abbf]">
+          <div className="py-12 text-center text-brand-light">
             No orders found.
           </div>
         )}

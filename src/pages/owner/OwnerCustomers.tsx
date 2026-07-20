@@ -8,7 +8,7 @@ export default function OwnerCustomers() {
   if (loading) {
     return (
       <div className="flex justify-center py-12">
-        <div className="h-8 w-8 animate-spin rounded-full border-2 border-[#066175]/35 border-t-[#e38622]" />
+        <div className="h-8 w-8 animate-spin rounded-full border-2 border-brand-medium/35 border-t-brand-orange" />
       </div>
     );
   }
@@ -23,39 +23,39 @@ export default function OwnerCustomers() {
 
   return (
     <div>
-      <h2 className="text-xl font-semibold text-[#f6ebd4]">Customers</h2>
-      <p className="mt-1 text-sm text-[#76abbf]">
+      <h2 className="text-xl font-semibold text-brand-cream">Customers</h2>
+      <p className="mt-1 text-sm text-brand-light">
         Customers with at least one completed order, ordered by total spent.
       </p>
 
       {customers.length === 0 ? (
-        <div className="mt-8 rounded-xl border-2 border-dashed border-[#066175]/35 bg-[#052631] p-12 text-center">
+        <div className="mt-8 rounded-xl border-2 border-dashed border-brand-medium/35 bg-brand-dark-alt p-12 text-center">
           <p className="text-white">No customers yet.</p>
-          <p className="mt-1 text-sm text-[#76abbf]">
+          <p className="mt-1 text-sm text-brand-light">
             Customers appear here once they have at least one order marked as
             delivered or completed.
           </p>
         </div>
       ) : (
-        <div className="mt-6 overflow-hidden rounded-xl border border-[#066175]/35 bg-[#052631] shadow-sm">
+        <div className="mt-6 overflow-hidden rounded-xl border border-brand-medium/35 bg-brand-dark-alt shadow-sm">
           <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-[#066175]/35">
-              <thead className="bg-[#066175]/30">
+            <table className="min-w-full divide-y divide-brand-medium/35">
+              <thead className="bg-brand-medium/30">
                 <tr>
-                  <th className="px-4 py-3 text-left text-xs font-medium uppercase text-[#76abbf]">
+                  <th className="px-4 py-3 text-left text-xs font-medium uppercase text-brand-light">
                     Customer
                   </th>
-                  <th className="px-4 py-3 text-right text-xs font-medium uppercase text-[#76abbf]">
+                  <th className="px-4 py-3 text-right text-xs font-medium uppercase text-brand-light">
                     Completed Orders
                   </th>
-                  <th className="px-4 py-3 text-right text-xs font-medium uppercase text-[#76abbf]">
+                  <th className="px-4 py-3 text-right text-xs font-medium uppercase text-brand-light">
                     Total spent
                   </th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[#066175]/35 bg-[#052631]">
+              <tbody className="divide-y divide-brand-medium/35 bg-brand-dark-alt">
                 {customers.map((c) => (
-                  <tr key={c.key} className="hover:bg-[#066175]/20">
+                  <tr key={c.key} className="hover:bg-brand-medium/20">
                     <td className="px-4 py-3">
                       <Link
                         to={`/account/owner/customers/${encodeURIComponent(
@@ -66,10 +66,10 @@ export default function OwnerCustomers() {
                         {c.email}
                       </Link>
                     </td>
-                    <td className="px-4 py-3 text-right text-[#76abbf]">
+                    <td className="px-4 py-3 text-right text-brand-light">
                       {c.orderCount}
                     </td>
-                    <td className="px-4 py-3 text-right font-medium text-[#f6ebd4]">
+                    <td className="px-4 py-3 text-right font-medium text-brand-cream">
                       {formatPrice(c.totalSpent)}
                     </td>
                   </tr>

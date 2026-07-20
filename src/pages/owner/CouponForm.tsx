@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { Button } from "../../components/Button";
+import { Button } from "../../components/ui/Button";
 import { supabase } from "../../lib/supabase";
 import { useCategoriesAdmin } from "../../hooks/useCategoriesAdmin";
 import { useProductsAdmin } from "../../hooks/useProductsAdmin";
@@ -155,7 +155,7 @@ export default function CouponForm() {
   if (loading) {
     return (
       <div className="flex justify-center py-12">
-        <div className="h-8 w-8 animate-spin rounded-full border-2 border-[#066175]/35 border-t-[#e38622]" />
+        <div className="h-8 w-8 animate-spin rounded-full border-2 border-brand-medium/35 border-t-brand-orange" />
       </div>
     );
   }
@@ -167,7 +167,7 @@ export default function CouponForm() {
           {error}
         </div>
       )}
-      <div className="rounded-lg border border-[#066175]/35 bg-[#052631] p-6 space-y-6">
+      <div className="rounded-lg border border-brand-medium/35 bg-brand-dark-alt p-6 space-y-6">
         <div>
           <label className="block text-sm font-medium text-white">
             Code
@@ -179,10 +179,10 @@ export default function CouponForm() {
               setForm((f) => ({ ...f, code: e.target.value.toUpperCase() }))
             }
             placeholder="SAVE10"
-            className="mt-1 w-full max-w-xs rounded-lg bg-[#044155] border border-[#066175]/60 text-white px-3 py-2 font-mono focus:border-[#e38622] focus:outline-none focus:ring-1 focus:ring-[#e38622]"
+            className="mt-1 w-full max-w-xs rounded-lg bg-brand-dark border border-brand-medium/60 text-white px-3 py-2 font-mono focus:border-brand-orange focus:outline-none focus:ring-1 focus:ring-brand-orange"
             required
           />
-          <p className="mt-1 text-xs text-[#76abbf]">
+          <p className="mt-1 text-xs text-brand-light">
             Customers enter this at checkout. Case-insensitive.
           </p>
         </div>
@@ -200,10 +200,10 @@ export default function CouponForm() {
                   discount_type: e.target.value as "percent" | "fixed",
                 }))
               }
-              className="mt-1 w-full rounded-lg bg-[#044155] border border-[#066175]/60 text-white px-3 py-2 focus:border-[#e38622] focus:outline-none"
+              className="mt-1 w-full rounded-lg bg-brand-dark border border-brand-medium/60 text-white px-3 py-2 focus:border-brand-orange focus:outline-none"
             >
-              <option value="percent" className="bg-[#052631] text-white">Percentage off</option>
-              <option value="fixed" className="bg-[#052631] text-white">Fixed amount off</option>
+              <option value="percent" className="bg-brand-dark-alt text-white">Percentage off</option>
+              <option value="fixed" className="bg-brand-dark-alt text-white">Fixed amount off</option>
             </select>
           </div>
           <div>
@@ -220,7 +220,7 @@ export default function CouponForm() {
                 setForm((f) => ({ ...f, discount_value: e.target.value }))
               }
               placeholder={form.discount_type === "percent" ? "10" : "5.00"}
-              className="mt-1 w-full rounded-lg bg-[#044155] border border-[#066175]/60 text-white px-3 py-2 focus:border-[#e38622] focus:outline-none focus:ring-1 focus:ring-[#e38622]"
+              className="mt-1 w-full rounded-lg bg-brand-dark border border-brand-medium/60 text-white px-3 py-2 focus:border-brand-orange focus:outline-none focus:ring-1 focus:ring-brand-orange"
               required
             />
           </div>
@@ -239,10 +239,10 @@ export default function CouponForm() {
                 scope_ids: [],
               }))
             }
-            className="mt-1 w-full rounded-lg bg-[#044155] border border-[#066175]/60 text-white px-3 py-2 focus:border-[#e38622] focus:outline-none"
+            className="mt-1 w-full rounded-lg bg-brand-dark border border-brand-medium/60 text-white px-3 py-2 focus:border-brand-orange focus:outline-none"
           >
             {SCOPE_OPTIONS.map((o) => (
-              <option key={o.value} value={o.value} className="bg-[#052631] text-white">
+              <option key={o.value} value={o.value} className="bg-brand-dark-alt text-white">
                 {o.label}
               </option>
             ))}
@@ -254,7 +254,7 @@ export default function CouponForm() {
             <label className="block text-sm font-medium text-white">
               Categories
             </label>
-            <p className="mt-1 text-xs text-[#76abbf]">
+            <p className="mt-1 text-xs text-brand-light">
               Discount applies only to items in these categories.
             </p>
             <div className="mt-2 flex flex-wrap gap-2">
@@ -263,7 +263,7 @@ export default function CouponForm() {
                 return (
                   <label
                     key={c.id}
-                    className="flex cursor-pointer items-center gap-2 rounded-lg border border-[#066175]/35 bg-[#052631] text-white px-3 py-2 text-sm hover:bg-[#066175]/30"
+                    className="flex cursor-pointer items-center gap-2 rounded-lg border border-brand-medium/35 bg-brand-dark-alt text-white px-3 py-2 text-sm hover:bg-brand-medium/30"
                   >
                     <input
                       type="checkbox"
@@ -281,7 +281,7 @@ export default function CouponForm() {
                           }));
                         }
                       }}
-                      className="rounded border-[#066175]/60 bg-[#044155] text-[#e38622] focus:ring-[#e38622]"
+                      className="rounded border-brand-medium/60 bg-brand-dark text-brand-orange focus:ring-brand-orange"
                     />
                     {c.name}
                   </label>
@@ -289,7 +289,7 @@ export default function CouponForm() {
               })}
             </div>
             {categories.length === 0 && (
-              <p className="mt-2 text-sm text-[#76abbf]">
+              <p className="mt-2 text-sm text-brand-light">
                 No categories. Create categories first.
               </p>
             )}
@@ -301,10 +301,10 @@ export default function CouponForm() {
             <label className="block text-sm font-medium text-white">
               Products
             </label>
-            <p className="mt-1 text-xs text-[#76abbf]">
+            <p className="mt-1 text-xs text-brand-light">
               Discount applies only to these products.
             </p>
-            <div className="mt-2 max-h-48 overflow-y-auto rounded-lg border border-[#066175]/35 bg-[#044155] p-2">
+            <div className="mt-2 max-h-48 overflow-y-auto rounded-lg border border-brand-medium/35 bg-brand-dark p-2">
               {products
                 .filter((p) => p.is_published)
                 .map((p) => {
@@ -312,7 +312,7 @@ export default function CouponForm() {
                   return (
                     <label
                       key={p.id}
-                      className="flex cursor-pointer items-center gap-2 rounded px-2 py-1.5 text-sm text-white hover:bg-[#066175]/30"
+                      className="flex cursor-pointer items-center gap-2 rounded px-2 py-1.5 text-sm text-white hover:bg-brand-medium/30"
                     >
                       <input
                         type="checkbox"
@@ -330,7 +330,7 @@ export default function CouponForm() {
                             }));
                           }
                         }}
-                        className="rounded border-[#066175]/60 bg-[#044155] text-[#e38622] focus:ring-[#e38622]"
+                        className="rounded border-brand-medium/60 bg-brand-dark text-brand-orange focus:ring-brand-orange"
                       />
                       <span className="truncate">{p.name}</span>
                     </label>
@@ -338,7 +338,7 @@ export default function CouponForm() {
                 })}
             </div>
             {products.filter((p) => p.is_published).length === 0 && (
-              <p className="mt-2 text-sm text-[#76abbf]">
+              <p className="mt-2 text-sm text-brand-light">
                 No published products.
               </p>
             )}
@@ -356,7 +356,7 @@ export default function CouponForm() {
               onChange={(e) =>
                 setForm((f) => ({ ...f, starts_at: e.target.value }))
               }
-              className="mt-1 w-full rounded-lg bg-[#044155] border border-[#066175]/60 text-white px-3 py-2 focus:border-[#e38622] focus:outline-none"
+              className="mt-1 w-full rounded-lg bg-brand-dark border border-brand-medium/60 text-white px-3 py-2 focus:border-brand-orange focus:outline-none"
             />
           </div>
           <div>
@@ -369,7 +369,7 @@ export default function CouponForm() {
               onChange={(e) =>
                 setForm((f) => ({ ...f, ends_at: e.target.value }))
               }
-              className="mt-1 w-full rounded-lg bg-[#044155] border border-[#066175]/60 text-white px-3 py-2 focus:border-[#e38622] focus:outline-none"
+              className="mt-1 w-full rounded-lg bg-brand-dark border border-brand-medium/60 text-white px-3 py-2 focus:border-brand-orange focus:outline-none"
             />
           </div>
         </div>
@@ -386,9 +386,9 @@ export default function CouponForm() {
               setForm((f) => ({ ...f, usage_limit: e.target.value }))
             }
             placeholder="Unlimited"
-            className="mt-1 w-full max-w-xs rounded-lg bg-[#044155] border border-[#066175]/60 text-white px-3 py-2 focus:border-[#e38622] focus:outline-none focus:ring-1 focus:ring-[#e38622]"
+            className="mt-1 w-full max-w-xs rounded-lg bg-brand-dark border border-brand-medium/60 text-white px-3 py-2 focus:border-brand-orange focus:outline-none focus:ring-1 focus:ring-brand-orange"
           />
-          <p className="mt-1 text-xs text-[#76abbf]">
+          <p className="mt-1 text-xs text-brand-light">
             Leave empty for unlimited uses.
           </p>
         </div>

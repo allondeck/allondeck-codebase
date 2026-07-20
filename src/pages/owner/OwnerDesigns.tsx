@@ -165,23 +165,23 @@ export default function OwnerDesigns() {
   return (
     <div className="space-y-6">
       <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
-        <h2 className="text-xl font-semibold text-[#f6ebd4]">Designs Management</h2>
+        <h2 className="text-xl font-semibold text-brand-cream">Designs Management</h2>
         <button
           onClick={() => openForm()}
-          className="flex items-center gap-2 rounded-lg bg-[#e38622] px-4 py-2 text-sm font-semibold text-white hover:bg-[#e38622]/80"
+          className="flex items-center gap-2 rounded-lg bg-brand-orange px-4 py-2 text-sm font-semibold text-white hover:bg-brand-orange/80"
         >
           <Plus className="h-4 w-4" />
           Add {activeTab === 'colors' ? 'Color' : 'Pattern'}
         </button>
       </div>
 
-      <div className="flex gap-4 border-b border-[#066175]/35">
+      <div className="flex gap-4 border-b border-brand-medium/35">
         <button
           onClick={() => setActiveTab('colors')}
           className={`pb-3 text-sm font-medium transition-colors ${
             activeTab === 'colors'
-              ? 'border-b-2 border-[#e38622] text-[#e38622]'
-              : 'text-[#76abbf] hover:text-[#f6ebd4]'
+              ? 'border-b-2 border-brand-orange text-brand-orange'
+              : 'text-brand-light hover:text-brand-cream'
           }`}
         >
           Colors
@@ -190,8 +190,8 @@ export default function OwnerDesigns() {
           onClick={() => setActiveTab('patterns')}
           className={`pb-3 text-sm font-medium transition-colors ${
             activeTab === 'patterns'
-              ? 'border-b-2 border-[#e38622] text-[#e38622]'
-              : 'text-[#76abbf] hover:text-[#f6ebd4]'
+              ? 'border-b-2 border-brand-orange text-brand-orange'
+              : 'text-brand-light hover:text-brand-cream'
           }`}
         >
           Patterns
@@ -199,59 +199,59 @@ export default function OwnerDesigns() {
       </div>
 
       {isFormOpen && (
-        <div className="rounded-lg border border-[#066175]/35 bg-[#052631] p-6 shadow-sm">
-          <h2 className="mb-4 text-lg font-bold text-[#f6ebd4]">
+        <div className="rounded-lg border border-brand-medium/35 bg-brand-dark-alt p-6 shadow-sm">
+          <h2 className="mb-4 text-lg font-bold text-brand-cream">
             {editingId ? 'Edit' : 'Add'} {activeTab === 'colors' ? 'Color' : 'Pattern'}
           </h2>
           <form onSubmit={handleSave} className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-[#76abbf]">Name</label>
+              <label className="block text-sm font-medium text-brand-light">Name</label>
               <input
                 required
                 type="text"
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                className="mt-1 block w-full rounded-md border border-[#066175]/50 bg-[#044155] px-3 py-2 text-white shadow-sm focus:border-[#e38622] focus:outline-none focus:ring-1 focus:ring-[#e38622]"
+                className="mt-1 block w-full rounded-md border border-brand-medium/50 bg-brand-dark px-3 py-2 text-white shadow-sm focus:border-brand-orange focus:outline-none focus:ring-1 focus:ring-brand-orange"
               />
             </div>
 
             {activeTab === 'colors' && (
               <div>
-                <label className="block text-sm font-medium text-[#76abbf]">Hex Color</label>
+                <label className="block text-sm font-medium text-brand-light">Hex Color</label>
                 <div className="mt-1 flex items-center gap-2">
                   <input
                     type="color"
                     value={formData.hex_color || '#000000'}
                     onChange={(e) => setFormData({ ...formData, hex_color: e.target.value })}
-                    className="h-10 w-10 cursor-pointer rounded-md border border-[#066175]/50 p-1 bg-[#044155]"
+                    className="h-10 w-10 cursor-pointer rounded-md border border-brand-medium/50 p-1 bg-brand-dark"
                   />
                   <input
                     type="text"
                     value={formData.hex_color}
                     onChange={(e) => setFormData({ ...formData, hex_color: e.target.value })}
                     placeholder="#000000"
-                    className="block flex-1 rounded-md border border-[#066175]/50 bg-[#044155] px-3 py-2 text-white shadow-sm focus:border-[#e38622] focus:outline-none focus:ring-1 focus:ring-[#e38622]"
+                    className="block flex-1 rounded-md border border-brand-medium/50 bg-brand-dark px-3 py-2 text-white shadow-sm focus:border-brand-orange focus:outline-none focus:ring-1 focus:ring-brand-orange"
                   />
                 </div>
               </div>
             )}
 
             <div>
-              <label className="block text-sm font-medium text-[#76abbf]">Texture Image</label>
+              <label className="block text-sm font-medium text-brand-light">Texture Image</label>
               <div className="mt-1 flex items-center gap-4">
                 {formData.image_url ? (
                   <img
                     src={formData.image_url}
                     alt="Preview"
-                    className="h-16 w-16 rounded-md object-cover border border-[#066175]/50"
+                    className="h-16 w-16 rounded-md object-cover border border-brand-medium/50"
                   />
                 ) : (
-                  <div className="flex h-16 w-16 items-center justify-center rounded-md border border-dashed border-[#066175]/50 bg-[#044155]">
-                    <ImageIcon className="h-6 w-6 text-[#76abbf]" />
+                  <div className="flex h-16 w-16 items-center justify-center rounded-md border border-dashed border-brand-medium/50 bg-brand-dark">
+                    <ImageIcon className="h-6 w-6 text-brand-light" />
                   </div>
                 )}
                 <div className="flex flex-col gap-2">
-                  <label className="cursor-pointer rounded-md border border-[#066175]/50 bg-[#044155] px-3 py-2 text-sm font-medium text-[#f6ebd4] shadow-sm hover:bg-[#066175]/30 transition-colors">
+                  <label className="cursor-pointer rounded-md border border-brand-medium/50 bg-brand-dark px-3 py-2 text-sm font-medium text-brand-cream shadow-sm hover:bg-brand-medium/30 transition-colors">
                     {uploading ? (
                       <span className="flex items-center gap-2">
                         <Loader2 className="h-4 w-4 animate-spin" /> Uploading...
@@ -275,14 +275,14 @@ export default function OwnerDesigns() {
               <button
                 type="button"
                 onClick={() => setIsFormOpen(false)}
-                className="rounded-md border border-[#066175]/50 bg-[#044155] px-4 py-2 text-sm font-medium text-[#76abbf] hover:bg-[#066175]/30 hover:text-white transition-colors"
+                className="rounded-md border border-brand-medium/50 bg-brand-dark px-4 py-2 text-sm font-medium text-brand-light hover:bg-brand-medium/30 hover:text-white transition-colors"
               >
                 Cancel
               </button>
               <button
                 type="submit"
                 disabled={saving}
-                className="inline-flex justify-center rounded-md bg-[#e38622] px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-[#e38622]/80 focus:outline-none focus:ring-2 focus:ring-[#e38622] focus:ring-offset-2 disabled:opacity-50 transition-colors"
+                className="inline-flex justify-center rounded-md bg-brand-orange px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-brand-orange/80 focus:outline-none focus:ring-2 focus:ring-brand-orange focus:ring-offset-2 disabled:opacity-50 transition-colors"
               >
                 {saving ? 'Saving...' : 'Save'}
               </button>
@@ -292,32 +292,32 @@ export default function OwnerDesigns() {
       )}
 
       {!isFormOpen && (
-        <div className="overflow-x-auto rounded-lg border border-[#066175]/35 bg-[#052631]">
+        <div className="overflow-x-auto rounded-lg border border-brand-medium/35 bg-brand-dark-alt">
           {loading ? (
             <div className="flex justify-center py-12">
-              <div className="h-8 w-8 animate-spin rounded-full border-2 border-[#066175]/35 border-t-[#e38622]" />
+              <div className="h-8 w-8 animate-spin rounded-full border-2 border-brand-medium/35 border-t-brand-orange" />
             </div>
           ) : (
-            <table className="w-full min-w-[600px] divide-y divide-[#066175]/35">
-              <thead className="bg-[#066175]/30">
+            <table className="w-full min-w-[600px] divide-y divide-brand-medium/35">
+              <thead className="bg-brand-medium/30">
                 <tr>
-                  <th className="px-4 py-3 text-left text-xs font-medium uppercase text-[#76abbf]">Image</th>
-                  <th className="px-4 py-3 text-left text-xs font-medium uppercase text-[#76abbf]">Name</th>
+                  <th className="px-4 py-3 text-left text-xs font-medium uppercase text-brand-light">Image</th>
+                  <th className="px-4 py-3 text-left text-xs font-medium uppercase text-brand-light">Name</th>
                   {activeTab === 'colors' && (
-                    <th className="px-4 py-3 text-left text-xs font-medium uppercase text-[#76abbf]">Hex</th>
+                    <th className="px-4 py-3 text-left text-xs font-medium uppercase text-brand-light">Hex</th>
                   )}
-                  <th className="px-4 py-3 text-right text-xs font-medium uppercase text-[#76abbf]">Actions</th>
+                  <th className="px-4 py-3 text-right text-xs font-medium uppercase text-brand-light">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[#066175]/35 bg-[#052631]">
+              <tbody className="divide-y divide-brand-medium/35 bg-brand-dark-alt">
                 {(activeTab === 'colors' ? colors : patterns).map((item) => (
-                  <tr key={item.id} className="hover:bg-[#066175]/20">
+                  <tr key={item.id} className="hover:bg-brand-medium/20">
                     <td className="whitespace-nowrap px-4 py-3">
                       {item.image_url ? (
-                        <img src={item.image_url} alt={item.name} className="h-10 w-10 rounded-full object-cover border border-[#066175]/50" />
+                        <img src={item.image_url} alt={item.name} className="h-10 w-10 rounded-full object-cover border border-brand-medium/50" />
                       ) : (
-                        <div className="h-10 w-10 rounded-full bg-[#044155] flex items-center justify-center border border-[#066175]/50">
-                          <ImageIcon className="h-4 w-4 text-[#76abbf]" />
+                        <div className="h-10 w-10 rounded-full bg-brand-dark flex items-center justify-center border border-brand-medium/50">
+                          <ImageIcon className="h-4 w-4 text-brand-light" />
                         </div>
                       )}
                     </td>
@@ -325,10 +325,10 @@ export default function OwnerDesigns() {
                       {item.name}
                     </td>
                     {activeTab === 'colors' && (
-                      <td className="whitespace-nowrap px-4 py-3 text-sm text-[#76abbf]">
+                      <td className="whitespace-nowrap px-4 py-3 text-sm text-brand-light">
                         <div className="flex items-center gap-2">
                           <div
-                            className="h-4 w-4 rounded-full border border-[#066175]/50"
+                            className="h-4 w-4 rounded-full border border-brand-medium/50"
                             style={{ backgroundColor: (item as DesignColor).hex_color || 'transparent' }}
                           />
                           {(item as DesignColor).hex_color}
@@ -339,13 +339,13 @@ export default function OwnerDesigns() {
                       <div className="flex justify-end gap-3">
                         <button
                           onClick={() => openForm(item)}
-                          className="text-[#76abbf] hover:text-[#e38622] transition-colors"
+                          className="text-brand-light hover:text-brand-orange transition-colors"
                         >
                           <Edit2 className="h-4 w-4" />
                         </button>
                         <button
                           onClick={() => handleDelete(item.id)}
-                          className="text-[#76abbf] hover:text-red-400 transition-colors"
+                          className="text-brand-light hover:text-red-400 transition-colors"
                         >
                           <Trash2 className="h-4 w-4" />
                         </button>
@@ -355,7 +355,7 @@ export default function OwnerDesigns() {
                 ))}
                 {(activeTab === 'colors' ? colors : patterns).length === 0 && (
                   <tr>
-                    <td colSpan={4} className="px-4 py-8 text-center text-sm text-[#76abbf]">
+                    <td colSpan={4} className="px-4 py-8 text-center text-sm text-brand-light">
                       No {activeTab} found. Add your first one!
                     </td>
                   </tr>

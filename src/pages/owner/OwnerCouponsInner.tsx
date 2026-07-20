@@ -117,7 +117,7 @@ export default function OwnerCouponsInner() {
   if (couponsLoading && coupons.length === 0) {
     return (
       <div className="flex justify-center py-12">
-        <div className="h-8 w-8 animate-spin rounded-full border-2 border-[#066175]/35 border-t-[#e38622]" />
+        <div className="h-8 w-8 animate-spin rounded-full border-2 border-brand-medium/35 border-t-brand-orange" />
       </div>
     );
   }
@@ -125,15 +125,15 @@ export default function OwnerCouponsInner() {
   return (
     <div>
       <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <h2 className="text-xl font-semibold text-[#f6ebd4]">Discounts</h2>
-        <div className="flex rounded-lg border border-[#066175]/35 bg-[#052631] p-1">
+        <h2 className="text-xl font-semibold text-brand-cream">Discounts</h2>
+        <div className="flex rounded-lg border border-brand-medium/35 bg-brand-dark-alt p-1">
           <button
             type="button"
             onClick={() => setActiveTab("coupons")}
             className={`rounded-md px-4 py-2 text-sm font-medium transition ${
               activeTab === "coupons"
-                ? "bg-[#066175]/30 text-white shadow-sm"
-                : "text-[#76abbf] hover:text-white"
+                ? "bg-brand-medium/30 text-white shadow-sm"
+                : "text-brand-light hover:text-white"
             }`}
           >
             Coupons
@@ -143,8 +143,8 @@ export default function OwnerCouponsInner() {
             onClick={() => setActiveTab("deals")}
             className={`rounded-md px-4 py-2 text-sm font-medium transition ${
               activeTab === "deals"
-                ? "bg-[#066175]/30 text-white shadow-sm"
-                : "text-[#76abbf] hover:text-white"
+                ? "bg-brand-medium/30 text-white shadow-sm"
+                : "text-brand-light hover:text-white"
             }`}
           >
             Deals
@@ -172,36 +172,36 @@ export default function OwnerCouponsInner() {
                 Discount amount from all coupon redemptions
               </p>
             </div>
-            <div className="rounded-xl border border-[#066175]/35 bg-[#052631] p-4 shadow-sm">
+            <div className="rounded-xl border border-brand-medium/35 bg-brand-dark-alt p-4 shadow-sm">
               <p className="text-sm font-medium text-white">
                 Spent with coupons
               </p>
-              <p className="mt-1 text-2xl font-bold text-[#f6ebd4]">
+              <p className="mt-1 text-2xl font-bold text-brand-cream">
                 {statsLoading ? "—" : formatPrice(totals.totalSpent)}
               </p>
-              <p className="mt-0.5 text-xs text-[#76abbf]">
+              <p className="mt-0.5 text-xs text-brand-light">
                 Order total from orders that used a coupon
               </p>
             </div>
-            <div className="rounded-xl border border-[#066175]/35 bg-[#052631] p-4 shadow-sm">
+            <div className="rounded-xl border border-brand-medium/35 bg-brand-dark-alt p-4 shadow-sm">
               <p className="text-sm font-medium text-white">
                 Orders with coupon
               </p>
-              <p className="mt-1 text-2xl font-bold text-[#f6ebd4]">
+              <p className="mt-1 text-2xl font-bold text-brand-cream">
                 {totals.orderCount}
               </p>
-              <p className="mt-0.5 text-xs text-[#76abbf]">
+              <p className="mt-0.5 text-xs text-brand-light">
                 Number of orders that used any coupon
               </p>
             </div>
           </div>
 
           {chartData.length > 0 && (
-            <div className="mb-6 rounded-xl border border-[#066175]/35 bg-[#052631] p-4 shadow-sm">
+            <div className="mb-6 rounded-xl border border-brand-medium/35 bg-brand-dark-alt p-4 shadow-sm">
               <h3 className="text-sm font-semibold text-white">
                 Savings by coupon
               </h3>
-              <p className="mt-0.5 text-xs text-[#76abbf]">
+              <p className="mt-0.5 text-xs text-brand-light">
                 Total discount amount per coupon (top 10)
               </p>
               <div className="mt-4 h-64">
@@ -240,74 +240,74 @@ export default function OwnerCouponsInner() {
           )}
 
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-            <p className="text-sm text-[#76abbf]">
+            <p className="text-sm text-brand-light">
               Manage discount codes applied at checkout.
             </p>
             <Link
               to="/account/owner/coupons/new"
-              className="w-full rounded-lg bg-[#e38622] px-4 py-2 text-center text-sm font-medium text-white hover:bg-[#e38622]/80 sm:w-auto"
+              className="w-full rounded-lg bg-brand-orange px-4 py-2 text-center text-sm font-medium text-white hover:bg-brand-orange/80 sm:w-auto"
             >
               Add coupon
             </Link>
           </div>
 
-          <div className="mt-4 overflow-x-auto rounded-lg border border-[#066175]/35 bg-[#052631]">
-            <table className="w-full min-w-[640px] table-fixed divide-y divide-[#066175]/35">
-              <thead className="bg-[#066175]/30">
+          <div className="mt-4 overflow-x-auto rounded-lg border border-brand-medium/35 bg-brand-dark-alt">
+            <table className="w-full min-w-[640px] table-fixed divide-y divide-brand-medium/35">
+              <thead className="bg-brand-medium/30">
                 <tr>
-                  <th className="w-[14%] px-4 py-2.5 text-left text-xs font-medium uppercase text-[#76abbf]">
+                  <th className="w-[14%] px-4 py-2.5 text-left text-xs font-medium uppercase text-brand-light">
                     Code
                   </th>
-                  <th className="w-[14%] px-4 py-2.5 text-left text-xs font-medium uppercase text-[#76abbf]">
+                  <th className="w-[14%] px-4 py-2.5 text-left text-xs font-medium uppercase text-brand-light">
                     Discount
                   </th>
-                  <th className="w-[14%] px-4 py-2.5 text-left text-xs font-medium uppercase text-[#76abbf]">
+                  <th className="w-[14%] px-4 py-2.5 text-left text-xs font-medium uppercase text-brand-light">
                     Applies to
                   </th>
-                  <th className="w-[10%] px-4 py-2.5 text-left text-xs font-medium uppercase text-[#76abbf]">
+                  <th className="w-[10%] px-4 py-2.5 text-left text-xs font-medium uppercase text-brand-light">
                     Usage
                   </th>
-                  <th className="w-[12%] px-4 py-2.5 text-left text-xs font-medium uppercase text-[#76abbf]">
+                  <th className="w-[12%] px-4 py-2.5 text-left text-xs font-medium uppercase text-brand-light">
                     Saved
                   </th>
-                  <th className="w-[12%] px-4 py-2.5 text-left text-xs font-medium uppercase text-[#76abbf]">
+                  <th className="w-[12%] px-4 py-2.5 text-left text-xs font-medium uppercase text-brand-light">
                     Spent
                   </th>
-                  <th className="w-[14%] px-4 py-2.5 text-left text-xs font-medium uppercase text-[#76abbf]">
+                  <th className="w-[14%] px-4 py-2.5 text-left text-xs font-medium uppercase text-brand-light">
                     Valid
                   </th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[#066175]/35 bg-[#052631]">
+              <tbody className="divide-y divide-brand-medium/35 bg-brand-dark-alt">
                 {coupons.map((c) => {
                   const stats = statsByCouponId[c.id];
                   return (
                     <tr
                       key={c.id}
                       onClick={() => navigate(`/account/owner/coupons/${c.id}`)}
-                      className="cursor-pointer hover:bg-[#066175]/20"
+                      className="cursor-pointer hover:bg-brand-medium/20"
                     >
                       <td className="px-4 py-2.5 font-mono font-medium text-white">
                         {c.code}
                       </td>
-                      <td className="px-4 py-2.5 text-sm text-[#76abbf]">
+                      <td className="px-4 py-2.5 text-sm text-brand-light">
                         {formatDiscount(c)}
                       </td>
-                      <td className="px-4 py-2.5 text-sm text-[#76abbf]">
+                      <td className="px-4 py-2.5 text-sm text-brand-light">
                         {SCOPE_LABELS[c.scope] ?? c.scope}
                       </td>
-                      <td className="px-4 py-2.5 text-sm text-[#76abbf]">
+                      <td className="px-4 py-2.5 text-sm text-brand-light">
                         {c.usage_limit != null
                           ? `${c.usage_count} / ${c.usage_limit}`
                           : c.usage_count}
                       </td>
-                      <td className="px-4 py-2.5 text-sm text-[#76abbf]">
+                      <td className="px-4 py-2.5 text-sm text-brand-light">
                         {stats ? formatPrice(stats.totalSaved) : "—"}
                       </td>
-                      <td className="px-4 py-2.5 text-sm text-[#76abbf]">
+                      <td className="px-4 py-2.5 text-sm text-brand-light">
                         {stats ? formatPrice(stats.totalSpent) : "—"}
                       </td>
-                      <td className="px-4 py-2.5 text-sm text-[#76abbf]">
+                      <td className="px-4 py-2.5 text-sm text-brand-light">
                         {c.starts_at || c.ends_at
                           ? [
                               c.starts_at
@@ -329,7 +329,7 @@ export default function OwnerCouponsInner() {
           </div>
 
           {coupons.length === 0 && (
-            <p className="mt-6 text-center text-[#76abbf]">
+            <p className="mt-6 text-center text-brand-light">
               No coupons yet. Add one to offer discounts at checkout.
             </p>
           )}
@@ -352,23 +352,23 @@ export default function OwnerCouponsInner() {
                 Total from orders that included a combo deal
               </p>
             </div>
-            <div className="rounded-xl border border-[#066175]/35 bg-[#052631] p-4 shadow-sm">
+            <div className="rounded-xl border border-brand-medium/35 bg-brand-dark-alt p-4 shadow-sm">
               <p className="text-sm font-medium text-white">
                 Orders with a deal
               </p>
-              <p className="mt-1 text-2xl font-bold text-[#f6ebd4]">
+              <p className="mt-1 text-2xl font-bold text-brand-cream">
                 {dealTotals?.distinctOrdersWithDeal ?? 0}
               </p>
-              <p className="mt-0.5 text-xs text-[#76abbf]">
+              <p className="mt-0.5 text-xs text-brand-light">
                 Orders that contained at least one combo
               </p>
             </div>
-            <div className="rounded-xl border border-[#066175]/35 bg-[#052631] p-4 shadow-sm">
+            <div className="rounded-xl border border-brand-medium/35 bg-brand-dark-alt p-4 shadow-sm">
               <p className="text-sm font-medium text-white">Units sold</p>
-              <p className="mt-1 text-2xl font-bold text-[#f6ebd4]">
+              <p className="mt-1 text-2xl font-bold text-brand-cream">
                 {dealTotals?.unitsSold ?? 0}
               </p>
-              <p className="mt-0.5 text-xs text-[#76abbf]">
+              <p className="mt-0.5 text-xs text-brand-light">
                 Total units across all deals
               </p>
             </div>
@@ -376,11 +376,11 @@ export default function OwnerCouponsInner() {
 
           {dealChartData.length > 0 && (
             <div className="mb-6 grid gap-6 lg:grid-cols-2">
-              <div className="rounded-xl border border-[#066175]/35 bg-[#052631] p-4 shadow-sm">
+              <div className="rounded-xl border border-brand-medium/35 bg-brand-dark-alt p-4 shadow-sm">
                 <h3 className="text-sm font-semibold text-white">
                   Revenue by deal
                 </h3>
-                <p className="mt-0.5 text-xs text-[#76abbf]">
+                <p className="mt-0.5 text-xs text-brand-light">
                   Top 10 combo deals by revenue
                 </p>
                 <div className="mt-4 h-64">
@@ -423,11 +423,11 @@ export default function OwnerCouponsInner() {
                   </ResponsiveContainer>
                 </div>
               </div>
-              <div className="rounded-xl border border-[#066175]/35 bg-[#052631] p-4 shadow-sm">
+              <div className="rounded-xl border border-brand-medium/35 bg-brand-dark-alt p-4 shadow-sm">
                 <h3 className="text-sm font-semibold text-white">
                   Share of combo revenue
                 </h3>
-                <p className="mt-0.5 text-xs text-[#76abbf]">
+                <p className="mt-0.5 text-xs text-brand-light">
                   Revenue split by deal
                 </p>
                 <div className="mt-4 h-64">
@@ -464,7 +464,7 @@ export default function OwnerCouponsInner() {
           )}
 
           {dealChartData.length === 0 && !dealStatsLoading && (
-            <p className="mb-6 text-sm text-[#76abbf]">
+            <p className="mb-6 text-sm text-brand-light">
               No combo sales yet. Charts will appear once customers order
               combos.
             </p>

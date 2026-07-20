@@ -1,7 +1,7 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { Button } from "../../components/Button";
-import { Select } from "../../components/Select";
+import { Button } from "../../components/ui/Button";
+import { Select } from "../../components/ui/Select";
 import { useOrderDetail } from "../../hooks/useOrderDetail";
 import { formatPrice, parsePrice } from "../../lib/utils";
 import { orderStatusLabel } from "../../lib/utils";
@@ -31,7 +31,7 @@ type ShippingAddress = {
 function ShippingAddressDisplay({ address }: { address: unknown }) {
   const addr = address as ShippingAddress;
   return (
-    <address className="mt-2 text-sm text-[#76abbf] not-italic">
+    <address className="mt-2 text-sm text-brand-light not-italic">
       {addr.full_name && (
         <span className="block font-medium text-white">
           {addr.full_name}
@@ -138,7 +138,7 @@ export default function OwnerOrderDetail() {
   if (loading) {
     return (
       <div className="flex justify-center py-12">
-        <div className="h-8 w-8 animate-spin rounded-full border-2 border-[#066175]/35 border-t-[#e38622]" />
+        <div className="h-8 w-8 animate-spin rounded-full border-2 border-brand-medium/35 border-t-brand-orange" />
       </div>
     );
   }
@@ -158,16 +158,16 @@ export default function OwnerOrderDetail() {
           variant="secondary"
           type="button"
           onClick={() => navigate("/owner/orders")}
-          className="text-sm text-[#76abbf] hover:text-white"
+          className="text-sm text-brand-light hover:text-white"
         >
           ← Back to orders
         </Button>
       </div>
-      <div className="rounded-lg border border-[#066175]/35 bg-[#052631] p-6">
-        <h2 className="text-xl font-semibold text-[#f6ebd4]">
+      <div className="rounded-lg border border-brand-medium/35 bg-brand-dark-alt p-6">
+        <h2 className="text-xl font-semibold text-brand-cream">
           Order #{order.id.slice(0, 8)}
         </h2>
-        <p className="mt-1 text-sm text-[#76abbf]">
+        <p className="mt-1 text-sm text-brand-light">
           {new Date(order.created_at).toLocaleString()}
         </p>
         <div className="mt-4 flex flex-wrap items-center gap-3">
@@ -177,7 +177,7 @@ export default function OwnerOrderDetail() {
               <span className="inline-flex rounded-full bg-red-950/40 border border-red-900/30 px-2.5 py-0.5 text-sm font-medium text-red-400">
                 {orderStatusLabel(order.status)}
               </span>
-              <span className="text-sm text-[#76abbf]">
+              <span className="text-sm text-brand-light">
                 Cancelled orders cannot be reactivated.
               </span>
             </>
@@ -197,21 +197,21 @@ export default function OwnerOrderDetail() {
                 ))}
               </Select>
               {updatingStatus && (
-                <span className="text-sm text-[#76abbf]">Updating…</span>
+                <span className="text-sm text-brand-light">Updating…</span>
               )}
             </>
           )}
           {order.tracking_number && (
-            <span className="text-sm text-[#76abbf]">
+            <span className="text-sm text-brand-light">
               Tracking: {order.carrier && `${order.carrier} — `}
               <span className="font-mono">{order.tracking_number}</span>
             </span>
           )}
         </div>
         {order.status === "cancelled" && (
-          <div className="mt-4 border-t border-[#066175]/35 pt-4">
+          <div className="mt-4 border-t border-brand-medium/35 pt-4">
             {order.stock_restored_at ? (
-              <p className="text-sm text-[#76abbf]">
+              <p className="text-sm text-brand-light">
                 Stock restored on{" "}
                 {new Date(order.stock_restored_at).toLocaleString()}.
               </p>
@@ -221,7 +221,7 @@ export default function OwnerOrderDetail() {
                 variant="secondary"
                 onClick={handleRestoreStock}
                 disabled={restoringStock}
-                className="border border-[#066175]/35 bg-[#052631] text-white hover:bg-[#066175]/30"
+                className="border border-brand-medium/35 bg-brand-dark-alt text-white hover:bg-brand-medium/30"
               >
                 {restoringStock ? "Restoring…" : "Add back to stock"}
               </Button>
@@ -229,8 +229,8 @@ export default function OwnerOrderDetail() {
           </div>
         )}
       </div>
-      <div className="rounded-lg border border-[#066175]/35 bg-[#052631] p-6">
-        <h3 className="font-semibold text-[#f6ebd4]">Payment</h3>
+      <div className="rounded-lg border border-brand-medium/35 bg-brand-dark-alt p-6">
+        <h3 className="font-semibold text-brand-cream">Payment</h3>
         {order.stripe_checkout_session_id ? (
           <div className="mt-2 flex items-center gap-2 rounded-lg bg-emerald-950/20 border border-emerald-900/30 px-3 py-2 text-sm text-emerald-400">
             <span aria-hidden className="text-emerald-400">
@@ -241,20 +241,20 @@ export default function OwnerOrderDetail() {
             </span>
           </div>
         ) : (
-          <p className="mt-2 text-sm text-[#76abbf]">
+          <p className="mt-2 text-sm text-brand-light">
             No payment record for this order.
           </p>
         )}
       </div>
-      <div className="rounded-lg border border-[#066175]/35 bg-[#052631] p-6">
-        <h3 className="font-semibold text-[#f6ebd4]">Customer</h3>
+      <div className="rounded-lg border border-brand-medium/35 bg-brand-dark-alt p-6">
+        <h3 className="font-semibold text-brand-cream">Customer</h3>
         <p className="mt-1 text-sm text-white">
           {order.customer_email ?? order.guest_email ?? "—"}
         </p>
       </div>
       {(order.coupon_id != null || Number(order.discount_amount ?? 0) > 0) && (
-        <div className="rounded-lg border border-[#066175]/35 bg-[#052631] p-6">
-          <h3 className="font-semibold text-[#f6ebd4]">Coupon used</h3>
+        <div className="rounded-lg border border-brand-medium/35 bg-brand-dark-alt p-6">
+          <h3 className="font-semibold text-brand-cream">Coupon used</h3>
           <p className="mt-2 text-sm text-white">
             {order.coupons?.code != null ? (
               <span>
@@ -270,36 +270,36 @@ export default function OwnerOrderDetail() {
         </div>
       )}
       {order.shipping_address != null ? (
-        <div className="rounded-lg border border-[#066175]/35 bg-[#052631] p-6">
-          <h3 className="font-semibold text-[#f6ebd4]">Shipping address</h3>
+        <div className="rounded-lg border border-brand-medium/35 bg-brand-dark-alt p-6">
+          <h3 className="font-semibold text-brand-cream">Shipping address</h3>
           <ShippingAddressDisplay address={order.shipping_address} />
         </div>
       ) : null}
-      <div className="rounded-lg border border-[#066175]/35 bg-[#052631] p-6">
-        <h3 className="font-semibold text-[#f6ebd4]">Items</h3>
+      <div className="rounded-lg border border-brand-medium/35 bg-brand-dark-alt p-6">
+        <h3 className="font-semibold text-brand-cream">Items</h3>
         <ul className="mt-4 space-y-3">
           {items.map((item) => (
             <li
               key={item.id}
-              className="flex flex-wrap items-center justify-between gap-2 border-b border-[#066175]/25 pb-3 last:border-0"
+              className="flex flex-wrap items-center justify-between gap-2 border-b border-brand-medium/25 pb-3 last:border-0"
             >
               <div className="flex flex-col">
                 <span className="text-white">{item.product_name}</span>
                 {item.variant_name && (
-                  <span className="text-sm text-[#76abbf]">{item.variant_name}</span>
+                  <span className="text-sm text-brand-light">{item.variant_name}</span>
                 )}
               </div>
               <div className="flex items-center gap-2">
-                <span className="text-sm text-[#76abbf]">×{item.quantity}</span>
-                <span className="font-medium text-[#f6ebd4]">
+                <span className="text-sm text-brand-light">×{item.quantity}</span>
+                <span className="font-medium text-brand-cream">
                   {formatPrice(parsePrice(item.product_price) * item.quantity)}
                 </span>
               </div>
             </li>
           ))}
         </ul>
-        <div className="mt-4 border-t border-[#066175]/35 pt-4">
-          <div className="flex justify-between text-sm text-[#76abbf]">
+        <div className="mt-4 border-t border-brand-medium/35 pt-4">
+          <div className="flex justify-between text-sm text-brand-light">
             <span>Subtotal</span>
             <span>{formatPrice(order.subtotal)}</span>
           </div>
@@ -309,15 +309,15 @@ export default function OwnerOrderDetail() {
               <span>−{formatPrice(order.discount_amount)}</span>
             </div>
           )}
-          <div className="flex justify-between text-sm text-[#76abbf]">
+          <div className="flex justify-between text-sm text-brand-light">
             <span>Shipping</span>
             <span>{formatPrice(order.shipping_total)}</span>
           </div>
-          <div className="flex justify-between text-sm text-[#76abbf]">
+          <div className="flex justify-between text-sm text-brand-light">
             <span>Tax</span>
             <span>{formatPrice(order.tax_total)}</span>
           </div>
-          <div className="mt-2 flex justify-between font-semibold text-[#f6ebd4]">
+          <div className="mt-2 flex justify-between font-semibold text-brand-cream">
             <span>Total</span>
             <span>{formatPrice(order.total)}</span>
           </div>

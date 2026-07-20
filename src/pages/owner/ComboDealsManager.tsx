@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from 'react'
-import { Button } from '../../components/Button'
+import { Button } from '../../components/ui/Button'
 import { useDealsAdmin } from '../../hooks/useDealsAdmin'
 import { useProductsAdmin } from '../../hooks/useProductsAdmin'
 import { formatPrice } from '../../lib/utils'
@@ -103,13 +103,13 @@ export function ComboDealsManager() {
   const showForm = adding || editingId
 
   return (
-    <div className="rounded-xl border border-[#066175]/35 bg-[#052631] p-5 shadow-sm">
-      <h3 className="text-base font-semibold tracking-tight text-[#f6ebd4]">Combo deals</h3>
-      <p className="mt-2 text-sm text-[#76abbf] leading-relaxed">
+    <div className="rounded-xl border border-brand-medium/35 bg-brand-dark-alt p-5 shadow-sm">
+      <h3 className="text-base font-semibold tracking-tight text-brand-cream">Combo deals</h3>
+      <p className="mt-2 text-sm text-brand-light leading-relaxed">
         Create bundles: select any number of products and set one total price. Products in a combo appear when customers use the &quot;Deals&quot; filter. Enable the Deals filter in Store Settings → Storefront → Filters to show.
       </p>
       {loading ? (
-        <p className="mt-4 text-sm text-[#76abbf]">Loading deals…</p>
+        <p className="mt-4 text-sm text-brand-light">Loading deals…</p>
       ) : (
         <>
           {!showForm && (
@@ -117,11 +117,11 @@ export function ComboDealsManager() {
               {deals.map((deal) => (
                 <div
                   key={deal.id}
-                  className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-[#066175]/35 bg-[#066175]/15 p-4 shadow-sm"
+                  className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-brand-medium/35 bg-brand-medium/15 p-4 shadow-sm"
                 >
                   <div>
                     <p className="font-medium text-white">{deal.name || 'Combo deal'}</p>
-                    <p className="text-sm text-[#76abbf]">
+                    <p className="text-sm text-brand-light">
                       {deal.deal_items.length} item(s) · {formatPrice(deal.total_price)} total
                     </p>
                   </div>
@@ -129,7 +129,7 @@ export function ComboDealsManager() {
                     <button
                       type="button"
                       onClick={() => openEdit(deal)}
-                      className="rounded border border-[#066175]/35 bg-[#052631] px-2 py-1 text-sm font-medium text-white hover:bg-[#066175]/30"
+                      className="rounded border border-brand-medium/35 bg-brand-dark-alt px-2 py-1 text-sm font-medium text-white hover:bg-brand-medium/30"
                     >
                       Edit
                     </button>
@@ -148,14 +148,14 @@ export function ComboDealsManager() {
               <button
                 type="button"
                 onClick={openAdd}
-                className="w-full rounded-xl border border-dashed border-[#066175]/60 bg-[#044155] py-3.5 text-sm font-medium text-white transition-colors hover:border-[#e38622] hover:bg-[#066175]/20"
+                className="w-full rounded-xl border border-dashed border-brand-medium/60 bg-brand-dark py-3.5 text-sm font-medium text-white transition-colors hover:border-brand-orange hover:bg-brand-medium/20"
               >
                 + Add combo deal
               </button>
             </div>
           )}
           {showForm && (
-            <div className="mt-5 rounded-xl border border-[#066175]/35 bg-[#052631] p-6 shadow-sm">
+            <div className="mt-5 rounded-xl border border-brand-medium/35 bg-brand-dark-alt p-6 shadow-sm">
             <div className="space-y-1">
               <label className="block text-sm font-medium text-white">Deal name</label>
               <input
@@ -163,22 +163,22 @@ export function ComboDealsManager() {
                 value={formName}
                 onChange={(e) => setFormName(e.target.value)}
                 placeholder="e.g. Starter bundle"
-                className="w-full rounded-lg bg-[#044155] border border-[#066175]/60 text-white px-3 py-2.5 text-sm placeholder-[#76abbf] focus:border-[#e38622] focus:outline-none focus:ring-2 focus:ring-[#e38622]/20"
+                className="w-full rounded-lg bg-brand-dark border border-brand-medium/60 text-white px-3 py-2.5 text-sm placeholder-brand-light focus:border-brand-orange focus:outline-none focus:ring-2 focus:ring-brand-orange/20"
               />
             </div>
 
             {/* Add products below — first so owner picks from list, then sees selected */}
             <div className="mt-6">
-              <p className="text-xs font-medium uppercase tracking-wider text-[#76abbf]">Add products below</p>
+              <p className="text-xs font-medium uppercase tracking-wider text-brand-light">Add products below</p>
               <input
                 type="search"
                 value={productSearch}
                 onChange={(e) => setProductSearch(e.target.value)}
                 placeholder="Search products..."
-                className="mt-2 w-full rounded-lg bg-[#044155] border border-[#066175]/60 text-white px-3 py-2.5 text-sm placeholder-[#76abbf] focus:border-[#e38622] focus:outline-none focus:ring-2 focus:ring-[#e38622]/20"
+                className="mt-2 w-full rounded-lg bg-brand-dark border border-brand-medium/60 text-white px-3 py-2.5 text-sm placeholder-brand-light focus:border-brand-orange focus:outline-none focus:ring-2 focus:ring-brand-orange/20"
                 aria-label="Search products to add to combo"
               />
-              <div className="mt-2 max-h-36 overflow-y-auto rounded-xl border border-[#066175]/35 bg-[#044155] p-2.5 space-y-1">
+              <div className="mt-2 max-h-36 overflow-y-auto rounded-xl border border-brand-medium/35 bg-brand-dark p-2.5 space-y-1">
                 {(() => {
                   const searchLower = productSearch.trim().toLowerCase()
                   const available = products
@@ -191,13 +191,13 @@ export function ComboDealsManager() {
                           key={p.id}
                           type="button"
                           onClick={() => addProduct(p.id)}
-                          className="block w-full rounded-lg px-3 py-2.5 text-left text-sm text-white transition-colors hover:bg-[#066175]/30 hover:shadow-sm"
+                          className="block w-full rounded-lg px-3 py-2.5 text-left text-sm text-white transition-colors hover:bg-brand-medium/30 hover:shadow-sm"
                         >
-                          + {p.name} <span className="text-[#76abbf]">— {formatPrice(p.price)}</span>
+                          + {p.name} <span className="text-brand-light">— {formatPrice(p.price)}</span>
                         </button>
                       ))}
                       {available.length === 0 && (
-                        <p className="px-3 py-4 text-center text-sm text-[#76abbf]">
+                        <p className="px-3 py-4 text-center text-sm text-brand-light">
                           {products.length === 0
                             ? 'No products. Add products in Products first.'
                             : searchLower
@@ -212,18 +212,18 @@ export function ComboDealsManager() {
             </div>
 
             <div className="mt-6">
-              <p className="text-xs font-medium uppercase tracking-wider text-[#76abbf]">Products in this combo</p>
-              <div className="mt-2 max-h-44 overflow-y-auto rounded-xl border border-[#066175]/35 bg-[#044155] p-2.5 space-y-1.5">
+              <p className="text-xs font-medium uppercase tracking-wider text-brand-light">Products in this combo</p>
+              <div className="mt-2 max-h-44 overflow-y-auto rounded-xl border border-brand-medium/35 bg-brand-dark p-2.5 space-y-1.5">
                 {formItems.map((item) => {
                   const p = products.find((x) => x.id === item.product_id)
                   return (
                     <div
                       key={item.product_id}
-                      className="flex items-center justify-between gap-3 rounded-lg border border-[#066175]/35 bg-[#052631] px-3 py-2.5 shadow-sm"
+                      className="flex items-center justify-between gap-3 rounded-lg border border-brand-medium/35 bg-brand-dark-alt px-3 py-2.5 shadow-sm"
                     >
                       <span className="min-w-0 flex-1 truncate text-sm text-white">
                         {p?.name ?? item.product_id}
-                        {p != null && <span className="ml-2 text-[#76abbf]">({formatPrice(p.price)} each)</span>}
+                        {p != null && <span className="ml-2 text-brand-light">({formatPrice(p.price)} each)</span>}
                       </span>
                       <div className="flex shrink-0 items-center gap-2">
                         <input
@@ -231,7 +231,7 @@ export function ComboDealsManager() {
                           min={1}
                           value={item.quantity}
                           onChange={(e) => setQuantity(item.product_id, parseInt(e.target.value, 10) || 1)}
-                          className="w-16 rounded-lg bg-[#044155] border border-[#066175]/60 text-white px-2 py-1.5 text-center text-sm focus:border-[#e38622] focus:outline-none focus:ring-1 focus:ring-[#e38622]/30"
+                          className="w-16 rounded-lg bg-brand-dark border border-brand-medium/60 text-white px-2 py-1.5 text-center text-sm focus:border-brand-orange focus:outline-none focus:ring-1 focus:ring-brand-orange/30"
                         />
                         <button
                           type="button"
@@ -265,10 +265,10 @@ export function ComboDealsManager() {
                       placeholder="0"
                       value={discountPercent}
                       onChange={(e) => setDiscountPercent(e.target.value)}
-                      className="w-24 rounded-lg bg-[#044155] border border-[#066175]/60 text-white px-3 py-2 text-sm focus:border-[#e38622] focus:outline-none focus:ring-2 focus:ring-[#e38622]/20"
+                      className="w-24 rounded-lg bg-brand-dark border border-brand-medium/60 text-white px-3 py-2 text-sm focus:border-brand-orange focus:outline-none focus:ring-2 focus:ring-brand-orange/20"
                       aria-label="Discount percentage applied to items total"
                     />
-                    <p className="text-xs text-[#76abbf]">Applied to items total → updates Total price</p>
+                    <p className="text-xs text-brand-light">Applied to items total → updates Total price</p>
                   </div>
                   <div className="space-y-1">
                     <label htmlFor="combo-total-price" className="block text-sm font-medium text-white">Total price ($)</label>
@@ -279,7 +279,7 @@ export function ComboDealsManager() {
                       step={0.01}
                       value={formTotalPrice}
                       onChange={(e) => setFormTotalPrice(e.target.value)}
-                      className="w-36 rounded-lg bg-[#044155] border border-[#066175]/60 text-white px-3 py-2 text-sm font-medium focus:border-[#e38622] focus:outline-none focus:ring-2 focus:ring-[#e38622]/20"
+                      className="w-36 rounded-lg bg-brand-dark border border-brand-medium/60 text-white px-3 py-2 text-sm font-medium focus:border-brand-orange focus:outline-none focus:ring-2 focus:ring-brand-orange/20"
                     />
                   </div>
                 </div>
@@ -287,7 +287,7 @@ export function ComboDealsManager() {
             )}
 
             {error && <p className="mt-4 text-sm text-red-400">{error}</p>}
-            <div className="mt-6 flex gap-3 border-t border-[#066175]/35 pt-5">
+            <div className="mt-6 flex gap-3 border-t border-brand-medium/35 pt-5">
               <Button type="button" onClick={handleSave} disabled={saving}>
                 {saving ? 'Saving...' : 'Save combo'}
               </Button>

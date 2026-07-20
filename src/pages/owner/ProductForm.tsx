@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { Button } from "../../components/Button";
+import { Button } from "../../components/ui/Button";
 import { supabase } from "../../lib/supabase";
 import {
   deleteStorageFileIfOurs,
@@ -373,7 +373,7 @@ export default function ProductForm() {
   if (loading) {
     return (
       <div className="flex justify-center py-12">
-        <div className="h-8 w-8 animate-spin rounded-full border-2 border-[#066175]/35 border-t-[#e38622]" />
+        <div className="h-8 w-8 animate-spin rounded-full border-2 border-brand-medium/35 border-t-brand-orange" />
       </div>
     );
   }
@@ -381,7 +381,7 @@ export default function ProductForm() {
   return (
     <form onSubmit={handleSubmit} className="max-w-2xl space-y-6">
       <div className="flex items-center justify-between">
-        <h2 className="text-xl font-semibold text-[#f6ebd4]">
+        <h2 className="text-xl font-semibold text-brand-cream">
           {isNew ? "Add product" : "Edit product"}
         </h2>
         {!isNew && (
@@ -400,7 +400,7 @@ export default function ProductForm() {
           {error}
         </div>
       )}
-      <div className="space-y-4 rounded-lg border border-[#066175]/35 bg-[#052631] p-6">
+      <div className="space-y-4 rounded-lg border border-brand-medium/35 bg-brand-dark-alt p-6">
         <div>
           <label className="block text-sm font-medium text-white">
             Name
@@ -410,7 +410,7 @@ export default function ProductForm() {
             required
             value={form.name}
             onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
-            className="mt-1 w-full rounded-lg bg-[#044155] border border-[#066175]/60 text-white px-3 py-2 focus:border-[#e38622] focus:outline-none focus:ring-1 focus:ring-[#e38622]"
+            className="mt-1 w-full rounded-lg bg-brand-dark border border-brand-medium/60 text-white px-3 py-2 focus:border-brand-orange focus:outline-none focus:ring-1 focus:ring-brand-orange"
           />
         </div>
         <div>
@@ -426,14 +426,14 @@ export default function ProductForm() {
                 setAutoSlug(false);
                 setForm((f) => ({ ...f, slug: e.target.value }));
               }}
-              className="flex-1 rounded-lg bg-[#044155] border border-[#066175]/60 text-white px-3 py-2 focus:border-[#e38622] focus:outline-none focus:ring-1 focus:ring-[#e38622]"
+              className="flex-1 rounded-lg bg-brand-dark border border-brand-medium/60 text-white px-3 py-2 focus:border-brand-orange focus:outline-none focus:ring-1 focus:ring-brand-orange"
             />
-            <label className="flex items-center gap-1 text-sm text-[#76abbf]">
+            <label className="flex items-center gap-1 text-sm text-brand-light">
               <input
                 type="checkbox"
                 checked={autoSlug}
                 onChange={(e) => setAutoSlug(e.target.checked)}
-                className="rounded border-[#066175]/60 bg-[#044155] text-[#e38622] focus:ring-[#e38622]"
+                className="rounded border-brand-medium/60 bg-brand-dark text-brand-orange focus:ring-brand-orange"
               />
               Auto
             </label>
@@ -454,7 +454,7 @@ export default function ProductForm() {
                     height={128}
                     loading="lazy"
                     decoding="async"
-                    className="h-32 w-32 rounded-lg border border-[#066175]/35 object-cover"
+                    className="h-32 w-32 rounded-lg border border-brand-medium/35 object-cover"
                   />
                   <button
                     type="button"
@@ -478,7 +478,7 @@ export default function ProductForm() {
                   </button>
                 </div>
               ) : (
-                <div className="flex h-32 w-32 items-center justify-center rounded-lg border border-dashed border-[#066175]/35 bg-[#044155] text-[#76abbf]">
+                <div className="flex h-32 w-32 items-center justify-center rounded-lg border border-dashed border-brand-medium/35 bg-brand-dark text-brand-light">
                   <svg
                     className="h-12 w-12"
                     fill="none"
@@ -496,7 +496,7 @@ export default function ProductForm() {
               )}
             </div>
             <div className="min-w-0 flex-1 space-y-2">
-              <label className="flex cursor-pointer items-center justify-center gap-2 rounded-lg border border-[#066175]/35 bg-[#052631] px-4 py-2 text-sm font-medium text-white hover:bg-[#066175]/30">
+              <label className="flex cursor-pointer items-center justify-center gap-2 rounded-lg border border-brand-medium/35 bg-brand-dark-alt px-4 py-2 text-sm font-medium text-white hover:bg-brand-medium/30">
                 <input
                   type="file"
                   accept="image/jpeg,image/png,image/webp,image/gif"
@@ -513,7 +513,7 @@ export default function ProductForm() {
                   setForm((f) => ({ ...f, image_url: e.target.value }))
                 }
                 placeholder="Or paste image URL"
-                className="w-full rounded-lg bg-[#044155] border border-[#066175]/60 text-white px-3 py-2 text-sm focus:border-[#e38622] focus:outline-none"
+                className="w-full rounded-lg bg-brand-dark border border-brand-medium/60 text-white px-3 py-2 text-sm focus:border-brand-orange focus:outline-none"
               />
             </div>
           </div>
@@ -528,7 +528,7 @@ export default function ProductForm() {
             onChange={(e) =>
               setForm((f) => ({ ...f, description: e.target.value }))
             }
-            className="mt-1 w-full rounded-lg bg-[#044155] border border-[#066175]/60 text-white px-3 py-2 focus:border-[#e38622] focus:outline-none focus:ring-1 focus:ring-[#e38622]"
+            className="mt-1 w-full rounded-lg bg-brand-dark border border-brand-medium/60 text-white px-3 py-2 focus:border-brand-orange focus:outline-none focus:ring-1 focus:ring-brand-orange"
           />
         </div>
         <div className="grid gap-4 sm:grid-cols-2">
@@ -545,7 +545,7 @@ export default function ProductForm() {
               onChange={(e) =>
                 setForm((f) => ({ ...f, price: e.target.value }))
               }
-              className="mt-1 w-full rounded-lg bg-[#044155] border border-[#066175]/60 text-white px-3 py-2 focus:border-[#e38622] focus:outline-none focus:ring-1 focus:ring-[#e38622]"
+              className="mt-1 w-full rounded-lg bg-brand-dark border border-brand-medium/60 text-white px-3 py-2 focus:border-brand-orange focus:outline-none focus:ring-1 focus:ring-brand-orange"
             />
           </div>
           <div>
@@ -560,7 +560,7 @@ export default function ProductForm() {
               onChange={(e) =>
                 setForm((f) => ({ ...f, compare_at_price: e.target.value }))
               }
-              className="mt-1 w-full rounded-lg bg-[#044155] border border-[#066175]/60 text-white px-3 py-2 focus:border-[#e38622] focus:outline-none focus:ring-1 focus:ring-[#e38622]"
+              className="mt-1 w-full rounded-lg bg-brand-dark border border-brand-medium/60 text-white px-3 py-2 focus:border-brand-orange focus:outline-none focus:ring-1 focus:ring-brand-orange"
             />
           </div>
         </div>
@@ -573,7 +573,7 @@ export default function ProductForm() {
               type="text"
               value={form.sku}
               onChange={(e) => setForm((f) => ({ ...f, sku: e.target.value }))}
-              className="mt-1 w-full rounded-lg bg-[#044155] border border-[#066175]/60 text-white px-3 py-2 focus:border-[#e38622] focus:outline-none focus:ring-1 focus:ring-[#e38622]"
+              className="mt-1 w-full rounded-lg bg-brand-dark border border-brand-medium/60 text-white px-3 py-2 focus:border-brand-orange focus:outline-none focus:ring-1 focus:ring-brand-orange"
             />
           </div>
           <div>
@@ -587,7 +587,7 @@ export default function ProductForm() {
               onChange={(e) =>
                 setForm((f) => ({ ...f, stock_quantity: e.target.value }))
               }
-              className="mt-1 w-full rounded-lg bg-[#044155] border border-[#066175]/60 text-white px-3 py-2 focus:border-[#e38622] focus:outline-none focus:ring-1 focus:ring-[#e38622]"
+              className="mt-1 w-full rounded-lg bg-brand-dark border border-brand-medium/60 text-white px-3 py-2 focus:border-brand-orange focus:outline-none focus:ring-1 focus:ring-brand-orange"
             />
           </div>
           <div className="sm:col-span-2">
@@ -602,9 +602,9 @@ export default function ProductForm() {
                 setForm((f) => ({ ...f, low_stock_threshold: e.target.value }))
               }
               placeholder="10"
-              className="mt-1 w-full max-w-xs rounded-lg bg-[#044155] border border-[#066175]/60 text-white px-3 py-2 focus:border-[#e38622] focus:outline-none focus:ring-1 focus:ring-[#e38622]"
+              className="mt-1 w-full max-w-xs rounded-lg bg-brand-dark border border-brand-medium/60 text-white px-3 py-2 focus:border-brand-orange focus:outline-none focus:ring-1 focus:ring-brand-orange"
             />
-            <p className="mt-1 text-xs text-[#76abbf]">
+            <p className="mt-1 text-xs text-brand-light">
               Alert when stock falls below this. Leave empty for default (10).
             </p>
           </div>
@@ -613,7 +613,7 @@ export default function ProductForm() {
           <label className="block text-sm font-medium text-white">
             Categories
           </label>
-          <p className="mt-1 text-xs text-[#76abbf]">
+          <p className="mt-1 text-xs text-brand-light">
             Select up to {MAX_CATEGORIES} categories. Used for filtering and
             suggested products.
           </p>
@@ -627,8 +627,8 @@ export default function ProductForm() {
                   key={c.id}
                   className={`flex cursor-pointer items-center gap-2 rounded-lg border px-3 py-2 text-sm ${
                     disabled
-                      ? "cursor-not-allowed border-[#066175]/10 bg-[#066175]/10 text-[#76abbf]"
-                      : "border-[#066175]/35 bg-[#052631] text-white hover:bg-[#066175]/30"
+                      ? "cursor-not-allowed border-brand-medium/10 bg-brand-medium/10 text-brand-light"
+                      : "border-brand-medium/35 bg-brand-dark-alt text-white hover:bg-brand-medium/30"
                   }`}
                 >
                   <input
@@ -651,7 +651,7 @@ export default function ProductForm() {
                         }));
                       }
                     }}
-                    className="rounded border-[#066175]/60 bg-[#044155] text-[#e38622] focus:ring-[#e38622]"
+                    className="rounded border-brand-medium/60 bg-brand-dark text-brand-orange focus:ring-brand-orange"
                   />
                   {c.name}
                 </label>
@@ -659,7 +659,7 @@ export default function ProductForm() {
             })}
           </div>
           {categories.length === 0 && (
-            <p className="mt-2 text-sm text-[#76abbf]">
+            <p className="mt-2 text-sm text-brand-light">
               No categories yet. Create categories first.
             </p>
           )}
@@ -672,7 +672,7 @@ export default function ProductForm() {
               onChange={(e) =>
                 setForm((f) => ({ ...f, is_published: e.target.checked }))
               }
-              className="rounded border-[#066175]/60 bg-[#044155] text-[#e38622] focus:ring-[#e38622]"
+              className="rounded border-brand-medium/60 bg-brand-dark text-brand-orange focus:ring-brand-orange"
             />
             <span className="text-sm text-white">Published</span>
           </label>
@@ -683,18 +683,18 @@ export default function ProductForm() {
               onChange={(e) =>
                 setForm((f) => ({ ...f, is_featured: e.target.checked }))
               }
-              className="rounded border-[#066175]/60 bg-[#044155] text-[#e38622] focus:ring-[#e38622]"
+              className="rounded border-brand-medium/60 bg-brand-dark text-brand-orange focus:ring-brand-orange"
             />
             <span className="text-sm text-white">Featured</span>
           </label>
         </div>
       </div>
       
-      <div className="space-y-4 rounded-lg border border-[#066175]/35 bg-[#052631] p-6">
+      <div className="space-y-4 rounded-lg border border-brand-medium/35 bg-brand-dark-alt p-6">
         <div className="flex items-center justify-between">
           <div>
             <h3 className="text-lg font-medium text-white">Variants (Colors/Options)</h3>
-            <p className="mt-1 text-xs text-[#76abbf]">
+            <p className="mt-1 text-xs text-brand-light">
               Add variants to track separate prices and inventory per option. If no variants exist, the product's base price and stock are used.
             </p>
           </div>
@@ -718,7 +718,7 @@ export default function ProductForm() {
         {form.variants.length > 0 && (
           <div className="space-y-4 mt-4">
             {form.variants.map((variant, index) => (
-              <div key={variant.id || `new-${index}`} className="relative rounded-lg border border-[#066175]/60 bg-[#044155] p-4">
+              <div key={variant.id || `new-${index}`} className="relative rounded-lg border border-brand-medium/60 bg-brand-dark p-4">
                 <button
                   type="button"
                   onClick={() => {
@@ -731,7 +731,7 @@ export default function ProductForm() {
                       return { ...f, variants: newVariants };
                     });
                   }}
-                  className="absolute top-4 right-4 text-[#76abbf] hover:text-red-400"
+                  className="absolute top-4 right-4 text-brand-light hover:text-red-400"
                   title="Remove variant"
                 >
                   <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -741,7 +741,7 @@ export default function ProductForm() {
                 
                 <div className="grid gap-4 sm:grid-cols-2 mt-2">
                   <div className="sm:col-span-2">
-                    <label className="block text-sm font-medium text-white">Variant Name <span className="text-[#e38622]">*</span></label>
+                    <label className="block text-sm font-medium text-white">Variant Name <span className="text-brand-orange">*</span></label>
                     <input
                       type="text"
                       required
@@ -752,7 +752,7 @@ export default function ProductForm() {
                         newVariants[index].name = e.target.value;
                         setForm({ ...form, variants: newVariants });
                       }}
-                      className="mt-1 w-full rounded-lg bg-[#052631] border border-[#066175]/60 text-white px-3 py-2 text-sm focus:border-[#e38622] focus:outline-none"
+                      className="mt-1 w-full rounded-lg bg-brand-dark-alt border border-brand-medium/60 text-white px-3 py-2 text-sm focus:border-brand-orange focus:outline-none"
                     />
                   </div>
                   <div>
@@ -765,11 +765,11 @@ export default function ProductForm() {
                         newVariants[index].sku = e.target.value;
                         setForm({ ...form, variants: newVariants });
                       }}
-                      className="mt-1 w-full rounded-lg bg-[#052631] border border-[#066175]/60 text-white px-3 py-2 text-sm focus:border-[#e38622] focus:outline-none"
+                      className="mt-1 w-full rounded-lg bg-brand-dark-alt border border-brand-medium/60 text-white px-3 py-2 text-sm focus:border-brand-orange focus:outline-none"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-white">Stock Quantity <span className="text-[#e38622]">*</span></label>
+                    <label className="block text-sm font-medium text-white">Stock Quantity <span className="text-brand-orange">*</span></label>
                     <input
                       type="number"
                       required
@@ -780,7 +780,7 @@ export default function ProductForm() {
                         newVariants[index].stock_quantity = e.target.value;
                         setForm({ ...form, variants: newVariants });
                       }}
-                      className="mt-1 w-full rounded-lg bg-[#052631] border border-[#066175]/60 text-white px-3 py-2 text-sm focus:border-[#e38622] focus:outline-none"
+                      className="mt-1 w-full rounded-lg bg-brand-dark-alt border border-brand-medium/60 text-white px-3 py-2 text-sm focus:border-brand-orange focus:outline-none"
                     />
                   </div>
                   <div>
@@ -796,7 +796,7 @@ export default function ProductForm() {
                         setForm({ ...form, variants: newVariants });
                       }}
                       placeholder="Leave empty for base price"
-                      className="mt-1 w-full rounded-lg bg-[#052631] border border-[#066175]/60 text-white px-3 py-2 text-sm focus:border-[#e38622] focus:outline-none"
+                      className="mt-1 w-full rounded-lg bg-brand-dark-alt border border-brand-medium/60 text-white px-3 py-2 text-sm focus:border-brand-orange focus:outline-none"
                     />
                   </div>
                   <div>
@@ -811,7 +811,7 @@ export default function ProductForm() {
                         newVariants[index].compare_at_price = e.target.value;
                         setForm({ ...form, variants: newVariants });
                       }}
-                      className="mt-1 w-full rounded-lg bg-[#052631] border border-[#066175]/60 text-white px-3 py-2 text-sm focus:border-[#e38622] focus:outline-none"
+                      className="mt-1 w-full rounded-lg bg-brand-dark-alt border border-brand-medium/60 text-white px-3 py-2 text-sm focus:border-brand-orange focus:outline-none"
                     />
                   </div>
                   <div className="sm:col-span-2">
@@ -819,7 +819,7 @@ export default function ProductForm() {
                     <div className="mt-1 flex items-center gap-3">
                       {variant.image_url && (
                         <div className="relative shrink-0">
-                          <img src={variant.image_url} alt="Variant" className="h-12 w-12 rounded object-cover border border-[#066175]/35" />
+                          <img src={variant.image_url} alt="Variant" className="h-12 w-12 rounded object-cover border border-brand-medium/35" />
                           <button
                             type="button"
                             onClick={() => {
@@ -836,7 +836,7 @@ export default function ProductForm() {
                         </div>
                       )}
                       <div className="flex-1 space-y-2 min-w-0">
-                        <label className="flex cursor-pointer items-center justify-center gap-2 rounded-lg border border-[#066175]/35 bg-[#052631] px-3 py-2 text-sm font-medium text-white hover:bg-[#066175]/30">
+                        <label className="flex cursor-pointer items-center justify-center gap-2 rounded-lg border border-brand-medium/35 bg-brand-dark-alt px-3 py-2 text-sm font-medium text-white hover:bg-brand-medium/30">
                           <input
                             type="file"
                             accept="image/jpeg,image/png,image/webp,image/gif"
@@ -855,7 +855,7 @@ export default function ProductForm() {
                             setForm({ ...form, variants: newVariants });
                           }}
                           placeholder="Or paste image URL"
-                          className="w-full rounded-lg bg-[#052631] border border-[#066175]/60 text-white px-3 py-2 text-sm focus:border-[#e38622] focus:outline-none"
+                          className="w-full rounded-lg bg-brand-dark-alt border border-brand-medium/60 text-white px-3 py-2 text-sm focus:border-brand-orange focus:outline-none"
                         />
                       </div>
                     </div>
@@ -873,7 +873,7 @@ export default function ProductForm() {
                           }));
                           setForm({ ...form, variants: newVariants });
                         }}
-                        className="rounded-full border-[#066175]/60 bg-[#052631] text-[#e38622] focus:ring-[#e38622]"
+                        className="rounded-full border-brand-medium/60 bg-brand-dark-alt text-brand-orange focus:ring-brand-orange"
                       />
                       <span className="text-sm font-medium text-white">Default selection</span>
                     </label>

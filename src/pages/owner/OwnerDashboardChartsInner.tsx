@@ -40,9 +40,9 @@ export default function OwnerDashboardChartsInner({
   const revenueChart = showChart(enabledChartIds, "revenue_chart") && (
     <div
       key="revenue_chart"
-      className="rounded-xl border border-[#066175]/35 bg-[#052631] p-5 shadow-sm"
+      className="rounded-xl border border-brand-medium/35 bg-brand-dark-alt p-5 shadow-sm"
     >
-      <h3 className="font-semibold text-[#f6ebd4]">Revenue Trend (14 Days)</h3>
+      <h3 className="font-semibold text-brand-cream">Revenue Trend (14 Days)</h3>
       <div className="mt-4 h-64">
         <ResponsiveContainer width="100%" height="100%">
           <AreaChart data={stats.revenueByDay}>
@@ -94,9 +94,9 @@ export default function OwnerDashboardChartsInner({
   ) && (
     <div
       key="orders_status_chart"
-      className="rounded-xl border border-[#066175]/35 bg-[#052631] p-5 shadow-sm"
+      className="rounded-xl border border-brand-medium/35 bg-brand-dark-alt p-5 shadow-sm"
     >
-      <h3 className="font-semibold text-[#f6ebd4]">Orders By Status</h3>
+      <h3 className="font-semibold text-brand-cream">Orders By Status</h3>
       <div className="mt-4 h-64">
         {ordersByStatusData.length > 0 ? (
           <ResponsiveContainer width="100%" height="100%">
@@ -122,7 +122,7 @@ export default function OwnerDashboardChartsInner({
             </BarChart>
           </ResponsiveContainer>
         ) : (
-          <div className="flex h-full items-center justify-center text-[#76abbf]">
+          <div className="flex h-full items-center justify-center text-brand-light">
             No orders yet
           </div>
         )}
@@ -136,9 +136,9 @@ export default function OwnerDashboardChartsInner({
   ) && (
     <div
       key="average_order_value_chart"
-      className="rounded-xl border border-[#066175]/35 bg-[#052631] p-5 shadow-sm"
+      className="rounded-xl border border-brand-medium/35 bg-brand-dark-alt p-5 shadow-sm"
     >
-      <h3 className="font-semibold text-[#f6ebd4]">
+      <h3 className="font-semibold text-brand-cream">
         Average Order Value (14 Days)
       </h3>
       <div className="mt-4 h-64">
@@ -187,9 +187,9 @@ export default function OwnerDashboardChartsInner({
   ) && (
     <div
       key="orders_by_weekday"
-      className="rounded-xl border border-[#066175]/35 bg-[#052631] p-5 shadow-sm"
+      className="rounded-xl border border-brand-medium/35 bg-brand-dark-alt p-5 shadow-sm"
     >
-      <h3 className="font-semibold text-[#f6ebd4]">Orders By Day Of Week</h3>
+      <h3 className="font-semibold text-brand-cream">Orders By Day Of Week</h3>
       <div className="mt-4 h-64">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart
@@ -223,9 +223,9 @@ export default function OwnerDashboardChartsInner({
   ) && (
     <div
       key="orders_over_time"
-      className="rounded-xl border border-[#066175]/35 bg-[#052631] p-5 shadow-sm"
+      className="rounded-xl border border-brand-medium/35 bg-brand-dark-alt p-5 shadow-sm"
     >
-      <h3 className="font-semibold text-[#f6ebd4]">
+      <h3 className="font-semibold text-brand-cream">
         Orders Over Time (14 Days)
       </h3>
       <div className="mt-4 h-64">

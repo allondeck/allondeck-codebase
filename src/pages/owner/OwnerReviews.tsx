@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
-import { Button } from "../../components/Button";
-import { Select } from "../../components/Select";
+import { Button } from "../../components/ui/Button";
+import { Select } from "../../components/ui/Select";
 import { useReviewsAdmin } from "../../hooks/useReviewsAdmin";
 import { supabase } from "../../lib/supabase";
 import type { ReviewAdminRow } from "../../hooks/useReviewsAdmin";
@@ -121,7 +121,7 @@ export default function OwnerReviews() {
   if (loading) {
     return (
       <div className="flex justify-center py-12">
-        <div className="h-8 w-8 animate-spin rounded-full border-2 border-[#066175]/35 border-t-[#e38622]" />
+        <div className="h-8 w-8 animate-spin rounded-full border-2 border-brand-medium/35 border-t-brand-orange" />
       </div>
     );
   }
@@ -136,18 +136,18 @@ export default function OwnerReviews() {
 
   return (
     <div>
-      <h2 className="mb-2 text-xl font-semibold text-[#f6ebd4]">
+      <h2 className="mb-2 text-xl font-semibold text-brand-cream">
         Product reviews
       </h2>
-      <p className="mb-6 text-sm text-[#76abbf]">
+      <p className="mb-6 text-sm text-brand-light">
         Hide inappropriate reviews; they will no longer appear on the product
         page. Delete to remove permanently. Use Email to contact reviewers.
       </p>
 
       {/* Filters — one row per filter, mobile-friendly, no truncation */}
-      <div className="mb-6 rounded-xl border border-[#066175]/35 bg-[#052631] p-4 sm:p-5">
+      <div className="mb-6 rounded-xl border border-brand-medium/35 bg-brand-dark-alt p-4 sm:p-5">
         <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
-          <span className="text-sm font-semibold text-[#f6ebd4]">Filters</span>
+          <span className="text-sm font-semibold text-brand-cream">Filters</span>
           {(productId ||
             rating ||
             dateRange !== "all" ||
@@ -162,7 +162,7 @@ export default function OwnerReviews() {
                 setSearch("");
                 setStatus("all");
               }}
-              className="text-sm font-medium text-[#76abbf] underline hover:text-white"
+              className="text-sm font-medium text-brand-light underline hover:text-white"
             >
               Clear filters
             </button>
@@ -223,8 +223,8 @@ export default function OwnerReviews() {
                   onClick={() => setDateRange(key === "all" ? "all" : key)}
                   className={`rounded-full px-4 py-2 text-sm font-medium transition-colors ${
                     dateRange === key
-                      ? "bg-[#e38622] text-white"
-                      : "bg-[#052631] text-[#76abbf] border border-[#066175]/35 hover:bg-[#066175]/30 hover:text-white"
+                      ? "bg-brand-orange text-white"
+                      : "bg-brand-dark-alt text-brand-light border border-brand-medium/35 hover:bg-brand-medium/30 hover:text-white"
                   }`}
                 >
                   {key === "all" ? "All time" : `Last ${key} days`}
@@ -264,46 +264,46 @@ export default function OwnerReviews() {
               placeholder="Type to filter reviews…"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full rounded-lg bg-[#044155] border border-[#066175]/60 text-white px-3 py-2.5 text-sm focus:border-[#e38622] focus:outline-none focus:ring-1 focus:ring-[#e38622]"
+              className="w-full rounded-lg bg-brand-dark border border-brand-medium/60 text-white px-3 py-2.5 text-sm focus:border-brand-orange focus:outline-none focus:ring-1 focus:ring-brand-orange"
               aria-describedby="reviews-search-hint"
             />
-            <span id="reviews-search-hint" className="text-xs text-[#76abbf]">
+            <span id="reviews-search-hint" className="text-xs text-brand-light">
               Filters update as you type.
             </span>
           </div>
         </div>
       </div>
 
-      <div className="overflow-x-auto rounded-lg border border-[#066175]/35 bg-[#052631]">
-        <table className="w-full min-w-[600px] divide-y divide-[#066175]/35">
-          <thead className="bg-[#066175]/30">
+      <div className="overflow-x-auto rounded-lg border border-brand-medium/35 bg-brand-dark-alt">
+        <table className="w-full min-w-[600px] divide-y divide-brand-medium/35">
+          <thead className="bg-brand-medium/30">
             <tr>
-              <th className="px-4 py-3 text-left text-xs font-medium uppercase text-[#76abbf]">
+              <th className="px-4 py-3 text-left text-xs font-medium uppercase text-brand-light">
                 Product
               </th>
-              <th className="px-4 py-3 text-left text-xs font-medium uppercase text-[#76abbf]">
+              <th className="px-4 py-3 text-left text-xs font-medium uppercase text-brand-light">
                 Rating
               </th>
-              <th className="px-4 py-3 text-left text-xs font-medium uppercase text-[#76abbf]">
+              <th className="px-4 py-3 text-left text-xs font-medium uppercase text-brand-light">
                 Review
               </th>
-              <th className="px-4 py-3 text-left text-xs font-medium uppercase text-[#76abbf]">
+              <th className="px-4 py-3 text-left text-xs font-medium uppercase text-brand-light">
                 Date
               </th>
-              <th className="px-4 py-3 text-left text-xs font-medium uppercase text-[#76abbf]">
+              <th className="px-4 py-3 text-left text-xs font-medium uppercase text-brand-light">
                 Email
               </th>
-              <th className="px-4 py-3 text-left text-xs font-medium uppercase text-[#76abbf]">
+              <th className="px-4 py-3 text-left text-xs font-medium uppercase text-brand-light">
                 Status
               </th>
-              <th className="px-4 py-3 text-right text-xs font-medium uppercase text-[#76abbf]">
+              <th className="px-4 py-3 text-right text-xs font-medium uppercase text-brand-light">
                 Actions
               </th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-[#066175]/35 bg-[#052631]">
+          <tbody className="divide-y divide-brand-medium/35 bg-brand-dark-alt">
             {filteredReviews.map((r) => (
-              <tr key={r.id} className={r.hidden ? "bg-[#066175]/10" : ""}>
+              <tr key={r.id} className={r.hidden ? "bg-brand-medium/10" : ""}>
                 <td className="px-4 py-3 text-sm text-white">
                   {r.products?.name ?? "—"}
                 </td>
@@ -311,24 +311,24 @@ export default function OwnerReviews() {
                   <Stars value={r.rating} />
                 </td>
                 <td
-                  className="max-w-xs cursor-pointer truncate px-4 py-3 text-sm text-[#76abbf] hover:text-white hover:underline"
+                  className="max-w-xs cursor-pointer truncate px-4 py-3 text-sm text-brand-light hover:text-white hover:underline"
                   title="Click to view full review"
                   onClick={() => setDetailReview(r)}
                 >
                   {r.body || "—"}
                 </td>
-                <td className="px-4 py-3 text-sm text-[#76abbf]">
+                <td className="px-4 py-3 text-sm text-brand-light">
                   {new Date(r.created_at).toLocaleDateString()}
                 </td>
                 <td className="px-4 py-3">
                   {r.reviewer_email ? (
                     <a
                       href={`mailto:${r.reviewer_email}`}
-                      className="inline-flex items-center gap-1 rounded-lg border border-[#066175]/35 bg-[#052631] px-2.5 py-1.5 text-sm font-medium text-white hover:bg-[#066175]/30"
+                      className="inline-flex items-center gap-1 rounded-lg border border-brand-medium/35 bg-brand-dark-alt px-2.5 py-1.5 text-sm font-medium text-white hover:bg-brand-medium/30"
                       onClick={(e) => e.stopPropagation()}
                     >
                       <svg
-                        className="h-4 w-4 text-[#76abbf]"
+                        className="h-4 w-4 text-brand-light"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
@@ -343,12 +343,12 @@ export default function OwnerReviews() {
                       Email
                     </a>
                   ) : (
-                    <span className="text-sm text-[#76abbf]">—</span>
+                    <span className="text-sm text-brand-light">—</span>
                   )}
                 </td>
                 <td className="px-4 py-3">
                   {r.hidden ? (
-                    <span className="rounded bg-amber-950/40 border border-amber-900/30 px-2 py-0.5 text-xs text-[#e38622]">
+                    <span className="rounded bg-amber-950/40 border border-amber-900/30 px-2 py-0.5 text-xs text-brand-orange">
                       Hidden
                     </span>
                   ) : (
@@ -390,7 +390,7 @@ export default function OwnerReviews() {
         </table>
       </div>
       {filteredReviews.length === 0 && (
-        <p className="mt-6 text-center text-[#76abbf]">
+        <p className="mt-6 text-center text-brand-light">
           {reviews.length === 0
             ? "No reviews yet."
             : "No reviews match the current filters."}
@@ -407,20 +407,20 @@ export default function OwnerReviews() {
           aria-labelledby="review-detail-title"
         >
           <div
-            className="max-h-[90vh] w-full max-w-lg overflow-y-auto rounded-xl border border-[#066175]/35 bg-[#052631] shadow-xl"
+            className="max-h-[90vh] w-full max-w-lg overflow-y-auto rounded-xl border border-brand-medium/35 bg-brand-dark-alt shadow-xl"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="sticky top-0 flex items-center justify-between border-b border-[#066175]/35 bg-[#052631] px-4 py-3">
+            <div className="sticky top-0 flex items-center justify-between border-b border-brand-medium/35 bg-brand-dark-alt px-4 py-3">
               <h3
                 id="review-detail-title"
-                className="text-lg font-semibold text-[#f6ebd4]"
+                className="text-lg font-semibold text-brand-cream"
               >
                 Review details
               </h3>
               <button
                 type="button"
                 onClick={() => setDetailReview(null)}
-                className="rounded-lg p-1.5 text-[#76abbf] hover:bg-[#066175]/30 hover:text-white"
+                className="rounded-lg p-1.5 text-brand-light hover:bg-brand-medium/30 hover:text-white"
                 aria-label="Close"
               >
                 <svg
@@ -440,7 +440,7 @@ export default function OwnerReviews() {
             </div>
             <div className="space-y-4 p-4">
               <div>
-                <span className="text-xs font-medium uppercase text-[#76abbf]">
+                <span className="text-xs font-medium uppercase text-brand-light">
                   Product
                 </span>
                 <p className="mt-0.5 text-sm font-medium text-white">
@@ -448,7 +448,7 @@ export default function OwnerReviews() {
                 </p>
               </div>
               <div>
-                <span className="text-xs font-medium uppercase text-[#76abbf]">
+                <span className="text-xs font-medium uppercase text-brand-light">
                   Rating
                 </span>
                 <div className="mt-0.5">
@@ -456,7 +456,7 @@ export default function OwnerReviews() {
                 </div>
               </div>
               <div>
-                <span className="text-xs font-medium uppercase text-[#76abbf]">
+                <span className="text-xs font-medium uppercase text-brand-light">
                   Review
                 </span>
                 <p className="mt-0.5 whitespace-pre-wrap text-sm text-white">
@@ -464,7 +464,7 @@ export default function OwnerReviews() {
                 </p>
               </div>
               <div>
-                <span className="text-xs font-medium uppercase text-[#76abbf]">
+                <span className="text-xs font-medium uppercase text-brand-light">
                   Date
                 </span>
                 <p className="mt-0.5 text-sm text-white">
@@ -472,7 +472,7 @@ export default function OwnerReviews() {
                 </p>
               </div>
               <div>
-                <span className="text-xs font-medium uppercase text-[#76abbf]">
+                <span className="text-xs font-medium uppercase text-brand-light">
                   Reviewer email
                 </span>
                 <p className="mt-0.5">
@@ -484,17 +484,17 @@ export default function OwnerReviews() {
                       {detailReview.reviewer_email}
                     </a>
                   ) : (
-                    <span className="text-sm text-[#76abbf]">—</span>
+                    <span className="text-sm text-brand-light">—</span>
                   )}
                 </p>
               </div>
               <div>
-                <span className="text-xs font-medium uppercase text-[#76abbf]">
+                <span className="text-xs font-medium uppercase text-brand-light">
                   Status
                 </span>
                 <p className="mt-0.5">
                   {detailReview.hidden ? (
-                    <span className="rounded bg-amber-950/40 border border-amber-900/30 px-2 py-0.5 text-xs text-[#e38622]">
+                    <span className="rounded bg-amber-950/40 border border-amber-900/30 px-2 py-0.5 text-xs text-brand-orange">
                       Hidden
                     </span>
                   ) : (
@@ -504,7 +504,7 @@ export default function OwnerReviews() {
                   )}
                 </p>
               </div>
-              <div className="flex flex-wrap gap-2 border-t border-[#066175]/35 pt-4">
+              <div className="flex flex-wrap gap-2 border-t border-brand-medium/35 pt-4">
                 <Button
                   variant="secondary"
                   onClick={() => {
