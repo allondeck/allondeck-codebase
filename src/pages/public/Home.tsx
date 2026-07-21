@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useProducts } from "../../hooks/useProducts";
 import { useRef, useState } from "react";
+import { ServiceCard } from "../../components/features/ServiceCard";
 
 export default function Home() {
   const { products, loading } = useProducts({ limit: 4 });
@@ -137,47 +138,32 @@ export default function Home() {
           </div>
 
           <div className="mt-16 grid gap-8 grid-cols-1 md:grid-cols-3">
-            {/* Card 1 */}
-            <Link to="/services#service-1" className="group block relative overflow-hidden rounded-3xl bg-brand-dark p-6 md:p-8 shadow-md border border-brand-light/10 transition-all hover:-translate-y-1 hover:shadow-xl">
-              <div className="mb-6 overflow-hidden rounded-2xl">
-                <img src="/assets/images/1.jpg" alt="Custom DECK Designs" className="h-48 w-full object-cover transition-transform group-hover:scale-105" />
-              </div>
-              <h3 className="font-heading text-lg font-bold tracking-wider text-brand-cream">Custom DECK Designs</h3>
-              <p className="mt-3 text-sm text-brand-cream/80 leading-relaxed font-sans">
-                Tailored marine flooring layouts styled perfectly to suit your boat. We create beautiful bespoke visual drafts.
-              </p>
-              <span className="mt-6 inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-brand-orange group-hover:underline">
-                See More →
-              </span>
-            </Link>
+            <ServiceCard
+              title="Custom DECK Designs"
+              description="Tailored marine flooring layouts styled perfectly to suit your boat. We create beautiful bespoke visual drafts."
+              imageSrc="/assets/images/1.jpg"
+              linkTo="/services#service-1"
+              buttonText="See More"
+              variant="preview-card"
+            />
 
-            {/* Card 2 */}
-            <Link to="/services#service-2" className="group block relative overflow-hidden rounded-3xl bg-brand-dark p-6 md:p-8 shadow-md border border-brand-light/10 transition-all hover:-translate-y-1 hover:shadow-xl">
-              <div className="mb-6 overflow-hidden rounded-2xl">
-                <img src="/assets/images/2.jpg" alt="Floor Manufacturing" className="h-48 w-full object-cover transition-transform group-hover:scale-105" />
-              </div>
-              <h3 className="font-heading text-lg font-bold tracking-wider text-brand-cream">Floor Manufacturing</h3>
-              <p className="mt-3 text-sm text-brand-cream/80 leading-relaxed font-sans">
-                High-quality fabrication using state of the art materials engineered to withstand the harshest ocean environments.
-              </p>
-              <span className="mt-6 inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-brand-orange group-hover:underline">
-                See More →
-              </span>
-            </Link>
+            <ServiceCard
+              title="Floor Manufacturing"
+              description="High-quality fabrication using state of the art materials engineered to withstand the harshest ocean environments."
+              imageSrc="/assets/images/2.jpg"
+              linkTo="/services#service-2"
+              buttonText="See More"
+              variant="preview-card"
+            />
 
-            {/* Card 3 */}
-            <Link to="/services#service-3" className="group block relative overflow-hidden rounded-3xl bg-brand-dark p-6 md:p-8 shadow-md border border-brand-light/10 transition-all hover:-translate-y-1 hover:shadow-xl">
-              <div className="mb-6 overflow-hidden rounded-2xl">
-                <img src="/assets/images/3.jpg" alt="Cutting & Installation" className="h-48 w-full object-cover transition-transform group-hover:scale-105" />
-              </div>
-              <h3 className="font-heading text-lg font-bold tracking-wider text-brand-cream">Cutting and Installation</h3>
-              <p className="mt-3 text-sm text-brand-cream/80 leading-relaxed font-sans">
-                Millimeter-precise CAD/CAM CNC cutting and clean expert installation for the ultimate seamless look and longevity.
-              </p>
-              <span className="mt-6 inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-brand-orange group-hover:underline">
-                See More →
-              </span>
-            </Link>
+            <ServiceCard
+              title="Cutting and Installation"
+              description="Millimeter-precise CAD/CAM CNC cutting and clean expert installation for the ultimate seamless look and longevity."
+              imageSrc="/assets/images/3.jpg"
+              linkTo="/services#service-3"
+              buttonText="See More"
+              variant="preview-card"
+            />
           </div>
         </div>
       </section>

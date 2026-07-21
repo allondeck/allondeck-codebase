@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { ServiceCard } from "../../components/features/ServiceCard";
 
 function scrollToSection(id: string) {
   const el = document.getElementById(id);
@@ -11,9 +12,7 @@ export default function Services() {
 
   useEffect(() => {
     if (location.hash) {
-      // Remove the '#' character
       const id = location.hash.replace("#", "");
-      // Small timeout to ensure elements are rendered
       setTimeout(() => {
         scrollToSection(id);
       }, 100);
@@ -24,7 +23,7 @@ export default function Services() {
 
   return (
     <div className="bg-brand-dark text-white font-sans pb-16">
-      {/* ── HERO SECTION MATCHING DESIGN SCREENSHOT ────────────────── */}
+      {/* ── HERO SECTION ────────────────── */}
       <div className="mx-auto max-w-[1400px] px-6 lg:px-12 pt-16 pb-20 text-center">
         <h1 className="font-heading text-5xl font-black tracking-widest text-brand-orange uppercase sm:text-6xl lg:text-7xl">
           SERVICES
@@ -32,100 +31,50 @@ export default function Services() {
 
         {/* 3-Card Grid */}
         <div className="mt-16 grid gap-8 grid-cols-1 md:grid-cols-3 max-w-6xl mx-auto text-left">
-          
           {/* Card 1: Custom Deck Designs */}
-          <div className="relative rounded-3xl border border-brand-medium bg-brand-dark-alt p-5 pb-20 overflow-hidden flex flex-col h-full shadow-lg">
-            <div className="aspect-[4/3] w-full overflow-hidden rounded-2xl">
-              <img
-                src="/assets/images/1.jpg"
-                alt="Custom Deck Designs"
-                className="h-full w-full object-cover"
-              />
-            </div>
-            <h3 className="mt-6 text-center font-heading text-xl font-bold tracking-wider text-brand-cream uppercase leading-snug">
-              Custom<br />Deck Designs
-            </h3>
-            
-            {/* Wave & Button overlay */}
-            <div className="absolute bottom-0 left-0 right-0 flex flex-col items-center justify-end pb-4 h-24">
-              {/* Wave decor */}
-              <div className="absolute bottom-6 left-0 right-0 opacity-40 px-2 pointer-events-none">
-                <img src="/assets/svg/recurso olas, 2 olas.svg" alt="" className="w-full h-8 object-cover" />
-              </div>
-              <button
-                type="button"
-                onClick={() => scrollToSection("service-1")}
-                className="relative z-10 rounded-lg bg-brand-orange hover:bg-orange-600 px-6 py-2.5 text-xs font-bold uppercase tracking-wider text-white transition-transform hover:scale-105"
-              >
-                SEE MORE
-              </button>
-            </div>
-          </div>
+          <ServiceCard
+            title={
+              <>
+                Custom<br />Deck Designs
+              </>
+            }
+            imageSrc="/assets/images/1.jpg"
+            targetId="service-1"
+            onActionClick={scrollToSection}
+            variant="hero-card"
+          />
 
           {/* Card 2: Floor Manufacturing */}
-          <div className="relative rounded-3xl border border-brand-medium bg-brand-dark-alt p-5 pb-20 overflow-hidden flex flex-col h-full shadow-lg">
-            <div className="aspect-[4/3] w-full overflow-hidden rounded-2xl">
-              <img
-                src="/assets/images/2.jpg"
-                alt="Floor Manufacturing"
-                className="h-full w-full object-cover"
-              />
-            </div>
-            <h3 className="mt-6 text-center font-heading text-xl font-bold tracking-wider text-brand-cream uppercase leading-snug">
-              Floor<br />Manufacturing
-            </h3>
-            
-            {/* Wave & Button overlay */}
-            <div className="absolute bottom-0 left-0 right-0 flex flex-col items-center justify-end pb-4 h-24">
-              {/* Wave decor */}
-              <div className="absolute bottom-6 left-0 right-0 opacity-40 px-2 pointer-events-none">
-                <img src="/assets/svg/recurso olas, 2 olas.svg" alt="" className="w-full h-8 object-cover" />
-              </div>
-              <button
-                type="button"
-                onClick={() => scrollToSection("service-2")}
-                className="relative z-10 rounded-lg bg-brand-orange hover:bg-orange-600 px-6 py-2.5 text-xs font-bold uppercase tracking-wider text-white transition-transform hover:scale-105"
-              >
-                SEE MORE
-              </button>
-            </div>
-          </div>
+          <ServiceCard
+            title={
+              <>
+                Floor<br />Manufacturing
+              </>
+            }
+            imageSrc="/assets/images/2.jpg"
+            targetId="service-2"
+            onActionClick={scrollToSection}
+            variant="hero-card"
+          />
 
           {/* Card 3: Cutting and Installation */}
-          <div className="relative rounded-3xl border border-brand-medium bg-brand-dark-alt p-5 pb-20 overflow-hidden flex flex-col h-full shadow-lg">
-            <div className="aspect-[4/3] w-full overflow-hidden rounded-2xl">
-              <img
-                src="/assets/images/3.jpg"
-                alt="Cutting and Installation"
-                className="h-full w-full object-cover"
-              />
-            </div>
-            <h3 className="mt-6 text-center font-heading text-xl font-bold tracking-wider text-brand-cream uppercase leading-snug">
-              Cutting and<br />Installation
-            </h3>
-            
-            {/* Wave & Button overlay */}
-            <div className="absolute bottom-0 left-0 right-0 flex flex-col items-center justify-end pb-4 h-24">
-              {/* Wave decor */}
-              <div className="absolute bottom-6 left-0 right-0 opacity-40 px-2 pointer-events-none">
-                <img src="/assets/svg/recurso olas, 2 olas.svg" alt="" className="w-full h-8 object-cover" />
-              </div>
-              <button
-                type="button"
-                onClick={() => scrollToSection("service-3")}
-                className="relative z-10 rounded-lg bg-brand-orange hover:bg-orange-600 px-6 py-2.5 text-xs font-bold uppercase tracking-wider text-white transition-transform hover:scale-105"
-              >
-                SEE MORE
-              </button>
-            </div>
-          </div>
-
+          <ServiceCard
+            title={
+              <>
+                Cutting and<br />Installation
+              </>
+            }
+            imageSrc="/assets/images/3.jpg"
+            targetId="service-3"
+            onActionClick={scrollToSection}
+            variant="hero-card"
+          />
         </div>
       </div>
 
       {/* SERVICES DETAILS */}
       <div className="space-y-0">
-        {/* Service 1: Custom DECK Designs (Dark Teal Background) */}
+        {/* Service 1: Custom DECK Designs */}
         <div id="service-1" className="scroll-mt-20 bg-brand-dark py-20 border-t border-brand-medium/30">
           <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
             <div className="grid gap-12 grid-cols-1 md:grid-cols-2 items-center">
@@ -155,7 +104,7 @@ export default function Services() {
           </div>
         </div>
 
-        {/* Service 2: Floor Manufacturing (Medium Teal Background) */}
+        {/* Service 2: Floor Manufacturing */}
         <div id="service-2" className="scroll-mt-20 bg-brand-medium text-white py-20 relative overflow-hidden">
           <div className="absolute inset-0 opacity-10">
             <img src="/assets/svg/recurso olas, 2 olas.svg" alt="" className="w-full h-full object-cover" />
@@ -188,7 +137,7 @@ export default function Services() {
           </div>
         </div>
 
-        {/* Service 3: Cutting and Installation (Dark Teal Background) */}
+        {/* Service 3: Cutting and Installation */}
         <div id="service-3" className="scroll-mt-20 bg-brand-dark text-white py-20 relative overflow-hidden border-t border-brand-medium/35">
           <div className="absolute inset-0 opacity-10">
             <img src="/assets/svg/recurso olas, 1 ola.svg" alt="" className="w-full h-full object-cover" />
