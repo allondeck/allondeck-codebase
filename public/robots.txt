@@ -1,0 +1,16 @@
+# All On Deck - Robots.txt
+User-agent: *
+Allow: /
+Allow: /services
+Allow: /about
+Allow: /products
+Allow: /estimate
+Allow: /designs
+
+# Disallow private user & dashboard routes
+Disallow: /owner/
+Disallow: /account/
+Disallow: /auth/
+
+# Sitemap location
+Sitemap: https://allondeck.com/sitemap.xml

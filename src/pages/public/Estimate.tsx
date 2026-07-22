@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { supabase } from "../../lib/supabase";
 import type { ContactRequestInsert } from "../../types/database";
 import { Icon } from "../../components/ui/Icon";
+import { SEO } from "../../components/ui/SEO";
 
 /** Formats a raw digit string into (123) 123-1234 as the user types */
 function formatPhone(raw: string): string {
@@ -60,6 +61,10 @@ export default function Estimate() {
 
   return (
     <div className="bg-white dark:bg-brand-dark text-gray-900 dark:text-brand-cream font-sans py-12">
+      <SEO
+        title="Get a Free Estimate | All On Deck"
+        description="Request a free quote for custom marine deck flooring. Tell us about your boat model, length, and design vision and our crew will reach out."
+      />
       {/* HEADER SECTION */}
       <div className="mx-auto max-w-[1400px] px-6 lg:px-12 text-center">
         <span className="text-sm font-semibold uppercase tracking-widest text-brand-orange">

@@ -23,6 +23,7 @@ import {
 } from "../../lib/productFilters";
 import { useDeals } from "../../hooks/useDeals";
 import type { ProductRow } from "../../types/database";
+import { SEO } from "../../components/ui/SEO";
 
 const SORT_OPTIONS: { value: ProductSortBy; label: string }[] = [
   { value: "newest", label: "Newest first" },
@@ -564,6 +565,10 @@ export default function Products() {
   // === MAIN RENDER ===
   return (
     <div className="mx-auto max-w-[1400px] px-6 lg:px-12 py-8 sm:px-6 lg:px-8 w-full">
+      <SEO
+        title="Products & Marine Deck Materials | All On Deck"
+        description="Browse our catalog of custom marine deck flooring materials, custom engravings, non-skid EVA/PE foam kits, and boat accessories."
+      />
       <div className="flex flex-col gap-6 md:flex-row md:gap-8">
         {/* Mobile category + filters row */}
         <div className="flex flex-col gap-3 md:hidden">

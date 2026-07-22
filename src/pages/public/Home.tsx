@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useProducts } from "../../hooks/useProducts";
 import { useRef, useState } from "react";
 import { ServiceCard } from "../../components/features/ServiceCard";
+import { SEO } from "../../components/ui/SEO";
 
 export default function Home() {
   const { products, loading } = useProducts({ limit: 4 });
@@ -50,6 +51,10 @@ export default function Home() {
 
   return (
     <div className="relative overflow-hidden bg-brand-dark text-white font-sans">
+      <SEO
+        title="All On Deck | Marine Deck Flooring Solutions"
+        description="Your trusted partner in Marine deck flooring solutions. High-durability EVA/PE foam decks, custom CAD designs, and precision CNC cutting in Florida."
+      />
       {/* 1. HERO SECTION */}
       <section 
         className="relative flex flex-col items-center justify-center px-4 py-32 text-center md:py-48 min-h-[90vh] overflow-hidden bg-black cursor-crosshair"

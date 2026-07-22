@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { ServiceCard } from "../../components/features/ServiceCard";
+import { SEO } from "../../components/ui/SEO";
 
 function scrollToSection(id: string) {
   const el = document.getElementById(id);
@@ -23,6 +24,10 @@ export default function Services() {
 
   return (
     <div className="bg-brand-dark text-white font-sans pb-16">
+      <SEO
+        title="Services & Custom CAD Deck Fabrication | All On Deck"
+        description="Custom deck designs, MarineMat EVA/PE foam floor manufacturing, high-precision CNC cutting, and expert installation services for boats across Florida."
+      />
       {/* ── HERO SECTION ────────────────── */}
       <div className="mx-auto max-w-[1400px] px-6 lg:px-12 pt-16 pb-20 text-center">
         <h1 className="font-heading text-5xl font-black tracking-widest text-brand-orange uppercase sm:text-6xl lg:text-7xl">

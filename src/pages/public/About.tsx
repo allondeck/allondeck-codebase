@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { TeamTeaserCard } from "../../components/features/TeamTeaserCard";
 import { TeamBioCard } from "../../components/features/TeamBioCard";
+import { SEO } from "../../components/ui/SEO";
 
 /**
  * About Page
@@ -33,6 +34,10 @@ export default function About() {
 
   return (
     <div className="bg-brand-dark text-white font-sans">
+      <SEO
+        title="Meet Our Team & Leadership | All On Deck"
+        description="Discover the team behind All On Deck. Led by Ernesto Alvarez and Roselena Oropesa, we bring precision nautical engineering and CAD design to marine flooring."
+      />
       {/* ── HERO SECTION ────────────────────────────────────────── */}
       <div className="mx-auto max-w-[1000px] px-6 lg:px-12 pt-16 pb-20 text-center">
         <h1 className="font-heading text-5xl font-black tracking-widest text-brand-cream uppercase sm:text-6xl lg:text-7xl">

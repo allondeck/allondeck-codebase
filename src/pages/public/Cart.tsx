@@ -7,6 +7,7 @@ import {
 } from "../../types/cart";
 import { formatPrice, parsePrice } from "../../lib/utils";
 import { getSupabaseImageTransformUrl } from "../../lib/imageUtils";
+import { SEO } from "../../components/ui/SEO";
 
 export default function Cart() {
   const { items, itemCount, updateQuantity, removeItem } = useCart();
@@ -22,6 +23,7 @@ export default function Cart() {
 
   return (
     <div className="mx-auto max-w-[1400px] px-6 lg:px-12 py-8 sm:px-6 lg:px-8 w-full">
+      <SEO title="Shopping Cart | All On Deck" description="Review your selected marine deck items and proceed to checkout." />
       {itemCount === 0 ? (
         <div className="rounded-xl border border-brand-medium/35 bg-brand-dark-alt p-12 text-center">
           <h2 className="text-xl font-semibold text-white">
