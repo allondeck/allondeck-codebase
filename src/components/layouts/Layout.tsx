@@ -132,7 +132,7 @@ export function Layout({ children }: LayoutProps) {
             </PrefetchLink>
 
             {/* RIGHT: Nav links & Icon buttons (desktop) */}
-            <div className="hidden md:flex items-center gap-8">
+            <div className="hidden lg:flex items-center gap-8">
               {/* Nav links */}
               <div className="flex items-center gap-6">
                 {[
@@ -200,8 +200,8 @@ export function Layout({ children }: LayoutProps) {
               </div>
             </div>
 
-            {/* Mobile: right-side icons + hamburger */}
-            <div className="flex md:hidden items-center gap-1">
+            {/* Mobile / Tablet: right-side icons + hamburger */}
+            <div className="flex lg:hidden items-center gap-1">
               <Link
                 to="/cart"
                 className="relative flex items-center justify-center rounded-lg p-2 text-brand-cream hover:bg-brand-medium/35"
@@ -233,11 +233,11 @@ export function Layout({ children }: LayoutProps) {
             </div>
           </div>
 
-          {/* Mobile dropdown */}
+          {/* Mobile / Tablet dropdown */}
           {menuOpen && (
             <div
               id="mobile-nav"
-              className="absolute left-0 right-0 top-full z-50 border-b border-brand-medium/30 bg-brand-dark py-3 shadow-lg md:hidden"
+              className="absolute left-0 right-0 top-full z-50 border-b border-brand-medium/30 bg-brand-dark py-3 shadow-lg lg:hidden"
             >
               <div className="mx-auto max-w-7xl space-y-0.5 px-4 sm:px-6 lg:px-8">
                 {[

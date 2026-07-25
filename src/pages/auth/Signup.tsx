@@ -18,16 +18,8 @@ export default function Signup() {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
-  const { signUp, signInWithGoogle } = useAuth();
+  const { signUp } = useAuth();
   const navigate = useNavigate();
-
-  async function handleGoogleSignUp() {
-    setError(null);
-    setLoading(true);
-    const { error: err } = await signInWithGoogle("/account");
-    setLoading(false);
-    if (err) setError(err.message);
-  }
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -63,16 +55,26 @@ export default function Signup() {
             {error}
           </div>
         )}
-        <Button
-          type="button"
-          variant="secondary"
-          disabled={loading}
-          onClick={handleGoogleSignUp}
-          className="w-full py-3 flex items-center justify-center gap-2 border border-brand-medium/50 bg-brand-dark-alt text-brand-cream hover:bg-brand-medium/30 hover:scale-105 active:scale-95 transition-all duration-200"
-        >
-          <GoogleIcon className="h-5 w-5" />
-          Continue with Google
-        </Button>
+        {/* Disabled Google Signup Wrapper with Hover Tooltip */}
+        <div className="relative group w-full cursor-not-allowed">
+          {/* Tooltip Popup */}
+          <div className="absolute -top-11 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 group-hover:-translate-y-1 transition-all duration-200 pointer-events-none z-30 whitespace-nowrap">
+            <div className="relative bg-brand-orange text-white text-xs font-bold uppercase tracking-wider px-3 py-1.5 rounded-lg shadow-xl shadow-brand-orange/20 border border-orange-400/40 flex items-center gap-1.5">
+              <span>🚀</span> Coming soon
+              <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-brand-orange rotate-45" />
+            </div>
+          </div>
+
+          <Button
+            type="button"
+            variant="secondary"
+            disabled
+            className="w-full py-3 flex items-center justify-center gap-2 border border-brand-medium/50 bg-brand-dark-alt/50 text-brand-cream/50 pointer-events-none opacity-60"
+          >
+            <GoogleIcon className="h-5 w-5 grayscale opacity-70" />
+            Continue with Google
+          </Button>
+        </div>
         <div className="relative">
           <div
             className="absolute inset-0 flex items-center"

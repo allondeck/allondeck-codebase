@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Button } from "../../components/ui/Button";
 
 export default function NotFound() {
   const [ripples, setRipples] = useState<
@@ -51,12 +51,9 @@ export default function NotFound() {
         </p>
 
         <div className="mt-12 pointer-events-auto">
-          <Link
-            to="/"
-            className="inline-block rounded-full bg-brand-orange px-8 py-3 text-xs font-bold uppercase tracking-wider text-white transition-transform hover:scale-105 shadow-lg shadow-brand-orange/20"
-          >
+          <Button to="/" variant="primary" size="md">
             Back to home
-          </Link>
+          </Button>
         </div>
       </div>
 

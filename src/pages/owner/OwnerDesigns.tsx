@@ -43,18 +43,18 @@ export default function OwnerDesigns() {
     try {
       if (activeTab === 'colors') {
         const { data, error } = await supabase
-          .from('design_colors' as any)
+          .from('design_colors')
           .select('*')
           .order('created_at', { ascending: true });
         if (error) throw error;
-        setColors((data as any) || []);
+        setColors(data || []);
       } else {
         const { data, error } = await supabase
-          .from('design_patterns' as any)
+          .from('design_patterns')
           .select('*')
           .order('created_at', { ascending: true });
         if (error) throw error;
-        setPatterns((data as any) || []);
+        setPatterns(data || []);
       }
     } catch (err) {
       console.error('Error fetching designs:', err);
@@ -118,10 +118,10 @@ export default function OwnerDesigns() {
         };
 
         if (editingId) {
-          const { error } = await supabase.from('design_colors' as any).update(payload).eq('id', editingId);
+          const { error } = await supabase.from('design_colors').update(payload).eq('id', editingId);
           if (error) throw error;
         } else {
-          const { error } = await supabase.from('design_colors' as any).insert([payload]);
+          const { error } = await supabase.from('design_colors').insert([payload]);
           if (error) throw error;
         }
       } else {
@@ -131,10 +131,10 @@ export default function OwnerDesigns() {
         };
 
         if (editingId) {
-          const { error } = await supabase.from('design_patterns' as any).update(payload).eq('id', editingId);
+          const { error } = await supabase.from('design_patterns').update(payload).eq('id', editingId);
           if (error) throw error;
         } else {
-          const { error } = await supabase.from('design_patterns' as any).insert([payload]);
+          const { error } = await supabase.from('design_patterns').insert([payload]);
           if (error) throw error;
         }
       }
@@ -152,8 +152,8 @@ export default function OwnerDesigns() {
   async function handleDelete(id: string) {
     if (!confirm('Are you sure you want to delete this item?')) return;
     try {
-      const table = activeTab === 'colors' ? 'design_colors' : 'design_patterns';
-      const { error } = await supabase.from(table as any).delete().eq('id', id);
+      const table: 'design_colors' | 'design_patterns' = activeTab === 'colors' ? 'design_colors' : 'design_patterns';
+      const { error } = await supabase.from(table).delete().eq('id', id);
       if (error) throw error;
       fetchData();
     } catch (err) {

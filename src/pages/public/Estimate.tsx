@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import { supabase } from "../../lib/supabase";
 import type { ContactRequestInsert } from "../../types/database";
 import { Icon } from "../../components/ui/Icon";
 import { SEO } from "../../components/ui/SEO";
+import { Button } from "../../components/ui/Button";
 
 /** Formats a raw digit string into (123) 123-1234 as the user types */
 function formatPhone(raw: string): string {
@@ -60,34 +60,34 @@ export default function Estimate() {
   };
 
   return (
-    <div className="bg-white dark:bg-brand-dark text-gray-900 dark:text-brand-cream font-sans py-12">
+    <div className="bg-brand-dark text-white font-sans py-12 md:py-16 min-h-screen">
       <SEO
         title="Get a Free Estimate | All On Deck"
         description="Request a free quote for custom marine deck flooring. Tell us about your boat model, length, and design vision and our crew will reach out."
       />
       {/* HEADER SECTION */}
       <div className="mx-auto max-w-[1400px] px-6 lg:px-12 text-center">
-        <span className="text-sm font-semibold uppercase tracking-widest text-brand-orange">
+        <span className="text-xs font-bold uppercase tracking-widest text-brand-orange">
           Renewing your boat's deck has never been EASIER!
         </span>
-        <h1 className="mt-4 font-heading text-4xl font-black tracking-wider text-brand-dark dark:text-brand-cream sm:text-5xl lg:text-6xl">
+        <h1 className="mt-4 font-heading text-4xl font-black tracking-wider text-brand-cream sm:text-5xl lg:text-6xl">
           FREE ESTIMATE
         </h1>
-        <div className="mx-auto mt-4 h-1.5 w-16 bg-brand-orange" />
-        <p className="mx-auto mt-6 max-w-2xl text-base md:text-lg leading-relaxed text-gray-600 dark:text-gray-300">
+        <div className="mx-auto mt-4 h-1.5 w-16 bg-brand-orange rounded-full" />
+        <p className="mx-auto mt-6 max-w-2xl text-base md:text-lg leading-relaxed text-brand-cream/80">
           Fill out the form below to get started. Our specialized design team
           will contact you shortly to review your project specs.
         </p>
       </div>
 
       {/* WAVE DIVIDER */}
-      <div className="my-12 mx-auto max-w-[1400px] px-6 lg:px-12 opacity-30">
+      <div className="my-12 mx-auto max-w-[1400px] px-6 lg:px-12 opacity-30 text-brand-light">
         <Icon name="wave" width={380} height={29} className="w-full" />
       </div>
 
       {/* FORM CONTAINER */}
-      <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
-        <div className="rounded-3xl bg-brand-dark p-6 md:p-10 shadow-xl text-white">
+      <div className="mx-auto max-w-3xl px-6 lg:px-12">
+        <div className="rounded-[2.5rem] bg-brand-medium/50 border border-brand-light/20 p-6 md:p-12 shadow-2xl text-white backdrop-blur-md">
           {submitted ? (
             <div className="text-center py-8">
               <span className="text-4xl text-brand-orange">✓</span>
@@ -102,12 +102,9 @@ export default function Estimate() {
                 shortly.
               </p>
               <div className="mt-8">
-                <Link
-                  to="/"
-                  className="inline-block rounded-full bg-brand-orange px-8 py-3 text-xs font-bold uppercase tracking-wider text-white transition-transform hover:scale-105 shadow-md shadow-brand-orange/30"
-                >
+                <Button to="/" variant="primary" size="md">
                   Back to Home
-                </Link>
+                </Button>
               </div>
             </div>
           ) : (
@@ -256,13 +253,15 @@ export default function Estimate() {
               </div>
 
               <div className="text-center pt-4">
-                <button
+                <Button
                   type="submit"
                   disabled={submitting}
-                  className="w-full rounded-full bg-brand-orange py-4 text-sm font-bold uppercase tracking-wider text-white transition-transform hover:scale-[1.02] shadow-lg shadow-brand-orange/30 font-sans disabled:opacity-70"
+                  variant="primary"
+                  size="lg"
+                  className="w-full"
                 >
                   {submitting ? "Sending…" : "Get estimate"}
-                </button>
+                </Button>
               </div>
             </form>
           )}

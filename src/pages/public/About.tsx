@@ -1,8 +1,9 @@
 import { useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { TeamTeaserCard } from "../../components/features/TeamTeaserCard";
 import { TeamBioCard } from "../../components/features/TeamBioCard";
 import { SEO } from "../../components/ui/SEO";
+import { Button } from "../../components/ui/Button";
 
 /**
  * About Page
@@ -124,12 +125,9 @@ export default function About() {
             expertise in Florida.
           </p>
           <div className="mt-8">
-            <Link
-              to="/services"
-              className="inline-block rounded-full bg-brand-orange hover:bg-orange-600 px-8 py-3 text-xs font-bold uppercase tracking-wider text-white transition-transform hover:scale-105 shadow-md"
-            >
+            <Button to="/services" variant="primary" size="md">
               See Our Work
-            </Link>
+            </Button>
           </div>
         </div>
       </div>

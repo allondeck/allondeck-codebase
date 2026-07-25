@@ -240,6 +240,25 @@ export type ProductCategoryRow = {
 };
 export type ProductCategoryInsert = Partial<ProductCategoryRow>;
 
+export type DesignColorRow = {
+  id: string;
+  name: string;
+  hex_color: string | null;
+  image_url: string | null;
+  created_at: string;
+};
+export type DesignColorInsert = Partial<DesignColorRow>;
+export type DesignColorUpdate = Partial<DesignColorRow>;
+
+export type DesignPatternRow = {
+  id: string;
+  name: string;
+  image_url: string | null;
+  created_at: string;
+};
+export type DesignPatternInsert = Partial<DesignPatternRow>;
+export type DesignPatternUpdate = Partial<DesignPatternRow>;
+
 export type Database = {
   public: {
     Tables: {
@@ -458,6 +477,18 @@ export type Database = {
             referencedColumns: ["id"];
           },
         ];
+      };
+      design_colors: {
+        Row: DesignColorRow;
+        Insert: DesignColorInsert;
+        Update: DesignColorUpdate;
+        Relationships: [];
+      };
+      design_patterns: {
+        Row: DesignPatternRow;
+        Insert: DesignPatternInsert;
+        Update: DesignPatternUpdate;
+        Relationships: [];
       };
     };
     Views: {

@@ -1,7 +1,8 @@
 import { useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { ServiceCard } from "../../components/features/ServiceCard";
 import { SEO } from "../../components/ui/SEO";
+import { Button } from "../../components/ui/Button";
 
 function scrollToSection(id: string) {
   const el = document.getElementById(id);
@@ -29,13 +30,13 @@ export default function Services() {
         description="Custom deck designs, MarineMat EVA/PE foam floor manufacturing, high-precision CNC cutting, and expert installation services for boats across Florida."
       />
       {/* ── HERO SECTION ────────────────── */}
-      <div className="mx-auto max-w-[1400px] px-6 lg:px-12 pt-16 pb-20 text-center">
+      <div className="mx-auto max-w-[1400px] px-6 lg:px-12 pt-10 sm:pt-12 md:pt-14 pb-20 text-center">
         <h1 className="font-heading text-5xl font-black tracking-widest text-brand-orange uppercase sm:text-6xl lg:text-7xl">
           SERVICES
         </h1>
 
         {/* 3-Card Grid */}
-        <div className="mt-16 grid gap-8 grid-cols-1 md:grid-cols-3 max-w-6xl mx-auto text-left">
+        <div className="mt-8 sm:mt-10 md:mt-12 grid gap-8 md:gap-12 lg:gap-8 xl:gap-6 grid-cols-1 lg:grid-cols-3 max-w-md sm:max-w-lg lg:max-w-[960px] xl:max-w-[1140px] mx-auto text-left">
           {/* Card 1: Custom Deck Designs */}
           <ServiceCard
             title={
@@ -46,7 +47,6 @@ export default function Services() {
             imageSrc="/assets/images/1.jpg"
             targetId="service-1"
             onActionClick={scrollToSection}
-            variant="hero-card"
           />
 
           {/* Card 2: Floor Manufacturing */}
@@ -59,7 +59,6 @@ export default function Services() {
             imageSrc="/assets/images/2.jpg"
             targetId="service-2"
             onActionClick={scrollToSection}
-            variant="hero-card"
           />
 
           {/* Card 3: Cutting and Installation */}
@@ -72,7 +71,6 @@ export default function Services() {
             imageSrc="/assets/images/3.jpg"
             targetId="service-3"
             onActionClick={scrollToSection}
-            variant="hero-card"
           />
         </div>
       </div>
@@ -97,12 +95,9 @@ export default function Services() {
                   Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit.
                 </p>
                 <div className="mt-8">
-                  <Link
-                    to="/estimate"
-                    className="inline-block rounded-full bg-brand-orange hover:bg-orange-600 px-8 py-3 text-sm font-bold uppercase tracking-wider text-white transition-transform hover:scale-105 shadow-md shadow-brand-orange/20"
-                  >
+                  <Button to="/estimate" variant="primary" size="md">
                     Get Started
-                  </Link>
+                  </Button>
                 </div>
               </div>
             </div>
@@ -130,12 +125,9 @@ export default function Services() {
                   Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit.
                 </p>
                 <div className="mt-8">
-                  <Link
-                    to="/estimate"
-                    className="inline-block rounded-full bg-brand-orange hover:bg-orange-600 px-8 py-3 text-sm font-bold uppercase tracking-wider text-white transition-transform hover:scale-105 shadow-md shadow-brand-orange/30"
-                  >
+                  <Button to="/estimate" variant="primary" size="md">
                     Get Started
-                  </Link>
+                  </Button>
                 </div>
               </div>
             </div>
@@ -160,12 +152,9 @@ export default function Services() {
                   With over two years of experience and outstanding results in Florida, we elevate your boat’s standard through high-precision CNC cutting. Our specialized team, using CAD and CAM software, ensures the millimeter-perfect fabrication of each MarineMat piece, followed by a professional and meticulous installation that guarantees a flawless fit, impeccable aesthetics, and maximum durability at sea.
                 </p>
                 <div className="mt-8">
-                  <Link
-                    to="/estimate"
-                    className="inline-block rounded-full bg-brand-orange hover:bg-orange-600 px-8 py-3 text-sm font-bold uppercase tracking-wider text-white transition-transform hover:scale-105 shadow-md shadow-brand-orange/30"
-                  >
+                  <Button to="/estimate" variant="primary" size="md">
                     Get Started
-                  </Link>
+                  </Button>
                 </div>
               </div>
             </div>
