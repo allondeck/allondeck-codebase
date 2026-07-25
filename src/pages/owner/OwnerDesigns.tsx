@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { supabase } from '../../lib/supabase';
-import { Plus, Trash2, Edit2, Loader2, Image as ImageIcon } from 'lucide-react';
+import React, { useState, useEffect } from "react";
+import { supabase } from "../../lib/supabase";
+import { Plus, Trash2, Edit2, Loader2, Image as ImageIcon } from "lucide-react";
 
 export type DesignColor = {
   id: string;
@@ -18,7 +18,7 @@ export type DesignPattern = {
 };
 
 export default function OwnerDesigns() {
-  const [activeTab, setActiveTab] = useState<'colors' | 'patterns'>('colors');
+  const [activeTab, setActiveTab] = useState<"colors" | "patterns">("colors");
   const [colors, setColors] = useState<DesignColor[]>([]);
   const [patterns, setPatterns] = useState<DesignPattern[]>([]);
   const [loading, setLoading] = useState(true);
@@ -30,35 +30,36 @@ export default function OwnerDesigns() {
     name: string;
     hex_color?: string;
     image_url?: string;
-  }>({ name: '', hex_color: '', image_url: '' });
+  }>({ name: "", hex_color: "", image_url: "" });
   const [saving, setSaving] = useState(false);
   const [uploading, setUploading] = useState(false);
 
   useEffect(() => {
     fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeTab]);
 
   async function fetchData() {
     setLoading(true);
     try {
-      if (activeTab === 'colors') {
+      if (activeTab === "colors") {
         const { data, error } = await supabase
-          .from('design_colors')
-          .select('*')
-          .order('created_at', { ascending: true });
+          .from("design_colors")
+          .select("*")
+          .order("created_at", { ascending: true });
         if (error) throw error;
         setColors(data || []);
       } else {
         const { data, error } = await supabase
-          .from('design_patterns')
-          .select('*')
-          .order('created_at', { ascending: true });
+          .from("design_patterns")
+          .select("*")
+          .order("created_at", { ascending: true });
         if (error) throw error;
         setPatterns(data || []);
       }
     } catch (err) {
-      console.error('Error fetching designs:', err);
-      alert('Error fetching data');
+      console.error("Error fetching designs:", err);
+      alert("Error fetching data");
     } finally {
       setLoading(false);
     }
@@ -69,12 +70,12 @@ export default function OwnerDesigns() {
       setEditingId(item.id);
       setFormData({
         name: item.name,
-        hex_color: 'hex_color' in item ? item.hex_color || '' : '',
-        image_url: item.image_url || '',
+        hex_color: "hex_color" in item ? item.hex_color || "" : "",
+        image_url: item.image_url || "",
       });
     } else {
       setEditingId(null);
-      setFormData({ name: '', hex_color: '', image_url: '' });
+      setFormData({ name: "", hex_color: "", image_url: "" });
     }
     setIsFormOpen(true);
   }
@@ -85,22 +86,24 @@ export default function OwnerDesigns() {
 
     setUploading(true);
     try {
-      const fileExt = file.name.split('.').pop();
+      const fileExt = file.name.split(".").pop();
       const fileName = `${Math.random()}.${fileExt}`;
       const filePath = `designs/${fileName}`;
-      
+
       const { error: uploadError } = await supabase.storage
-        .from('store')
+        .from("store")
         .upload(filePath, file);
-        
+
       if (uploadError) throw uploadError;
-      
-      const { data: { publicUrl } } = supabase.storage.from('store').getPublicUrl(filePath);
-      
+
+      const {
+        data: { publicUrl },
+      } = supabase.storage.from("store").getPublicUrl(filePath);
+
       setFormData((prev) => ({ ...prev, image_url: publicUrl }));
     } catch (err) {
-      console.error('Upload error:', err);
-      alert('Failed to upload image');
+      console.error("Upload error:", err);
+      alert("Failed to upload image");
     } finally {
       setUploading(false);
     }
@@ -110,7 +113,7 @@ export default function OwnerDesigns() {
     e.preventDefault();
     setSaving(true);
     try {
-      if (activeTab === 'colors') {
+      if (activeTab === "colors") {
         const payload = {
           name: formData.name,
           hex_color: formData.hex_color || null,
@@ -118,10 +121,15 @@ export default function OwnerDesigns() {
         };
 
         if (editingId) {
-          const { error } = await supabase.from('design_colors').update(payload).eq('id', editingId);
+          const { error } = await supabase
+            .from("design_colors")
+            .update(payload)
+            .eq("id", editingId);
           if (error) throw error;
         } else {
-          const { error } = await supabase.from('design_colors').insert([payload]);
+          const { error } = await supabase
+            .from("design_colors")
+            .insert([payload]);
           if (error) throw error;
         }
       } else {
@@ -131,10 +139,15 @@ export default function OwnerDesigns() {
         };
 
         if (editingId) {
-          const { error } = await supabase.from('design_patterns').update(payload).eq('id', editingId);
+          const { error } = await supabase
+            .from("design_patterns")
+            .update(payload)
+            .eq("id", editingId);
           if (error) throw error;
         } else {
-          const { error } = await supabase.from('design_patterns').insert([payload]);
+          const { error } = await supabase
+            .from("design_patterns")
+            .insert([payload]);
           if (error) throw error;
         }
       }
@@ -142,56 +155,59 @@ export default function OwnerDesigns() {
       setIsFormOpen(false);
       fetchData();
     } catch (err) {
-      console.error('Error saving:', err);
-      alert('Failed to save');
+      console.error("Error saving:", err);
+      alert("Failed to save");
     } finally {
       setSaving(false);
     }
   }
 
   async function handleDelete(id: string) {
-    if (!confirm('Are you sure you want to delete this item?')) return;
+    if (!confirm("Are you sure you want to delete this item?")) return;
     try {
-      const table: 'design_colors' | 'design_patterns' = activeTab === 'colors' ? 'design_colors' : 'design_patterns';
-      const { error } = await supabase.from(table).delete().eq('id', id);
+      const table: "design_colors" | "design_patterns" =
+        activeTab === "colors" ? "design_colors" : "design_patterns";
+      const { error } = await supabase.from(table).delete().eq("id", id);
       if (error) throw error;
       fetchData();
     } catch (err) {
-      console.error('Error deleting:', err);
-      alert('Failed to delete');
+      console.error("Error deleting:", err);
+      alert("Failed to delete");
     }
   }
 
   return (
     <div className="space-y-6">
       <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
-        <h2 className="text-xl font-semibold text-brand-cream">Designs Management</h2>
+        <h2 className="text-xl font-semibold text-brand-cream">
+          Designs Management
+        </h2>
         <button
           onClick={() => openForm()}
           className="flex items-center gap-2 rounded-lg bg-brand-orange px-4 py-2 text-sm font-semibold text-white hover:bg-brand-orange/80"
         >
           <Plus className="h-4 w-4" />
-          Add {activeTab === 'colors' ? 'Color' : 'Pattern'}
+          Add {activeTab === "colors" ? "Color" : "Pattern"}
         </button>
       </div>
 
       <div className="flex gap-4 border-b border-brand-medium/35">
         <button
-          onClick={() => setActiveTab('colors')}
+          onClick={() => setActiveTab("colors")}
           className={`pb-3 text-sm font-medium transition-colors ${
-            activeTab === 'colors'
-              ? 'border-b-2 border-brand-orange text-brand-orange'
-              : 'text-brand-light hover:text-brand-cream'
+            activeTab === "colors"
+              ? "border-b-2 border-brand-orange text-brand-orange"
+              : "text-brand-light hover:text-brand-cream"
           }`}
         >
           Colors
         </button>
         <button
-          onClick={() => setActiveTab('patterns')}
+          onClick={() => setActiveTab("patterns")}
           className={`pb-3 text-sm font-medium transition-colors ${
-            activeTab === 'patterns'
-              ? 'border-b-2 border-brand-orange text-brand-orange'
-              : 'text-brand-light hover:text-brand-cream'
+            activeTab === "patterns"
+              ? "border-b-2 border-brand-orange text-brand-orange"
+              : "text-brand-light hover:text-brand-cream"
           }`}
         >
           Patterns
@@ -201,34 +217,45 @@ export default function OwnerDesigns() {
       {isFormOpen && (
         <div className="rounded-lg border border-brand-medium/35 bg-brand-dark-alt p-6 shadow-sm">
           <h2 className="mb-4 text-lg font-bold text-brand-cream">
-            {editingId ? 'Edit' : 'Add'} {activeTab === 'colors' ? 'Color' : 'Pattern'}
+            {editingId ? "Edit" : "Add"}{" "}
+            {activeTab === "colors" ? "Color" : "Pattern"}
           </h2>
           <form onSubmit={handleSave} className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-brand-light">Name</label>
+              <label className="block text-sm font-medium text-brand-light">
+                Name
+              </label>
               <input
                 required
                 type="text"
                 value={formData.name}
-                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, name: e.target.value })
+                }
                 className="mt-1 block w-full rounded-md border border-brand-medium/50 bg-brand-dark px-3 py-2 text-white shadow-sm focus:border-brand-orange focus:outline-none focus:ring-1 focus:ring-brand-orange"
               />
             </div>
 
-            {activeTab === 'colors' && (
+            {activeTab === "colors" && (
               <div>
-                <label className="block text-sm font-medium text-brand-light">Hex Color</label>
+                <label className="block text-sm font-medium text-brand-light">
+                  Hex Color
+                </label>
                 <div className="mt-1 flex items-center gap-2">
                   <input
                     type="color"
-                    value={formData.hex_color || '#000000'}
-                    onChange={(e) => setFormData({ ...formData, hex_color: e.target.value })}
+                    value={formData.hex_color || "#000000"}
+                    onChange={(e) =>
+                      setFormData({ ...formData, hex_color: e.target.value })
+                    }
                     className="h-10 w-10 cursor-pointer rounded-md border border-brand-medium/50 p-1 bg-brand-dark"
                   />
                   <input
                     type="text"
                     value={formData.hex_color}
-                    onChange={(e) => setFormData({ ...formData, hex_color: e.target.value })}
+                    onChange={(e) =>
+                      setFormData({ ...formData, hex_color: e.target.value })
+                    }
                     placeholder="#000000"
                     className="block flex-1 rounded-md border border-brand-medium/50 bg-brand-dark px-3 py-2 text-white shadow-sm focus:border-brand-orange focus:outline-none focus:ring-1 focus:ring-brand-orange"
                   />
@@ -237,7 +264,9 @@ export default function OwnerDesigns() {
             )}
 
             <div>
-              <label className="block text-sm font-medium text-brand-light">Texture Image</label>
+              <label className="block text-sm font-medium text-brand-light">
+                Texture Image
+              </label>
               <div className="mt-1 flex items-center gap-4">
                 {formData.image_url ? (
                   <img
@@ -254,10 +283,11 @@ export default function OwnerDesigns() {
                   <label className="cursor-pointer rounded-md border border-brand-medium/50 bg-brand-dark px-3 py-2 text-sm font-medium text-brand-cream shadow-sm hover:bg-brand-medium/30 transition-colors">
                     {uploading ? (
                       <span className="flex items-center gap-2">
-                        <Loader2 className="h-4 w-4 animate-spin" /> Uploading...
+                        <Loader2 className="h-4 w-4 animate-spin" />{" "}
+                        Uploading...
                       </span>
                     ) : (
-                      'Upload Image'
+                      "Upload Image"
                     )}
                     <input
                       type="file"
@@ -284,7 +314,7 @@ export default function OwnerDesigns() {
                 disabled={saving}
                 className="inline-flex justify-center rounded-md bg-brand-orange px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-brand-orange/80 focus:outline-none focus:ring-2 focus:ring-brand-orange focus:ring-offset-2 disabled:opacity-50 transition-colors"
               >
-                {saving ? 'Saving...' : 'Save'}
+                {saving ? "Saving..." : "Save"}
               </button>
             </div>
           </form>
@@ -301,20 +331,32 @@ export default function OwnerDesigns() {
             <table className="w-full min-w-[600px] divide-y divide-brand-medium/35">
               <thead className="bg-brand-medium/30">
                 <tr>
-                  <th className="px-4 py-3 text-left text-xs font-medium uppercase text-brand-light">Image</th>
-                  <th className="px-4 py-3 text-left text-xs font-medium uppercase text-brand-light">Name</th>
-                  {activeTab === 'colors' && (
-                    <th className="px-4 py-3 text-left text-xs font-medium uppercase text-brand-light">Hex</th>
+                  <th className="px-4 py-3 text-left text-xs font-medium uppercase text-brand-light">
+                    Image
+                  </th>
+                  <th className="px-4 py-3 text-left text-xs font-medium uppercase text-brand-light">
+                    Name
+                  </th>
+                  {activeTab === "colors" && (
+                    <th className="px-4 py-3 text-left text-xs font-medium uppercase text-brand-light">
+                      Hex
+                    </th>
                   )}
-                  <th className="px-4 py-3 text-right text-xs font-medium uppercase text-brand-light">Actions</th>
+                  <th className="px-4 py-3 text-right text-xs font-medium uppercase text-brand-light">
+                    Actions
+                  </th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-brand-medium/35 bg-brand-dark-alt">
-                {(activeTab === 'colors' ? colors : patterns).map((item) => (
+                {(activeTab === "colors" ? colors : patterns).map((item) => (
                   <tr key={item.id} className="hover:bg-brand-medium/20">
                     <td className="whitespace-nowrap px-4 py-3">
                       {item.image_url ? (
-                        <img src={item.image_url} alt={item.name} className="h-10 w-10 rounded-full object-cover border border-brand-medium/50" />
+                        <img
+                          src={item.image_url}
+                          alt={item.name}
+                          className="h-10 w-10 rounded-full object-cover border border-brand-medium/50"
+                        />
                       ) : (
                         <div className="h-10 w-10 rounded-full bg-brand-dark flex items-center justify-center border border-brand-medium/50">
                           <ImageIcon className="h-4 w-4 text-brand-light" />
@@ -324,12 +366,16 @@ export default function OwnerDesigns() {
                     <td className="whitespace-nowrap px-4 py-3 text-sm font-medium text-white">
                       {item.name}
                     </td>
-                    {activeTab === 'colors' && (
+                    {activeTab === "colors" && (
                       <td className="whitespace-nowrap px-4 py-3 text-sm text-brand-light">
                         <div className="flex items-center gap-2">
                           <div
                             className="h-4 w-4 rounded-full border border-brand-medium/50"
-                            style={{ backgroundColor: (item as DesignColor).hex_color || 'transparent' }}
+                            style={{
+                              backgroundColor:
+                                (item as DesignColor).hex_color ||
+                                "transparent",
+                            }}
                           />
                           {(item as DesignColor).hex_color}
                         </div>
@@ -353,9 +399,12 @@ export default function OwnerDesigns() {
                     </td>
                   </tr>
                 ))}
-                {(activeTab === 'colors' ? colors : patterns).length === 0 && (
+                {(activeTab === "colors" ? colors : patterns).length === 0 && (
                   <tr>
-                    <td colSpan={4} className="px-4 py-8 text-center text-sm text-brand-light">
+                    <td
+                      colSpan={4}
+                      className="px-4 py-8 text-center text-sm text-brand-light"
+                    >
                       No {activeTab} found. Add your first one!
                     </td>
                   </tr>

@@ -191,7 +191,11 @@ export default function Signup() {
             {PASSWORD_REQUIREMENTS.map(({ key, label }) => (
               <li
                 key={key}
-                className={requirementMet(key) ? "text-emerald-400 font-medium" : "text-brand-light/60"}
+                className={
+                  requirementMet(key)
+                    ? "text-emerald-400 font-medium"
+                    : "text-brand-light/60"
+                }
               >
                 {requirementMet(key) ? "✓ " : "○ "}
                 {label}
@@ -205,7 +209,10 @@ export default function Signup() {
       </form>
       <p className="mt-4 text-center text-sm text-brand-light">
         Already have an account?{" "}
-        <Link to="/login" className="font-medium text-brand-orange hover:underline">
+        <Link
+          to="/login"
+          className="font-medium text-brand-orange hover:underline"
+        >
           Sign in
         </Link>
       </p>

@@ -237,7 +237,6 @@ export default function Home() {
         <div className="relative z-10 mx-auto max-w-[1400px] px-6 lg:px-12 text-center w-full">
           {/* Gallery Centerpiece Card */}
           <div className="relative mx-auto max-w-3xl sm:max-w-4xl rounded-[2.5rem] bg-brand-dark/90 backdrop-blur-md p-8 sm:p-12 md:p-14 border border-brand-light/20 shadow-2xl overflow-visible text-center">
-
             {/* Title - CHECK OUR (Brand Light) / GALLERY (Brand Cream) */}
             <h2 className="relative z-10 font-heading uppercase text-center leading-none">
               <span className="block text-3xl sm:text-5xl md:text-6xl font-black tracking-[0.2em] text-brand-light drop-shadow-md">
