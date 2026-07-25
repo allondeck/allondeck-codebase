@@ -8,16 +8,13 @@
  * - Storefront display preferences (Out of stock visibility, default collapsed sidebars)
  * - Dashboard widget arrangements
  */
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "../../components/ui/Button";
 import { supabase } from "../../lib/supabase";
 import {
   deleteStorageFileIfOurs,
   cleanupAllOrphanedStorage,
-  MAX_IMAGE_SIZE_STORE,
-  getMaxImageSizeLabel,
-  isImageSizeWithinLimit,
 } from "../../lib/storage";
 import { useStoreSettings } from "../../hooks/useStoreSettings";
 import { useCategories } from "../../hooks/useCategories";
@@ -74,8 +71,6 @@ function parseFooterCategories(v: unknown): string[] {
   return [];
 }
 
-const MAX_FOOTER_CATEGORIES = 3;
-
 /**
  * The main settings component wrapper.
  * Handles fetching settings on mount, managing local component state, 
@@ -87,7 +82,6 @@ export default function OwnerSettings() {
   const { categories } = useCategories();
   const [storeName, setStoreName] = useState("");
   const [logoUrl, setLogoUrl] = useState("");
-  const [logoUrlInput, setLogoUrlInput] = useState("");
   const [showStoreNameInNav, setShowStoreNameInNav] = useState(false);
   const [dashboardWidgets, setDashboardWidgets] = useState<DashboardWidgetId[]>(
     [],
@@ -105,10 +99,8 @@ export default function OwnerSettings() {
     useState(false);
   const [saving, setSaving] = useState(false);
   const [saveError, setSaveError] = useState<string | null>(null);
-  const [uploading, setUploading] = useState(false);
   const [cleaning, setCleaning] = useState(false);
   const [cleanupResult, setCleanupResult] = useState<string | null>(null);
-  const logoFileInputRef = useRef<HTMLInputElement>(null);
   const [draggedWidgetId, setDraggedWidgetId] =
     useState<DashboardWidgetId | null>(null);
   const [dragOverWidgetId, setDragOverWidgetId] =
@@ -159,49 +151,6 @@ export default function OwnerSettings() {
     settings.shipping_countries,
     settings.ai_instructions,
   ]);
-
-  async function handleLogoUpload(e: React.ChangeEvent<HTMLInputElement>) {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    const validTypes = [
-      "image/jpeg",
-      "image/png",
-      "image/webp",
-      "image/gif",
-      "image/svg+xml",
-    ];
-    if (!validTypes.includes(file.type)) {
-      setSaveError("Please upload a JPEG, PNG, WebP, GIF, or SVG image.");
-      return;
-    }
-    if (!isImageSizeWithinLimit(file, MAX_IMAGE_SIZE_STORE)) {
-      setSaveError(
-        `Logo must be under ${getMaxImageSizeLabel(MAX_IMAGE_SIZE_STORE)}.`,
-      );
-      return;
-    }
-    setSaveError(null);
-    setUploading(true);
-    const ext = file.name.split(".").pop() || "png";
-    const path = `logo.${ext}`;
-    const { data, error: err } = await supabase.storage
-      .from("store")
-      .upload(path, file, {
-        cacheControl: "3600",
-        upsert: true,
-      });
-    setUploading(false);
-    e.target.value = "";
-    if (err) {
-      setSaveError(err.message);
-      return;
-    }
-    const { data: urlData } = supabase.storage
-      .from("store")
-      .getPublicUrl(data.path);
-    setLogoUrl(urlData.publicUrl);
-    setLogoUrlInput("");
-  }
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -329,9 +278,6 @@ export default function OwnerSettings() {
     "flex flex-wrap items-center gap-2 border-b border-brand-medium/35 pb-4 mb-4";
   const sectionTitle = "text-base font-semibold text-brand-cream";
   const sectionDesc = "text-sm text-brand-light mt-0.5 min-w-0";
-  const fieldLabel = "block text-sm font-medium text-white";
-  const fieldHint = "text-xs text-brand-light mt-1";
-
   return (
     <div className="w-full max-w-[1400px] px-6 lg:px-12">
       <div className="mb-6 sm:mb-8">
