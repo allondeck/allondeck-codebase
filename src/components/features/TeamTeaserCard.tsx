@@ -34,28 +34,30 @@ export function TeamTeaserCard({
   whatsappUrl,
   email,
   wavePosition = "left",
-  buttonClassName = "bg-brand-cream text-[#05586d] hover:bg-white",
+  buttonClassName = "bg-brand-cream text-brand-dark hover:bg-white",
   onViewBioClick,
 }: TeamTeaserCardProps) {
   const wavePosClass =
     wavePosition === "left"
-      ? "absolute -bottom-2 -left-2 w-28 pointer-events-none z-20"
-      : "absolute -bottom-2 -right-2 w-28 pointer-events-none z-20";
+      ? "absolute bottom-5 -left-10 w-36 pointer-events-none z-20 text-[#599db3]"
+      : "absolute bottom-5 -right-10 w-36 pointer-events-none z-20 text-[#599db3]";
 
   return (
-    <div className="flex flex-col items-center text-center w-full max-w-[280px]">
+    <div className="flex flex-col items-start text-left w-full max-w-[320px]">
       {/* Portrait Photo Container */}
-      <div className="relative w-full aspect-[3/4] rounded-[2rem] overflow-hidden border border-brand-medium/35 bg-brand-dark-alt shadow-xl">
-        <img
-          src={imageSrc}
-          alt={name}
-          className="h-full w-full object-cover"
-        />
+      <div className="relative w-full aspect-[4/5] rounded-[2.5rem] bg-brand-dark-alt shadow-xl">
+        <div className="w-full h-full rounded-[2.5rem] overflow-hidden border border-brand-medium/35">
+          <img
+            src={imageSrc}
+            alt={name}
+            className="h-full w-full object-cover"
+          />
+        </div>
         {/* Wave decoration overlapping bottom corner */}
         <div className={wavePosClass}>
           <svg
             viewBox="0 0 380.442 62.684"
-            className="w-full h-auto text-brand-light"
+            className="w-full h-auto"
             fill="currentColor"
           >
             <path d="M380.437,15.6a4.388,4.388,0,0,0-6.319-3.88c-10.453,4.8-19.785,1.364-28.981-4.008-.894-.522-1.909-.894-2.833-1.383C328.072-1.2,313.45-1.45,299.969,6.776c-14.137,8.628-26.9,8.967-41.157.237C245.143-1.359,230.1-1.622,215.963,6.46a72.2,72.2,0,0,1-8.834,4.334c-8.749,3.522-17.668,4.336-27.3.326-.792-.318-1.581-.652-2.367-1.019q-.972-.453-1.94-.95-1.05-.538-2.1-1.122c-.519-.289-1.038-.579-1.556-.881-.894-.522-1.909-.894-2.833-1.383C154.8-1.764,140.181-2.012,126.7,6.214c-14.137,8.628-26.9,8.966-41.157.237C71.875-1.922,56.836-2.185,42.7,5.9,30.953,12.609,19.3,16.126,6.311,10.614A4.348,4.348,0,0,0,.272,14.681a41.477,41.477,0,0,1-.213,5.4c-.465,3.926,1.845,5.278,6.512,6.4a55.747,55.747,0,0,0,37.374-4.266q5.23-2.549,10.491-5.056a20.369,20.369,0,0,1,18.1-.135c5.432,2.524,10.784,5.174,16.243,7.654a41.316,41.316,0,0,0,33.52.355c5.6-2.434,11.045-5.142,16.508-7.8a21.456,21.456,0,0,1,18.648-.021c6.076,2.906,12.1,5.918,18.374,8.494.13.053.262.09.392.142.808.322,1.618.613,2.431.881a61.814,61.814,0,0,0,7.53,1.681,44.616,44.616,0,0,0,27.331-3.824q7.074-3.46,14.189-6.862a20.371,20.371,0,0,1,18.1-.135c5.431,2.524,10.783,5.173,16.242,7.654a41.308,41.308,0,0,0,33.52.355c5.6-2.434,11.045-5.142,16.508-7.8a21.456,21.456,0,0,1,18.648-.021c6.077,2.906,12.1,5.918,18.374,8.494a36.531,36.531,0,0,0,27.191.631c1.569-.576,3.8-1.868,3.9-2.944C380.427,21.268,380.457,18.572,380.437,15.6Z" />
@@ -65,50 +67,51 @@ export function TeamTeaserCard({
       </div>
 
       {/* Teaser Info */}
-      <div className="mt-4 w-full">
-        <span className="block text-xs text-[#8fc5db] font-bold tracking-widest uppercase">
+      <div className="mt-4 w-full text-left">
+        <span className="block text-xs text-brand-light font-bold italic tracking-wider">
           {role}
         </span>
-        <span className="block text-lg font-black tracking-widest text-brand-cream uppercase mt-1">
+        <span className="block text-lg sm:text-xl font-black tracking-widest text-brand-cream font-heading uppercase mt-0.5">
           {name}
         </span>
 
         {/* Teaser CTA & Contact */}
-        <div className="mt-4 flex items-center justify-center gap-3">
+        <div className="mt-3 flex items-center gap-2.5">
           <button
             onClick={() => onViewBioClick(bioSectionId)}
-            className={`px-5 py-2.5 rounded-2xl text-xs font-bold uppercase tracking-wider hover:scale-105 transition-all shadow-md ${buttonClassName}`}
+            className={`px-5 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider hover:scale-105 transition-transform shadow-md ${buttonClassName}`}
           >
-            View Bio
+            VIEW BIO
           </button>
+          
+          {/* WhatsApp Icon - Solid Orange Speech Bubble with Dark Phone Receiver */}
           <a
             href={whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center text-brand-orange hover:text-[#d2751b] transition-all hover:scale-105 drop-shadow-md rounded-full"
+            className="flex h-10 w-10 shrink-0 items-center justify-center hover:scale-105 transition-transform shadow-md"
             aria-label="WhatsApp"
           >
-            <svg className="h-10 w-10" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12.001 2C17.5238 2 22.001 6.47715 22.001 12C22.001 17.5228 17.5238 22 12.001 22C10.1671 22 8.44851 21.5064 6.97086 20.6447L2.00516 22L3.35712 17.0315C2.49494 15.5536 2.00098 13.8345 2.00098 12C2.00098 6.47715 6.47813 2 12.001 2ZM8.59339 7.30019L8.39232 7.30833C8.26293 7.31742 8.13607 7.34902 8.02057 7.40811C7.93392 7.45244 7.85348 7.51651 7.72709 7.63586C7.60774 7.74855 7.53857 7.84697 7.46569 7.94186C7.09599 8.4232 6.89729 9.01405 6.90098 9.62098C6.90299 10.1116 7.03043 10.5884 7.23169 11.0336C7.63982 11.9364 8.31288 12.8908 9.20194 13.7759C9.4155 13.9885 9.62473 14.2034 9.85034 14.402C10.9538 15.3736 12.2688 16.0742 13.6907 16.4482C13.6907 16.4482 14.2507 16.5342 14.2589 16.5347C14.4444 16.5447 14.6296 16.5313 14.8153 16.5218C15.1066 16.5068 15.391 16.428 15.6484 16.2909C15.8139 16.2028 15.8922 16.159 16.0311 16.0714C16.0311 16.0714 16.0737 16.0426 16.1559 15.9814C16.2909 15.8808 16.3743 15.81 16.4866 15.6934C16.5694 15.6074 16.6406 15.5058 16.6956 15.3913C16.7738 15.2281 16.8525 14.9166 16.8838 14.6579C16.9077 14.4603 16.9005 14.3523 16.8979 14.2854C16.8936 14.1778 16.8047 14.0671 16.7073 14.0201L16.1258 13.7587C16.1258 13.7587 15.2563 13.3803 14.7245 13.1377C14.6691 13.1124 14.6085 13.1007 14.5476 13.097C14.4142 13.0888 14.2647 13.1236 14.1696 13.2238C14.1646 13.2218 14.0984 13.279 13.3749 14.1555C13.335 14.2032 13.2415 14.3069 13.0798 14.2972C13.0554 14.2955 13.0311 14.292 13.0074 14.2858C12.9419 14.2685 12.8781 14.2457 12.8157 14.2193C12.692 14.1668 12.6486 14.1469 12.5641 14.1105C11.9868 13.8583 11.457 13.5209 10.9887 13.108C10.8631 12.9974 10.7463 12.8783 10.6259 12.7616C10.2057 12.3543 9.86169 11.9211 9.60577 11.4938C9.5918 11.4705 9.57027 11.4368 9.54708 11.3991C9.50521 11.331 9.45903 11.25 9.44455 11.1944C9.40738 11.0473 9.50599 10.9291 9.50599 10.9291C9.50599 10.9291 9.74939 10.663 9.86248 10.5183C9.97128 10.379 10.0652 10.2428 10.125 10.1457C10.2428 9.95633 10.2801 9.76062 10.2182 9.60963C9.93764 8.92565 9.64818 8.24536 9.34986 7.56894C9.29098 7.43545 9.11585 7.33846 8.95659 7.32007C8.90265 7.31384 8.84875 7.30758 8.79459 7.30402C8.66053 7.29748 8.5262 7.29892 8.39232 7.30833L8.59339 7.30019Z" />
+            <svg className="h-10 w-10" viewBox="0 0 24 24" fill="none">
+              <path
+                fill="#e88d25"
+                d="M12 2C6.48 2 2 6.48 2 12c0 2.17.69 4.19 1.87 5.84L2.5 21.5l3.82-1.33C7.91 21.28 9.89 22 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2z"
+              />
+              <path
+                fill="#05586d"
+                d="M15.5 13.8c-.3-.15-1.7-.84-1.96-.94-.26-.1-.45-.15-.64.15-.19.3-.74.94-.91 1.13-.17.19-.34.21-.64.06-.3-.15-1.27-.47-2.42-1.5-.9-.8-1.5-1.79-1.68-2.09-.18-.3-.02-.46.13-.61.14-.14.3-.34.45-.51.15-.17.2-.3.3-.5.1-.19.05-.36-.02-.51s-.64-1.55-.88-2.12c-.23-.55-.47-.48-.64-.49-.16-.01-.35-.01-.54-.01-.19 0-.5.07-.76.36-.26.29-1 1-1 2.43 0 1.43 1.04 2.81 1.18 3 .15.19 2.05 3.13 4.97 4.39.69.3 1.23.48 1.65.61.7.22 1.34.19 1.84.12.56-.08 1.7-.7 1.94-1.37.24-.67.24-1.25.17-1.37-.07-.12-.26-.19-.56-.34z"
+              />
             </svg>
           </a>
+
+          {/* Email Icon - Solid Orange Squircle with Dark Envelope Cutout */}
           <a
             href={`mailto:${email}`}
-            className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-orange text-[#05586d] hover:bg-[#d2751b] transition-all hover:scale-105 shadow-md"
+            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-brand-orange text-[#05586d] hover:scale-105 transition-transform shadow-md"
             aria-label="Email"
           >
-            <svg
-              className="h-5.5 w-5.5"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2.5"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-              />
+            <svg className="h-5.5 w-5.5" viewBox="0 0 24 24" fill="#05586d">
+              <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
             </svg>
           </a>
         </div>
