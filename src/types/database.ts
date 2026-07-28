@@ -259,6 +259,18 @@ export type DesignPatternRow = {
 export type DesignPatternInsert = Partial<DesignPatternRow>;
 export type DesignPatternUpdate = Partial<DesignPatternRow>;
 
+export type GalleryImageRow = {
+  id: string;
+  title: string;
+  description: string | null;
+  image_url: string;
+  service_type: string;
+  display_order: number;
+  created_at: string;
+};
+export type GalleryImageInsert = Partial<GalleryImageRow>;
+export type GalleryImageUpdate = Partial<GalleryImageRow>;
+
 export type Database = {
   public: {
     Tables: {
@@ -488,6 +500,12 @@ export type Database = {
         Row: DesignPatternRow;
         Insert: DesignPatternInsert;
         Update: DesignPatternUpdate;
+        Relationships: [];
+      };
+      gallery_images: {
+        Row: GalleryImageRow;
+        Insert: GalleryImageInsert;
+        Update: GalleryImageUpdate;
         Relationships: [];
       };
     };

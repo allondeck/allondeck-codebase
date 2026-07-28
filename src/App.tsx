@@ -70,6 +70,7 @@ export const router = createBrowserRouter([
       { path: "/", element: <Home /> },
       { path: "/services", lazy: async () => ({ Component: (await import("./pages/public/services/index")).default }) },
       { path: "/designs", lazy: async () => ({ Component: (await import("./pages/public/designs/index")).default }) },
+      { path: "/gallery", lazy: async () => ({ Component: (await import("./pages/public/gallery/index")).default }) },
       { path: "/estimate", lazy: async () => ({ Component: (await import("./pages/public/estimate/index")).default }) },
       { path: "/products", lazy: async () => ({ Component: (await import("./pages/public/products/index")).default }) },
       { path: "/products/:slug", lazy: async () => ({ Component: (await import("./pages/public/productDetail/index")).default }) },
@@ -117,6 +118,7 @@ export const router = createBrowserRouter([
               { path: "categories", lazy: async () => ({ Component: (await import("./pages/owner/ownerCategories/index")).default }) },
               { path: "categories/:id", lazy: async () => ({ Component: (await import("./pages/owner/categoryForm/index")).default }) },
               { path: "designs", lazy: async () => ({ Component: (await import("./pages/owner/ownerDesigns/index")).default }) },
+              { path: "gallery", lazy: async () => ({ Component: (await import("./pages/owner/ownerGallery/index")).default }) },
               { path: "coupons", lazy: async () => ({ Component: (await import("./pages/owner/ownerCoupons/index")).default }) },
               { path: "coupons/:id", lazy: async () => ({ Component: (await import("./pages/owner/couponForm/index")).default }) },
 
@@ -158,6 +160,7 @@ export const router = createBrowserRouter([
               { path: "orders/from-invoice", lazy: async () => ({ Component: (await import("./pages/owner/ownerOrderFromInvoice/index")).default }) },
               { path: "orders/create-manual", lazy: async () => ({ Component: (await import("./pages/owner/ownerOrderCreateManual/index")).default }) },
               { path: "orders/:id", lazy: async () => ({ Component: (await import("./pages/owner/ownerOrderDetail/index")).default }) },
+              { path: "gallery", lazy: async () => ({ Component: (await import("./pages/owner/ownerGallery/index")).default }) },
             ]
           }
         ]

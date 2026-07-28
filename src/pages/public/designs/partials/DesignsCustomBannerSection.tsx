@@ -35,6 +35,12 @@ export function DesignsCustomBannerSection() {
           >
             See Services
           </Link>
+          <Link
+            to="/gallery"
+            className="inline-flex items-center justify-center rounded-full border-2 border-brand-orange/50 bg-brand-orange/10 px-10 py-3.5 text-sm font-bold uppercase tracking-wider text-brand-orange hover:bg-brand-orange hover:text-white transition-all leading-none"
+          >
+            View Gallery
+          </Link>
         </div>
       </div>
     </div>

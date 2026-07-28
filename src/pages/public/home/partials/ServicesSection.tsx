@@ -33,6 +33,15 @@ export function ServicesSection() {
             buttonText="See More"
           />
         </div>
+
+        <div className="mt-12 text-center">
+          <a
+            href="/gallery"
+            className="inline-flex items-center gap-2 rounded-full border border-brand-orange/60 bg-brand-orange/15 px-8 py-3.5 text-sm font-bold tracking-wider text-brand-orange uppercase hover:bg-brand-orange hover:text-white transition-all transform hover:scale-105 shadow-lg"
+          >
+            Explore Full Project Gallery →
+          </a>
+        </div>
       </div>
     </section>
   );

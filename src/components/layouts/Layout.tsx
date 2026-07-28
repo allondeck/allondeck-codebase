@@ -139,6 +139,7 @@ export function Layout({ children }: LayoutProps) {
                   { to: "/about", label: "ABOUT US" },
                   { to: "/products", label: "SHOP" },
                   { to: "/services", label: "SERVICES" },
+                  { to: "/gallery", label: "GALLERY" },
                   { to: "/designs", label: "DESIGNS" },
                 ].map(({ to, label }) => {
                   const isActive =
@@ -244,6 +245,7 @@ export function Layout({ children }: LayoutProps) {
                   { to: "/about", label: "ABOUT US" },
                   { to: "/products", label: "SHOP" },
                   { to: "/services", label: "SERVICES" },
+                  { to: "/gallery", label: "GALLERY" },
                   { to: "/designs", label: "DESIGNS" },
                 ].map(({ to, label }) => {
                   const isActive =
