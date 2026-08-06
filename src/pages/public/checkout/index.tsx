@@ -127,7 +127,9 @@ export default function Checkout() {
         <h2 className="text-xl font-semibold text-white">
           No items to checkout
         </h2>
-        <p className="mt-2 text-brand-light">Add products to your cart first.</p>
+        <p className="mt-2 text-brand-light">
+          Add products to your cart first.
+        </p>
         <Link
           to="/products"
           className="mt-4 inline-block rounded-lg bg-brand-orange px-6 py-3 font-medium text-white hover:bg-orange-600 transition-all duration-200 hover:scale-105 active:scale-95"
@@ -218,9 +220,9 @@ export default function Checkout() {
       clearCart();
 
       const { data: sessionData, error: sessionError } =
-          await supabase.functions.invoke("create-checkout-session", {
-            body: { orderId },
-          });
+        await supabase.functions.invoke("create-checkout-session", {
+          body: { orderId },
+        });
       const checkoutUrl = sessionData?.url;
       if (checkoutUrl && typeof checkoutUrl === "string") {
         window.location.href = checkoutUrl;
@@ -238,7 +240,7 @@ export default function Checkout() {
   }
 
   return (
-    <div className="mx-auto max-w-[1400px] px-6 lg:px-12 py-16 sm:px-6 lg:px-8 text-left">
+    <div className="mx-auto max-w-[1400px] px-6 lg:px-12 py-16 sm:px-6 text-left">
       <h1 className="mb-8 text-2xl font-bold text-white">Checkout</h1>
       <form onSubmit={handlePlaceOrder}>
         {!user && (

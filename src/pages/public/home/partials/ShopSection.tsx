@@ -1,12 +1,16 @@
 import { useProducts } from "../../../../hooks/useProducts";
 import { Button } from "../../../../components/ui/Button";
 import { ShopCard } from "../../../../components/features/ShopCard";
+import { ProductCarousel } from "../../../../components/features/ProductCarousel";
 
 export function ShopSection() {
-  const { products, loading } = useProducts({ limit: 4 });
+  const { products, loading } = useProducts({ limit: 8 });
 
   return (
-    <section className="py-20 bg-brand-dark text-white overflow-hidden">
+    <section
+      className="py-20 bg-brand-dark text-white overflow-hidden"
+      id="shop"
+    >
       <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
         <div className="text-center flex flex-col items-center">
           <div className="flex flex-col md:flex-row items-center justify-center gap-4">
@@ -28,37 +32,18 @@ export function ShopSection() {
           </p>
         </div>
 
-        <div className="mt-12 relative group">
-          <div className="flex gap-6 overflow-x-auto pb-8 snap-x snap-mandatory scrollbar-hide [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
-            {loading
-              ? [1, 2, 3, 4].map((n) => (
-                  <div
-                    key={n}
-                    className="snap-start shrink-0 w-72 h-96 animate-pulse rounded-[2rem] bg-brand-medium/50 shadow-md"
-                  />
-                ))
-              : products.map((product) => (
-                  <ShopCard key={product.id} product={product} />
-                ))}
-          </div>
-
-          {/* Scroll hint arrow */}
-          <div className="hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 w-12 h-12 bg-white/40 backdrop-blur-sm rounded-full items-center justify-center text-white shadow-lg pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity">
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={3}
-                d="M9 5l7 7-7 7"
-              />
-            </svg>
-          </div>
-        </div>
+        <ProductCarousel className="mt-12">
+          {loading
+            ? Array.from({ length: 8 }).map((_, i) => (
+                <div
+                  key={i}
+                  className="snap-start shrink-0 w-72 h-96 animate-pulse rounded-[2rem] bg-brand-medium/50 shadow-md"
+                />
+              ))
+            : products.map((product) => (
+                <ShopCard key={product.id} product={product} />
+              ))}
+        </ProductCarousel>
 
         <div className="mt-4 text-center">
           <Button to="/products" variant="outline" size="md">

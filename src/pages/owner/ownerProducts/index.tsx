@@ -4,6 +4,7 @@ import { Select } from "../../../components/ui/Select";
 import {
   useProductsAdmin,
   type ProductSortBy,
+  type ProductWithCategories,
 } from "../../../hooks/useProductsAdmin";
 import { useCategoriesAdmin } from "../../../hooks/useCategoriesAdmin";
 import { formatPrice } from "../../../lib/utils";
@@ -39,31 +40,29 @@ export default function OwnerProducts() {
 
   const DEFAULT_LOW_STOCK_THRESHOLD = 10;
 
-  function getCategoryNames(product: {
-    product_categories?: { categories: { name: string } | null }[];
-  }) {
+  function getCategoryNames(product: ProductWithCategories) {
     const cats = product.product_categories
       ?.map((pc) => pc.categories?.name)
       .filter(Boolean) as string[] | undefined;
     return cats?.length ? cats.join(", ") : "—";
   }
 
-  function isLowStock(product: any): boolean {
+  function isLowStock(product: ProductWithCategories): boolean {
     const threshold =
       product.low_stock_threshold ?? DEFAULT_LOW_STOCK_THRESHOLD;
     
-    const activeVariants = product.product_variants?.filter((v: any) => v.is_active) || [];
+    const activeVariants = product.product_variants?.filter((v) => v.is_active) || [];
     if (activeVariants.length > 0) {
-      return activeVariants.some((v: any) => v.stock_quantity <= threshold);
+      return activeVariants.some((v) => v.stock_quantity <= threshold);
     }
     
     return product.stock_quantity <= threshold;
   }
   
-  function getStockDisplay(product: any) {
-    const activeVariants = product.product_variants?.filter((v: any) => v.is_active) || [];
+  function getStockDisplay(product: ProductWithCategories) {
+    const activeVariants = product.product_variants?.filter((v) => v.is_active) || [];
     if (activeVariants.length > 0) {
-      const totalStock = activeVariants.reduce((sum: number, v: any) => sum + v.stock_quantity, 0);
+      const totalStock = activeVariants.reduce((sum, v) => sum + v.stock_quantity, 0);
       return `${totalStock} in ${activeVariants.length} variants`;
     }
     return product.stock_quantity;

@@ -11,7 +11,10 @@ export default function Cart() {
 
   const subtotal = items.reduce((sum, i) => {
     if (isProductCartItem(i)) {
-      const price = i.variant_price != null ? Number(i.variant_price) : parsePrice(i.product.price);
+      const price =
+        i.variant_price != null
+          ? Number(i.variant_price)
+          : parsePrice(i.product.price);
       return sum + price * i.quantity;
     }
     if (isComboCartItem(i)) return sum + i.totalPrice * i.quantity;
@@ -19,8 +22,11 @@ export default function Cart() {
   }, 0);
 
   return (
-    <div className="mx-auto max-w-[1400px] px-6 lg:px-12 py-8 sm:px-6 lg:px-8 w-full">
-      <SEO title="Shopping Cart | All On Deck" description="Review your selected marine deck items and proceed to checkout." />
+    <div className="mx-auto max-w-[1400px] px-6 lg:px-12 py-8 sm:px-6 w-full">
+      <SEO
+        title="Shopping Cart | All On Deck"
+        description="Review your selected marine deck items and proceed to checkout."
+      />
       {itemCount === 0 ? (
         <CartEmptySection />
       ) : (

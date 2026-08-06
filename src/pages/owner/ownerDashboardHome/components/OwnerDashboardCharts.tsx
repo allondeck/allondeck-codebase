@@ -1,9 +1,15 @@
 import { useState, useEffect } from "react";
 import type { useDashboardStats } from "../../../../hooks/useDashboardStats";
 
+export interface OrderStatusChartData {
+  name: string;
+  count: number;
+  fill: string;
+}
+
 export interface DashboardChartsProps {
   stats: ReturnType<typeof useDashboardStats>["stats"];
-  ordersByStatusData: any[];
+  ordersByStatusData: OrderStatusChartData[];
   enabledChartIds: string[];
 }
 

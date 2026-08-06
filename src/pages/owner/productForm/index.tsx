@@ -10,7 +10,7 @@ import {
 } from "../../../lib/storage";
 import { useCategoriesAdmin } from "../../../hooks/useCategoriesAdmin";
 import { slugify } from "../../../lib/utils";
-import type { ProductRow } from "../../../types/database";
+import type { ProductRow, ProductVariantRow } from "../../../types/database";
 
 const MAX_CATEGORIES = 3;
 
@@ -117,7 +117,7 @@ export default function ProductForm() {
           is_featured: p.is_featured,
           category_ids: categoryIds,
           image_url: p.image_url ?? "",
-          variants: (variantsData || []).map((v: any) => ({
+          variants: (variantsData || []).map((v: ProductVariantRow) => ({
             id: v.id,
             name: v.name,
             sku: v.sku || "",

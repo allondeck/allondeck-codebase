@@ -34,7 +34,7 @@ export default function OwnerDashboardChartsInner({
   stats,
   ordersByStatusData,
   enabledChartIds,
-}: DashboardChartsProps & { ordersByStatusData: any[]; enabledChartIds: string[] }) {
+}: DashboardChartsProps) {
   const revenueChart = showChart(enabledChartIds, "revenue_chart") && (
     <div
       key="revenue_chart"
@@ -65,8 +65,8 @@ export default function OwnerDashboardChartsInner({
               contentStyle={{ backgroundColor: '#052631', borderColor: '#066175', color: '#fff' }}
               labelStyle={{ color: '#f6ebd4' }}
               itemStyle={{ color: '#fff' }}
-              formatter={(value: any) => [
-                formatCurrency(value ?? 0),
+              formatter={(value: unknown) => [
+                formatCurrency(Number(value) || 0),
                 "Revenue",
               ]}
               labelFormatter={(label) =>
@@ -157,8 +157,8 @@ export default function OwnerDashboardChartsInner({
               contentStyle={{ backgroundColor: '#052631', borderColor: '#066175', color: '#fff' }}
               labelStyle={{ color: '#f6ebd4' }}
               itemStyle={{ color: '#fff' }}
-              formatter={(value: any) => [
-                formatCurrency(value ?? 0),
+              formatter={(value: unknown) => [
+                formatCurrency(Number(value) || 0),
                 "Avg. order value",
               ]}
               labelFormatter={(label) =>
@@ -201,7 +201,7 @@ export default function OwnerDashboardChartsInner({
               contentStyle={{ backgroundColor: '#052631', borderColor: '#066175', color: '#fff' }}
               labelStyle={{ color: '#f6ebd4' }}
               itemStyle={{ color: '#fff' }}
-              formatter={(value: any) => [value, "Orders"]}
+              formatter={(value: unknown) => [Number(value) || 0, "Orders"]}
             />
             <Bar
               dataKey="count"
@@ -246,7 +246,7 @@ export default function OwnerDashboardChartsInner({
               contentStyle={{ backgroundColor: '#052631', borderColor: '#066175', color: '#fff' }}
               labelStyle={{ color: '#f6ebd4' }}
               itemStyle={{ color: '#fff' }}
-              formatter={(value: any) => [value, "Orders"]}
+              formatter={(value: unknown) => [Number(value) || 0, "Orders"]}
               labelFormatter={(label) =>
                 formatDate(String(label) + "T00:00:00")
               }

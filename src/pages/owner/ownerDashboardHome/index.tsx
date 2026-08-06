@@ -9,7 +9,9 @@ import {
   DASHBOARD_OVERVIEW_LIMITS,
 } from "../../../lib/dashboardWidgets";
 
-const OwnerDashboardCharts = lazy(() => import("./components/OwnerDashboardCharts"));
+const OwnerDashboardCharts = lazy(
+  () => import("./components/OwnerDashboardCharts"),
+);
 
 const MAX_STAT_CARDS = DASHBOARD_OVERVIEW_LIMITS.stats;
 const MAX_CHARTS = DASHBOARD_OVERVIEW_LIMITS.charts;
@@ -59,7 +61,7 @@ export default function OwnerDashboardHome({
       name: status.charAt(0).toUpperCase() + status.slice(1),
       count,
       fill: STATUS_COLORS[status] ?? "#94a3b8",
-    })
+    }),
   );
 
   if (loading) {
@@ -106,7 +108,9 @@ export default function OwnerDashboardHome({
         <p className="mt-1 text-2xl font-bold text-brand-cream">
           {formatCurrency(stats.revenue)}
         </p>
-        <p className="mt-1 text-xs text-brand-light">From paid/shipped orders</p>
+        <p className="mt-1 text-xs text-brand-light">
+          From paid/shipped orders
+        </p>
       </Link>
     );
   }
@@ -137,9 +141,7 @@ export default function OwnerDashboardHome({
         className="rounded-xl border border-brand-medium/35 bg-brand-dark-alt p-5 shadow-sm transition hover:border-brand-medium/70 hover:shadow"
       >
         <p className="text-sm font-medium text-brand-light">Product Catalog</p>
-        <p className="mt-1 text-2xl font-bold text-white">
-          {products.length}
-        </p>
+        <p className="mt-1 text-2xl font-bold text-white">{products.length}</p>
         <p className="mt-1 text-xs text-brand-light">
           {publishedCount} published
           {stats.lowStockCount > 0 && (
@@ -158,7 +160,9 @@ export default function OwnerDashboardHome({
         to="/account/owner/products?low_stock=1"
         className="rounded-xl border border-brand-medium/35 bg-brand-dark-alt p-5 shadow-sm transition hover:border-brand-medium/70 hover:shadow"
       >
-        <p className="text-sm font-medium text-brand-light">Low Stock Summary</p>
+        <p className="text-sm font-medium text-brand-light">
+          Low Stock Summary
+        </p>
         <p className="mt-1 text-2xl font-bold text-brand-orange">
           {stats.lowStockCount}
         </p>
@@ -172,7 +176,7 @@ export default function OwnerDashboardHome({
   const orderedStatIds = isAllWidgetsPage
     ? [...STAT_CARD_IDS]
     : enabledWidgets.filter((id) =>
-        STAT_CARD_IDS.includes(id as (typeof STAT_CARD_IDS)[number])
+        STAT_CARD_IDS.includes(id as (typeof STAT_CARD_IDS)[number]),
       );
   const displayedStatCards = (
     isAllWidgetsPage ? orderedStatIds : orderedStatIds.slice(0, MAX_STAT_CARDS)
@@ -200,11 +204,13 @@ export default function OwnerDashboardHome({
               key={i}
               className="flex items-center justify-between rounded-lg bg-brand-medium/30 px-3 py-2"
             >
-              <span className="truncate font-medium text-white font-semibold">
+              <span className="truncate text-white font-semibold">
                 {p.name}
               </span>
               <div className="ml-2 flex shrink-0 items-center gap-3">
-                <span className="text-sm text-brand-light">{p.quantity} sold</span>
+                <span className="text-sm text-brand-light">
+                  {p.quantity} sold
+                </span>
                 <span className="text-sm font-medium text-brand-cream">
                   {formatCurrency(p.revenue)}
                 </span>
@@ -232,9 +238,7 @@ export default function OwnerDashboardHome({
               to={`/account/owner/products/${p.id}`}
               className="flex items-center justify-between rounded-lg bg-amber-950/20 border border-amber-900/30 px-3 py-2 transition hover:bg-amber-950/40"
             >
-              <span className="truncate font-medium text-white">
-                {p.name}
-              </span>
+              <span className="truncate font-medium text-white">{p.name}</span>
               <span
                 className={`shrink-0 text-sm font-medium ${
                   p.stock_quantity === 0 ? "text-red-400" : "text-brand-orange"
@@ -246,7 +250,9 @@ export default function OwnerDashboardHome({
           ))}
         </div>
       ) : (
-        <p className="mt-4 text-brand-light">All products have sufficient stock</p>
+        <p className="mt-4 text-brand-light">
+          All products have sufficient stock
+        </p>
       )}
     </div>
   );
@@ -258,7 +264,7 @@ export default function OwnerDashboardHome({
   const orderedListIds = isAllWidgetsPage
     ? [...LIST_IDS]
     : enabledWidgets.filter((id) =>
-        LIST_IDS.includes(id as (typeof LIST_IDS)[number])
+        LIST_IDS.includes(id as (typeof LIST_IDS)[number]),
       );
   const displayedListWidgets = (
     isAllWidgetsPage
