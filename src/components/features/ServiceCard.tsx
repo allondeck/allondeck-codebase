@@ -57,7 +57,12 @@ export function ServiceCard({
   const renderButton = () => {
     if (linkTo) {
       return (
-        <Button to={destination} variant="primary" size="md" className={buttonClassName}>
+        <Button
+          to={destination}
+          variant="primary"
+          size="md"
+          className={`!py-3.5 lg:!py-3.5 ${buttonClassName}`.trim()}
+        >
           {buttonText}
         </Button>
       );
@@ -68,7 +73,7 @@ export function ServiceCard({
         onClick={() => targetId && onActionClick?.(targetId)}
         variant="primary"
         size="md"
-        className={buttonClassName}
+        className={`!py-3.5 lg:!py-3.5 ${buttonClassName}`.trim()}
       >
         {buttonText}
       </Button>
@@ -76,9 +81,13 @@ export function ServiceCard({
   };
 
   return (
-    <div className={`group relative flex flex-col justify-between overflow-visible rounded-[2.5rem] bg-brand-medium p-5 pt-5 pb-16 ${cardMinHeight} border border-white/10 shadow-2xl transition-all hover:-translate-y-1 ${className}`.trim()}>
+    <div
+      className={`group relative flex flex-col justify-between overflow-visible rounded-[1.5rem] bg-brand-medium p-5 pt-5 pb-16 ${cardMinHeight} border border-white/10 shadow-2xl transition-all hover:-translate-y-1 ${className}`.trim()}
+    >
       {/* Top Image Container */}
-      <div className={`overflow-hidden rounded-[2rem] ${aspectRatio} w-full shadow-md ${imageClassName}`.trim()}>
+      <div
+        className={`overflow-hidden rounded-[2rem] ${aspectRatio} w-full shadow-md ${imageClassName}`.trim()}
+      >
         <img
           src={imageSrc}
           alt={typeof title === "string" ? title : "Service"}
@@ -88,7 +97,9 @@ export function ServiceCard({
 
       {/* Title */}
       <div className="my-auto pt-3 pb-2 sm:pt-4 sm:pb-3 text-center px-3">
-        <h3 className={`font-heading text-2xl sm:text-3xl lg:text-xl xl:text-3xl font-black tracking-wider text-white uppercase leading-snug ${titleClassName}`.trim()}>
+        <h3
+          className={`font-heading text-2xl sm:text-3xl lg:text-2xl xl:text-3xl font-black tracking-wider text-brand-cream uppercase leading-snug ${titleClassName}`.trim()}
+        >
           {title}
         </h3>
       </div>
@@ -96,17 +107,17 @@ export function ServiceCard({
       {/* Waves & Bottom Right Corner Button */}
       <div className="absolute bottom-0 left-0 right-0 h-16 pointer-events-none overflow-visible">
         {/* Top Wave (Behind button, z-0) */}
-        <div className="absolute bottom-6 sm:bottom-7 -left-2 sm:-left-3 lg:-left-4 right-0 sm:right-1 z-0 text-brand-light opacity-95 pointer-events-none scale-y-[0.65] sm:scale-y-70 lg:scale-y-90 origin-bottom">
+        <div className="absolute bottom-5 sm:bottom-6 lg:bottom-4 -left-2 sm:-left-3 lg:-left-4 right-0 sm:right-1 z-0 text-brand-light opacity-95 pointer-events-none scale-y-[0.65] sm:scale-y-[0.70] lg:scale-y-[0.90] origin-bottom">
           <Wave />
         </div>
 
         {/* SEE MORE Button in Bottom Right Corner (z-10) */}
-        <div className="absolute bottom-2.5 right-3 z-10 pointer-events-auto">
+        <div className="absolute bottom-1.5 right-5 z-10 pointer-events-auto">
           {renderButton()}
         </div>
 
         {/* Bottom Wave (In front of lower part of button, z-20) */}
-        <div className="absolute -bottom-1 sm:bottom-0 -left-2 sm:-left-3 lg:-left-4 right-0 sm:right-1 z-20 text-brand-light opacity-95 pointer-events-none scale-y-[0.65] sm:scale-y-70 lg:scale-y-90 origin-bottom">
+        <div className="absolute -bottom-2 sm:-bottom-2 lg:-bottom-2.5 -left-2 sm:-left-3 lg:-left-4 right-0 sm:right-1 z-20 text-brand-light opacity-95 pointer-events-none scale-y-[0.65] sm:scale-y-[0.70] lg:scale-y-[0.90] origin-bottom">
           <Wave />
         </div>
       </div>

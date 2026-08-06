@@ -17,6 +17,7 @@ export function ServicesSection() {
             imageSrc="/assets/images/1.jpg"
             linkTo="/services#service-1"
             buttonText="See More"
+            buttonClassName="!py-4 lg:!py-4"
           />
 
           <ServiceCard
@@ -24,6 +25,7 @@ export function ServicesSection() {
             imageSrc="/assets/images/2.jpg"
             linkTo="/services#service-2"
             buttonText="See More"
+            buttonClassName="!py-4 lg:!py-4"
           />
 
           <ServiceCard
@@ -31,6 +33,7 @@ export function ServicesSection() {
             imageSrc="/assets/images/3.jpg"
             linkTo="/services#service-3"
             buttonText="See More"
+            buttonClassName="!py-4 lg:!py-4"
           />
         </div>
 

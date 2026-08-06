@@ -1,6 +1,6 @@
-import { Link } from "react-router-dom";
 import { useProducts } from "../../../../hooks/useProducts";
 import { Button } from "../../../../components/ui/Button";
+import { ShopCard } from "../../../../components/features/ShopCard";
 
 export function ShopSection() {
   const { products, loading } = useProducts({ limit: 4 });
@@ -11,20 +11,20 @@ export function ShopSection() {
         <div className="text-center flex flex-col items-center">
           <div className="flex flex-col md:flex-row items-center justify-center gap-4">
             <svg
-              className="h-10 w-10 text-brand-orange"
+              className="h-10 w-10 md:h-14 md:w-14 lg:h-20 lg:w-20 text-brand-orange"
               fill="currentColor"
               viewBox="0 0 24 24"
             >
               <path d="M19 6h-3.5a5.5 5.5 0 00-11 0H1v16h18V6zm-8-3.5c1.93 0 3.5 1.57 3.5 3.5h-7c0-1.93 1.57-3.5 3.5-3.5zM3 20V8h12v12H3z" />
               <path d="M7.5 6a3.5 3.5 0 017 0H16a5.5 5.5 0 00-11 0h2.5z" />
             </svg>
-            <h2 className="font-heading text-4xl md:text-6xl font-normal tracking-widest text-brand-cream">
+            <h2 className="font-heading text-4xl md:text-6xl lg:text-8xl font-normal tracking-widest text-brand-cream">
               OUR SHOP
             </h2>
           </div>
-          <p className="mt-4 max-w-xl text-sm md:text-base text-brand-light italic tracking-wide">
-            Join the community and carry our spirit on every journey. We'll
-            see you out on the water!
+          <p className="mt-4 max-w-xl text-base md:text-lg lg:text-xl text-brand-light italic tracking-wide">
+            Join the community and carry our spirit on every journey. We'll see
+            you out on the water!
           </p>
         </div>
 
@@ -38,48 +38,7 @@ export function ShopSection() {
                   />
                 ))
               : products.map((product) => (
-                  <Link
-                    key={product.id}
-                    to={`/products/${product.slug}`}
-                    className="snap-start shrink-0 w-[280px] flex flex-col bg-brand-medium rounded-[2rem] p-4 border border-transparent hover:border-brand-orange/50 transition-all shadow-lg"
-                  >
-                    <div className="relative bg-white aspect-[4/5] rounded-3xl overflow-hidden shadow-inner">
-                      {product.image_url ? (
-                        <img
-                          src={`https://rckxskncdxobolhctnfw.supabase.co/storage/v1/object/public/products/${product.image_url}`}
-                          alt={product.name}
-                          className="w-full h-full object-contain p-8 hover:scale-105 transition-transform"
-                        />
-                      ) : (
-                        <div className="w-full h-full flex items-center justify-center text-gray-300">
-                          <svg
-                            className="w-12 h-12"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14"
-                            />
-                          </svg>
-                        </div>
-                      )}
-                      <div className="absolute bottom-2 right-2 bg-brand-orange rounded-full w-9 h-9 flex items-center justify-center text-white text-xl font-black shadow-md transition-colors hover:bg-orange-600">
-                        +
-                      </div>
-                    </div>
-                    <div className="mt-5 px-2 pb-1">
-                      <h3 className="font-heading font-medium text-white tracking-widest text-lg uppercase truncate">
-                        {product.name}
-                      </h3>
-                      <p className="text-white text-sm mt-1 font-bold tracking-wider">
-                        ${Number(product.price).toFixed(2)}
-                      </p>
-                    </div>
-                  </Link>
+                  <ShopCard key={product.id} product={product} />
                 ))}
           </div>
 
