@@ -1,6 +1,8 @@
 import { Button } from "../../../../components/ui/Button";
 import { formatPrice } from "../../../../lib/utils";
 import { getSupabaseImageTransformUrl } from "../../../../lib/imageUtils";
+import { useWishlist } from "../../../../hooks/useWishlist";
+import { useCastAndReel } from "../../../../components/ui/CastAndReelSplash";
 import type { ProductRow } from "../../../../types/database";
 
 type VariantType = {
@@ -50,9 +52,13 @@ export function ProductMainSection({
   onAddToCart,
   added,
 }: ProductMainSectionProps) {
+  const { isInWishlist, toggle } = useWishlist();
+  const saved = isInWishlist(product.id);
+  const { triggerSplash } = useCastAndReel();
+
   return (
     <div className="flex flex-col gap-8 lg:flex-row">
-      <div className="aspect-square w-full max-w-lg shrink-0 overflow-hidden rounded-lg bg-brand-dark-alt">
+      <div className="relative aspect-square w-full max-w-lg shrink-0 overflow-hidden rounded-2xl bg-brand-dark-alt shadow-xl border border-brand-medium/30">
         {selectedVariant?.image_url || product.image_url ? (
           <img
             src={getSupabaseImageTransformUrl(
@@ -89,6 +95,33 @@ export function ProductMainSection({
             </svg>
           </div>
         )}
+
+        <button
+          type="button"
+          onClick={(e) => {
+            e.preventDefault();
+            triggerSplash(e, saved ? "Released!" : "Hooked!");
+            toggle(product.id);
+          }}
+          className="absolute right-4 top-4 rounded-full bg-brand-dark-alt/90 p-3 shadow-lg backdrop-blur-md transition-transform hover:scale-110 active:scale-95 border border-white/10"
+          aria-label={saved ? "Remove from wishlist" : "Save for later"}
+        >
+          <svg
+            className={`h-6 w-6 transition-colors ${
+              saved ? "text-red-500 fill-current" : "text-brand-light hover:text-brand-orange"
+            }`}
+            fill={saved ? "currentColor" : "none"}
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={1.8}
+              d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+            />
+          </svg>
+        </button>
       </div>
 
       <div className="flex-1">
@@ -104,9 +137,9 @@ export function ProductMainSection({
           )}
         </div>
         {product.description && (
-          <p className="mt-4 text-brand-cream">{product.description}</p>
+          <p className="mt-4 text-brand-cream leading-relaxed">{product.description}</p>
         )}
-        {!inStock && <p className="mt-2 text-red-400">Out of stock</p>}
+        {!inStock && <p className="mt-2 text-red-400 font-bold">Out of stock</p>}
         {inStock && (
           <p className="mt-2 text-sm text-brand-light">
             {currentStock} in stock
@@ -191,3 +224,4 @@ export function ProductMainSection({
     </div>
   );
 }
+

@@ -9,6 +9,7 @@ import {
 import { ScrollToTop } from "./components/features/ScrollToTop";
 import { useAuth } from "./context/AuthContext";
 import { Layout } from "./components/layouts/Layout";
+import { CastAndReelProvider } from "./components/ui/CastAndReelSplash";
 // import { Chatbox } from "./components/features/chatbox";
 import Home from "./pages/public/home/index";
 import Account from "./pages/account/Account";
@@ -51,7 +52,7 @@ function OwnerGuard({ children }: { children: React.ReactNode }) {
 
 function RootLayout() {
   return (
-    <>
+    <CastAndReelProvider>
       <ScrollToTop />
       {/* <Chatbox /> */}
       <Layout>
@@ -59,7 +60,7 @@ function RootLayout() {
           <Outlet />
         </Suspense>
       </Layout>
-    </>
+    </CastAndReelProvider>
   );
 }
 

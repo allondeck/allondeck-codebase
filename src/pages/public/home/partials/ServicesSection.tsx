@@ -1,9 +1,19 @@
+import { motion } from "framer-motion";
 import { ServiceCard } from "../../../../components/features/ServiceCard";
+import { AnimatedWaveDivider } from "../../../../components/ui/AnimatedWaveDivider";
 
 export function ServicesSection() {
   return (
-    <section className="bg-brand-dark pt-10 sm:pt-12 md:pt-14 pb-20 md:pb-28 text-white relative overflow-hidden">
-      <div className="relative mx-auto max-w-[1400px] px-6 lg:px-12">
+    <section className="bg-brand-dark pt-4 sm:pt-6 md:pt-8 pb-20 md:pb-28 text-white relative overflow-hidden">
+      <AnimatedWaveDivider className="-mt-8 mb-6 opacity-75" />
+
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-50px" }}
+        transition={{ duration: 0.7, ease: "easeOut" }}
+        className="relative mx-auto max-w-[1400px] px-6 lg:px-12"
+      >
         <div className="text-center">
           <h2 className="font-heading text-5xl sm:text-7xl md:text-8xl font-black tracking-widest text-brand-cream text-center uppercase drop-shadow-md">
             SERVICES
@@ -45,7 +55,8 @@ export function ServicesSection() {
             Explore Full Project Gallery →
           </a>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }
+
