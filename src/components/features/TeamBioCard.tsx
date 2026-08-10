@@ -76,7 +76,7 @@ export function TeamBioCard({
             href={whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex h-11 w-11 shrink-0 items-center justify-center hover:scale-105 transition-transform shadow-md"
+            className="flex h-11 w-11 shrink-0 items-center justify-center hover:scale-105 transition-transform"
             aria-label="WhatsApp"
           >
             <svg className="h-11 w-11" viewBox="0 0 24 24" fill="none">
@@ -94,7 +94,7 @@ export function TeamBioCard({
           {/* Email Icon */}
           <a
             href={`mailto:${email}`}
-            className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-brand-orange text-[#05586d] hover:scale-105 transition-transform shadow-md"
+            className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-brand-orange text-[#05586d] hover:scale-105 transition-transform"
             aria-label="Email"
           >
             <svg className="h-6 w-6" viewBox="0 0 24 24" fill="#05586d">

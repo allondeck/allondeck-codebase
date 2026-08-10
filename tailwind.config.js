@@ -15,6 +15,7 @@ export default {
         brand: {
           dark: "#044155",
           "dark-alt": "#052631",
+          navy: "#044155",
           medium: "#066175",
           light: "#76abbf",
           cream: "#f6ebd4",

@@ -1,9 +1,5 @@
-/**
- * TeamTeaserCard.tsx
- * 
- * Reusable hero teaser card component for displaying team member quick info 
- * with portrait photo, decorative wave overlay, and quick contact/bio links.
- */
+import React from "react";
+import { Link } from "react-router-dom";
 
 interface TeamTeaserCardProps {
   /** Full name of the team member */
@@ -13,7 +9,9 @@ interface TeamTeaserCardProps {
   /** Path to portrait photo */
   imageSrc: string;
   /** Target section ID to scroll to when clicking "View Bio" */
-  bioSectionId: string;
+  bioSectionId?: string;
+  /** Route path to navigate to when clicking "View Bio" (e.g. "/about#bio-ernesto") */
+  to?: string;
   /** WhatsApp contact link */
   whatsappUrl: string;
   /** Email address */
@@ -23,7 +21,7 @@ interface TeamTeaserCardProps {
   /** Optional custom CSS classes for the "View Bio" button styling */
   buttonClassName?: string;
   /** Function callback for scrolling to bio section */
-  onViewBioClick: (id: string) => void;
+  onViewBioClick?: (id: string) => void;
 }
 
 export function TeamTeaserCard({
@@ -31,33 +29,42 @@ export function TeamTeaserCard({
   role,
   imageSrc,
   bioSectionId,
+  to,
   whatsappUrl,
   email,
   wavePosition = "left",
-  buttonClassName = "bg-brand-cream text-brand-dark hover:bg-white",
+  buttonClassName = "bg-brand-orange text-white hover:bg-orange-600",
   onViewBioClick,
 }: TeamTeaserCardProps) {
   const wavePosClass =
     wavePosition === "left"
-      ? "absolute bottom-5 -left-10 w-36 pointer-events-none z-20 text-[#599db3]"
-      : "absolute bottom-5 -right-10 w-36 pointer-events-none z-20 text-[#599db3]";
+      ? "absolute bottom-5 -left-8 sm:-left-10 w-36 sm:w-44 pointer-events-none z-20 text-[#6bb3c7]"
+      : "absolute bottom-5 -right-8 sm:-right-10 w-36 sm:w-44 pointer-events-none z-20 text-[#6bb3c7]";
+
+  const handleBioClick = (e: React.MouseEvent) => {
+    if (onViewBioClick && bioSectionId) {
+      e.preventDefault();
+      onViewBioClick(bioSectionId);
+    }
+  };
 
   return (
-    <div className="flex flex-col items-start text-left w-full max-w-[320px]">
+    <div className="flex flex-col items-start text-left w-full max-w-[320px] sm:max-w-[350px]">
       {/* Portrait Photo Container */}
-      <div className="relative w-full aspect-[4/5] rounded-[2.5rem] bg-brand-dark-alt shadow-xl">
-        <div className="w-full h-full rounded-[2.5rem] overflow-hidden border border-brand-medium/35">
+      <div className="relative w-full aspect-[4/5] rounded-[2.2rem] bg-brand-dark-alt shadow-2xl">
+        <div className="w-full h-full rounded-[2.2rem] overflow-hidden border border-brand-medium/30">
           <img
             src={imageSrc}
             alt={name}
             className="h-full w-full object-cover"
           />
         </div>
-        {/* Wave decoration overlapping bottom corner */}
+
+        {/* Double Wave overlay overlapping bottom corner */}
         <div className={wavePosClass}>
           <svg
             viewBox="0 0 380.442 62.684"
-            className="w-full h-auto"
+            className="w-full h-auto drop-shadow-md"
             fill="currentColor"
           >
             <path d="M380.437,15.6a4.388,4.388,0,0,0-6.319-3.88c-10.453,4.8-19.785,1.364-28.981-4.008-.894-.522-1.909-.894-2.833-1.383C328.072-1.2,313.45-1.45,299.969,6.776c-14.137,8.628-26.9,8.967-41.157.237C245.143-1.359,230.1-1.622,215.963,6.46a72.2,72.2,0,0,1-8.834,4.334c-8.749,3.522-17.668,4.336-27.3.326-.792-.318-1.581-.652-2.367-1.019q-.972-.453-1.94-.95-1.05-.538-2.1-1.122c-.519-.289-1.038-.579-1.556-.881-.894-.522-1.909-.894-2.833-1.383C154.8-1.764,140.181-2.012,126.7,6.214c-14.137,8.628-26.9,8.966-41.157.237C71.875-1.922,56.836-2.185,42.7,5.9,30.953,12.609,19.3,16.126,6.311,10.614A4.348,4.348,0,0,0,.272,14.681a41.477,41.477,0,0,1-.213,5.4c-.465,3.926,1.845,5.278,6.512,6.4a55.747,55.747,0,0,0,37.374-4.266q5.23-2.549,10.491-5.056a20.369,20.369,0,0,1,18.1-.135c5.432,2.524,10.784,5.174,16.243,7.654a41.316,41.316,0,0,0,33.52.355c5.6-2.434,11.045-5.142,16.508-7.8a21.456,21.456,0,0,1,18.648-.021c6.076,2.906,12.1,5.918,18.374,8.494.13.053.262.09.392.142.808.322,1.618.613,2.431.881a61.814,61.814,0,0,0,7.53,1.681,44.616,44.616,0,0,0,27.331-3.824q7.074-3.46,14.189-6.862a20.371,20.371,0,0,1,18.1-.135c5.431,2.524,10.783,5.173,16.242,7.654a41.308,41.308,0,0,0,33.52.355c5.6-2.434,11.045-5.142,16.508-7.8a21.456,21.456,0,0,1,18.648-.021c6.077,2.906,12.1,5.918,18.374,8.494a36.531,36.531,0,0,0,27.191.631c1.569-.576,3.8-1.868,3.9-2.944C380.427,21.268,380.457,18.572,380.437,15.6Z" />
@@ -66,51 +73,61 @@ export function TeamTeaserCard({
         </div>
       </div>
 
-      {/* Teaser Info */}
-      <div className="mt-4 w-full text-left">
-        <span className="block text-xs text-brand-light font-bold italic tracking-wider">
+      {/* Info Container */}
+      <div className="mt-5 w-full text-left">
+        <span className="block text-xs sm:text-sm text-[#6bb3c7] font-medium italic tracking-wider uppercase font-sans whitespace-nowrap">
           {role}
         </span>
-        <span className="block text-lg sm:text-xl font-black tracking-widest text-brand-cream font-heading uppercase mt-0.5">
+        <h3 className="block text-base sm:text-lg md:text-xl font-black tracking-widest text-brand-cream font-heading uppercase mt-1 whitespace-nowrap">
           {name}
-        </span>
+        </h3>
 
-        {/* Teaser CTA & Contact */}
-        <div className="mt-3 flex items-center gap-2.5">
-          <button
-            onClick={() => onViewBioClick(bioSectionId)}
-            className={`px-5 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider hover:scale-105 transition-transform shadow-md ${buttonClassName}`}
-          >
-            VIEW BIO
-          </button>
-          
-          {/* WhatsApp Icon - Solid Orange Speech Bubble with Dark Phone Receiver */}
+        {/* Buttons Row */}
+        <div className="mt-4 flex items-center gap-3">
+          {to ? (
+            <Link
+              to={to}
+              onClick={handleBioClick}
+              className={`px-7 py-3 rounded-2xl text-xs sm:text-sm font-bold uppercase tracking-wider transition-transform hover:scale-105 shadow-md ${buttonClassName}`}
+            >
+              VIEW BIO
+            </Link>
+          ) : (
+            <button
+              onClick={handleBioClick}
+              className={`px-7 py-3 rounded-2xl text-xs sm:text-sm font-bold uppercase tracking-wider transition-transform hover:scale-105 shadow-md ${buttonClassName}`}
+            >
+              VIEW BIO
+            </button>
+          )}
+
+          {/* WhatsApp Speech Bubble Icon */}
           <a
             href={whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex h-10 w-10 shrink-0 items-center justify-center hover:scale-105 transition-transform shadow-md"
+            className="flex h-11 w-11 shrink-0 items-center justify-center transition-transform hover:scale-105"
             aria-label="WhatsApp"
           >
-            <svg className="h-10 w-10" viewBox="0 0 24 24" fill="none">
+            <svg className="h-11 w-11" viewBox="0 0 24 24" fill="none">
               <path
-                fill="#e88d25"
+                fill="#ea8925"
                 d="M12 2C6.48 2 2 6.48 2 12c0 2.17.69 4.19 1.87 5.84L2.5 21.5l3.82-1.33C7.91 21.28 9.89 22 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2z"
               />
               <path
-                fill="#05586d"
+                fill="#052631"
                 d="M15.5 13.8c-.3-.15-1.7-.84-1.96-.94-.26-.1-.45-.15-.64.15-.19.3-.74.94-.91 1.13-.17.19-.34.21-.64.06-.3-.15-1.27-.47-2.42-1.5-.9-.8-1.5-1.79-1.68-2.09-.18-.3-.02-.46.13-.61.14-.14.3-.34.45-.51.15-.17.2-.3.3-.5.1-.19.05-.36-.02-.51s-.64-1.55-.88-2.12c-.23-.55-.47-.48-.64-.49-.16-.01-.35-.01-.54-.01-.19 0-.5.07-.76.36-.26.29-1 1-1 2.43 0 1.43 1.04 2.81 1.18 3 .15.19 2.05 3.13 4.97 4.39.69.3 1.23.48 1.65.61.7.22 1.34.19 1.84.12.56-.08 1.7-.7 1.94-1.37.24-.67.24-1.25.17-1.37-.07-.12-.26-.19-.56-.34z"
               />
             </svg>
           </a>
 
-          {/* Email Icon - Solid Orange Squircle with Dark Envelope Cutout */}
+          {/* Email Squircle Icon */}
           <a
             href={`mailto:${email}`}
-            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-brand-orange text-[#05586d] hover:scale-105 transition-transform shadow-md"
+            className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-brand-orange text-[#052631] transition-transform hover:scale-105"
             aria-label="Email"
           >
-            <svg className="h-5.5 w-5.5" viewBox="0 0 24 24" fill="#05586d">
+            <svg className="h-6 w-6" viewBox="0 0 24 24" fill="#052631">
               <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
             </svg>
           </a>
