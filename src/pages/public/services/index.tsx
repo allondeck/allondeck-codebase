@@ -17,8 +17,8 @@ const DEFAULT_SERVICES: ServiceRow[] = [
     secondary_description:
       "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit.",
     image_url: "/assets/images/1.jpg",
-    cta_text: "Get Started",
-    cta_link: "/estimate",
+    cta_text: "View Gallery",
+    cta_link: "/gallery?category=custom_deck_designs",
     display_order: 1,
     is_active: true,
     created_at: new Date().toISOString(),
@@ -32,8 +32,8 @@ const DEFAULT_SERVICES: ServiceRow[] = [
     secondary_description:
       "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit.",
     image_url: "/assets/images/2.jpg",
-    cta_text: "Get Started",
-    cta_link: "/estimate",
+    cta_text: "View Gallery",
+    cta_link: "/gallery?category=floor_manufacturing",
     display_order: 2,
     is_active: true,
     created_at: new Date().toISOString(),
@@ -46,8 +46,8 @@ const DEFAULT_SERVICES: ServiceRow[] = [
       "With over two years of experience and outstanding results in Florida, we elevate your boat’s standard through high-precision CNC cutting. Our specialized team, using CAD and CAM software, ensures the millimeter-perfect fabrication of each MarineMat piece, followed by a professional and meticulous installation that guarantees a flawless fit, impeccable aesthetics, and maximum durability at sea.",
     secondary_description: null,
     image_url: "/assets/images/3.jpg",
-    cta_text: "Get Started",
-    cta_link: "/estimate",
+    cta_text: "View Gallery",
+    cta_link: "/gallery?category=cutting_installation",
     display_order: 3,
     is_active: true,
     created_at: new Date().toISOString(),
@@ -161,11 +161,11 @@ export default function Services() {
                       )}
                       <div className="mt-8">
                         <Button
-                          to={service.cta_link || "/estimate"}
+                          to={service.cta_link || "/gallery"}
                           variant="primary"
                           size="md"
                         >
-                          {service.cta_text || "Get Started"}
+                          {service.cta_text || "View Gallery"}
                         </Button>
                       </div>
                     </div>
@@ -220,11 +220,11 @@ export default function Services() {
                     )}
                     <div className="mt-8">
                       <Button
-                        to={service.cta_link || "/estimate"}
+                        to={service.cta_link || "/gallery"}
                         variant="primary"
                         size="md"
                       >
-                        {service.cta_text || "Get Started"}
+                        {service.cta_text || "View Gallery"}
                       </Button>
                     </div>
                   </div>

@@ -16,10 +16,10 @@ export function ServicesGalleryBannerSection() {
           </p>
           <div className="pt-2">
             <Link
-              to="/gallery"
+              to="/estimate"
               className="inline-flex items-center gap-2 rounded-full bg-brand-orange px-8 py-3.5 text-sm font-bold text-white shadow-lg hover:bg-brand-orange/80 transition-all transform hover:scale-105"
             >
-              Explore Full Gallery →
+              Get Free Estimate →
             </Link>
           </div>
         </div>

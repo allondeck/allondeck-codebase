@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import { supabase } from "../../../lib/supabase";
 import { SEO } from "../../../components/ui/SEO";
 import { X, ChevronLeft, ChevronRight, Maximize2 } from "lucide-react";
@@ -78,10 +79,28 @@ const INITIAL_FALLBACK_IMAGES: GalleryImage[] = [
 ];
 
 export default function Gallery() {
+  const [searchParams, setSearchParams] = useSearchParams();
   const [images, setImages] = useState<GalleryImage[]>([]);
-  const [activeCategory, setActiveCategory] = useState<string>("all");
+
+  const categoryParam = searchParams.get("category") || searchParams.get("service");
+  const [activeCategory, setActiveCategory] = useState<string>(() => {
+    if (categoryParam && SERVICE_CATEGORIES.some((c) => c.id === categoryParam)) {
+      return categoryParam;
+    }
+    return "all";
+  });
+
   const [loading, setLoading] = useState(true);
   const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(null);
+
+  useEffect(() => {
+    const cat = searchParams.get("category") || searchParams.get("service");
+    if (cat && SERVICE_CATEGORIES.some((c) => c.id === cat)) {
+      setActiveCategory(cat);
+    } else if (!cat) {
+      setActiveCategory("all");
+    }
+  }, [searchParams]);
 
   useEffect(() => {
     fetchGalleryImages();
@@ -187,6 +206,17 @@ export default function Gallery() {
                 onClick={() => {
                   setActiveCategory(cat.id);
                   setSelectedImageIndex(null);
+                  if (cat.id === "all") {
+                    const newParams = new URLSearchParams(searchParams);
+                    newParams.delete("category");
+                    newParams.delete("service");
+                    setSearchParams(newParams, { replace: true });
+                  } else {
+                    const newParams = new URLSearchParams(searchParams);
+                    newParams.set("category", cat.id);
+                    newParams.delete("service");
+                    setSearchParams(newParams, { replace: true });
+                  }
                 }}
                 className={`rounded-full px-5 py-2 text-xs sm:text-sm font-bold tracking-wider uppercase transition-all ${
                   isActive

@@ -36,8 +36,8 @@ export function CuttingInstallationSection() {
               impeccable aesthetics, and maximum durability at sea.
             </p>
             <div className="mt-8">
-              <Button to="/estimate" variant="primary" size="md">
-                Get Started
+              <Button to="/gallery?category=cutting_installation" variant="primary" size="md">
+                View Gallery
               </Button>
             </div>
           </div>

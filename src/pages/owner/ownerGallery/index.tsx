@@ -428,14 +428,21 @@ export default function OwnerGallery() {
             </thead>
             <tbody className="divide-y divide-brand-medium/35">
               {filteredImages.map((img, idx) => (
-                <tr key={img.id} className="hover:bg-brand-medium/20 transition-colors">
+                <tr
+                  key={img.id}
+                  onClick={() => openForm(img)}
+                  className="cursor-pointer hover:bg-brand-medium/20 transition-colors"
+                >
                   <td className="whitespace-nowrap px-4 py-3 text-brand-light">
                     <div className="flex items-center gap-3">
                       <span className="font-bold text-white text-base min-w-[24px]">{img.display_order}</span>
                       <div className="flex items-center gap-1.5">
                         <button
                           disabled={idx === 0}
-                          onClick={() => handleReorder(img.id, -1)}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleReorder(img.id, -1);
+                          }}
                           title="Move Up"
                           aria-label="Move image up"
                           className="rounded-md border border-brand-medium/50 bg-brand-dark p-2 text-brand-cream hover:border-brand-orange hover:bg-brand-orange hover:text-white disabled:opacity-20 transition-all shadow-sm"
@@ -444,7 +451,10 @@ export default function OwnerGallery() {
                         </button>
                         <button
                           disabled={idx === filteredImages.length - 1}
-                          onClick={() => handleReorder(img.id, 1)}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleReorder(img.id, 1);
+                          }}
                           title="Move Down"
                           aria-label="Move image down"
                           className="rounded-md border border-brand-medium/50 bg-brand-dark p-2 text-brand-cream hover:border-brand-orange hover:bg-brand-orange hover:text-white disabled:opacity-20 transition-all shadow-sm"
@@ -477,14 +487,20 @@ export default function OwnerGallery() {
                   <td className="whitespace-nowrap px-4 py-3 text-right">
                     <div className="flex justify-end gap-3">
                       <button
-                        onClick={() => openForm(img)}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          openForm(img);
+                        }}
                         className="text-brand-light hover:text-brand-orange transition-colors"
                         title="Edit image"
                       >
                         <Edit2 className="h-4 w-4" />
                       </button>
                       <button
-                        onClick={() => handleDelete(img.id)}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleDelete(img.id);
+                        }}
                         className="text-brand-light hover:text-red-400 transition-colors"
                         title="Delete image"
                       >

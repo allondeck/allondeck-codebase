@@ -32,8 +32,8 @@ export function CustomDeckDesignsSection() {
               nostrud exerci tation ullamcorper suscipit.
             </p>
             <div className="mt-8">
-              <Button to="/estimate" variant="primary" size="md">
-                Get Started
+              <Button to="/gallery?category=custom_deck_designs" variant="primary" size="md">
+                View Gallery
               </Button>
             </div>
           </div>
