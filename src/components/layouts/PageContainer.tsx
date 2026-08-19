@@ -8,7 +8,7 @@ interface PageContainerProps {
 
 export function PageContainer({ children, className = '', noPadding = false }: PageContainerProps) {
   return (
-    <div className={`mx-auto w-full max-w-[1400px] ${noPadding ? '' : 'px-6 lg:px-12'} ${className}`}>
+    <div className={`mx-auto w-full max-w-content ${noPadding ? '' : 'px-6 lg:px-12'} ${className}`}>
       {children}
     </div>
   );

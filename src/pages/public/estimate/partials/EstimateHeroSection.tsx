@@ -4,7 +4,7 @@ export function EstimateHeroSection() {
   return (
     <>
       {/* HEADER SECTION */}
-      <div className="mx-auto max-w-[1400px] px-6 lg:px-12 text-center">
+      <div className="mx-auto max-w-content px-6 lg:px-12 text-center">
         <span className="text-xs font-bold uppercase tracking-widest text-brand-orange">
           Renewing your boat's deck has never been EASIER!
         </span>
@@ -19,7 +19,7 @@ export function EstimateHeroSection() {
       </div>
 
       {/* WAVE DIVIDER */}
-      <div className="my-12 mx-auto max-w-[1400px] px-6 lg:px-12 opacity-30 text-brand-light">
+      <div className="my-12 mx-auto max-w-content px-6 lg:px-12 opacity-30 text-brand-light">
         <Icon name="wave" width={380} height={29} className="w-full" />
       </div>
     </>

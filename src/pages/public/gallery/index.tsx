@@ -165,23 +165,18 @@ export default function Gallery() {
 
       {/* Hero Header */}
       <section className="relative overflow-hidden border-b border-brand-medium/35 bg-gradient-to-b from-brand-dark-alt to-brand-dark py-16 sm:py-24">
-        <div className="mx-auto max-w-[1400px] px-6 lg:px-12 text-center relative z-10">
-          <div className="inline-flex items-center gap-2 rounded-full bg-brand-orange/15 border border-brand-orange/30 px-4 py-1.5 text-xs font-bold text-brand-orange uppercase tracking-wider mb-6">
-            <Sparkles className="h-4 w-4" />
-            Our Portfolio & Work
-          </div>
-          <h1 className="font-heading text-4xl sm:text-6xl md:text-7xl font-black uppercase tracking-widest text-brand-cream drop-shadow-md">
-            PROJECT GALLERY
+        <div className="mx-auto max-w-content px-6 lg:px-12 text-center relative z-10">
+          <h1 className="font-heading text-5xl font-black tracking-widest text-brand-orange uppercase sm:text-6xl lg:text-7xl">
+            GALLERY
           </h1>
-          <div className="mx-auto mt-4 h-1.5 w-24 bg-brand-orange rounded-full" />
-          <p className="mx-auto mt-6 max-w-2xl text-base sm:text-lg text-brand-light">
-            Explore our showcase of custom CAD deck designs, CNC foam floor manufacturing, and expert installation work crafted for boat owners across Florida.
+          <p className="mx-auto mt-4 max-w-2xl text-sm md:text-base italic leading-relaxed text-brand-light">
+            Explore our portfolio of custom marine decking installations, handcrafted finishes, and precision CNC work.
           </p>
         </div>
       </section>
 
       {/* Main Gallery Area */}
-      <div className="mx-auto max-w-[1400px] px-6 lg:px-12 pt-12">
+      <div className="mx-auto max-w-content px-6 lg:px-12 pt-12">
         {/* Category Filters */}
         <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-10">
           {SERVICE_CATEGORIES.map((cat) => {

@@ -2,7 +2,7 @@ export function DesignsMaterialsSection() {
   return (
     <div
       id="materials"
-      className="scroll-mt-20 mx-auto max-w-[1400px] px-6 lg:px-12 py-20 border-t border-brand-medium/30"
+      className="scroll-mt-20 mx-auto max-w-content px-6 lg:px-12 py-20 border-t border-brand-medium/30"
     >
       <div className="text-center mb-12">
         <span className="text-xs font-bold uppercase tracking-widest text-brand-orange">

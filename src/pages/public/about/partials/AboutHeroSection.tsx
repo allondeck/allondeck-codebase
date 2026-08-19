@@ -26,7 +26,7 @@ export function AboutHeroSection({ onViewBioClick }: AboutHeroSectionProps) {
           whatsappUrl="https://wa.me/18005550199"
           email="ernesto@allondeck.com"
           wavePosition="left"
-          buttonClassName="bg-brand-cream text-brand-dark hover:bg-white"
+          buttonClassName="bg-brand-cream text-brand-orange hover:bg-white"
           onViewBioClick={onViewBioClick}
         />
 
@@ -39,7 +39,7 @@ export function AboutHeroSection({ onViewBioClick }: AboutHeroSectionProps) {
           whatsappUrl="https://wa.me/18005550198"
           email="roselena@allondeck.com"
           wavePosition="right"
-          buttonClassName="bg-brand-orange text-brand-dark hover:bg-brand-orange/90"
+          buttonClassName="bg-brand-orange text-white hover:bg-brand-orange/90"
           onViewBioClick={onViewBioClick}
         />
       </div>

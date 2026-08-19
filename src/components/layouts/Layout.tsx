@@ -117,7 +117,7 @@ export function Layout({ children }: LayoutProps) {
   return (
     <div className="flex min-h-screen flex-col bg-brand-dark text-white">
       <nav className="sticky top-0 z-50 border-b border-brand-medium/35 bg-brand-dark/95 shadow-md backdrop-blur-sm">
-        <div className="relative mx-auto max-w-[1400px] px-6 lg:px-12">
+        <div className="relative mx-auto max-w-content px-6 lg:px-12">
           <div className="flex h-16 items-center justify-between">
 
             {/* LEFT: Logo + Brand */}

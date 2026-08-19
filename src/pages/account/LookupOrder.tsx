@@ -89,7 +89,7 @@ export default function LookupOrder() {
   }
 
   return (
-    <div className="mx-auto max-w-[1400px] px-6 lg:px-12 py-8 sm:px-6 lg:px-8 w-full text-left">
+    <div className="mx-auto max-w-content px-6 lg:px-12 py-8 sm:px-6 lg:px-8 w-full text-left">
       <h1 className="text-2xl font-bold text-white">Look up your order</h1>
       <p className="mt-1 text-sm text-brand-light">
         Enter the order ID and email address used when you placed the order.

@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 export function ServicesGalleryBannerSection() {
   return (
-    <div className="mx-auto max-w-[1400px] px-6 lg:px-12 mt-16">
+    <div className="mx-auto max-w-content px-6 lg:px-12 mt-16">
       <div className="relative overflow-hidden rounded-3xl border border-brand-medium/40 bg-gradient-to-r from-brand-dark-alt via-brand-dark to-brand-dark-alt p-8 sm:p-12 text-center shadow-2xl">
         <div className="relative z-10 max-w-3xl mx-auto space-y-4">
           <span className="inline-block rounded-full bg-brand-orange/20 border border-brand-orange/40 px-4 py-1 text-xs font-bold uppercase tracking-wider text-brand-orange">

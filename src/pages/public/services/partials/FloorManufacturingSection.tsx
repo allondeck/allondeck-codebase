@@ -13,7 +13,7 @@ export function FloorManufacturingSection() {
           className="w-full h-full object-cover"
         />
       </div>
-      <div className="relative mx-auto max-w-[1400px] px-6 lg:px-12">
+      <div className="relative mx-auto max-w-content px-6 lg:px-12">
         <div className="grid gap-12 grid-cols-1 md:grid-cols-2 items-center">
           <div className="md:order-last overflow-hidden rounded-3xl shadow-xl border border-brand-dark/40">
             <img

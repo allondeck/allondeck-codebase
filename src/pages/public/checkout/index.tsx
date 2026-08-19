@@ -240,7 +240,7 @@ export default function Checkout() {
   }
 
   return (
-    <div className="mx-auto max-w-[1400px] px-6 lg:px-12 py-16 sm:px-6 text-left">
+    <div className="mx-auto max-w-content px-6 lg:px-12 py-16 sm:px-6 text-left">
       <h1 className="mb-8 text-2xl font-bold text-white">Checkout</h1>
       <form onSubmit={handlePlaceOrder}>
         {!user && (

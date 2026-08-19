@@ -545,7 +545,7 @@ export default function Products() {
   );
 
   return (
-    <div className="mx-auto max-w-[1400px] px-6 py-8 sm:px-6 lg:px-8 w-full">
+    <div className="mx-auto max-w-content px-6 py-8 sm:px-6 lg:px-8 w-full">
       <SEO
         title="Products & Marine Deck Materials | All On Deck"
         description="Browse our catalog of custom marine deck flooring materials, custom engravings, non-skid EVA/PE foam kits, and boat accessories."

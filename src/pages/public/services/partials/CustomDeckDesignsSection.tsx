@@ -6,7 +6,7 @@ export function CustomDeckDesignsSection() {
       id="service-1"
       className="scroll-mt-20 bg-brand-dark py-20 border-t border-brand-medium/30"
     >
-      <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
+      <div className="mx-auto max-w-content px-6 lg:px-12">
         <div className="grid gap-12 grid-cols-1 md:grid-cols-2 items-center">
           <div className="overflow-hidden rounded-3xl shadow-xl border border-brand-medium/30">
             <img

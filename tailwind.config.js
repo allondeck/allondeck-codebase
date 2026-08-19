@@ -18,9 +18,12 @@ export default {
           navy: "#044155",
           medium: "#066175",
           light: "#76abbf",
-          cream: "#f6ebd4",
-          orange: "#e38622",
+          cream: "#ffe3c5",
+          orange: "#e98e2e",
         }
+      },
+      maxWidth: {
+        content: "1400px",
       }
     },
   },

@@ -7,7 +7,7 @@ interface DesignsHeroSectionProps {
 export function DesignsHeroSection({ onActionClick }: DesignsHeroSectionProps) {
   return (
     <div className="relative overflow-hidden pt-16 pb-24">
-      <div className="relative mx-auto max-w-[1400px] px-6 lg:px-12 text-center">
+      <div className="relative mx-auto max-w-content px-6 lg:px-12 text-center">
         <h1 className="font-heading text-5xl font-black tracking-widest text-brand-cream uppercase sm:text-6xl lg:text-7xl">
           DESIGNS
         </h1>

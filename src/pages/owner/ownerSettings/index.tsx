@@ -264,7 +264,7 @@ export default function OwnerSettings() {
   const sectionTitle = "text-base font-semibold text-brand-cream";
   const sectionDesc = "text-sm text-brand-light mt-0.5 min-w-0";
   return (
-    <div className="w-full max-w-[1400px] px-6 lg:px-12">
+    <div className="w-full max-w-content px-6 lg:px-12">
       <div className="mb-6 sm:mb-8">
         <h1 className="text-xl font-bold text-brand-cream sm:text-2xl">
           Store settings

@@ -222,7 +222,7 @@ export default function ProductDetail() {
   }
 
   return (
-    <div className="mx-auto max-w-[1400px] px-6 py-8 sm:px-6 lg:px-8 w-full">
+    <div className="mx-auto max-w-content px-6 py-8 sm:px-6 lg:px-8 w-full">
       <ProductMainSection
         product={product}
         activeVariants={activeVariants}

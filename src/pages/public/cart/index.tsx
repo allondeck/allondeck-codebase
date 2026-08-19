@@ -22,7 +22,7 @@ export default function Cart() {
   }, 0);
 
   return (
-    <div className="mx-auto max-w-[1400px] px-6 lg:px-12 py-8 sm:px-6 w-full">
+    <div className="mx-auto max-w-content px-6 lg:px-12 py-8 sm:px-6 w-full">
       <SEO
         title="Shopping Cart | All On Deck"
         description="Review your selected marine deck items and proceed to checkout."

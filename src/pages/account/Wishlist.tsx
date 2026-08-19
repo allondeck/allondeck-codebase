@@ -37,7 +37,7 @@ export default function Wishlist() {
   }, [wishlistIds]);
 
   return (
-    <div className="mx-auto max-w-[1400px] px-6 lg:px-12 py-8 sm:px-6 lg:px-8 w-full text-left">
+    <div className="mx-auto max-w-content px-6 lg:px-12 py-8 sm:px-6 lg:px-8 w-full text-left">
       <h1 className="text-2xl font-bold text-white">Wishlist</h1>
       <p className="mt-1 text-sm text-brand-light">
         {wishlistIds.length === 0

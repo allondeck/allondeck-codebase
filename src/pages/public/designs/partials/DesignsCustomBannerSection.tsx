@@ -10,7 +10,7 @@ export function DesignsCustomBannerSection() {
           className="w-full h-full object-cover"
         />
       </div>
-      <div className="relative mx-auto max-w-[1400px] px-6 lg:px-12 text-center">
+      <div className="relative mx-auto max-w-content px-6 lg:px-12 text-center">
         <span className="inline-block rounded-full bg-brand-orange/20 border border-brand-orange/40 px-4 py-1 text-xs font-bold uppercase tracking-widest text-brand-orange mb-4">
           No Additional Cost
         </span>

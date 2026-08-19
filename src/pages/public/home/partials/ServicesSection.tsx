@@ -12,7 +12,7 @@ export function ServicesSection() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-50px" }}
         transition={{ duration: 0.7, ease: "easeOut" }}
-        className="relative mx-auto max-w-[1400px] px-6 lg:px-12"
+        className="relative mx-auto max-w-content px-6 lg:px-12"
       >
         <div className="text-center">
           <h2 className="font-heading text-5xl sm:text-7xl md:text-8xl font-black tracking-widest text-brand-cream text-center uppercase drop-shadow-md">

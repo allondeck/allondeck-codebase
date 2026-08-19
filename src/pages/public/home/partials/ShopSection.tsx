@@ -11,7 +11,7 @@ export function ShopSection() {
       className="py-20 bg-brand-dark text-white overflow-hidden"
       id="shop"
     >
-      <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
+      <div className="mx-auto max-w-content px-6 lg:px-12">
         <div className="text-center flex flex-col items-center">
           <div className="flex flex-col md:flex-row items-center justify-center gap-4">
             <svg

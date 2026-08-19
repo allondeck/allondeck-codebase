@@ -22,7 +22,7 @@ export default function AccountOrders() {
   }
 
   return (
-    <div className="mx-auto max-w-[1400px] px-6 lg:px-12 py-8 sm:px-6 lg:px-8 w-full text-left">
+    <div className="mx-auto max-w-content px-6 lg:px-12 py-8 sm:px-6 lg:px-8 w-full text-left">
       <Link to="/account" className="text-sm text-brand-light hover:text-white">
         ← Back to account
       </Link>

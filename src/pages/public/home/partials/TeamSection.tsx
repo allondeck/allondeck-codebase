@@ -3,7 +3,7 @@ import { TeamTeaserCard } from "../../../../components/features/TeamTeaserCard";
 export function TeamSection() {
   return (
     <section className="pt-16 pb-24 bg-brand-dark text-white">
-      <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
+      <div className="mx-auto max-w-content px-6 lg:px-12">
         <div className="text-center">
           <h2 className="font-heading text-4xl sm:text-5xl lg:text-6xl font-black tracking-widest text-brand-cream uppercase">
             MEET OUR TEAM

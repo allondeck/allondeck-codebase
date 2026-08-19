@@ -3,7 +3,7 @@ import { ServiceCard } from "../../../../components/features/ServiceCard";
 export function DesignsSection() {
   return (
     <section className="bg-brand-dark pt-10 sm:pt-12 md:pt-14 pb-20 md:pb-28 text-white relative overflow-hidden">
-      <div className="relative mx-auto max-w-[1400px] px-6 lg:px-12 text-center">
+      <div className="relative mx-auto max-w-content px-6 lg:px-12 text-center">
         <h2 className="font-heading text-5xl sm:text-7xl md:text-8xl font-black tracking-widest text-brand-cream text-center uppercase drop-shadow-md">
           DESIGNS
         </h2>

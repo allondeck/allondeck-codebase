@@ -68,7 +68,7 @@ export function PromoBannerSection() {
               to="/products"
               variant="primary"
               size="lg"
-              className="relative z-10 pointer-events-auto bg-[#ea8925] hover:bg-[#d77918] text-white shadow-lg !px-8 lg:!px-12 !py-3.5 lg:!py-4 !text-base sm:!text-lg lg:!text-xl font-bold !rounded-2xl"
+              className="relative z-10 pointer-events-auto bg-brand-orange hover:bg-brand-orange/90 text-white shadow-lg !px-8 lg:!px-12 !py-3.5 lg:!py-4 !text-base sm:!text-lg lg:!text-xl font-bold !rounded-2xl"
             >
               GET IT
             </Button>

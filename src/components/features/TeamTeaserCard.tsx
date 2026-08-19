@@ -88,14 +88,14 @@ export function TeamTeaserCard({
             <Link
               to={to}
               onClick={handleBioClick}
-              className={`px-7 py-3 rounded-2xl text-xs sm:text-sm font-bold uppercase tracking-wider transition-transform hover:scale-105 shadow-md ${buttonClassName}`}
+              className={`px-7 py-3 rounded-2xl text-xs sm:text-sm uppercase tracking-wider transition-transform hover:scale-105 shadow-md ${buttonClassName}`}
             >
               VIEW BIO
             </Link>
           ) : (
             <button
               onClick={handleBioClick}
-              className={`px-7 py-3 rounded-2xl text-xs sm:text-sm font-bold uppercase tracking-wider transition-transform hover:scale-105 shadow-md ${buttonClassName}`}
+              className={`px-7 py-3 rounded-2xl text-xs sm:text-sm uppercase tracking-wider transition-transform hover:scale-105 shadow-md ${buttonClassName}`}
             >
               VIEW BIO
             </button>
@@ -106,17 +106,19 @@ export function TeamTeaserCard({
             href={whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex h-11 w-11 shrink-0 items-center justify-center transition-transform hover:scale-105"
+            className="flex size-12 shrink-0 items-center justify-center transition-transform hover:scale-105"
             aria-label="WhatsApp"
           >
-            <svg className="h-11 w-11" viewBox="0 0 24 24" fill="none">
+            <svg className="size-12" viewBox="0 0 24 24" fill="none">
+              {/* Orange speech bubble background with bottom-left pointer */}
               <path
-                fill="#ea8925"
+                fill="#e98e2e"
                 d="M12 2C6.48 2 2 6.48 2 12c0 2.17.69 4.19 1.87 5.84L2.5 21.5l3.82-1.33C7.91 21.28 9.89 22 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2z"
               />
+              {/* Brand navy phone handset inside the bubble */}
               <path
-                fill="#052631"
-                d="M15.5 13.8c-.3-.15-1.7-.84-1.96-.94-.26-.1-.45-.15-.64.15-.19.3-.74.94-.91 1.13-.17.19-.34.21-.64.06-.3-.15-1.27-.47-2.42-1.5-.9-.8-1.5-1.79-1.68-2.09-.18-.3-.02-.46.13-.61.14-.14.3-.34.45-.51.15-.17.2-.3.3-.5.1-.19.05-.36-.02-.51s-.64-1.55-.88-2.12c-.23-.55-.47-.48-.64-.49-.16-.01-.35-.01-.54-.01-.19 0-.5.07-.76.36-.26.29-1 1-1 2.43 0 1.43 1.04 2.81 1.18 3 .15.19 2.05 3.13 4.97 4.39.69.3 1.23.48 1.65.61.7.22 1.34.19 1.84.12.56-.08 1.7-.7 1.94-1.37.24-.67.24-1.25.17-1.37-.07-.12-.26-.19-.56-.34z"
+                fill="#044155"
+                d="M16.27 14.12c-.25-.13-1.46-.72-1.68-.8-.22-.09-.39-.13-.55.13-.16.26-.63.8-.78.97-.15.16-.29.18-.55.05-.26-.13-1.09-.4-2.07-1.28-.77-.69-1.29-1.53-1.44-1.79-.15-.26-.02-.4.11-.53.12-.12.26-.29.39-.44.13-.15.17-.26.26-.43.09-.16.04-.31-.02-.44s-.55-1.33-.75-1.82c-.2-.47-.4-.41-.55-.42-.14-.01-.3-.01-.46-.01-.16 0-.43.06-.65.31-.22.25-.86.86-.86 2.08s.89 2.41 1.01 2.57c.13.16 1.76 2.68 4.26 3.76.6.26 1.06.41 1.42.52.6.19 1.15.16 1.58.1.48-.07 1.46-.6 1.66-1.17.21-.57.21-1.07.15-1.17-.06-.1-.22-.16-.48-.29z"
               />
             </svg>
           </a>
@@ -124,11 +126,30 @@ export function TeamTeaserCard({
           {/* Email Squircle Icon */}
           <a
             href={`mailto:${email}`}
-            className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-brand-orange text-[#052631] transition-transform hover:scale-105"
+            className="flex size-[42px] shrink-0 items-center justify-center rounded-2xl bg-brand-orange text-brand-navy transition-transform hover:scale-105"
             aria-label="Email"
           >
-            <svg className="h-6 w-6" viewBox="0 0 24 24" fill="#052631">
-              <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+            <svg className="size-[32px]" viewBox="0 0 48 48" fill="none">
+              {/* Top Flap Section */}
+              <path
+                d="M7 11H41C41.6 11 42.1 11.2 42.5 11.5L25.3 25.1C24.5 25.7 23.5 25.7 22.7 25.1L5.5 11.5C5.9 11.2 6.4 11 7 11Z"
+                fill="#044155"
+              />
+              {/* Bottom Body Section */}
+              <path
+                d="M8.2 37H39.8L27.2 27.2L24.8 29.1C24.3 29.5 23.7 29.5 23.2 29.1L20.8 27.2L8.2 37Z"
+                fill="#044155"
+              />
+              {/* Left Side Section */}
+              <path
+                d="M5 14.2V34.8C5 35.6 5.4 36.3 6.1 36.7L18.8 25.1L5 14.2Z"
+                fill="#044155"
+              />
+              {/* Right Side Section */}
+              <path
+                d="M43 14.2L29.2 25.1L41.9 36.7C42.6 36.3 43 35.6 43 34.8V14.2Z"
+                fill="#044155"
+              />
             </svg>
           </a>
         </div>

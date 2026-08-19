@@ -13,7 +13,7 @@ export function GallerySection() {
         />
       </div>
 
-      <div className="relative z-10 mx-auto max-w-[1400px] px-6 lg:px-12 text-center w-full">
+      <div className="relative z-10 mx-auto max-w-content px-6 lg:px-12 text-center w-full">
         {/* Gallery Centerpiece Card */}
         <div className="relative mx-auto max-w-3xl rounded-[2.5rem] bg-brand-dark/90 backdrop-blur-md p-8 sm:p-12 md:p-14 border border-brand-light/20 shadow-2xl overflow-visible text-center">
           {/* Title - CHECK OUR (Brand Light) / GALLERY (Brand Cream) */}

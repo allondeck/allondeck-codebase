@@ -26,7 +26,7 @@ export default function Account() {
   }
 
   return (
-    <div className="mx-auto max-w-[1400px] px-6 lg:px-12 py-8 sm:px-6 lg:px-8 w-full text-left">
+    <div className="mx-auto max-w-content px-6 lg:px-12 py-8 sm:px-6 lg:px-8 w-full text-left">
       <h1 className="text-2xl font-bold text-white">Account</h1>
       <p className="mt-1 text-brand-cream">{profile?.full_name || user.email}</p>
 

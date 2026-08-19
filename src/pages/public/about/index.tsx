@@ -3,7 +3,6 @@ import { useLocation } from "react-router-dom";
 import { SEO } from "../../../components/ui/SEO";
 import { AboutHeroSection } from "./partials/AboutHeroSection";
 import { AboutBioSection } from "./partials/AboutBioSection";
-import { AboutPrecisionBannerSection } from "./partials/AboutPrecisionBannerSection";
 
 export default function About() {
   const location = useLocation();
@@ -37,7 +36,6 @@ export default function About() {
       />
       <AboutHeroSection onViewBioClick={scrollToSection} />
       <AboutBioSection />
-      <AboutPrecisionBannerSection />
     </div>
   );
 }

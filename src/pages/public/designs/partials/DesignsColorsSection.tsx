@@ -17,7 +17,7 @@ export function DesignsColorsSection({ colors }: DesignsColorsSectionProps) {
       id="colors"
       className="scroll-mt-20 border-t border-brand-medium/30 bg-[#0C5A6D] py-20 relative overflow-hidden"
     >
-      <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
+      <div className="mx-auto max-w-content px-6 lg:px-12">
         <div className="flex flex-col-reverse lg:flex-row items-center gap-12 lg:gap-20">
           {/* Color Swatch Grid */}
           <div className="flex-1 w-full relative z-10">
