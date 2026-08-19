@@ -271,6 +271,22 @@ export type GalleryImageRow = {
 export type GalleryImageInsert = Partial<GalleryImageRow>;
 export type GalleryImageUpdate = Partial<GalleryImageRow>;
 
+export type ServiceRow = {
+  id: string;
+  title: string;
+  card_title: string | null;
+  description: string;
+  secondary_description: string | null;
+  image_url: string;
+  cta_text: string | null;
+  cta_link: string | null;
+  display_order: number;
+  is_active: boolean;
+  created_at: string;
+};
+export type ServiceInsert = Partial<ServiceRow>;
+export type ServiceUpdate = Partial<ServiceRow>;
+
 export type Database = {
   public: {
     Tables: {
@@ -506,6 +522,12 @@ export type Database = {
         Row: GalleryImageRow;
         Insert: GalleryImageInsert;
         Update: GalleryImageUpdate;
+        Relationships: [];
+      };
+      services: {
+        Row: ServiceRow;
+        Insert: ServiceInsert;
+        Update: ServiceUpdate;
         Relationships: [];
       };
     };

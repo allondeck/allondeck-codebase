@@ -119,7 +119,8 @@ export const router = createBrowserRouter([
               { path: "categories", lazy: async () => ({ Component: (await import("./pages/owner/ownerCategories/index")).default }) },
               { path: "categories/:id", lazy: async () => ({ Component: (await import("./pages/owner/categoryForm/index")).default }) },
               { path: "designs", lazy: async () => ({ Component: (await import("./pages/owner/ownerDesigns/index")).default }) },
-              { path: "gallery", lazy: async () => ({ Component: (await import("./pages/owner/ownerGallery/index")).default }) },
+              { path: "services", lazy: async () => ({ Component: (await import("./pages/owner/ownerServices/index")).default }) },
+              { path: "gallery", element: <Navigate to="/account/owner/services?tab=gallery" replace /> },
               { path: "coupons", lazy: async () => ({ Component: (await import("./pages/owner/ownerCoupons/index")).default }) },
               { path: "coupons/:id", lazy: async () => ({ Component: (await import("./pages/owner/couponForm/index")).default }) },
 
@@ -161,7 +162,8 @@ export const router = createBrowserRouter([
               { path: "orders/from-invoice", lazy: async () => ({ Component: (await import("./pages/owner/ownerOrderFromInvoice/index")).default }) },
               { path: "orders/create-manual", lazy: async () => ({ Component: (await import("./pages/owner/ownerOrderCreateManual/index")).default }) },
               { path: "orders/:id", lazy: async () => ({ Component: (await import("./pages/owner/ownerOrderDetail/index")).default }) },
-              { path: "gallery", lazy: async () => ({ Component: (await import("./pages/owner/ownerGallery/index")).default }) },
+              { path: "services", lazy: async () => ({ Component: (await import("./pages/owner/ownerServices/index")).default }) },
+              { path: "gallery", element: <Navigate to="/account/owner/services?tab=gallery" replace /> },
             ]
           }
         ]
