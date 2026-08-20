@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import { supabase } from "../../../../lib/supabase";
 import { ServiceRow } from "../../../../types/database";
 import { ServiceCard } from "../../../../components/features/ServiceCard";
@@ -47,6 +47,31 @@ const DEFAULT_SERVICES: ServiceRow[] = [
   },
 ];
 
+const containerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.18,
+      delayChildren: 0.1,
+    },
+  },
+};
+
+const cardVariants: Variants = {
+  hidden: { opacity: 0, y: 35, scale: 0.96 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      type: "spring" as const,
+      stiffness: 140,
+      damping: 18,
+    },
+  },
+};
+
 export function ServicesSection() {
   const [services, setServices] = useState<ServiceRow[]>(DEFAULT_SERVICES);
 
@@ -74,44 +99,71 @@ export function ServicesSection() {
     <section className="bg-brand-dark pt-4 sm:pt-6 md:pt-8 pb-20 md:pb-28 text-white relative overflow-hidden">
       <AnimatedWaveDivider className="-mt-8 mb-6 opacity-75" />
 
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-50px" }}
-        transition={{ duration: 0.7, ease: "easeOut" }}
-        className="relative mx-auto max-w-content px-6 lg:px-12"
-      >
-        <div className="text-center">
+      <div className="relative mx-auto max-w-content px-6 lg:px-12">
+        {/* Animated Section Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 25 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-40px" }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="text-center"
+        >
           <h2 className="font-heading text-5xl sm:text-7xl md:text-8xl font-black tracking-widest text-brand-cream text-center uppercase drop-shadow-md">
             SERVICES
           </h2>
-          <div className="mx-auto mt-4 h-1.5 w-20 bg-brand-orange rounded-full" />
-        </div>
+          <motion.div
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+            className="mx-auto mt-4 h-1.5 w-20 bg-brand-orange rounded-full origin-center"
+          />
+        </motion.div>
 
-        <div className="mt-8 sm:mt-10 md:mt-12 grid gap-8 md:gap-12 lg:gap-8 xl:gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 max-w-md sm:max-w-lg md:max-w-3xl lg:max-w-[960px] xl:max-w-[1140px] mx-auto">
+        {/* 3-Card Grid with Staggered Scroll Entrance */}
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-60px" }}
+          className="mt-8 sm:mt-10 md:mt-12 grid gap-8 md:gap-12 lg:gap-8 xl:gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 max-w-md sm:max-w-lg md:max-w-3xl lg:max-w-[960px] xl:max-w-[1140px] mx-auto"
+        >
           {services.map((service, idx) => (
-            <ServiceCard
+            <motion.div
               key={service.id || `srv-${idx}`}
-              title={service.card_title || service.title}
-              imageSrc={service.image_url}
-              linkTo={`/services#service-${idx + 1}`}
-              buttonText="See More"
-              buttonClassName="!py-4 lg:!py-4"
-            />
+              variants={cardVariants}
+              className="h-full"
+            >
+              <ServiceCard
+                title={service.card_title || service.title}
+                imageSrc={service.image_url}
+                linkTo={`/services#service-${idx + 1}`}
+                buttonText="See More"
+                buttonClassName="!py-4 lg:!py-4"
+              />
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
-        <div className="mt-12 text-center">
-          <a
+        {/* Bottom CTA with Spring Hover Animation */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+          className="mt-12 text-center"
+        >
+          <motion.a
             href="/gallery"
-            className="inline-flex items-center gap-2 rounded-full border border-brand-orange/60 bg-brand-orange/15 px-8 py-3.5 text-sm font-bold tracking-wider text-brand-orange uppercase hover:bg-brand-orange hover:text-white transition-all transform hover:scale-105 shadow-lg"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.98 }}
+            transition={{ type: "spring", stiffness: 300, damping: 15 }}
+            className="inline-flex items-center gap-2 rounded-full border border-brand-orange/60 bg-brand-orange/15 px-8 py-3.5 text-sm font-bold tracking-wider text-brand-orange uppercase hover:bg-brand-orange hover:text-white transition-all shadow-lg"
           >
             Explore Full Project Gallery →
-          </a>
-        </div>
-      </motion.div>
+          </motion.a>
+        </motion.div>
+      </div>
     </section>
   );
 }
-
-
