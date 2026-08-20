@@ -39,6 +39,8 @@ export function DesignsColorsSection({ colors }: DesignsColorsSectionProps) {
                         <img
                           src={color.image_url}
                           alt={color.name}
+                          loading="lazy"
+                          decoding="async"
                           className="absolute inset-0 w-full h-full object-cover mix-blend-multiply opacity-90"
                         />
                       )}
@@ -73,10 +75,12 @@ export function DesignsColorsSection({ colors }: DesignsColorsSectionProps) {
               <img
                 src="/assets/svg/recurso olas, 2 olas.svg"
                 alt=""
+                loading="lazy"
+                decoding="async"
                 className="w-64 opacity-50 mb-6"
               />
               <Link
-                to="/contact"
+                to="/estimate"
                 className="rounded-lg bg-brand-orange hover:bg-orange-500 px-8 py-3.5 text-sm font-bold uppercase tracking-wider text-white shadow-lg transition-transform hover:scale-105"
               >
                 MATCH COLOR

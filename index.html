@@ -20,10 +20,13 @@
     <meta name="twitter:description" content="Premium Marine Deck Flooring, Custom CAD Designs, CNC Manufacturing, and Precision Installation in Florida." />
     <meta name="twitter:image" content="/assets/images/1.jpg" />
 
-    <!-- Preload logo SVG -->
+    <!-- Preload logo SVG, hero LCP image, and primary fonts -->
     <link rel="preload" as="image" href="/favicon.svg" fetchpriority="high" />
+    <link rel="preload" as="image" href="/assets/images/1.jpg" fetchpriority="high" />
+    <link rel="preload" as="font" type="font/otf" href="/fonts/Aquatico-Regular.otf" crossorigin />
+    <link rel="preload" as="font" type="font/ttf" href="/fonts/Nunito-Regular.ttf" crossorigin />
   </head>
-  <body className="bg-[#033343]">
+  <body class="bg-[#033343]">
     <div id="root">
       <!-- Static shell: first paint before JS. React replaces this on mount. -->
       <div

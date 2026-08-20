@@ -70,6 +70,7 @@ export function ProductsHeaderControls({
           <input
             type="search"
             placeholder="Search products..."
+            aria-label="Search products"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             className="w-full rounded-lg border border-brand-medium/50 bg-brand-dark-alt px-4 py-2 text-white placeholder-brand-light/50 focus:border-brand-orange focus:outline-none focus:ring-1 focus:ring-brand-orange"

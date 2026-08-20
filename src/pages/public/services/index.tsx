@@ -75,7 +75,10 @@ export default function Services() {
           .order("created_at", { ascending: true });
 
         if (error) {
-          console.warn("Using default services (could not fetch from DB):", error);
+          console.warn(
+            "Using default services (could not fetch from DB):",
+            error,
+          );
           setServices(DEFAULT_SERVICES);
         } else if (data && data.length > 0) {
           setServices(data);
@@ -110,7 +113,10 @@ export default function Services() {
         title="Services & Custom CAD Deck Fabrication | All On Deck"
         description="Custom deck designs, MarineMat EVA/PE foam floor manufacturing, high-precision CNC cutting, and expert installation services for boats across Florida."
       />
-      <ServicesHeroSection services={services} onActionClick={scrollToSection} />
+      <ServicesHeroSection
+        services={services}
+        onActionClick={scrollToSection}
+      />
 
       {/* Alternating Services Sections */}
       <div className="space-y-0">
@@ -142,6 +148,8 @@ export default function Services() {
                       <img
                         src={service.image_url}
                         alt={service.title}
+                        loading="lazy"
+                        decoding="async"
                         className="h-64 md:h-96 w-full object-cover"
                       />
                     </div>
@@ -181,7 +189,9 @@ export default function Services() {
               key={service.id || sectionId}
               id={sectionId}
               className={`scroll-mt-20 bg-brand-dark py-20 relative overflow-hidden ${
-                index > 0 ? "border-t border-brand-medium/35" : "border-t border-brand-medium/30"
+                index > 0
+                  ? "border-t border-brand-medium/35"
+                  : "border-t border-brand-medium/30"
               }`}
             >
               {index > 0 && (
@@ -201,6 +211,9 @@ export default function Services() {
                     <img
                       src={service.image_url}
                       alt={service.title}
+                      loading={index === 0 ? "eager" : "lazy"}
+                      fetchPriority={index === 0 ? "high" : "auto"}
+                      decoding="async"
                       className="h-64 md:h-96 w-full object-cover"
                     />
                   </div>
@@ -239,4 +252,3 @@ export default function Services() {
     </div>
   );
 }
-

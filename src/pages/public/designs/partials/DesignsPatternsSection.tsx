@@ -33,6 +33,8 @@ export function DesignsPatternsSection({ patterns }: DesignsPatternsSectionProps
                         <img
                           src={pattern.image_url}
                           alt={pattern.name}
+                          loading="lazy"
+                          decoding="async"
                           className="w-full h-full object-cover"
                         />
                       ) : (
@@ -66,6 +68,8 @@ export function DesignsPatternsSection({ patterns }: DesignsPatternsSectionProps
               <img
                 src="/assets/svg/recurso olas, 2 olas.svg"
                 alt=""
+                loading="lazy"
+                decoding="async"
                 className="w-64 opacity-50 mb-6"
               />
               <Link

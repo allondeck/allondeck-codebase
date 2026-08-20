@@ -8,7 +8,9 @@ export function EstimateBannerSection() {
       <div className="absolute inset-0 z-0">
         <img
           src="/assets/images/10.jpg"
-          alt="Free Estimate Deck"
+          alt="Free Estimate Marine Deck Flooring"
+          loading="lazy"
+          decoding="async"
           className="h-full w-full object-cover opacity-75"
         />
       </div>

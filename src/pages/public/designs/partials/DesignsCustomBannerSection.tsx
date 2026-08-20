@@ -19,15 +19,14 @@ export function DesignsCustomBannerSection() {
         </h2>
         <p className="mt-4 text-base text-brand-light leading-relaxed">
           Every order includes custom design consultation at no extra charge.
-          Our team will work with you to achieve the perfect look for your
-          boat.
+          Our team will work with you to achieve the perfect look for your boat.
         </p>
         <div className="mt-8 flex justify-center gap-4 flex-wrap">
           <Link
-            to="/contact"
+            to="/estimate"
             className="inline-flex items-center justify-center rounded-full bg-brand-orange hover:bg-orange-600 px-10 py-3.5 text-sm font-bold uppercase tracking-wider text-white transition-transform hover:scale-105 shadow-lg leading-none"
           >
-            Get It — Free
+            Get An Estimate
           </Link>
           <Link
             to="/services"

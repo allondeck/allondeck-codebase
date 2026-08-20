@@ -17,7 +17,6 @@ import Login from "./pages/auth/Login";
 import Signup from "./pages/auth/Signup";
 import Setup from "./pages/auth/Setup";
 import LookupOrder from "./pages/account/LookupOrder";
-import About from "./pages/public/about/index";
 import NotFound from "./pages/public/notFound/index";
 
 function RedirectOwnerOrderId() {
@@ -83,7 +82,7 @@ export const router = createBrowserRouter([
       { path: "/account/orders", lazy: async () => ({ Component: (await import("./pages/account/AccountOrders")).default }) },
       { path: "/account/orders/:id", lazy: async () => ({ Component: (await import("./pages/account/OrderDetail")).default }) },
       { path: "/lookup-order", element: <LookupOrder /> },
-      { path: "/about", element: <About /> },
+      { path: "/about", lazy: async () => ({ Component: (await import("./pages/public/about/index")).default }) },
 
       { path: "/login", element: <Login /> },
       { path: "/signup", element: <Signup /> },

@@ -22,6 +22,8 @@ export function ShopCard({ product, className = "" }: ShopCardProps) {
           <img
             src={`https://rckxskncdxobolhctnfw.supabase.co/storage/v1/object/public/products/${product.image_url}`}
             alt={product.name}
+            loading="lazy"
+            decoding="async"
             className="w-full h-full object-contain p-8 hover:scale-105 transition-transform"
           />
         ) : (

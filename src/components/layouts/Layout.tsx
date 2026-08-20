@@ -426,6 +426,7 @@ export function Layout({ children }: LayoutProps) {
                       type="text"
                       required
                       placeholder="Name"
+                      aria-label="Your Name"
                       value={footerForm.name}
                       onChange={(e) => setFooterForm({ ...footerForm, name: e.target.value })}
                       className="bg-brand-dark text-white placeholder-brand-cream/40 px-3 py-2 text-sm rounded-lg focus:outline-none focus:ring-1 focus:ring-brand-orange font-sans"
@@ -434,6 +435,7 @@ export function Layout({ children }: LayoutProps) {
                       type="email"
                       required
                       placeholder="Email"
+                      aria-label="Email address"
                       value={footerForm.email}
                       onChange={(e) => setFooterForm({ ...footerForm, email: e.target.value })}
                       className="bg-brand-dark text-white placeholder-brand-cream/40 px-3 py-2 text-sm rounded-lg focus:outline-none focus:ring-1 focus:ring-brand-orange font-sans"
@@ -441,6 +443,7 @@ export function Layout({ children }: LayoutProps) {
                     <input
                       type="text"
                       placeholder="Subject (optional)"
+                      aria-label="Subject"
                       value={footerForm.subject}
                       onChange={(e) => setFooterForm({ ...footerForm, subject: e.target.value })}
                       className="bg-brand-dark text-white placeholder-brand-cream/40 px-3 py-2 text-sm rounded-lg focus:outline-none focus:ring-1 focus:ring-brand-orange font-sans"
@@ -450,6 +453,7 @@ export function Layout({ children }: LayoutProps) {
                     <textarea
                       required
                       placeholder="Message..."
+                      aria-label="Message"
                       rows={3}
                       value={footerForm.message}
                       onChange={(e) => setFooterForm({ ...footerForm, message: e.target.value })}

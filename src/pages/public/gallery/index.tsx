@@ -3,6 +3,7 @@ import { useSearchParams } from "react-router-dom";
 import { supabase } from "../../../lib/supabase";
 import { SEO } from "../../../components/ui/SEO";
 import { X, ChevronLeft, ChevronRight, Maximize2 } from "lucide-react";
+import { ServicesGalleryBannerSection } from "../services/partials/ServicesGalleryBannerSection";
 
 export type GalleryImage = {
   id: string;
@@ -97,6 +98,14 @@ export default function Gallery() {
     const cat = searchParams.get("category") || searchParams.get("service");
     if (cat && SERVICE_CATEGORIES.some((c) => c.id === cat)) {
       setActiveCategory(cat);
+      if (cat !== "all") {
+        setTimeout(() => {
+          const el = document.getElementById("gallery-section");
+          if (el) {
+            el.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+        }, 150);
+      }
     } else if (!cat) {
       setActiveCategory("all");
     }
@@ -195,7 +204,7 @@ export default function Gallery() {
       </section>
 
       {/* Main Gallery Area */}
-      <div className="mx-auto max-w-content px-6 lg:px-12 pt-12">
+      <div id="gallery-section" className="scroll-mt-6 mx-auto max-w-content px-6 lg:px-12 pt-12">
         {/* Category Filters */}
         <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-10">
           {SERVICE_CATEGORIES.map((cat) => {
@@ -286,6 +295,9 @@ export default function Gallery() {
           </div>
         )}
       </div>
+
+      {/* CTA Estimate Banner */}
+      <ServicesGalleryBannerSection variant="medium" />
 
       {/* Lightbox Modal */}
       {selectedImageIndex !== null && currentImage && (

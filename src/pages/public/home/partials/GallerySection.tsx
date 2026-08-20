@@ -8,7 +8,9 @@ export function GallerySection() {
       <div className="absolute inset-0 z-0">
         <img
           src="/assets/images/9.jpg"
-          alt="Boat Gallery"
+          alt="All On Deck Boat Flooring Gallery"
+          loading="lazy"
+          decoding="async"
           className="h-full w-full object-cover"
         />
       </div>

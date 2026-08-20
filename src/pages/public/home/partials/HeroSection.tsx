@@ -58,7 +58,10 @@ export function HeroSection() {
         <div className="w-[220vh] h-[220vw] min-w-[1200px] min-h-[1200px] -rotate-90 flex items-center justify-center">
           <img
             src="/assets/images/1.jpg"
-            alt="All On Deck Hero"
+            alt="All On Deck Hero Marine Decking"
+            loading="eager"
+            fetchPriority="high"
+            decoding="async"
             className="w-full h-full object-cover opacity-80"
           />
         </div>
