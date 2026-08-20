@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
 import { supabase } from "../../../../lib/supabase";
 import type { ContactRequestInsert } from "../../../../types/database";
 import { Button } from "../../../../components/ui/Button";
@@ -12,14 +13,21 @@ function formatPhone(raw: string): string {
 }
 
 export function EstimateFormSection() {
+  const location = useLocation();
+  const stateData = (location.state || {}) as {
+    boatModel?: string;
+    feet?: string;
+    message?: string;
+  };
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     phone: "",
     zipCode: "",
-    boatModel: "",
-    feet: "",
-    message: "",
+    boatModel: stateData.boatModel || "",
+    feet: stateData.feet || "",
+    message: stateData.message || "",
   });
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { supabase } from "../../../lib/supabase";
 import { DesignsHeroSection } from "./partials/DesignsHeroSection";
+import { DesignsStudioSection } from "./partials/DesignsStudioSection";
 import { DesignsPatternsSection, type DesignPattern } from "./partials/DesignsPatternsSection";
 import { DesignsColorsSection, type DesignColor } from "./partials/DesignsColorsSection";
 import { DesignsMaterialsSection } from "./partials/DesignsMaterialsSection";
@@ -32,6 +33,7 @@ export default function Designs() {
   return (
     <div className="bg-brand-dark text-white font-sans">
       <DesignsHeroSection onActionClick={scrollToSection} />
+      <DesignsStudioSection colors={colors} patterns={patterns} />
       <DesignsPatternsSection patterns={patterns} />
       <DesignsColorsSection colors={colors} />
       <DesignsMaterialsSection />
