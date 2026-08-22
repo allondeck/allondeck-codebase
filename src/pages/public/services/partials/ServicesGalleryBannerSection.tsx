@@ -14,7 +14,7 @@ export function ServicesGalleryBannerSection({
   variant = "dark",
   className = "",
   badge = "Get Started Today",
-  title = "Ready to upgrade your boat's deck?",
+  title = "Ready to upgrade your boat?",
   description = "Get a personalized, no-obligation estimate tailored to your vessel. From custom CAD templating and MarineMat® foam manufacturing to precision CNC installation, our team is ready to bring your vision to life.",
   buttonText = "Get Free Estimate →",
   buttonLink = "/estimate",
@@ -25,7 +25,9 @@ export function ServicesGalleryBannerSection({
       : "bg-gradient-to-r from-brand-dark-alt via-brand-dark to-brand-dark-alt border-brand-medium/40";
 
   return (
-    <div className={`mx-auto max-w-content px-6 lg:px-12 mt-16 sm:mt-20 ${className}`}>
+    <div
+      className={`mx-auto max-w-content px-6 lg:px-12 mt-16 sm:mt-20 ${className}`}
+    >
       <div
         className={`relative overflow-hidden rounded-3xl border ${bgClasses} p-8 sm:p-12 text-center shadow-2xl`}
       >
