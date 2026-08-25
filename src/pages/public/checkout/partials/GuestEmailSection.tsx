@@ -14,11 +14,14 @@ export function GuestEmailSection({ guestEmail, onChange }: GuestEmailSectionPro
       </label>
       <input
         id="guestEmail"
+        name="email"
         type="email"
+        autoComplete="email"
+        inputMode="email"
         required
         value={guestEmail}
         onChange={(e) => onChange(e.target.value)}
-        className="mt-1 w-full rounded-lg border border-brand-medium/50 bg-brand-dark px-3 py-2 text-white placeholder-brand-light/50 focus:border-brand-orange focus:outline-none focus:ring-1 focus:ring-brand-orange"
+        className="mt-1 w-full rounded-lg border border-brand-medium/50 bg-brand-dark px-3 py-2.5 text-base sm:text-sm text-white placeholder-brand-light/50 focus:border-brand-orange focus:outline-none focus:ring-2 focus:ring-brand-orange min-h-[44px]"
         placeholder="you@example.com"
       />
     </div>

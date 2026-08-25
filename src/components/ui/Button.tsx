@@ -21,19 +21,19 @@ export type ButtonProps = BaseButtonProps &
 
 const variantStyles: Record<ButtonVariant, string> = {
   primary:
-    "rounded-[12px] bg-brand-orange text-white hover:bg-orange-600 font-semibold uppercase tracking-wider transition-transform hover:scale-105 shadow-md disabled:opacity-50 disabled:pointer-events-none",
+    "rounded-[12px] bg-brand-orange text-white hover:bg-orange-600 font-semibold uppercase tracking-wider transition-all hover:scale-105 shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange focus-visible:ring-offset-2 focus-visible:ring-offset-brand-dark disabled:opacity-50 disabled:pointer-events-none",
   secondary:
-    "rounded-[12px] bg-brand-dark-alt text-brand-cream border border-brand-medium/50 hover:bg-brand-medium/30 font-semibold uppercase tracking-wider transition-transform hover:scale-105 disabled:opacity-50 disabled:pointer-events-none",
+    "rounded-[12px] bg-brand-dark-alt text-brand-cream border border-brand-medium/50 hover:bg-brand-medium/30 font-semibold uppercase tracking-wider transition-all hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange focus-visible:ring-offset-2 focus-visible:ring-offset-brand-dark disabled:opacity-50 disabled:pointer-events-none",
   outline:
-    "rounded-[12px] border-2 border-brand-orange text-brand-orange hover:bg-brand-orange hover:text-white font-semibold uppercase tracking-wider transition-colors shadow-md disabled:opacity-50 disabled:pointer-events-none",
+    "rounded-[12px] border-2 border-brand-orange text-brand-orange hover:bg-brand-orange hover:text-white font-semibold uppercase tracking-wider transition-colors shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange focus-visible:ring-offset-2 focus-visible:ring-offset-brand-dark disabled:opacity-50 disabled:pointer-events-none",
   ghost:
-    "rounded-[12px] text-brand-cream/70 hover:text-brand-orange font-semibold uppercase tracking-wider transition-colors disabled:opacity-50 disabled:pointer-events-none",
+    "rounded-[12px] text-brand-cream/80 hover:text-brand-orange font-semibold uppercase tracking-wider transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange focus-visible:ring-offset-2 focus-visible:ring-offset-brand-dark disabled:opacity-50 disabled:pointer-events-none",
 };
 
 const sizeStyles: Record<ButtonSize, string> = {
-  sm: "px-5 lg:px-4 py-2 lg:py-1.5 text-xs",
-  md: "px-7 lg:px-6 py-3 lg:py-2.5 text-sm lg:text-sm",
-  lg: "px-8 lg:px-8 py-3.5 lg:py-3 text-sm sm:text-base lg:text-sm xl:text-base",
+  sm: "px-5 lg:px-4 py-2.5 lg:py-2 text-xs min-h-[38px]",
+  md: "px-7 lg:px-6 py-3.5 lg:py-2.5 text-sm min-h-[44px]",
+  lg: "px-8 lg:px-8 py-4 lg:py-3 text-sm sm:text-base min-h-[48px]",
 };
 
 /**
@@ -67,9 +67,9 @@ export function Button({
     );
   }
 
-  const buttonProps = props as React.ButtonHTMLAttributes<HTMLButtonElement>;
+  const { type = "button", ...buttonProps } = props as React.ButtonHTMLAttributes<HTMLButtonElement>;
   return (
-    <button className={combinedClasses} {...buttonProps}>
+    <button type={type} className={combinedClasses} {...buttonProps}>
       {children}
     </button>
   );

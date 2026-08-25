@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { ProductCard } from "../../components/features/ProductCard";
+import { SEO } from "../../components/ui/SEO";
 import { useWishlist } from "../../hooks/useWishlist";
 import { supabase } from "../../lib/supabase";
 import type { ProductRow } from "../../types/database";
@@ -38,6 +39,10 @@ export default function Wishlist() {
 
   return (
     <div className="mx-auto max-w-content px-6 lg:px-12 py-8 sm:px-6 lg:px-8 w-full text-left">
+      <SEO
+        title="Saved Wishlist | All On Deck"
+        description="View and manage your saved marine flooring products and boating accessories."
+      />
       <h1 className="text-2xl font-bold text-white">Wishlist</h1>
       <p className="mt-1 text-sm text-brand-light">
         {wishlistIds.length === 0

@@ -1,5 +1,6 @@
 import { useMemo, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { SEO } from "../../../components/ui/SEO";
 import { RecentlyViewedStrip } from "../../../components/features/RecentlyViewedStrip";
 import { useProductBySlug } from "../../../hooks/useProductBySlug";
 import { useSuggestedProducts } from "../../../hooks/useSuggestedProducts";
@@ -223,6 +224,34 @@ export default function ProductDetail() {
 
   return (
     <div className="mx-auto max-w-content px-6 py-8 sm:px-6 lg:px-8 w-full">
+      <SEO
+        title={`${product.name} | All On Deck`}
+        description={product.description?.slice(0, 160) || `${product.name} - Premium marine deck flooring and boating accessories from All On Deck.`}
+        image={product.image_url ? `https://rckxskncdxobolhctnfw.supabase.co/storage/v1/object/public/products/${product.image_url}` : undefined}
+      />
+      {/* Product JSON-LD Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Product",
+            name: product.name,
+            image: product.image_url
+              ? `https://rckxskncdxobolhctnfw.supabase.co/storage/v1/object/public/products/${product.image_url}`
+              : undefined,
+            description: product.description || undefined,
+            offers: {
+              "@type": "Offer",
+              price: productPrice,
+              priceCurrency: "USD",
+              availability: inStock
+                ? "https://schema.org/InStock"
+                : "https://schema.org/OutOfStock",
+            },
+          }),
+        }}
+      />
       <ProductMainSection
         product={product}
         activeVariants={activeVariants}

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Navigate, Link, useNavigate } from "react-router-dom";
 import { Button } from "../../components/ui/Button";
+import { SEO } from "../../components/ui/SEO";
 import { useAuth } from "../../context/AuthContext";
 import { useCustomerOrders } from "../../hooks/useCustomerOrders";
 import { formatPrice } from "../../lib/utils";
@@ -27,6 +28,10 @@ export default function Account() {
 
   return (
     <div className="mx-auto max-w-content px-6 lg:px-12 py-8 sm:px-6 lg:px-8 w-full text-left">
+      <SEO
+        title="My Account | All On Deck"
+        description="Manage your All On Deck profile, view orders, and manage preferences."
+      />
       <h1 className="text-2xl font-bold text-white">Account</h1>
       <p className="mt-1 text-brand-cream">{profile?.full_name || user.email}</p>
 

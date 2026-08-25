@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useSearchParams } from "react-router-dom";
 import { supabase } from "../../../lib/supabase";
 import { SEO } from "../../../components/ui/SEO";
@@ -146,19 +146,19 @@ export default function Gallery() {
 
   const currentImage = selectedImageIndex !== null ? filteredImages[selectedImageIndex] : null;
 
-  const handleNext = () => {
+  const handleNext = useCallback(() => {
     if (selectedImageIndex !== null && filteredImages.length > 0) {
       setSelectedImageIndex((selectedImageIndex + 1) % filteredImages.length);
     }
-  };
+  }, [selectedImageIndex, filteredImages.length]);
 
-  const handlePrev = () => {
+  const handlePrev = useCallback(() => {
     if (selectedImageIndex !== null && filteredImages.length > 0) {
       setSelectedImageIndex(
         (selectedImageIndex - 1 + filteredImages.length) % filteredImages.length
       );
     }
-  };
+  }, [selectedImageIndex, filteredImages.length]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -169,7 +169,7 @@ export default function Gallery() {
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [selectedImageIndex, filteredImages]);
+  }, [selectedImageIndex, handleNext, handlePrev]);
 
   const getServiceLabel = (type: string) => {
     switch (type) {
@@ -212,6 +212,7 @@ export default function Gallery() {
             return (
               <button
                 key={cat.id}
+                type="button"
                 onClick={() => {
                   setActiveCategory(cat.id);
                   setSelectedImageIndex(null);
@@ -227,7 +228,7 @@ export default function Gallery() {
                     setSearchParams(newParams, { replace: true });
                   }
                 }}
-                className={`rounded-full px-5 py-2 text-xs sm:text-sm font-bold tracking-wider uppercase transition-all ${
+                className={`rounded-full px-5 py-2.5 text-xs sm:text-sm font-bold tracking-wider uppercase transition-all min-h-[44px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange ${
                   isActive
                     ? "bg-brand-orange text-white shadow-lg shadow-brand-orange/25 ring-2 ring-brand-orange/50 scale-105"
                     : "bg-brand-dark-alt text-brand-light border border-brand-medium/40 hover:bg-brand-medium/30 hover:text-white"
@@ -253,16 +254,28 @@ export default function Gallery() {
             {filteredImages.map((img, idx) => (
               <div
                 key={img.id}
+                role="button"
+                tabIndex={0}
+                aria-label={`View enlarged image: ${img.title}`}
                 onClick={() => setSelectedImageIndex(idx)}
-                className="group relative cursor-pointer overflow-hidden rounded-2xl border border-brand-medium/30 bg-brand-dark-alt transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-brand-orange/15 hover:border-brand-orange/60"
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    setSelectedImageIndex(idx);
+                  }
+                }}
+                className="group relative cursor-pointer overflow-hidden rounded-2xl border border-brand-medium/30 bg-brand-dark-alt transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-brand-orange/15 hover:border-brand-orange/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange"
               >
                 {/* Aspect Ratio Container */}
                 <div className="relative aspect-[4/3] w-full overflow-hidden bg-brand-dark">
                   <img
                     src={img.image_url}
                     alt={img.title}
+                    width={400}
+                    height={300}
                     className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
                     loading="lazy"
+                    decoding="async"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-brand-dark via-brand-dark/20 to-transparent opacity-80 group-hover:opacity-95 transition-opacity" />
 
@@ -275,7 +288,7 @@ export default function Gallery() {
 
                   {/* Hover icon */}
                   <div className="absolute top-4 right-4 rounded-full bg-brand-orange p-2 text-white opacity-0 group-hover:opacity-100 transition-all duration-300 transform scale-75 group-hover:scale-100 shadow-lg">
-                    <Maximize2 className="h-4 w-4" />
+                    <Maximize2 className="h-4 w-4" aria-hidden="true" />
                   </div>
                 </div>
 
@@ -301,32 +314,40 @@ export default function Gallery() {
 
       {/* Lightbox Modal */}
       {selectedImageIndex !== null && currentImage && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-md p-4 sm:p-8 animate-in fade-in duration-200">
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label="Image preview modal"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-md p-4 sm:p-8 animate-in fade-in duration-200"
+        >
           {/* Close button */}
           <button
+            type="button"
             onClick={() => setSelectedImageIndex(null)}
             aria-label="Close modal"
-            className="absolute top-6 right-6 z-50 rounded-full bg-brand-dark/80 p-3 text-white hover:bg-brand-orange transition-colors border border-white/20"
+            className="absolute top-6 right-6 z-50 rounded-full bg-brand-dark/80 p-3 text-white hover:bg-brand-orange transition-colors border border-white/20 min-h-[44px] min-w-[44px] flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange"
           >
-            <X className="h-6 w-6" />
+            <X className="h-6 w-6" aria-hidden="true" />
           </button>
 
           {/* Navigation Previous */}
           <button
+            type="button"
             onClick={handlePrev}
             aria-label="Previous image"
-            className="absolute left-4 sm:left-8 top-1/2 z-50 -translate-y-1/2 rounded-full bg-brand-dark/80 p-3 text-white hover:bg-brand-orange transition-colors border border-white/20"
+            className="absolute left-4 sm:left-8 top-1/2 z-50 -translate-y-1/2 rounded-full bg-brand-dark/80 p-3 text-white hover:bg-brand-orange transition-colors border border-white/20 min-h-[44px] min-w-[44px] flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange"
           >
-            <ChevronLeft className="h-6 w-6" />
+            <ChevronLeft className="h-6 w-6" aria-hidden="true" />
           </button>
 
           {/* Navigation Next */}
           <button
+            type="button"
             onClick={handleNext}
             aria-label="Next image"
-            className="absolute right-4 sm:right-8 top-1/2 z-50 -translate-y-1/2 rounded-full bg-brand-dark/80 p-3 text-white hover:bg-brand-orange transition-colors border border-white/20"
+            className="absolute right-4 sm:right-8 top-1/2 z-50 -translate-y-1/2 rounded-full bg-brand-dark/80 p-3 text-white hover:bg-brand-orange transition-colors border border-white/20 min-h-[44px] min-w-[44px] flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange"
           >
-            <ChevronRight className="h-6 w-6" />
+            <ChevronRight className="h-6 w-6" aria-hidden="true" />
           </button>
 
           {/* Content Box */}

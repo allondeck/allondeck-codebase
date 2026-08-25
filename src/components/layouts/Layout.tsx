@@ -90,23 +90,10 @@ export function Layout({ children }: LayoutProps) {
   const storeName = getStoreName(settings);
 
 
+  // Only set fallback title if none has been set yet
   useEffect(() => {
-    document.title = storeName;
-    const desc = document.querySelector('meta[name="description"]');
-    if (desc) desc.setAttribute("content", `${storeName} – Online store`);
-    else {
-      const meta = document.createElement("meta");
-      meta.name = "description";
-      meta.content = `${storeName} – Online store`;
-      document.head.appendChild(meta);
-    }
-    const ogTitle = document.querySelector('meta[property="og:title"]');
-    if (ogTitle) ogTitle.setAttribute("content", storeName);
-    else {
-      const meta = document.createElement("meta");
-      meta.setAttribute("property", "og:title");
-      meta.content = storeName;
-      document.head.appendChild(meta);
+    if (!document.title || document.title === "Store") {
+      document.title = storeName;
     }
   }, [storeName]);
 
@@ -114,8 +101,27 @@ export function Layout({ children }: LayoutProps) {
     setMenuOpen(false);
   }, [location.pathname]);
 
+  // Close mobile menu on Escape key
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && menuOpen) {
+        setMenuOpen(false);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [menuOpen]);
+
   return (
     <div className="flex min-h-screen flex-col bg-brand-dark text-white">
+      {/* Skip to Main Content Link for Keyboard Accessibility */}
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:rounded-lg focus:bg-brand-orange focus:px-4 focus:py-2.5 focus:text-white focus:shadow-2xl focus:outline-none focus:ring-2 focus:ring-white font-bold tracking-wider text-sm uppercase"
+      >
+        Skip to main content
+      </a>
+
       <nav className="sticky top-0 z-50 border-b border-brand-medium/35 bg-brand-dark/95 shadow-md backdrop-blur-sm">
         <div className="relative mx-auto max-w-content px-6 lg:px-12">
           <div className="flex h-16 items-center justify-between">
@@ -123,7 +129,7 @@ export function Layout({ children }: LayoutProps) {
             {/* LEFT: Logo + Brand */}
             <PrefetchLink
               to="/"
-              className="flex items-center gap-2.5 transition-opacity hover:opacity-80 shrink-0"
+              className="flex items-center gap-2.5 transition-opacity hover:opacity-80 shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange rounded-lg p-1"
             >
               <Icon name="logo" width={36} height={41} />
               <span className="font-heading text-base font-bold tracking-widest text-brand-light uppercase leading-tight">
@@ -150,7 +156,7 @@ export function Layout({ children }: LayoutProps) {
                     <PrefetchLink
                       key={to}
                       to={to}
-                      className={`relative text-sm font-semibold tracking-wider transition-colors pb-1
+                      className={`relative text-sm font-semibold tracking-wider transition-colors pb-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange rounded px-1
                         ${isActive
                           ? "text-white after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-brand-orange after:rounded-full"
                           : "text-brand-light hover:text-brand-cream"
@@ -167,12 +173,12 @@ export function Layout({ children }: LayoutProps) {
                 {/* Cart */}
                 <Link
                   to="/cart"
-                  className="relative flex items-center justify-center rounded-lg p-2 text-brand-cream hover:bg-brand-medium/35 transition-colors"
-                  aria-label="Cart"
+                  className="relative flex items-center justify-center rounded-lg p-2.5 text-brand-cream hover:bg-brand-medium/35 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange min-h-[44px] min-w-[44px]"
+                  aria-label={`Cart, ${itemCount} items`}
                 >
                   <Icon name="cart" size={24} color="currentColor" />
                   {itemCount > 0 && (
-                    <span className="absolute -top-0.5 -right-0.5 flex h-4.5 min-w-[18px] items-center justify-center rounded-full bg-brand-orange px-1 text-[10px] font-bold text-white leading-none">
+                    <span className="absolute 1 top-0.5 right-0.5 flex h-4.5 min-w-[18px] items-center justify-center rounded-full bg-brand-orange px-1 text-[10px] font-bold text-white leading-none">
                       {itemCount}
                     </span>
                   )}
@@ -182,8 +188,8 @@ export function Layout({ children }: LayoutProps) {
                 {!authLoading && (
                   <Link
                     to={user ? "/account" : "/login"}
-                    className="flex items-center justify-center rounded-lg p-2 text-brand-cream hover:bg-brand-medium/35 transition-colors"
-                    aria-label={user ? "Account" : "Sign in"}
+                    className="flex items-center justify-center rounded-lg p-2.5 text-brand-cream hover:bg-brand-medium/35 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange min-h-[44px] min-w-[44px]"
+                    aria-label={user ? "My Account" : "Sign in to account"}
                   >
                     <Icon name="profile" size={24} color="currentColor" />
                   </Link>
@@ -193,7 +199,7 @@ export function Layout({ children }: LayoutProps) {
                 {!authLoading && user && isOwner && (
                   <Link
                     to="/account/owner"
-                    className="ml-1 rounded-full bg-brand-orange/20 border border-brand-orange/40 px-3 py-1 text-xs font-bold text-brand-orange hover:bg-brand-orange/30 transition-colors tracking-wider"
+                    className="ml-1 rounded-full bg-brand-orange/20 border border-brand-orange/40 px-3.5 py-1.5 text-xs font-bold text-brand-orange hover:bg-brand-orange/30 transition-colors tracking-wider focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange"
                   >
                     DASHBOARD
                   </Link>
@@ -205,12 +211,12 @@ export function Layout({ children }: LayoutProps) {
             <div className="flex lg:hidden items-center gap-1">
               <Link
                 to="/cart"
-                className="relative flex items-center justify-center rounded-lg p-2 text-brand-cream hover:bg-brand-medium/35"
-                aria-label="Cart"
+                className="relative flex items-center justify-center rounded-lg p-2.5 text-brand-cream hover:bg-brand-medium/35 min-h-[44px] min-w-[44px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange"
+                aria-label={`Cart, ${itemCount} items`}
               >
-                <Icon name="cart" size={20} color="currentColor" />
+                <Icon name="cart" size={22} color="currentColor" />
                 {itemCount > 0 && (
-                  <span className="absolute -top-0.5 -right-0.5 flex h-4 min-w-[16px] items-center justify-center rounded-full bg-brand-orange px-0.5 text-[9px] font-bold text-white leading-none">
+                  <span className="absolute top-0.5 right-0.5 flex h-4 min-w-[16px] items-center justify-center rounded-full bg-brand-orange px-0.5 text-[9px] font-bold text-white leading-none">
                     {itemCount}
                   </span>
                 )}
@@ -218,12 +224,12 @@ export function Layout({ children }: LayoutProps) {
               <button
                 type="button"
                 onClick={() => setMenuOpen((o) => !o)}
-                className="rounded-lg p-2 text-brand-cream hover:bg-brand-medium/35"
-                aria-label="Menu"
+                className="rounded-lg p-2.5 text-brand-cream hover:bg-brand-medium/35 min-h-[44px] min-w-[44px] flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange"
+                aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
                 aria-expanded={menuOpen}
                 aria-controls="mobile-nav"
               >
-                <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                   {menuOpen ? (
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                   ) : (
@@ -236,66 +242,74 @@ export function Layout({ children }: LayoutProps) {
 
           {/* Mobile / Tablet dropdown */}
           {menuOpen && (
-            <div
-              id="mobile-nav"
-              className="absolute left-0 right-0 top-full z-50 border-b border-brand-medium/30 bg-brand-dark py-3 shadow-lg lg:hidden"
-            >
-              <div className="mx-auto max-w-7xl space-y-0.5 px-4 sm:px-6 lg:px-8">
-                {[
-                  { to: "/about", label: "ABOUT US" },
-                  { to: "/products", label: "SHOP" },
-                  { to: "/services", label: "SERVICES" },
-                  { to: "/gallery", label: "GALLERY" },
-                  { to: "/designs", label: "DESIGNS" },
-                ].map(({ to, label }) => {
-                  const isActive =
-                    to === "/"
-                      ? location.pathname === "/"
-                      : location.pathname.startsWith(to);
-                  return (
-                    <PrefetchLink
-                      key={to}
-                      to={to}
+            <>
+              {/* Backdrop */}
+              <div
+                className="fixed inset-0 top-16 bg-black/60 backdrop-blur-sm z-40 lg:hidden"
+                onClick={() => setMenuOpen(false)}
+                aria-hidden="true"
+              />
+              <div
+                id="mobile-nav"
+                className="absolute left-0 right-0 top-full z-50 border-b border-brand-medium/30 bg-brand-dark py-3 shadow-2xl lg:hidden"
+              >
+                <div className="mx-auto max-w-7xl space-y-1 px-4 sm:px-6 lg:px-8">
+                  {[
+                    { to: "/about", label: "ABOUT US" },
+                    { to: "/products", label: "SHOP" },
+                    { to: "/services", label: "SERVICES" },
+                    { to: "/gallery", label: "GALLERY" },
+                    { to: "/designs", label: "DESIGNS" },
+                  ].map(({ to, label }) => {
+                    const isActive =
+                      to === "/"
+                        ? location.pathname === "/"
+                        : location.pathname.startsWith(to);
+                    return (
+                      <PrefetchLink
+                        key={to}
+                        to={to}
+                        onClick={() => setMenuOpen(false)}
+                        className={`flex min-h-[48px] w-full items-center rounded-xl px-4 py-3 text-sm font-semibold tracking-wider transition-colors
+                          ${isActive
+                            ? "bg-brand-medium/40 text-white border-l-4 border-brand-orange"
+                            : "text-brand-cream/80 hover:bg-brand-medium/25 hover:text-white"
+                          }`}
+                      >
+                        {label}
+                      </PrefetchLink>
+                    );
+                  })}
+
+                  <div className="my-2 border-t border-brand-medium/30" />
+
+                  {!authLoading && (
+                    <Link
+                      to={user ? "/account" : "/login"}
                       onClick={() => setMenuOpen(false)}
-                      className={`flex min-h-[44px] w-full items-center rounded-lg px-4 py-3 text-sm font-semibold tracking-wider transition-colors
-                        ${isActive
-                          ? "bg-brand-medium/40 text-white border-l-4 border-brand-orange"
-                          : "text-brand-cream/80 hover:bg-brand-medium/25 hover:text-white"
-                        }`}
+                      className="flex min-h-[48px] w-full items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold text-brand-cream/80 hover:bg-brand-medium/25 hover:text-white transition-colors"
                     >
-                      {label}
-                    </PrefetchLink>
-                  );
-                })}
-
-                <div className="my-2 border-t border-brand-medium/30" />
-
-                {!authLoading && (
-                  <Link
-                    to={user ? "/account" : "/login"}
-                    onClick={() => setMenuOpen(false)}
-                    className="flex min-h-[44px] w-full items-center gap-3 rounded-lg px-4 py-3 text-sm font-semibold text-brand-cream/80 hover:bg-brand-medium/25 hover:text-white transition-colors"
-                  >
-                    <Icon name="profile" size={20} color="currentColor" />
-                    {user ? "Account" : "Sign in"}
-                  </Link>
-                )}
-                {!authLoading && user && isOwner && (
-                  <Link
-                    to="/account/owner"
-                    onClick={() => setMenuOpen(false)}
-                    className="flex min-h-[44px] w-full items-center rounded-lg px-4 py-3 text-sm font-bold text-brand-orange hover:bg-brand-orange/10 transition-colors tracking-wider"
-                  >
-                    DASHBOARD
-                  </Link>
-                )}
+                      <Icon name="profile" size={20} color="currentColor" />
+                      {user ? "Account" : "Sign in"}
+                    </Link>
+                  )}
+                  {!authLoading && user && isOwner && (
+                    <Link
+                      to="/account/owner"
+                      onClick={() => setMenuOpen(false)}
+                      className="flex min-h-[48px] w-full items-center rounded-xl px-4 py-3 text-sm font-bold text-brand-orange hover:bg-brand-orange/10 transition-colors tracking-wider"
+                    >
+                      DASHBOARD
+                    </Link>
+                  )}
+                </div>
               </div>
-            </div>
+            </>
           )}
         </div>
       </nav>
 
-      <main className="flex-1 w-full">
+      <main id="main-content" tabIndex={-1} className="flex-1 w-full outline-none">
         {children}
       </main>
 
@@ -424,46 +438,53 @@ export function Layout({ children }: LayoutProps) {
                   <div className="flex flex-col gap-2">
                     <input
                       type="text"
+                      name="name"
+                      autoComplete="name"
                       required
                       placeholder="Name"
                       aria-label="Your Name"
                       value={footerForm.name}
                       onChange={(e) => setFooterForm({ ...footerForm, name: e.target.value })}
-                      className="bg-brand-dark text-white placeholder-brand-cream/40 px-3 py-2 text-sm rounded-lg focus:outline-none focus:ring-1 focus:ring-brand-orange font-sans"
+                      className="bg-brand-dark text-white placeholder-white/70 px-3 py-2 text-sm rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-orange font-sans min-h-[42px]"
                     />
                     <input
                       type="email"
+                      name="email"
+                      autoComplete="email"
+                      inputMode="email"
                       required
                       placeholder="Email"
                       aria-label="Email address"
                       value={footerForm.email}
                       onChange={(e) => setFooterForm({ ...footerForm, email: e.target.value })}
-                      className="bg-brand-dark text-white placeholder-brand-cream/40 px-3 py-2 text-sm rounded-lg focus:outline-none focus:ring-1 focus:ring-brand-orange font-sans"
+                      className="bg-brand-dark text-white placeholder-white/70 px-3 py-2 text-sm rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-orange font-sans min-h-[42px]"
                     />
                     <input
                       type="text"
+                      name="subject"
                       placeholder="Subject (optional)"
                       aria-label="Subject"
                       value={footerForm.subject}
                       onChange={(e) => setFooterForm({ ...footerForm, subject: e.target.value })}
-                      className="bg-brand-dark text-white placeholder-brand-cream/40 px-3 py-2 text-sm rounded-lg focus:outline-none focus:ring-1 focus:ring-brand-orange font-sans"
+                      className="bg-brand-dark text-white placeholder-white/70 px-3 py-2 text-sm rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-orange font-sans min-h-[42px]"
                     />
                   </div>
                   <div className="flex flex-col justify-between gap-2">
                     <textarea
+                      name="message"
                       required
                       placeholder="Message..."
                       aria-label="Message"
                       rows={3}
                       value={footerForm.message}
                       onChange={(e) => setFooterForm({ ...footerForm, message: e.target.value })}
-                      className="flex-1 bg-brand-dark text-white placeholder-brand-cream/40 p-3 text-sm rounded-lg focus:outline-none focus:ring-1 focus:ring-brand-orange resize-none font-sans"
+                      className="flex-1 bg-brand-dark text-white placeholder-white/70 p-3 text-sm rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-orange resize-none font-sans min-h-[80px]"
                     />
                     <div className="flex justify-end">
                       <button
                         type="submit"
                         disabled={footerSubmitting}
-                        className="bg-brand-orange hover:bg-orange-600 text-white text-xs font-bold uppercase tracking-wider px-6 py-2 rounded-lg transition-transform hover:scale-105 disabled:opacity-70"
+                        className="bg-brand-orange hover:bg-orange-600 text-white text-xs font-bold uppercase tracking-wider px-6 py-2.5 rounded-lg transition-transform hover:scale-105 disabled:opacity-70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white min-h-[40px]"
                       >
                         {footerSubmitting ? "SENDING…" : "SEND"}
                       </button>

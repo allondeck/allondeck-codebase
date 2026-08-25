@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { SEO } from "../../../components/ui/SEO";
 import { useCart } from "../../../context/CartContext";
 import { isProductCartItem } from "../../../types/cart";
 import { useAuth } from "../../../context/AuthContext";
@@ -241,6 +242,10 @@ export default function Checkout() {
 
   return (
     <div className="mx-auto max-w-content px-6 lg:px-12 py-16 sm:px-6 text-left">
+      <SEO
+        title="Secure Checkout | All On Deck"
+        description="Complete your custom marine deck flooring order securely with All On Deck."
+      />
       <h1 className="mb-8 text-2xl font-bold text-white">Checkout</h1>
       <form onSubmit={handlePlaceOrder}>
         {!user && (

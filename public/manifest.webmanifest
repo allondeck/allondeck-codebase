@@ -1,0 +1,17 @@
+{
+  "name": "All On Deck – Marine Deck Flooring",
+  "short_name": "All On Deck",
+  "description": "Premium Marine Deck Flooring, Custom CAD Designs, CNC Manufacturing, and Precision Installation in Florida.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#033343",
+  "theme_color": "#033343",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

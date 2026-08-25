@@ -108,10 +108,10 @@ export function TeamTeaserCard({
             href={whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex size-12 shrink-0 items-center justify-center transition-transform hover:scale-105"
-            aria-label="WhatsApp"
+            className="flex size-12 shrink-0 items-center justify-center transition-transform hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange rounded-full"
+            aria-label={`Contact ${name} on WhatsApp`}
           >
-            <svg className="size-12" viewBox="0 0 24 24" fill="none">
+            <svg className="size-12" viewBox="0 0 24 24" fill="none" aria-hidden="true">
               {/* Orange speech bubble background with bottom-left pointer */}
               <path
                 fill="#e98e2e"
@@ -128,10 +128,10 @@ export function TeamTeaserCard({
           {/* Email Squircle Icon */}
           <a
             href={`mailto:${email}`}
-            className="flex size-[42px] shrink-0 items-center justify-center rounded-2xl bg-brand-orange text-brand-navy transition-transform hover:scale-105"
-            aria-label="Email"
+            className="flex size-[42px] shrink-0 items-center justify-center rounded-2xl bg-brand-orange text-brand-navy transition-transform hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+            aria-label={`Send email to ${name}`}
           >
-            <svg className="size-[32px]" viewBox="0 0 48 48" fill="none">
+            <svg className="size-[32px]" viewBox="0 0 48 48" fill="none" aria-hidden="true">
               {/* Top Flap Section */}
               <path
                 d="M7 11H41C41.6 11 42.1 11.2 42.5 11.5L25.3 25.1C24.5 25.7 23.5 25.7 22.7 25.1L5.5 11.5C5.9 11.2 6.4 11 7 11Z"

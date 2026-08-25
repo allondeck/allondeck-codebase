@@ -100,11 +100,13 @@ export function EstimateFormSection() {
               </label>
               <input
                 id="est-name"
+                name="name"
                 type="text"
+                autoComplete="name"
                 required
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                className="mt-2 w-full rounded-xl border border-brand-medium bg-[#033343] text-white px-4 py-3 text-sm focus:border-brand-orange focus:outline-none font-sans"
+                className="mt-2 w-full rounded-xl border border-brand-medium bg-[#033343] text-white px-4 py-3 text-base sm:text-sm focus:border-brand-orange focus:outline-none focus:ring-2 focus:ring-brand-orange font-sans min-h-[44px]"
                 placeholder="Your full name"
               />
             </div>
@@ -119,11 +121,14 @@ export function EstimateFormSection() {
               </label>
               <input
                 id="est-email"
+                name="email"
                 type="email"
+                autoComplete="email"
+                inputMode="email"
                 required
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                className="mt-2 w-full rounded-xl border border-brand-medium bg-[#033343] text-white px-4 py-3 text-sm focus:border-brand-orange focus:outline-none font-sans"
+                className="mt-2 w-full rounded-xl border border-brand-medium bg-[#033343] text-white px-4 py-3 text-base sm:text-sm focus:border-brand-orange focus:outline-none focus:ring-2 focus:ring-brand-orange font-sans min-h-[44px]"
                 placeholder="you@example.com"
               />
             </div>
@@ -139,10 +144,13 @@ export function EstimateFormSection() {
               </label>
               <input
                 id="est-phone"
+                name="phone"
                 type="tel"
+                autoComplete="tel"
+                inputMode="tel"
                 value={formData.phone}
                 onChange={(e) => setFormData({ ...formData, phone: formatPhone(e.target.value) })}
-                className="mt-2 w-full rounded-xl border border-brand-medium bg-[#033343] text-white px-4 py-3 text-sm focus:border-brand-orange focus:outline-none font-sans"
+                className="mt-2 w-full rounded-xl border border-brand-medium bg-[#033343] text-white px-4 py-3 text-base sm:text-sm focus:border-brand-orange focus:outline-none focus:ring-2 focus:ring-brand-orange font-sans min-h-[44px]"
                 placeholder="(555) 555-0100"
               />
             </div>
@@ -159,10 +167,13 @@ export function EstimateFormSection() {
                 </label>
                 <input
                   id="est-zip"
+                  name="zipCode"
                   type="text"
+                  autoComplete="postal-code"
+                  inputMode="numeric"
                   value={formData.zipCode}
                   onChange={(e) => setFormData({ ...formData, zipCode: e.target.value })}
-                  className="mt-2 w-full rounded-xl border border-brand-medium bg-[#033343] text-white px-4 py-3 text-sm focus:border-brand-orange focus:outline-none font-sans"
+                  className="mt-2 w-full rounded-xl border border-brand-medium bg-[#033343] text-white px-4 py-3 text-base sm:text-sm focus:border-brand-orange focus:outline-none focus:ring-2 focus:ring-brand-orange font-sans min-h-[44px]"
                   placeholder="e.g. 90210"
                 />
               </div>
@@ -176,10 +187,12 @@ export function EstimateFormSection() {
                 </label>
                 <input
                   id="est-feet"
+                  name="feet"
                   type="number"
+                  inputMode="numeric"
                   value={formData.feet}
                   onChange={(e) => setFormData({ ...formData, feet: e.target.value })}
-                  className="mt-2 w-full rounded-xl border border-brand-medium bg-[#033343] text-white px-4 py-3 text-sm focus:border-brand-orange focus:outline-none font-sans"
+                  className="mt-2 w-full rounded-xl border border-brand-medium bg-[#033343] text-white px-4 py-3 text-base sm:text-sm focus:border-brand-orange focus:outline-none focus:ring-2 focus:ring-brand-orange font-sans min-h-[44px]"
                   placeholder="24"
                 />
               </div>
@@ -196,10 +209,11 @@ export function EstimateFormSection() {
               </label>
               <input
                 id="est-model"
+                name="boatModel"
                 type="text"
                 value={formData.boatModel}
                 onChange={(e) => setFormData({ ...formData, boatModel: e.target.value })}
-                className="mt-2 w-full rounded-xl border border-brand-medium bg-[#033343] text-white px-4 py-3 text-sm focus:border-brand-orange focus:outline-none font-sans"
+                className="mt-2 w-full rounded-xl border border-brand-medium bg-[#033343] text-white px-4 py-3 text-base sm:text-sm focus:border-brand-orange focus:outline-none focus:ring-2 focus:ring-brand-orange font-sans min-h-[44px]"
                 placeholder="e.g. Sea Ray 240 Sundeck"
               />
             </div>
@@ -214,11 +228,12 @@ export function EstimateFormSection() {
               </label>
               <textarea
                 id="est-message"
+                name="message"
                 rows={4}
                 required
                 value={formData.message}
                 onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                className="mt-2 w-full rounded-xl border border-brand-medium bg-[#033343] text-white px-4 py-3 text-sm focus:border-brand-orange focus:outline-none font-sans resize-none"
+                className="mt-2 w-full rounded-xl border border-brand-medium bg-[#033343] text-white px-4 py-3 text-base sm:text-sm focus:border-brand-orange focus:outline-none focus:ring-2 focus:ring-brand-orange font-sans resize-none"
                 placeholder="Any additional details, questions, or special requests…"
               />
             </div>

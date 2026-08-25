@@ -32,7 +32,9 @@ export function ShippingAddressSection({
           </label>
           <input
             id="full_name"
+            name="name"
             type="text"
+            autoComplete="name"
             required
             value={address.full_name || ""}
             onChange={(e) =>
@@ -44,7 +46,7 @@ export function ShippingAddressSection({
                 full_name: capitalizeWords(e.target.value),
               }))
             }
-            className="mt-1 w-full rounded-lg border border-brand-medium/50 bg-brand-dark px-3 py-2 text-white placeholder-brand-light/50 focus:border-brand-orange focus:outline-none focus:ring-1 focus:ring-brand-orange"
+            className="mt-1 w-full rounded-lg border border-brand-medium/50 bg-brand-dark px-3 py-2.5 text-base sm:text-sm text-white placeholder-brand-light/50 focus:border-brand-orange focus:outline-none focus:ring-2 focus:ring-brand-orange min-h-[44px]"
             placeholder="John Doe"
           />
         </div>
@@ -57,7 +59,9 @@ export function ShippingAddressSection({
           </label>
           <input
             id="line1"
+            name="address-line1"
             type="text"
+            autoComplete="address-line1"
             required
             value={address.line1 || ""}
             onChange={(e) =>
@@ -69,7 +73,7 @@ export function ShippingAddressSection({
                 line1: capitalizeWords(e.target.value),
               }))
             }
-            className="mt-1 w-full rounded-lg border border-brand-medium/50 bg-brand-dark px-3 py-2 text-white placeholder-brand-light/50 focus:border-brand-orange focus:outline-none focus:ring-1 focus:ring-brand-orange"
+            className="mt-1 w-full rounded-lg border border-brand-medium/50 bg-brand-dark px-3 py-2.5 text-base sm:text-sm text-white placeholder-brand-light/50 focus:border-brand-orange focus:outline-none focus:ring-2 focus:ring-brand-orange min-h-[44px]"
             placeholder="123 Main St"
           />
         </div>
@@ -82,7 +86,9 @@ export function ShippingAddressSection({
           </label>
           <input
             id="line2"
+            name="address-line2"
             type="text"
+            autoComplete="address-line2"
             value={address.line2 || ""}
             onChange={(e) =>
               setAddress((a) => ({ ...a, line2: e.target.value }))
@@ -93,7 +99,7 @@ export function ShippingAddressSection({
                 line2: capitalizeWords(e.target.value),
               }))
             }
-            className="mt-1 w-full rounded-lg border border-brand-medium/50 bg-brand-dark px-3 py-2 text-white placeholder-brand-light/50 focus:border-brand-orange focus:outline-none focus:ring-1 focus:ring-brand-orange"
+            className="mt-1 w-full rounded-lg border border-brand-medium/50 bg-brand-dark px-3 py-2.5 text-base sm:text-sm text-white placeholder-brand-light/50 focus:border-brand-orange focus:outline-none focus:ring-2 focus:ring-brand-orange min-h-[44px]"
             placeholder="Apt 4"
           />
         </div>
@@ -107,7 +113,9 @@ export function ShippingAddressSection({
             </label>
             <input
               id="city"
+              name="address-level2"
               type="text"
+              autoComplete="address-level2"
               required
               value={address.city}
               onChange={(e) =>
@@ -119,7 +127,7 @@ export function ShippingAddressSection({
                   city: capitalizeWords(e.target.value),
                 }))
               }
-              className="mt-1 w-full rounded-lg border border-brand-medium/50 bg-brand-dark px-3 py-2 text-white placeholder-brand-light/50 focus:border-brand-orange focus:outline-none focus:ring-1 focus:ring-brand-orange"
+              className="mt-1 w-full rounded-lg border border-brand-medium/50 bg-brand-dark px-3 py-2.5 text-base sm:text-sm text-white placeholder-brand-light/50 focus:border-brand-orange focus:outline-none focus:ring-2 focus:ring-brand-orange min-h-[44px]"
               placeholder="New York"
             />
           </div>
@@ -132,7 +140,9 @@ export function ShippingAddressSection({
             </label>
             <input
               id="state"
+              name="address-level1"
               type="text"
+              autoComplete="address-level1"
               required
               value={address.state}
               onChange={(e) =>
@@ -144,7 +154,7 @@ export function ShippingAddressSection({
                   state: capitalizeWords(e.target.value),
                 }))
               }
-              className="mt-1 w-full rounded-lg border border-brand-medium/50 bg-brand-dark px-3 py-2 text-white placeholder-brand-light/50 focus:border-brand-orange focus:outline-none focus:ring-1 focus:ring-brand-orange"
+              className="mt-1 w-full rounded-lg border border-brand-medium/50 bg-brand-dark px-3 py-2.5 text-base sm:text-sm text-white placeholder-brand-light/50 focus:border-brand-orange focus:outline-none focus:ring-2 focus:ring-brand-orange min-h-[44px]"
               placeholder="NY"
             />
           </div>
@@ -159,7 +169,10 @@ export function ShippingAddressSection({
             </label>
             <input
               id="postal_code"
+              name="postal-code"
               type="text"
+              autoComplete="postal-code"
+              inputMode="numeric"
               required
               value={address.postal_code || ""}
               onChange={(e) =>
@@ -171,7 +184,7 @@ export function ShippingAddressSection({
                   postal_code: capitalizeWords(e.target.value),
                 }))
               }
-              className="mt-1 w-full rounded-lg border border-brand-medium/50 bg-brand-dark px-3 py-2 text-white placeholder-brand-light/50 focus:border-brand-orange focus:outline-none focus:ring-1 focus:ring-brand-orange"
+              className="mt-1 w-full rounded-lg border border-brand-medium/50 bg-brand-dark px-3 py-2.5 text-base sm:text-sm text-white placeholder-brand-light/50 focus:border-brand-orange focus:outline-none focus:ring-2 focus:ring-brand-orange min-h-[44px]"
               placeholder="10001"
             />
           </div>
@@ -184,6 +197,8 @@ export function ShippingAddressSection({
             </label>
             <select
               id="country"
+              name="country"
+              autoComplete="country"
               required
               value={
                 countryOptions.includes(address.country)
@@ -193,7 +208,7 @@ export function ShippingAddressSection({
               onChange={(e) =>
                 setAddress((a) => ({ ...a, country: e.target.value }))
               }
-              className="mt-1 w-full rounded-lg border border-brand-medium/50 bg-brand-dark px-3 py-2 text-white focus:border-brand-orange focus:outline-none focus:ring-1 focus:ring-brand-orange"
+              className="mt-1 w-full rounded-lg border border-brand-medium/50 bg-brand-dark px-3 py-2.5 text-base sm:text-sm text-white focus:border-brand-orange focus:outline-none focus:ring-2 focus:ring-brand-orange min-h-[44px]"
             >
               <option value="">Select country</option>
               {countryOptions.map((c) => (
@@ -213,7 +228,10 @@ export function ShippingAddressSection({
           </label>
           <input
             id="phone"
+            name="tel"
             type="tel"
+            autoComplete="tel"
+            inputMode="tel"
             value={address.phone || ""}
             onChange={(e) =>
               setAddress((a) => ({ ...a, phone: e.target.value }))
@@ -224,7 +242,7 @@ export function ShippingAddressSection({
                 phone: capitalizeWords(e.target.value),
               }))
             }
-            className="mt-1 w-full rounded-lg border border-brand-medium/50 bg-brand-dark px-3 py-2 text-white placeholder-brand-light/50 focus:border-brand-orange focus:outline-none focus:ring-1 focus:ring-brand-orange"
+            className="mt-1 w-full rounded-lg border border-brand-medium/50 bg-brand-dark px-3 py-2.5 text-base sm:text-sm text-white placeholder-brand-light/50 focus:border-brand-orange focus:outline-none focus:ring-2 focus:ring-brand-orange min-h-[44px]"
             placeholder="+1 555 123 4567"
           />
         </div>

@@ -119,12 +119,12 @@ export function HeroSection() {
             style={{ transform: "translateZ(25px)" }}
             className="relative flex flex-col items-center"
           >
-            <h2 className="font-heading text-4xl sm:text-6xl md:text-8xl font-black tracking-widest text-brand-orange uppercase drop-shadow-md text-center">
+            <h1 className="font-heading text-4xl sm:text-6xl md:text-8xl font-black tracking-widest text-brand-orange uppercase drop-shadow-md text-center">
               WELCOME
-            </h2>
-            <h3 className="mt-2 sm:mt-4 font-heading text-xl sm:text-3xl md:text-5xl font-bold tracking-widest text-white drop-shadow-md text-center">
-              TO ALL ON DECK,
-            </h3>
+              <span className="block mt-2 sm:mt-4 font-heading text-xl sm:text-3xl md:text-5xl font-bold tracking-widest text-white drop-shadow-md text-center">
+                TO ALL ON DECK,
+              </span>
+            </h1>
             <p className="mt-4 sm:mt-8 max-w-3xl font-sans text-base sm:text-lg md:text-xl lg:text-2xl leading-relaxed text-white drop-shadow-md font-medium tracking-wide text-center">
               your trusted partner in marine deck flooring solutions. With years
               of experience and an unwavering commitment to quality, we offer

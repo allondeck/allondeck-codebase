@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { supabase } from "../../../lib/supabase";
+import { SEO } from "../../../components/ui/SEO";
 import { DesignsHeroSection } from "./partials/DesignsHeroSection";
 import { DesignsPatternsSection, type DesignPattern } from "./partials/DesignsPatternsSection";
 import { DesignsColorsSection, type DesignColor } from "./partials/DesignsColorsSection";
@@ -31,6 +32,10 @@ export default function Designs() {
 
   return (
     <div className="bg-brand-dark text-white font-sans">
+      <SEO
+        title="Custom Boat Deck Designs, Patterns & Colors | All On Deck"
+        description="Explore custom boat flooring patterns, marine colors, EVA foam materials, and personalized CAD logo engravings tailored for your vessel."
+      />
       <DesignsHeroSection onActionClick={scrollToSection} />
       <DesignsPatternsSection patterns={patterns} />
       <DesignsColorsSection colors={colors} />
