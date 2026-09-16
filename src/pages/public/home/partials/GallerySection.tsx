@@ -20,10 +20,10 @@ export function GallerySection() {
         <div className="relative mx-auto max-w-3xl rounded-[2.5rem] bg-brand-dark/90 backdrop-blur-md p-8 sm:p-12 md:p-14 border border-brand-light/20 shadow-2xl overflow-visible text-center">
           {/* Title - CHECK OUR (Brand Light) / GALLERY (Brand Cream) */}
           <h2 className="relative z-10 font-heading uppercase text-center leading-none">
-            <span className="block text-3xl sm:text-5xl md:text-6xl font-black tracking-[0.2em] text-brand-light drop-shadow-md">
+            <span className="block text-xl sm:text-2xl md:text-4xl font-bold tracking-widest text-brand-light drop-shadow-md">
               CHECK OUR
             </span>
-            <span className="block text-5xl sm:text-7xl md:text-8xl font-black tracking-widest text-brand-cream drop-shadow-lg mt-1 sm:mt-2">
+            <span className="block text-4xl md:text-6xl font-black tracking-widest text-brand-cream drop-shadow-lg mt-1 sm:mt-2">
               GALLERY
             </span>
           </h2>

@@ -4,7 +4,7 @@ export function DesignsSection() {
   return (
     <section className="bg-brand-dark pt-10 sm:pt-12 md:pt-14 pb-20 md:pb-28 text-white relative overflow-hidden">
       <div className="relative mx-auto max-w-content px-6 lg:px-12 text-center">
-        <h2 className="font-heading text-5xl sm:text-7xl md:text-8xl font-black tracking-widest text-brand-cream text-center uppercase drop-shadow-md">
+        <h2 className="font-heading text-4xl md:text-6xl font-black tracking-widest text-brand-cream text-center uppercase drop-shadow-md">
           DESIGNS
         </h2>
 
@@ -16,8 +16,7 @@ export function DesignsSection() {
             imageSrc="/assets/images/5.2.jpg"
             linkTo="/designs#colors"
             buttonText="SEE MORE"
-            aspectRatio="aspect-square"
-            cardMinHeight="min-h-0"
+            aspectRatio="aspect-[3/4]"
           />
 
           {/* Card 2: Patterns */}
@@ -26,8 +25,7 @@ export function DesignsSection() {
             imageSrc="/assets/images/1.jpg"
             linkTo="/designs#gallery"
             buttonText="SEE MORE"
-            aspectRatio="aspect-square"
-            cardMinHeight="min-h-0"
+            aspectRatio="aspect-[3/4]"
           />
 
           {/* Card 3: Materials */}
@@ -36,8 +34,7 @@ export function DesignsSection() {
             imageSrc="/assets/images/9.jpg"
             linkTo="/designs#materials"
             buttonText="SEE MORE"
-            aspectRatio="aspect-square"
-            cardMinHeight="min-h-0"
+            aspectRatio="aspect-[3/4]"
           />
         </div>
       </div>

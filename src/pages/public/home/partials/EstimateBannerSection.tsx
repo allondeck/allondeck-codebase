@@ -1,5 +1,4 @@
-import { Wave } from "../../../../components/ui/Wave";
-import { Button } from "../../../../components/ui/Button";
+import { WaveButton } from "../../../../components/ui/WaveButton";
 
 export function EstimateBannerSection() {
   return (
@@ -17,7 +16,7 @@ export function EstimateBannerSection() {
 
       <div className="relative z-10 w-full max-w-3xl mx-auto flex flex-col items-center text-center">
         {/* Title above card */}
-        <h2 className="font-heading text-4xl sm:text-5xl md:text-6xl font-black tracking-widest text-brand-orange uppercase drop-shadow-lg mb-6">
+        <h2 className="font-heading text-4xl md:text-6xl font-black tracking-widest text-brand-orange uppercase drop-shadow-lg mb-6">
           FREE ESTIMATE
         </h2>
 
@@ -27,25 +26,19 @@ export function EstimateBannerSection() {
             RENEWING YOUR<br />BOAT'S DECK HAS<br />NEVER BEEN EASIER!
           </h3>
 
-          <div className="mt-8 mb-6">
-            <Button
+          <div className="mt-10 mb-8">
+            <WaveButton
               to="/estimate"
               variant="primary"
               size="lg"
-              className="relative z-10 pointer-events-auto"
             >
               GET AN ESTIMATE
-            </Button>
+            </WaveButton>
           </div>
 
           <p className="font-heading text-xs sm:text-sm md:text-base font-bold tracking-[0.2em] text-white uppercase drop-shadow-md">
             TAKE YOUR BOAT TO THE NEXT LEVEL
           </p>
-
-          {/* Wave graphic at bottom of card */}
-          <div className="w-64 sm:w-80 md:w-96 text-brand-light/90 pointer-events-none mt-4">
-            <Wave />
-          </div>
         </div>
       </div>
     </section>

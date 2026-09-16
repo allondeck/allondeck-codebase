@@ -47,7 +47,7 @@ export function ServiceCard({
   buttonText = "SEE MORE",
   onActionClick,
   aspectRatio = "aspect-[3/4]",
-  cardMinHeight = "min-h-[460px] sm:min-h-[500px] lg:min-h-[480px] xl:min-h-[540px]",
+  cardMinHeight = "min-h-[490px] sm:min-h-[535px] lg:min-h-[515px] xl:min-h-[580px]",
   className = "",
   imageClassName = "",
   titleClassName = "",
@@ -87,12 +87,12 @@ export function ServiceCard({
         y: -7,
         rotateX: 2.5,
         rotateY: -2,
-        transition: { type: "spring", stiffness: 240, damping: 16 }
+        transition: { type: "spring", stiffness: 240, damping: 16 },
       }}
       className="transform-gpu perspective-1000 h-full"
     >
       <div
-        className={`group relative flex flex-col justify-between overflow-visible rounded-[1.5rem] bg-brand-medium p-5 pt-5 pb-16 ${cardMinHeight} border border-white/10 shadow-2xl transition-shadow hover:shadow-cyan-500/10 ${className}`.trim()}
+        className={`group relative flex flex-col justify-between overflow-visible rounded-[1.5rem] bg-brand-medium p-5 sm:p-6 pt-5 sm:pt-6 pb-16 sm:pb-18 ${cardMinHeight} border border-white/10 shadow-2xl transition-shadow hover:shadow-cyan-500/10 ${className}`.trim()}
       >
         {/* Top Image Container */}
         <div
@@ -108,9 +108,9 @@ export function ServiceCard({
         </div>
 
         {/* Title */}
-        <div className="my-auto pt-3 pb-2 sm:pt-4 sm:pb-3 text-center px-3">
+        <div className="my-auto pt-2 pb-2 sm:pt-3 sm:pb-10 text-center px-3">
           <h3
-            className={`font-heading text-2xl sm:text-3xl lg:text-2xl xl:text-3xl font-black tracking-wider text-brand-cream uppercase leading-snug ${titleClassName}`.trim()}
+            className={`font-heading text-2xl font-black tracking-wider text-brand-cream uppercase leading-snug ${titleClassName}`.trim()}
           >
             {title}
           </h3>
@@ -137,4 +137,3 @@ export function ServiceCard({
     </motion.div>
   );
 }
-

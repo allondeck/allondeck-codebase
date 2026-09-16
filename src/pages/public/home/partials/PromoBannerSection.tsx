@@ -53,7 +53,7 @@ export function PromoBannerSection() {
             FINAL SALE
           </span>
 
-          <h2 className="mt-6 font-heading text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-wider text-brand-dark">
+          <h2 className="mt-6 font-heading text-4xl md:text-6xl font-black tracking-widest text-brand-dark uppercase">
             GET 30% OFF
           </h2>
 

@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 import { supabase } from "../../../lib/supabase";
 import { ServiceRow } from "../../../types/database";
 import { SEO } from "../../../components/ui/SEO";
-import { Button } from "../../../components/ui/Button";
+import { WaveButton } from "../../../components/ui/WaveButton";
 import { ServicesHeroSection } from "./partials/ServicesHeroSection";
 import { ServicesGalleryBannerSection } from "./partials/ServicesGalleryBannerSection";
 
@@ -167,14 +167,14 @@ export default function Services() {
                           {service.secondary_description}
                         </p>
                       )}
-                      <div className="mt-8">
-                        <Button
+                      <div className="mt-10 flex justify-start">
+                        <WaveButton
                           to={service.cta_link || "/gallery"}
                           variant="primary"
                           size="md"
                         >
                           {service.cta_text || "View Gallery"}
-                        </Button>
+                        </WaveButton>
                       </div>
                     </div>
                   </div>
@@ -194,15 +194,14 @@ export default function Services() {
                   : "border-t border-brand-medium/30"
               }`}
             >
-              {index > 0 && (
-                <div className="absolute inset-0 opacity-10 pointer-events-none">
-                  <img
-                    src="/assets/svg/recurso olas, 1 ola.svg"
-                    alt=""
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-              )}
+              {/* Wave decoration */}
+              <div className="absolute inset-0 opacity-10 pointer-events-none">
+                <img
+                  src="/assets/svg/recurso olas, 1 ola.svg"
+                  alt=""
+                  className="w-full h-full object-cover"
+                />
+              </div>
 
               <div className="relative mx-auto max-w-content px-6 lg:px-12">
                 <div className="grid gap-12 grid-cols-1 md:grid-cols-2 items-center">
@@ -231,14 +230,14 @@ export default function Services() {
                         {service.secondary_description}
                       </p>
                     )}
-                    <div className="mt-8">
-                      <Button
+                    <div className="mt-10 flex justify-start">
+                      <WaveButton
                         to={service.cta_link || "/gallery"}
                         variant="primary"
                         size="md"
                       >
                         {service.cta_text || "View Gallery"}
-                      </Button>
+                      </WaveButton>
                     </div>
                   </div>
                 </div>

@@ -194,7 +194,7 @@ export default function Gallery() {
       {/* Hero Header */}
       <section className="relative overflow-hidden border-b border-brand-medium/35 bg-gradient-to-b from-brand-dark-alt to-brand-dark py-16 sm:py-24">
         <div className="mx-auto max-w-content px-6 lg:px-12 text-center relative z-10">
-          <h1 className="font-heading text-5xl font-black tracking-widest text-brand-orange uppercase sm:text-6xl lg:text-7xl">
+          <h1 className="font-heading text-4xl md:text-6xl font-black tracking-widest text-brand-orange uppercase">
             GALLERY
           </h1>
           <p className="mx-auto mt-4 max-w-2xl text-sm md:text-base italic leading-relaxed text-brand-light">

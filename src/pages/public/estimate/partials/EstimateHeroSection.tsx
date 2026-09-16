@@ -8,7 +8,7 @@ export function EstimateHeroSection() {
         <span className="text-xs font-bold uppercase tracking-widest text-brand-orange">
           Renewing your boat's deck has never been EASIER!
         </span>
-        <h1 className="mt-4 font-heading text-4xl font-black tracking-wider text-brand-cream sm:text-5xl lg:text-6xl">
+        <h1 className="mt-4 font-heading text-4xl md:text-6xl font-black tracking-widest text-brand-cream uppercase">
           FREE ESTIMATE
         </h1>
         <div className="mx-auto mt-4 h-1.5 w-16 bg-brand-orange rounded-full" />

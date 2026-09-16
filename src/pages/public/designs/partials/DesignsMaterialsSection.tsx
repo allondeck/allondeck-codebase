@@ -8,7 +8,7 @@ export function DesignsMaterialsSection() {
         <span className="text-xs font-bold uppercase tracking-widest text-brand-orange">
           Engineering
         </span>
-        <h2 className="mt-2 font-heading text-3xl font-black tracking-wider text-brand-cream sm:text-4xl">
+        <h2 className="mt-2 font-heading text-4xl md:text-6xl font-black tracking-widest text-brand-cream uppercase">
           MATERIALS & SPECS
         </h2>
         <div className="mx-auto mt-3 h-1 w-10 bg-brand-orange" />

@@ -109,7 +109,7 @@ export function ServicesSection() {
           transition={{ duration: 0.6, ease: "easeOut" }}
           className="text-center"
         >
-          <h2 className="font-heading text-5xl sm:text-7xl md:text-8xl font-black tracking-widest text-brand-cream text-center uppercase drop-shadow-md">
+          <h2 className="font-heading text-4xl md:text-6xl font-black tracking-widest text-brand-cream text-center uppercase drop-shadow-md">
             SERVICES
           </h2>
           <motion.div
@@ -127,7 +127,7 @@ export function ServicesSection() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-60px" }}
-          className="mt-8 sm:mt-10 md:mt-12 grid gap-8 md:gap-12 lg:gap-8 xl:gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 max-w-md sm:max-w-lg md:max-w-3xl lg:max-w-[960px] xl:max-w-[1140px] mx-auto"
+          className="mt-8 sm:mt-10 md:mt-12 grid gap-8 md:gap-10 lg:gap-8 xl:gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 max-w-[480px] sm:max-w-[550px] md:max-w-[820px] lg:max-w-[1030px] xl:max-w-[1220px] 2xl:max-w-[1260px] mx-auto"
         >
           {services.map((service, idx) => (
             <motion.div

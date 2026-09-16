@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { SEO } from "../../../components/ui/SEO";
 import { AboutHeroSection } from "./partials/AboutHeroSection";
@@ -6,10 +6,14 @@ import { AboutBioSection } from "./partials/AboutBioSection";
 
 export default function About() {
   const location = useLocation();
+  const [activeBioId, setActiveBioId] = useState<string | null>(() => {
+    return location.hash ? location.hash.replace("#", "") : null;
+  });
 
   useEffect(() => {
     if (location.hash) {
       const id = location.hash.replace("#", "");
+      setActiveBioId(id);
       const el = document.getElementById(id);
       if (el) {
         setTimeout(() => {
@@ -22,6 +26,7 @@ export default function About() {
   }, [location]);
 
   const scrollToSection = (id: string) => {
+    setActiveBioId(id);
     const el = document.getElementById(id);
     if (el) {
       el.scrollIntoView({ behavior: "smooth", block: "center" });
@@ -34,7 +39,10 @@ export default function About() {
         title="Meet Our Team & Leadership | All On Deck"
         description="Discover the team behind All On Deck. Led by Ernesto Alvarez and Roselena Oropesa, we bring precision nautical engineering and CAD design to marine flooring."
       />
-      <AboutHeroSection onViewBioClick={scrollToSection} />
+      <AboutHeroSection
+        onViewBioClick={scrollToSection}
+        activeBioId={activeBioId}
+      />
       <AboutBioSection />
     </div>
   );

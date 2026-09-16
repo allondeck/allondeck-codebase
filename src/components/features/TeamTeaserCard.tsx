@@ -18,6 +18,8 @@ interface TeamTeaserCardProps {
   email: string;
   /** Wave position overlay side ('left' or 'right') */
   wavePosition?: "left" | "right";
+  /** Whether this card/bio is currently active/selected */
+  isActive?: boolean;
   /** Optional custom CSS classes for the "View Bio" button styling */
   buttonClassName?: string;
   /** Function callback for scrolling to bio section */
@@ -33,9 +35,14 @@ export function TeamTeaserCard({
   whatsappUrl,
   email,
   wavePosition = "left",
-  buttonClassName = "bg-brand-orange text-white hover:bg-orange-600",
+  isActive = false,
+  buttonClassName,
   onViewBioClick,
 }: TeamTeaserCardProps) {
+  const defaultButtonClass = isActive
+    ? "bg-brand-cream text-brand-orange hover:bg-white"
+    : "bg-brand-orange text-white hover:bg-brand-cream hover:text-brand-orange";
+  const resolvedButtonClass = buttonClassName || defaultButtonClass;
   const wavePosClass =
     wavePosition === "left"
       ? "absolute bottom-5 -left-8 sm:-left-10 w-36 sm:w-44 pointer-events-none z-20 text-[#6bb3c7]"
@@ -90,14 +97,14 @@ export function TeamTeaserCard({
             <Link
               to={to}
               onClick={handleBioClick}
-              className={`px-7 py-3 rounded-2xl text-xs sm:text-sm uppercase tracking-wider transition-transform hover:scale-105 shadow-md ${buttonClassName}`}
+              className={`px-7 py-3 rounded-2xl text-xs sm:text-sm uppercase tracking-wider transition-all duration-300 hover:scale-105 shadow-md ${resolvedButtonClass}`}
             >
               VIEW BIO
             </Link>
           ) : (
             <button
               onClick={handleBioClick}
-              className={`px-7 py-3 rounded-2xl text-xs sm:text-sm uppercase tracking-wider transition-transform hover:scale-105 shadow-md ${buttonClassName}`}
+              className={`px-7 py-3 rounded-2xl text-xs sm:text-sm uppercase tracking-wider transition-all duration-300 hover:scale-105 shadow-md ${resolvedButtonClass}`}
             >
               VIEW BIO
             </button>

@@ -14,7 +14,7 @@ export function DesignsCustomBannerSection() {
         <span className="inline-block rounded-full bg-brand-orange/20 border border-brand-orange/40 px-4 py-1 text-xs font-bold uppercase tracking-widest text-brand-orange mb-4">
           No Additional Cost
         </span>
-        <h2 className="font-heading text-3xl font-black tracking-wider text-brand-cream sm:text-4xl">
+        <h2 className="font-heading text-4xl md:text-6xl font-black tracking-widest text-brand-cream uppercase">
           CUSTOM DESIGN
         </h2>
         <p className="mt-4 text-base text-brand-light leading-relaxed">

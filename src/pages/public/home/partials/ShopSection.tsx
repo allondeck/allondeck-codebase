@@ -15,14 +15,14 @@ export function ShopSection() {
         <div className="text-center flex flex-col items-center">
           <div className="flex flex-col md:flex-row items-center justify-center gap-4">
             <svg
-              className="h-10 w-10 md:h-14 md:w-14 lg:h-20 lg:w-20 text-brand-orange"
+              className="h-9 w-9 md:h-14 md:w-14 text-brand-orange"
               fill="currentColor"
               viewBox="0 0 24 24"
             >
               <path d="M19 6h-3.5a5.5 5.5 0 00-11 0H1v16h18V6zm-8-3.5c1.93 0 3.5 1.57 3.5 3.5h-7c0-1.93 1.57-3.5 3.5-3.5zM3 20V8h12v12H3z" />
               <path d="M7.5 6a3.5 3.5 0 017 0H16a5.5 5.5 0 00-11 0h2.5z" />
             </svg>
-            <h2 className="font-heading text-4xl md:text-6xl lg:text-8xl font-normal tracking-widest text-brand-cream">
+            <h2 className="font-heading text-4xl md:text-6xl font-black tracking-widest text-brand-cream uppercase">
               OUR SHOP
             </h2>
           </div>

@@ -8,7 +8,7 @@ export function DesignsHeroSection({ onActionClick }: DesignsHeroSectionProps) {
   return (
     <div className="relative overflow-hidden pt-16 pb-24">
       <div className="relative mx-auto max-w-content px-6 lg:px-12 text-center">
-        <h1 className="font-heading text-5xl font-black tracking-widest text-brand-cream uppercase sm:text-6xl lg:text-7xl">
+        <h1 className="font-heading text-4xl md:text-6xl font-black tracking-widest text-brand-cream uppercase">
           DESIGNS
         </h1>
 
@@ -20,8 +20,7 @@ export function DesignsHeroSection({ onActionClick }: DesignsHeroSectionProps) {
             imageSrc="/assets/images/5.2.jpg"
             targetId="colors"
             onActionClick={onActionClick}
-            aspectRatio="aspect-square"
-            cardMinHeight="min-h-0"
+            aspectRatio="aspect-[3/4]"
           />
 
           {/* Card 2: Patterns */}
@@ -30,8 +29,7 @@ export function DesignsHeroSection({ onActionClick }: DesignsHeroSectionProps) {
             imageSrc="/assets/images/1.jpg"
             targetId="gallery"
             onActionClick={onActionClick}
-            aspectRatio="aspect-square"
-            cardMinHeight="min-h-0"
+            aspectRatio="aspect-[3/4]"
           />
 
           {/* Card 3: Materials */}
@@ -40,8 +38,7 @@ export function DesignsHeroSection({ onActionClick }: DesignsHeroSectionProps) {
             imageSrc="/assets/images/9.jpg"
             targetId="materials"
             onActionClick={onActionClick}
-            aspectRatio="aspect-square"
-            cardMinHeight="min-h-0"
+            aspectRatio="aspect-[3/4]"
           />
         </div>
       </div>
