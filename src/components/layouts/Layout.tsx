@@ -338,7 +338,7 @@ export function Layout({ children }: LayoutProps) {
       </main>
 
       <div className="h-8 w-full bg-brand-cream" />
-      <footer className="mt-auto overflow-hidden font-sans">
+      <footer id="site-footer" className="mt-auto overflow-hidden font-sans">
         <div className="grid grid-cols-1 md:grid-cols-3 w-full">
           {/* Column 1: CONTACT US */}
           <div className="bg-brand-dark p-12 flex flex-col justify-start items-center text-center text-white">
@@ -490,7 +490,7 @@ export function Layout({ children }: LayoutProps) {
                       <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
                     </svg>
                   </div>
-                  <h4 className="font-heading text-base sm:text-lg font-bold tracking-wide text-brand-cream group-hover:text-brand-orange transition-colors">
+                  <h4 className="font-sans text-base sm:text-lg font-bold tracking-wide text-brand-cream group-hover:text-brand-orange transition-colors">
                     Miami, Fl
                   </h4>
                 </a>
@@ -514,8 +514,32 @@ export function Layout({ children }: LayoutProps) {
                       <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
                     </svg>
                   </div>
-                  <h4 className="font-heading text-base sm:text-lg font-bold tracking-wide text-brand-cream group-hover:text-brand-orange transition-colors">
+                  <h4 className="font-sans text-base sm:text-lg font-bold tracking-wide text-brand-cream group-hover:text-brand-orange transition-colors">
                     Orlando, Fl
+                  </h4>
+                </a>
+              </div>
+
+              {/* New Jersey Location */}
+              <div className="col-span-2 flex flex-col items-center text-center group pt-2 sm:pt-4">
+                <a
+                  href="https://maps.google.com/?q=New+Jersey"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex flex-col items-center group-hover:text-brand-orange transition-colors"
+                >
+                  <div className="text-brand-orange shrink-0 mb-2 transition-transform group-hover:scale-110">
+                    <svg
+                      className="w-10 h-10"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                      aria-hidden="true"
+                    >
+                      <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+                    </svg>
+                  </div>
+                  <h4 className="font-sans text-base sm:text-lg font-bold tracking-wide text-brand-cream group-hover:text-brand-orange transition-colors">
+                    New Jersey
                   </h4>
                 </a>
               </div>

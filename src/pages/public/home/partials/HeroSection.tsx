@@ -45,14 +45,12 @@ export function HeroSection() {
           loading="eager"
           fetchPriority="high"
           decoding="async"
-          className="w-full h-full object-cover object-center opacity-90"
+          className="w-full h-full object-cover object-center"
         />
-        {/* Subtle dark vignette overlay so content remains readable while vibrant boat colors pop */}
-        <div className="absolute inset-0 bg-gradient-to-t from-brand-dark/80 via-brand-dark/25 to-brand-dark/50" />
       </div>
 
-      {/* Main 3D Card Container */}
-      <div className="relative z-10 mx-auto max-w-4xl w-full perspective-[1200px] mt-4 sm:mt-8">
+      {/* Main 3D Card Container - Scaled down wrapper box while keeping rich content presence */}
+      <div className="relative z-10 mx-auto max-w-[360px] sm:max-w-[560px] md:max-w-[620px] w-full perspective-[1200px] mt-6 sm:mt-8 px-3 sm:px-0">
         <motion.div
           ref={cardRef}
           onMouseMove={handleCardMouseMove}
@@ -62,7 +60,7 @@ export function HeroSection() {
             rotateY,
             transformStyle: "preserve-3d",
           }}
-          className="relative flex flex-col items-center text-center bg-brand-dark/85 backdrop-blur-md rounded-[2.5rem] sm:rounded-[3rem] p-6 sm:p-10 md:p-16 pb-14 sm:pb-16 md:pb-20 shadow-2xl border border-white/10 cursor-default"
+          className="relative flex flex-col items-center text-center bg-brand-dark/85 backdrop-blur-md rounded-[2.25rem] sm:rounded-[2.75rem] px-4 sm:px-8 md:px-10 pt-7 sm:pt-9 pb-14 sm:pb-16 shadow-2xl border border-white/10 cursor-default"
         >
           {/* Dynamic Light Sheen overlay moving across the card (contained in inner rounded overflow mask) */}
           <div className="absolute inset-0 rounded-[inherit] overflow-hidden pointer-events-none">
@@ -71,37 +69,41 @@ export function HeroSection() {
                 left: sheenLeft,
                 top: sheenTop,
               }}
-              className="absolute -translate-x-1/2 -translate-y-1/2 w-[32rem] h-[32rem] rounded-full bg-gradient-to-r from-brand-light/15 via-white/10 to-transparent blur-3xl pointer-events-none mix-blend-screen"
+              className="absolute -translate-x-1/2 -translate-y-1/2 w-[28rem] h-[28rem] rounded-full bg-gradient-to-r from-brand-light/15 via-white/10 to-transparent blur-3xl pointer-events-none mix-blend-screen"
             />
           </div>
 
           {/* Typography with 3D Z-Depth Layering */}
           <div
             style={{ transform: "translateZ(25px)" }}
-            className="relative flex flex-col items-center"
+            className="relative flex flex-col items-center w-full"
           >
-            <h1 className="font-heading text-4xl md:text-6xl font-black tracking-widest text-brand-orange uppercase drop-shadow-md text-center">
-              WELCOME
-              <span className="block mt-2 sm:mt-4 font-heading text-xl sm:text-2xl md:text-4xl font-bold tracking-widest text-white drop-shadow-md text-center">
+            {/* WELCOME heading overlaps top card edge with tight line wrapping */}
+            <h1 className="relative -mt-9 sm:-mt-12 md:-mt-14 font-heading tracking-widest uppercase drop-shadow-lg text-center select-none flex flex-col items-center leading-none">
+              <span className="text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] font-black text-brand-orange leading-none">
+                WELCOME
+              </span>
+              <span className="mt-1 sm:mt-1.5 text-base sm:text-xl md:text-2xl lg:text-[1.75rem] font-bold text-white drop-shadow-md tracking-wider sm:tracking-widest leading-none">
                 TO ALL ON DECK,
               </span>
             </h1>
-            <p className="mt-4 sm:mt-8 max-w-3xl font-sans text-base sm:text-lg md:text-xl lg:text-2xl leading-relaxed text-white drop-shadow-md font-medium tracking-wide text-center">
-              your trusted partner in marine deck flooring solutions. With years
+
+            <p className="mt-4 sm:mt-6 max-w-md sm:max-w-lg font-sans text-xs sm:text-base md:text-lg leading-relaxed text-white drop-shadow-md font-medium tracking-wide text-center px-1 sm:px-2">
+              your trusted partner in Marine deck flooring solutions. With years
               of experience and an unwavering commitment to quality, we offer
               products that combine durability, comfort, and style to enhance
               your on-water experience.
             </p>
 
-            <p className="mt-6 sm:mt-10 font-heading text-sm sm:text-lg font-bold uppercase tracking-[0.15em] sm:tracking-[0.2em] text-brand-cream text-center">
+            <p className="mt-4 sm:mt-6 font-heading text-[11px] sm:text-sm md:text-base font-bold uppercase tracking-wider sm:tracking-[0.2em] text-white/95 drop-shadow-md text-center">
               Take your boat to the next level
             </p>
           </div>
 
-          {/* Floating Action Button with Layered Waves (Exact original centering & positioning) */}
-          <div className="absolute bottom-2 sm:bottom-3 left-1/2 -translate-x-1/2 translate-y-1/4 flex items-center justify-center w-full z-20 pointer-events-none">
+          {/* Action Button with Layered Waves - Balanced subtle overlap on bottom border */}
+          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/4 flex items-center justify-center w-full z-20 pointer-events-none">
             {/* Top Wave (Behind button, official design asset) */}
-            <div className="absolute top-1/2 -translate-y-3.5 left-1/2 -translate-x-1/2 w-[18rem] sm:w-[22rem] md:w-[26rem] z-0 text-brand-light pointer-events-none opacity-95">
+            <div className="absolute top-1/2 -translate-y-3 left-1/2 -translate-x-1/2 w-[15rem] sm:w-[18rem] md:w-[21rem] z-0 text-brand-light pointer-events-none opacity-90">
               <Wave />
             </div>
 
@@ -109,13 +111,13 @@ export function HeroSection() {
               to="/services"
               variant="primary"
               size="lg"
-              className="relative z-10 pointer-events-auto shadow-2xl transition-transform hover:scale-105"
+              className="relative z-10 pointer-events-auto shadow-2xl transition-transform hover:scale-105 px-7 sm:px-8 py-3 text-xs sm:text-sm font-bold tracking-wider"
             >
               SERVICES
             </Button>
 
             {/* Bottom Wave (In front of button, official design asset) */}
-            <div className="absolute top-1/2 translate-y-3.5 left-1/2 -translate-x-1/2 w-[18rem] sm:w-[22rem] md:w-[26rem] z-20 text-brand-light pointer-events-none opacity-95">
+            <div className="absolute top-1/2 translate-y-2.5 left-1/2 -translate-x-1/2 w-[15rem] sm:w-[18rem] md:w-[21rem] z-20 text-brand-light pointer-events-none opacity-90">
               <Wave />
             </div>
           </div>

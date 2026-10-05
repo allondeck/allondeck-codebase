@@ -2,21 +2,20 @@ import { ServiceCard } from "../../../../components/features/ServiceCard";
 
 export function DesignsSection() {
   return (
-    <section className="bg-brand-dark pt-10 sm:pt-12 md:pt-14 pb-20 md:pb-28 text-white relative overflow-hidden">
+    <section className="bg-brand-dark scroll-mt-16 pt-8 sm:pt-10 lg:pt-12 pb-8 sm:pb-10 lg:pb-12 text-white relative overflow-hidden">
       <div className="relative mx-auto max-w-content px-6 lg:px-12 text-center">
-        <h2 className="font-heading text-4xl md:text-6xl font-black tracking-widest text-brand-cream text-center uppercase drop-shadow-md">
+        <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl font-black tracking-widest text-brand-cream text-center uppercase drop-shadow-md">
           DESIGNS
         </h2>
 
         {/* 3-Card Grid */}
-        <div className="mt-8 sm:mt-10 md:mt-14 grid gap-8 md:gap-12 lg:gap-8 xl:gap-6 grid-cols-1 lg:grid-cols-3 max-w-md sm:max-w-lg lg:max-w-[960px] xl:max-w-[1140px] mx-auto text-left">
+        <div className="mt-4 sm:mt-5 lg:mt-6 grid gap-5 sm:gap-6 lg:gap-6 xl:gap-7 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 max-w-[420px] sm:max-w-[500px] md:max-w-[800px] lg:max-w-[1060px] xl:max-w-[1160px] 2xl:max-w-[1200px] mx-auto text-left">
           {/* Card 1: Colors */}
           <ServiceCard
             title="COLORS"
             imageSrc="/assets/images/5.2.jpg"
             linkTo="/designs#colors"
             buttonText="SEE MORE"
-            aspectRatio="aspect-[3/4]"
           />
 
           {/* Card 2: Patterns */}
@@ -25,7 +24,6 @@ export function DesignsSection() {
             imageSrc="/assets/images/1.jpg"
             linkTo="/designs#gallery"
             buttonText="SEE MORE"
-            aspectRatio="aspect-[3/4]"
           />
 
           {/* Card 3: Materials */}
@@ -34,7 +32,6 @@ export function DesignsSection() {
             imageSrc="/assets/images/9.jpg"
             linkTo="/designs#materials"
             buttonText="SEE MORE"
-            aspectRatio="aspect-[3/4]"
           />
         </div>
       </div>

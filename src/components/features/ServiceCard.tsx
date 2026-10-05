@@ -46,8 +46,8 @@ export function ServiceCard({
   linkTo,
   buttonText = "SEE MORE",
   onActionClick,
-  aspectRatio = "aspect-[3/4]",
-  cardMinHeight = "min-h-[490px] sm:min-h-[535px] lg:min-h-[515px] xl:min-h-[580px]",
+  aspectRatio = "aspect-[6/7]",
+  cardMinHeight = "min-h-[460px] sm:min-h-[490px] lg:min-h-[480px] xl:min-h-[510px]",
   className = "",
   imageClassName = "",
   titleClassName = "",
@@ -61,8 +61,8 @@ export function ServiceCard({
         <Button
           to={destination}
           variant="primary"
-          size="md"
-          className={`!py-3.5 lg:!py-3.5 ${buttonClassName}`.trim()}
+          size="sm"
+          className={`!py-2.5 sm:!py-3 lg:!py-2.5 !px-5 sm:!px-6 !text-xs sm:!text-sm font-bold ${buttonClassName}`.trim()}
         >
           {buttonText}
         </Button>
@@ -73,8 +73,8 @@ export function ServiceCard({
         type="button"
         onClick={() => targetId && onActionClick?.(targetId)}
         variant="primary"
-        size="md"
-        className={`!py-3.5 lg:!py-3.5 ${buttonClassName}`.trim()}
+        size="sm"
+        className={`!py-2.5 sm:!py-3 lg:!py-2.5 !px-5 sm:!px-6 !text-xs sm:!text-sm font-bold ${buttonClassName}`.trim()}
       >
         {buttonText}
       </Button>
@@ -92,11 +92,11 @@ export function ServiceCard({
       className="transform-gpu perspective-1000 h-full"
     >
       <div
-        className={`group relative flex flex-col justify-between overflow-visible rounded-[1.5rem] bg-brand-medium p-5 sm:p-6 pt-5 sm:pt-6 pb-16 sm:pb-18 ${cardMinHeight} border border-white/10 shadow-2xl transition-shadow hover:shadow-cyan-500/10 ${className}`.trim()}
+        className={`group relative flex flex-col justify-between overflow-visible rounded-[1.5rem] bg-brand-medium p-4 sm:p-4.5 pt-4 sm:pt-4.5 pb-13 sm:pb-14 ${cardMinHeight} border border-white/10 shadow-2xl transition-shadow hover:shadow-cyan-500/10 ${className}`.trim()}
       >
         {/* Top Image Container */}
         <div
-          className={`overflow-hidden rounded-[2rem] ${aspectRatio} w-full shadow-md ${imageClassName}`.trim()}
+          className={`overflow-hidden rounded-[1.25rem] sm:rounded-[1.75rem] ${aspectRatio} w-full shadow-md ${imageClassName}`.trim()}
         >
           <img
             src={imageSrc}
@@ -108,28 +108,28 @@ export function ServiceCard({
         </div>
 
         {/* Title */}
-        <div className="my-auto pt-2 pb-2 sm:pt-3 sm:pb-10 text-center px-3">
+        <div className="my-auto pt-2 pb-1.5 sm:pt-2.5 sm:pb-2 text-center px-2">
           <h3
-            className={`font-heading text-2xl font-black tracking-wider text-brand-cream uppercase leading-snug ${titleClassName}`.trim()}
+            className={`font-heading text-xl sm:text-2xl font-black tracking-wider text-brand-cream uppercase leading-snug ${titleClassName}`.trim()}
           >
             {title}
           </h3>
         </div>
 
         {/* Waves & Bottom Right Corner Button */}
-        <div className="absolute bottom-0 left-0 right-0 h-16 pointer-events-none overflow-visible">
+        <div className="absolute bottom-0 left-0 right-0 h-14 sm:h-16 pointer-events-none overflow-visible">
           {/* Top Wave (Behind button, z-0) */}
-          <div className="absolute bottom-5 sm:bottom-6 lg:bottom-4 -left-2 sm:-left-3 lg:-left-4 right-0 sm:right-1 z-0 text-brand-light opacity-95 pointer-events-none scale-y-[0.65] sm:scale-y-[0.70] lg:scale-y-[0.90] origin-bottom">
+          <div className="absolute bottom-3.5 sm:bottom-4 lg:bottom-3.5 -left-2 sm:-left-3 lg:-left-4 right-0 sm:right-1 z-0 text-brand-light opacity-95 pointer-events-none scale-y-[0.60] sm:scale-y-[0.70] lg:scale-y-[0.80] origin-bottom">
             <Wave />
           </div>
 
           {/* SEE MORE Button in Bottom Right Corner (z-10) */}
-          <div className="absolute bottom-1.5 right-5 z-10 pointer-events-auto">
+          <div className="absolute bottom-1 sm:bottom-1.5 right-3.5 sm:right-5 z-10 pointer-events-auto">
             {renderButton()}
           </div>
 
           {/* Bottom Wave (In front of lower part of button, z-20) */}
-          <div className="absolute -bottom-2 sm:-bottom-2 lg:-bottom-2.5 -left-2 sm:-left-3 lg:-left-4 right-0 sm:right-1 z-20 text-brand-light opacity-95 pointer-events-none scale-y-[0.65] sm:scale-y-[0.70] lg:scale-y-[0.90] origin-bottom">
+          <div className="absolute -bottom-2 sm:-bottom-2 lg:-bottom-2 -left-2 sm:-left-3 lg:-left-4 right-0 sm:right-1 z-20 text-brand-light opacity-95 pointer-events-none scale-y-[0.60] sm:scale-y-[0.70] lg:scale-y-[0.80] origin-bottom">
             <Wave />
           </div>
         </div>

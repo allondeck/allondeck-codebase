@@ -24,6 +24,8 @@ interface TeamTeaserCardProps {
   buttonClassName?: string;
   /** Function callback for scrolling to bio section */
   onViewBioClick?: (id: string) => void;
+  /** Optional container class name */
+  className?: string;
 }
 
 export function TeamTeaserCard({
@@ -38,6 +40,7 @@ export function TeamTeaserCard({
   isActive = false,
   buttonClassName,
   onViewBioClick,
+  className = "",
 }: TeamTeaserCardProps) {
   const defaultButtonClass = isActive
     ? "bg-brand-cream text-brand-orange hover:bg-white"
@@ -45,8 +48,8 @@ export function TeamTeaserCard({
   const resolvedButtonClass = buttonClassName || defaultButtonClass;
   const wavePosClass =
     wavePosition === "left"
-      ? "absolute bottom-5 -left-8 sm:-left-10 w-36 sm:w-44 pointer-events-none z-20 text-[#6bb3c7]"
-      : "absolute bottom-5 -right-8 sm:-right-10 w-36 sm:w-44 pointer-events-none z-20 text-[#6bb3c7]";
+      ? "absolute bottom-3.5 -left-5 sm:-left-7 w-28 sm:w-34 pointer-events-none z-20 text-[#6bb3c7]"
+      : "absolute bottom-3.5 -right-5 sm:-right-7 w-28 sm:w-34 pointer-events-none z-20 text-[#6bb3c7]";
 
   const handleBioClick = (e: React.MouseEvent) => {
     if (onViewBioClick && bioSectionId) {
@@ -56,10 +59,10 @@ export function TeamTeaserCard({
   };
 
   return (
-    <div className="flex flex-col items-start text-left w-full max-w-[320px] sm:max-w-[350px]">
+    <div className={`flex flex-col items-start text-left w-full max-w-[260px] sm:max-w-[275px] md:max-w-[285px] lg:max-w-[290px] ${className}`}>
       {/* Portrait Photo Container */}
-      <div className="relative w-full aspect-[4/5] rounded-[2.2rem] bg-brand-dark-alt shadow-2xl">
-        <div className="w-full h-full rounded-[2.2rem] overflow-hidden border border-brand-medium/30">
+      <div className="relative w-full aspect-[5/6] rounded-[1.75rem] bg-brand-dark-alt shadow-2xl">
+        <div className="w-full h-full rounded-[1.75rem] overflow-hidden border border-brand-medium/30">
           <img
             src={imageSrc}
             alt={name}
@@ -83,28 +86,28 @@ export function TeamTeaserCard({
       </div>
 
       {/* Info Container */}
-      <div className="mt-5 w-full text-left">
-        <span className="block text-xs sm:text-sm text-[#6bb3c7] font-medium italic tracking-wider uppercase font-sans whitespace-nowrap">
+      <div className="mt-3 sm:mt-4 w-full text-left">
+        <span className="block text-[11px] sm:text-xs text-[#6bb3c7] font-medium italic tracking-wider uppercase font-sans whitespace-nowrap">
           {role}
         </span>
-        <h3 className="block text-base sm:text-lg md:text-xl font-black tracking-widest text-brand-cream font-heading uppercase mt-1 whitespace-nowrap">
+        <h3 className="block text-sm sm:text-base lg:text-lg font-black tracking-widest text-brand-cream font-heading uppercase mt-0.5 sm:mt-1 whitespace-nowrap">
           {name}
         </h3>
 
         {/* Buttons Row */}
-        <div className="mt-4 flex items-center gap-3">
+        <div className="mt-3 sm:mt-3.5 flex items-center gap-2.5 sm:gap-3">
           {to ? (
             <Link
               to={to}
               onClick={handleBioClick}
-              className={`px-7 py-3 rounded-2xl text-xs sm:text-sm uppercase tracking-wider transition-all duration-300 hover:scale-105 shadow-md ${resolvedButtonClass}`}
+              className={`px-5 sm:px-6 py-2 sm:py-2.5 rounded-xl text-[11px] sm:text-xs uppercase tracking-wider font-semibold transition-all duration-300 hover:scale-105 shadow-md ${resolvedButtonClass}`}
             >
               VIEW BIO
             </Link>
           ) : (
             <button
               onClick={handleBioClick}
-              className={`px-7 py-3 rounded-2xl text-xs sm:text-sm uppercase tracking-wider transition-all duration-300 hover:scale-105 shadow-md ${resolvedButtonClass}`}
+              className={`px-5 sm:px-6 py-2 sm:py-2.5 rounded-xl text-[11px] sm:text-xs uppercase tracking-wider font-semibold transition-all duration-300 hover:scale-105 shadow-md ${resolvedButtonClass}`}
             >
               VIEW BIO
             </button>
@@ -115,10 +118,10 @@ export function TeamTeaserCard({
             href={whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex size-12 shrink-0 items-center justify-center transition-transform hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange rounded-full"
+            className="flex size-9 sm:size-10 shrink-0 items-center justify-center transition-transform hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange rounded-full"
             aria-label={`Contact ${name} on WhatsApp`}
           >
-            <svg className="size-12" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <svg className="size-9 sm:size-10" viewBox="0 0 24 24" fill="none" aria-hidden="true">
               {/* Orange speech bubble background with bottom-left pointer */}
               <path
                 fill="#e98e2e"
@@ -135,10 +138,10 @@ export function TeamTeaserCard({
           {/* Email Squircle Icon */}
           <a
             href={`mailto:${email}`}
-            className="flex size-[42px] shrink-0 items-center justify-center rounded-2xl bg-brand-orange text-brand-navy transition-transform hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+            className="flex size-[32px] sm:size-[36px] shrink-0 items-center justify-center rounded-xl bg-brand-orange text-brand-navy transition-transform hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
             aria-label={`Send email to ${name}`}
           >
-            <svg className="size-[32px]" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+            <svg className="size-[24px] sm:size-[28px]" viewBox="0 0 48 48" fill="none" aria-hidden="true">
               {/* Top Flap Section */}
               <path
                 d="M7 11H41C41.6 11 42.1 11.2 42.5 11.5L25.3 25.1C24.5 25.7 23.5 25.7 22.7 25.1L5.5 11.5C5.9 11.2 6.4 11 7 11Z"

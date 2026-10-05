@@ -97,8 +97,8 @@ export function ServicesSection() {
   }, []);
 
   return (
-    <section className="bg-brand-dark pt-4 sm:pt-6 md:pt-8 pb-20 md:pb-28 text-white relative overflow-hidden">
-      <AnimatedWaveDivider className="-mt-8 mb-6 opacity-75" />
+    <section className="bg-brand-dark pt-6 sm:pt-8 md:pt-4 pb-6 sm:pb-8 lg:pb-8 text-white relative z-10">
+      <AnimatedWaveDivider className="hidden md:block relative z-20 -mt-10 md:-mt-12 mb-2 sm:mb-3 opacity-90" />
 
       <div className="relative mx-auto max-w-content px-6 lg:px-12">
         {/* Animated Section Header */}
@@ -109,7 +109,7 @@ export function ServicesSection() {
           transition={{ duration: 0.6, ease: "easeOut" }}
           className="text-center"
         >
-          <h2 className="font-heading text-4xl md:text-6xl font-black tracking-widest text-brand-cream text-center uppercase drop-shadow-md">
+          <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl font-black tracking-widest text-brand-cream text-center uppercase drop-shadow-md">
             SERVICES
           </h2>
           <motion.div
@@ -117,7 +117,7 @@ export function ServicesSection() {
             whileInView={{ scaleX: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
-            className="mx-auto mt-4 h-1.5 w-20 bg-brand-orange rounded-full origin-center"
+            className="mx-auto mt-2.5 sm:mt-3 h-1 w-16 bg-brand-orange rounded-full origin-center"
           />
         </motion.div>
 
@@ -127,7 +127,7 @@ export function ServicesSection() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-60px" }}
-          className="mt-8 sm:mt-10 md:mt-12 grid gap-8 md:gap-10 lg:gap-8 xl:gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 max-w-[480px] sm:max-w-[550px] md:max-w-[820px] lg:max-w-[1030px] xl:max-w-[1220px] 2xl:max-w-[1260px] mx-auto"
+          className="mt-4 sm:mt-5 lg:mt-6 grid gap-5 sm:gap-6 lg:gap-6 xl:gap-7 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 max-w-[420px] sm:max-w-[500px] md:max-w-[800px] lg:max-w-[1060px] xl:max-w-[1160px] 2xl:max-w-[1200px] mx-auto"
         >
           {services.map((service, idx) => (
             <motion.div
@@ -140,7 +140,6 @@ export function ServicesSection() {
                 imageSrc={service.image_url}
                 linkTo={`/services#service-${idx + 1}`}
                 buttonText="See More"
-                buttonClassName="!py-4 lg:!py-4"
               />
             </motion.div>
           ))}
@@ -152,11 +151,11 @@ export function ServicesSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.4 }}
-          className="mt-12 text-center"
+          className="mt-4 sm:mt-5 text-center"
         >
           <Link
             to="/gallery"
-            className="inline-flex items-center gap-2 rounded-full border border-brand-orange/60 bg-brand-orange/15 px-8 py-3.5 text-sm font-bold tracking-wider text-brand-orange uppercase hover:bg-brand-orange hover:text-white transition-all shadow-lg hover:scale-105 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange min-h-[44px]"
+            className="inline-flex items-center gap-2 rounded-full border border-brand-orange/60 bg-brand-orange/15 px-6 py-2.5 text-xs sm:text-sm font-bold tracking-wider text-brand-orange uppercase hover:bg-brand-orange hover:text-white transition-all shadow-lg hover:scale-105 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange min-h-[40px]"
           >
             Explore Full Project Gallery →
           </Link>
