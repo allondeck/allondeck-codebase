@@ -92,7 +92,7 @@ export function ServiceCard({
       className="transform-gpu perspective-1000 h-full"
     >
       <div
-        className={`group relative flex flex-col justify-between overflow-visible rounded-[1.5rem] bg-brand-medium p-4 sm:p-4.5 pt-4 sm:pt-4.5 pb-13 sm:pb-14 ${cardMinHeight} border border-white/10 shadow-2xl transition-shadow hover:shadow-cyan-500/10 ${className}`.trim()}
+        className={`group relative flex flex-col justify-between overflow-visible rounded-[1.5rem] bg-brand-medium p-4 sm:p-4.5 pt-4 sm:pt-4.5 pb-[72px] sm:pb-14 ${cardMinHeight} border border-white/10 shadow-2xl transition-shadow hover:shadow-cyan-500/10 ${className}`.trim()}
       >
         {/* Top Image Container */}
         <div

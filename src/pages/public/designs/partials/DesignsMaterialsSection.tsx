@@ -2,7 +2,7 @@ export function DesignsMaterialsSection() {
   return (
     <div
       id="materials"
-      className="scroll-mt-20 mx-auto max-w-content px-6 lg:px-12 py-20 border-t border-brand-medium/30"
+      className="scroll-mt-20 mx-auto max-w-content px-6 lg:px-12 pt-20 pb-6 md:py-20 border-t border-brand-medium/30"
     >
       <div className="text-center mb-12">
         <span className="text-xs font-bold uppercase tracking-widest text-brand-orange">
@@ -31,8 +31,8 @@ export function DesignsMaterialsSection() {
           <p className="mt-4 text-sm text-white/80 leading-relaxed font-sans flex-1">
             Our premium closed-cell EVA (ethylene-vinyl acetate) and PE
             (polyethylene) foam sheet materials provide exceptional non-slip
-            traction under extreme wet/dry situations. Soft on bare feet,
-            highly shock-absorbent, and dampens vessel vibrations.
+            traction under extreme wet/dry situations. Soft on bare feet, highly
+            shock-absorbent, and dampens vessel vibrations.
           </p>
           <ul className="mt-6 space-y-2 border-t border-brand-medium/30 pt-6 text-xs text-brand-light font-sans">
             <li className="flex items-center gap-2">

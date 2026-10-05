@@ -13,18 +13,78 @@ interface DesignsColorsSectionProps {
 }
 
 const DEFAULT_COLORS: DesignColor[] = [
-  { id: "c1", name: "Classic Teak", hex_color: "#c19a6b", image_url: "/assets/images/2.jpg" },
-  { id: "c2", name: "Arctic White", hex_color: "#f5f5f0", image_url: "/assets/images/4.jpg" },
-  { id: "c3", name: "Carbon Black", hex_color: "#1a1a1a", image_url: "/assets/images/3.jpg" },
-  { id: "c4", name: "Ocean Navy", hex_color: "#1b3a6b", image_url: "/assets/images/5.jpg" },
-  { id: "c5", name: "Coral Drift", hex_color: "#d4704a", image_url: "/assets/images/10.jpg" },
-  { id: "c6", name: "Desert Sand", hex_color: "#c2a06e", image_url: "/assets/images/1.jpg" },
-  { id: "c7", name: "Slate Grey", hex_color: "#5a6475", image_url: "/assets/images/11.jpg" },
-  { id: "c8", name: "Ivory Pearl", hex_color: "#ede8d9", image_url: "/assets/images/4.jpg" },
-  { id: "c9", name: "Deep Ebony", hex_color: "#2c1810", image_url: "/assets/images/3.jpg" },
-  { id: "c10", name: "Sea Foam", hex_color: "#4a9e8b", image_url: "/assets/images/5.2.jpg" },
-  { id: "c11", name: "Driftwood", hex_color: "#8b7355", image_url: "/assets/images/2.jpg" },
-  { id: "c12", name: "Marine Blue", hex_color: "#044155", image_url: "/assets/images/1.jpg" },
+  {
+    id: "c1",
+    name: "Classic Teak",
+    hex_color: "#c19a6b",
+    image_url: "/assets/images/2.jpg",
+  },
+  {
+    id: "c2",
+    name: "Arctic White",
+    hex_color: "#f5f5f0",
+    image_url: "/assets/images/4.jpg",
+  },
+  {
+    id: "c3",
+    name: "Carbon Black",
+    hex_color: "#1a1a1a",
+    image_url: "/assets/images/3.jpg",
+  },
+  {
+    id: "c4",
+    name: "Ocean Navy",
+    hex_color: "#1b3a6b",
+    image_url: "/assets/images/5.jpg",
+  },
+  {
+    id: "c5",
+    name: "Coral Drift",
+    hex_color: "#d4704a",
+    image_url: "/assets/images/10.jpg",
+  },
+  {
+    id: "c6",
+    name: "Desert Sand",
+    hex_color: "#c2a06e",
+    image_url: "/assets/images/1.jpg",
+  },
+  {
+    id: "c7",
+    name: "Slate Grey",
+    hex_color: "#5a6475",
+    image_url: "/assets/images/11.jpg",
+  },
+  {
+    id: "c8",
+    name: "Ivory Pearl",
+    hex_color: "#ede8d9",
+    image_url: "/assets/images/4.jpg",
+  },
+  {
+    id: "c9",
+    name: "Deep Ebony",
+    hex_color: "#2c1810",
+    image_url: "/assets/images/3.jpg",
+  },
+  {
+    id: "c10",
+    name: "Sea Foam",
+    hex_color: "#4a9e8b",
+    image_url: "/assets/images/5.2.jpg",
+  },
+  {
+    id: "c11",
+    name: "Driftwood",
+    hex_color: "#8b7355",
+    image_url: "/assets/images/2.jpg",
+  },
+  {
+    id: "c12",
+    name: "Marine Blue",
+    hex_color: "#044155",
+    image_url: "/assets/images/1.jpg",
+  },
 ];
 
 export function DesignsColorsSection({ colors }: DesignsColorsSectionProps) {
@@ -35,7 +95,7 @@ export function DesignsColorsSection({ colors }: DesignsColorsSectionProps) {
   return (
     <div
       id="colors"
-      className="scroll-mt-20 border-t border-brand-medium/30 bg-[#0C5A6D] pt-24 pb-[104px] relative overflow-visible"
+      className="scroll-mt-20 border-t border-brand-medium/30 bg-[#0C5A6D] pt-8 md:pt-24 pb-[104px] relative overflow-visible"
     >
       <div className="mx-auto max-w-content px-6 lg:px-12">
         <div className="flex flex-col-reverse lg:flex-row items-center justify-between gap-12 lg:gap-0">
@@ -167,23 +227,29 @@ export function DesignsColorsSection({ colors }: DesignsColorsSectionProps) {
               COLORS
             </h2>
             <p className="mt-8 text-sm md:text-base text-white font-sans leading-relaxed text-justify hyphens-auto tracking-wide">
-              Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed
-              diam nonummy nibh euismod tincidunt ut laoreet dolore magna
-              aliquam erat volutpat. Ut wisi enim ad Lorem ipsum dolor sit
-              amet, consectetuer adipiscing elit, sed diam nonummy nibh
-              euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
-              Ut wisi enim ad minim veniam, quis nostrud exerci tation
-              ullamcorper suscipit lobortis nisl ut aliquip
+              Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
+              nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam
+              erat volutpat. Ut wisi enim ad Lorem ipsum dolor sit amet,
+              consectetuer adipiscing elit, sed diam nonummy nibh euismod
+              tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi
+              enim ad minim veniam, quis nostrud exerci tation ullamcorper
+              suscipit lobortis nisl ut aliquip
             </p>
 
-            <div className="mt-10 flex justify-start">
-              <WaveButton
-                to="/estimate"
-                variant="primary"
-                size="lg"
-              >
-                MATCH COLOR
-              </WaveButton>
+            <div className="mt-10 flex justify-start ml-8">
+              {/* Mobile */}
+              <div className="md:hidden">
+                <WaveButton to="/estimate" variant="primary" size="md">
+                  MATCH COLOR
+                </WaveButton>
+              </div>
+
+              {/* Desktop */}
+              <div className="hidden md:block">
+                <WaveButton to="/estimate" variant="primary" size="lg">
+                  MATCH COLOR
+                </WaveButton>
+              </div>
             </div>
           </div>
         </div>

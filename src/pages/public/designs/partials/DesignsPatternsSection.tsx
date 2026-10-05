@@ -21,19 +21,53 @@ interface DesignsPatternsSectionProps {
 }
 
 const DEFAULT_PATTERNS: (DesignPattern & { pattern_type: PatternType })[] = [
-  { id: "p1", name: "Interlocking Brick", image_url: "/assets/images/2.jpg", pattern_type: "stepped" },
-  { id: "p2", name: "Geometric Diamond", image_url: "/assets/images/3.jpg", pattern_type: "diamonds" },
-  { id: "p3", name: "Chevron Wave", image_url: "/assets/images/4.jpg", pattern_type: "chevron" },
-  { id: "p4", name: "Diamond Lattice", image_url: "/assets/images/5.jpg", pattern_type: "crosshatch" },
-  { id: "p5", name: "Octagon Mosaic", image_url: "/assets/images/10.jpg", pattern_type: "octagons" },
-  { id: "p6", name: "Hexagon Key", image_url: "/assets/images/11.jpg", pattern_type: "hexagons" },
+  {
+    id: "p1",
+    name: "Interlocking Brick",
+    image_url: "/assets/images/2.jpg",
+    pattern_type: "stepped",
+  },
+  {
+    id: "p2",
+    name: "Geometric Diamond",
+    image_url: "/assets/images/3.jpg",
+    pattern_type: "diamonds",
+  },
+  {
+    id: "p3",
+    name: "Chevron Wave",
+    image_url: "/assets/images/4.jpg",
+    pattern_type: "chevron",
+  },
+  {
+    id: "p4",
+    name: "Diamond Lattice",
+    image_url: "/assets/images/5.jpg",
+    pattern_type: "crosshatch",
+  },
+  {
+    id: "p5",
+    name: "Octagon Mosaic",
+    image_url: "/assets/images/10.jpg",
+    pattern_type: "octagons",
+  },
+  {
+    id: "p6",
+    name: "Hexagon Key",
+    image_url: "/assets/images/11.jpg",
+    pattern_type: "hexagons",
+  },
 ];
 
 function PatternSVG({ type, id }: { type: PatternType; id: string }) {
   const clipId = `clip-${type}-${id}`;
 
   return (
-    <svg viewBox="0 0 100 100" className="w-full h-full select-none" fill="none">
+    <svg
+      viewBox="0 0 100 100"
+      className="w-full h-full select-none"
+      fill="none"
+    >
       <defs>
         <clipPath id={clipId}>
           <rect x="6" y="6" width="88" height="88" rx="8" />
@@ -143,9 +177,11 @@ function PatternSVG({ type, id }: { type: PatternType; id: string }) {
           strokeLinecap="round"
           strokeLinejoin="round"
         >
-          {[-40, -26, -12, 2, 16, 30, 44, 58, 72, 86, 100, 114, 128].map((c) => (
-            <line key={`f-${c}`} x1={c} y1="0" x2={c + 100} y2="100" />
-          ))}
+          {[-40, -26, -12, 2, 16, 30, 44, 58, 72, 86, 100, 114, 128].map(
+            (c) => (
+              <line key={`f-${c}`} x1={c} y1="0" x2={c + 100} y2="100" />
+            ),
+          )}
           {[-28, -14, 0, 14, 28, 42, 56, 70, 84, 98, 112, 126, 140].map((c) => (
             <line key={`b-${c}`} x1={c} y1="100" x2={c + 100} y2="0" />
           ))}
@@ -161,13 +197,27 @@ function PatternSVG({ type, id }: { type: PatternType; id: string }) {
           strokeLinejoin="round"
         >
           {[
-            [20, 20], [50, 20], [80, 20],
-            [20, 50], [50, 50], [80, 50],
-            [20, 80], [50, 80], [80, 80],
-            [-10, 20], [-10, 50], [-10, 80],
-            [110, 20], [110, 50], [110, 80],
-            [20, -10], [50, -10], [80, -10],
-            [20, 110], [50, 110], [80, 110],
+            [20, 20],
+            [50, 20],
+            [80, 20],
+            [20, 50],
+            [50, 50],
+            [80, 50],
+            [20, 80],
+            [50, 80],
+            [80, 80],
+            [-10, 20],
+            [-10, 50],
+            [-10, 80],
+            [110, 20],
+            [110, 50],
+            [110, 80],
+            [20, -10],
+            [50, -10],
+            [80, -10],
+            [20, 110],
+            [50, 110],
+            [80, 110],
           ].map(([cx, cy], i) => (
             <polygon
               key={i}
@@ -217,28 +267,33 @@ function PatternSVG({ type, id }: { type: PatternType; id: string }) {
   );
 }
 
-export function DesignsPatternsSection({ patterns }: DesignsPatternsSectionProps) {
+export function DesignsPatternsSection({
+  patterns,
+}: DesignsPatternsSectionProps) {
   // Use DB patterns or fallback to the 6 physical sample patterns from the Illustrator mockup
   const displayPatterns =
     patterns && patterns.length > 0
       ? patterns.map((p, idx) => ({
           ...p,
           image_url:
-            p.image_url || DEFAULT_PATTERNS[idx % DEFAULT_PATTERNS.length].image_url,
+            p.image_url ||
+            DEFAULT_PATTERNS[idx % DEFAULT_PATTERNS.length].image_url,
           pattern_type:
-            p.pattern_type || DEFAULT_PATTERNS[idx % DEFAULT_PATTERNS.length].pattern_type,
+            p.pattern_type ||
+            DEFAULT_PATTERNS[idx % DEFAULT_PATTERNS.length].pattern_type,
         }))
       : DEFAULT_PATTERNS;
 
   const [selectedPatternId, setSelectedPatternId] = useState<string>("p1");
 
   const activePattern =
-    displayPatterns.find((p) => p.id === selectedPatternId) || displayPatterns[0];
+    displayPatterns.find((p) => p.id === selectedPatternId) ||
+    displayPatterns[0];
 
   return (
     <div
       id="gallery"
-      className="scroll-mt-20 border-t border-brand-medium/30 bg-[#0C5A6D] pt-24 pb-[104px] relative overflow-visible"
+      className="scroll-mt-20 border-t border-brand-medium/30 bg-[#0C5A6D] pt-24 pb-12 md:pb-[104px] relative overflow-visible"
     >
       <div className="mx-auto max-w-content px-6 lg:px-12">
         <div className="flex flex-col-reverse lg:flex-row items-center justify-between gap-12 lg:gap-0">
@@ -307,18 +362,32 @@ export function DesignsPatternsSection({ patterns }: DesignsPatternsSectionProps
             <p className="mt-8 text-sm md:text-base text-white font-sans leading-relaxed text-justify hyphens-auto tracking-wide">
               Every deck is unique. Browse a selection of our premium pattern
               designs and get inspired for your next build. Our patterns are
-              precision routed for a perfect finish that elevates the
-              aesthetics of any vessel.
+              precision routed for a perfect finish that elevates the aesthetics
+              of any vessel.
             </p>
 
-            <div className="mt-10 flex justify-start">
-              <WaveButton
-                to={`/estimate${activePattern ? `?pattern=${encodeURIComponent(activePattern.name)}` : ""}`}
-                variant="primary"
-                size="lg"
-              >
-                GET THIS DESIGN
-              </WaveButton>
+            <div className="mt-10 flex justify-start ml-8">
+              {/* Mobile */}
+              <div className="md:hidden">
+                <WaveButton
+                  to={`/estimate${activePattern ? `?pattern=${encodeURIComponent(activePattern.name)}` : ""}`}
+                  variant="primary"
+                  size="md"
+                >
+                  GET THIS DESIGN
+                </WaveButton>
+              </div>
+
+              {/* Desktop */}
+              <div className="hidden md:block">
+                <WaveButton
+                  to={`/estimate${activePattern ? `?pattern=${encodeURIComponent(activePattern.name)}` : ""}`}
+                  variant="primary"
+                  size="lg"
+                >
+                  GET THIS DESIGN
+                </WaveButton>
+              </div>
             </div>
           </div>
         </div>

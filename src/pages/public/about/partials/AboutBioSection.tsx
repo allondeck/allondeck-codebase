@@ -3,7 +3,7 @@ import { TeamBioCard } from "../../../../components/features/TeamBioCard";
 export function AboutBioSection() {
   return (
     <div className="mx-auto max-w-[1100px] px-6 lg:px-12 pb-24">
-      <div className="flex flex-col gap-36 md:gap-32">
+      <div className="flex flex-col md:gap-32">
         {/* Card 1: Ernesto Alvarez */}
         <TeamBioCard
           id="ernesto-bio"

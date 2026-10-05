@@ -1,5 +1,6 @@
 import { useProducts } from "../../../../hooks/useProducts";
 import { Button } from "../../../../components/ui/Button";
+import { Icon } from "../../../../components/ui/Icon";
 import { ShopCard } from "../../../../components/features/ShopCard";
 import { ProductCarousel } from "../../../../components/features/ProductCarousel";
 
@@ -8,36 +9,34 @@ export function ShopSection() {
 
   return (
     <section
-      className="py-20 bg-brand-dark text-white overflow-hidden"
+      className="scroll-mt-16 pt-8 sm:pt-10 lg:pt-12 pb-8 sm:pb-10 lg:pb-10 bg-brand-dark text-white overflow-hidden"
       id="shop"
     >
       <div className="mx-auto max-w-content px-6 lg:px-12">
         <div className="text-center flex flex-col items-center">
-          <div className="flex flex-col md:flex-row items-center justify-center gap-4">
-            <svg
-              className="h-9 w-9 md:h-14 md:w-14 text-brand-orange"
-              fill="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path d="M19 6h-3.5a5.5 5.5 0 00-11 0H1v16h18V6zm-8-3.5c1.93 0 3.5 1.57 3.5 3.5h-7c0-1.93 1.57-3.5 3.5-3.5zM3 20V8h12v12H3z" />
-              <path d="M7.5 6a3.5 3.5 0 017 0H16a5.5 5.5 0 00-11 0h2.5z" />
-            </svg>
-            <h2 className="font-heading text-4xl md:text-6xl font-black tracking-widest text-brand-cream uppercase">
+          <div className="flex items-center justify-center gap-3 sm:gap-4">
+            <Icon
+              name="cart"
+              size={48}
+              className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 text-brand-orange shrink-0"
+              color="currentColor"
+            />
+            <h2 className="font-heading text-4xl sm:text-5xl md:text-6xl font-black tracking-widest text-brand-cream uppercase drop-shadow-md">
               OUR SHOP
             </h2>
           </div>
-          <p className="mt-4 max-w-xl text-base md:text-lg lg:text-xl text-brand-light italic tracking-wide">
+          <p className="mt-2.5 sm:mt-3 max-w-[320px] sm:max-w-[380px] md:max-w-[440px] lg:max-w-[450px] text-sm sm:text-base md:text-lg text-brand-light italic tracking-wide text-center leading-relaxed">
             Join the community and carry our spirit on every journey. We'll see
             you out on the water!
           </p>
         </div>
 
-        <ProductCarousel className="mt-12">
+        <ProductCarousel className="mt-5 sm:mt-6">
           {loading
             ? Array.from({ length: 8 }).map((_, i) => (
                 <div
                   key={i}
-                  className="snap-start shrink-0 w-72 h-96 animate-pulse rounded-[2rem] bg-brand-medium/50 shadow-md"
+                  className="snap-start shrink-0 w-[220px] sm:w-[240px] md:w-[250px] lg:w-[260px] xl:w-[270px] h-72 sm:h-80 animate-pulse rounded-[1.5rem] sm:rounded-[1.75rem] bg-brand-medium/50 shadow-md"
                 />
               ))
             : products.map((product) => (
@@ -45,7 +44,7 @@ export function ShopSection() {
               ))}
         </ProductCarousel>
 
-        <div className="mt-4 text-center">
+        <div className="mt-4 sm:mt-5 text-center">
           <Button to="/products" variant="outline" size="md">
             View All Products
           </Button>
