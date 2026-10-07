@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { supabase } from '../../../lib/supabase';
+import { SEO } from '../../../components/ui/SEO';
 import { OrderConfirmationDetailsSection } from './partials/OrderConfirmationDetailsSection';
 
 export default function OrderConfirmation() {
@@ -38,11 +39,19 @@ export default function OrderConfirmation() {
 
   if (loading) {
     return (
-      <div className="flex justify-center py-12">
+      <div className="mx-auto max-w-content px-6 lg:px-12 py-20 sm:py-28 lg:py-32 flex justify-center items-center min-h-[50vh]">
         <div className="h-8 w-8 animate-spin rounded-full border-2 border-brand-medium/35 border-t-brand-orange" />
       </div>
     );
   }
 
-  return <OrderConfirmationDetailsSection order={order} />;
+  return (
+    <div className="mx-auto max-w-content px-6 lg:px-12 py-20 sm:py-28 lg:py-32 flex flex-col items-center justify-center">
+      <SEO
+        title="Order Confirmed | All On Deck"
+        description="Thank you for your order with All On Deck."
+      />
+      <OrderConfirmationDetailsSection order={order} />
+    </div>
+  );
 }
