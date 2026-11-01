@@ -417,7 +417,7 @@ export function Layout({ children }: LayoutProps) {
             {/* Socials */}
             <div className="flex items-center gap-6 pt-4 text-left">
               <a
-                href="https://www.facebook.com/all.on.deck.2023?mibextid=LQQJ4d"
+                href="https://www.facebook.com/profile.php?id=61571779111701"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-brand-cream hover:text-brand-orange transition-colors"

@@ -10,6 +10,7 @@ import {
 } from "../../../components/ui/AnimatedSection";
 import { X, ChevronLeft, ChevronRight, Maximize2 } from "lucide-react";
 import { ServicesGalleryBannerSection } from "../services/partials/ServicesGalleryBannerSection";
+import { GallerySocialCtaSection } from "./partials/GallerySocialCtaSection";
 
 export type GalleryImage = {
   id: string;
@@ -263,8 +264,11 @@ export default function Gallery() {
             <div className="h-10 w-10 animate-spin rounded-full border-4 border-brand-medium/30 border-t-brand-orange" />
           </div>
         ) : filteredImages.length === 0 ? (
-          <div className="rounded-2xl border border-brand-medium/30 bg-brand-dark-alt py-16 text-center">
+          <div className="rounded-2xl border border-brand-medium/30 bg-brand-dark-alt py-16 px-6 text-center">
             <p className="text-brand-light text-lg">No gallery images found for this category.</p>
+            <p className="text-xs sm:text-sm text-brand-light/70 mt-2">
+              Visit our social media channels below to view recent builds and vessel installations.
+            </p>
           </div>
         ) : (
           <motion.div
@@ -335,6 +339,9 @@ export default function Gallery() {
           </motion.div>
         )}
       </div>
+
+      {/* Social Media CTA Section */}
+      <GallerySocialCtaSection />
 
       {/* CTA Estimate Banner */}
       <ServicesGalleryBannerSection variant="medium" />
