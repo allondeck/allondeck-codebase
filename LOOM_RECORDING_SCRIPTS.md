@@ -360,7 +360,7 @@ Cada video incluye:
 > 
 > *Ya tenemos el servicio de correos listo usando **Resend**. Para que los correos salgan con el nombre oficial de su empresa y no caigan en la carpeta de correo no deseado (spam), necesitamos verificar su dominio propio (por ejemplo, `orders@allondeckmarine.com`). Esto se hace agregando unos registros simples en su proveedor de dominio (como GoDaddy o Namecheap).*
 > 
-> *Asimismo, confírmenme a qué correo de su equipo quieren que les llegue el aviso inmediato cada vez que un cliente solicite un presupuesto en la web.*
+> *Asimismo, confírmenme a qué correo de su equipo quieren que les llegue el aviso inmediato cada vez que un cliente solicite un presupuesto en la web? Allondeckadm@gmail.com o tienen otro correo?*
 > 
 > ---
 > 
