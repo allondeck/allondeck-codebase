@@ -2,7 +2,8 @@
  * Image utilities for compression and Supabase storage transformations.
  */
 
-const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL ?? "";
+const SUPABASE_URL =
+  (typeof import.meta !== "undefined" && import.meta.env?.VITE_SUPABASE_URL) || "";
 
 export interface ImageTransformOptions {
   width: number;
@@ -135,25 +136,40 @@ export async function compressImageForUpload(
           outputExt = "jpg";
         }
 
-        // If still exceeds maxSizeBytes, try lower quality
-        if (blob && blob.size > maxSizeBytes) {
-          const lowerBlob = await exportBlob(0.70, outputType);
-          if (lowerBlob) blob = lowerBlob;
-        }
+        // If file still exceeds maxSizeBytes, progressively reduce quality and scale
+        let currentQuality = quality;
+        let currentWidth = targetWidth;
+        let currentHeight = targetHeight;
+        let activeCanvas = canvas;
+        let attempts = 0;
 
-        // If still exceeds maxSizeBytes, downscale further
-        if (blob && blob.size > maxSizeBytes) {
-          const smallerCanvas = document.createElement("canvas");
-          const halfScale = 0.75;
-          smallerCanvas.width = Math.round(targetWidth * halfScale);
-          smallerCanvas.height = Math.round(targetHeight * halfScale);
-          const sCtx = smallerCanvas.getContext("2d");
-          if (sCtx) {
-            sCtx.drawImage(canvas, 0, 0, smallerCanvas.width, smallerCanvas.height);
-            const smallerBlob = await new Promise<Blob | null>((res) =>
-              smallerCanvas.toBlob(res, outputType, 0.70)
+        while (blob && blob.size > maxSizeBytes && attempts < 5) {
+          attempts++;
+          if (currentQuality > 0.60) {
+            currentQuality = Math.max(0.55, currentQuality - 0.15);
+            const lowerBlob = await new Promise<Blob | null>((res) =>
+              activeCanvas.toBlob(res, outputType, currentQuality)
             );
-            if (smallerBlob) blob = smallerBlob;
+            if (lowerBlob) blob = lowerBlob;
+          } else {
+            // Downscale dimensions further
+            currentWidth = Math.max(1, Math.round(currentWidth * 0.75));
+            currentHeight = Math.max(1, Math.round(currentHeight * 0.75));
+
+            const nextCanvas = document.createElement("canvas");
+            nextCanvas.width = currentWidth;
+            nextCanvas.height = currentHeight;
+            const nextCtx = nextCanvas.getContext("2d");
+            if (nextCtx) {
+              nextCtx.drawImage(activeCanvas, 0, 0, currentWidth, currentHeight);
+              activeCanvas = nextCanvas;
+              const smallerBlob = await new Promise<Blob | null>((res) =>
+                activeCanvas.toBlob(res, outputType, currentQuality)
+              );
+              if (smallerBlob) blob = smallerBlob;
+            } else {
+              break;
+            }
           }
         }
 

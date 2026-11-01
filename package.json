@@ -10,7 +10,9 @@
     "preview": "vite preview",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run",
-    "test:e2e": "cypress run"
+    "test:e2e": "cypress run",
+    "test:compression": "node scripts/test-image-compression.mjs",
+    "test:compression:e2e": "cypress run --spec 'cypress/e2e/image-compression.cy.ts'"
   },
   "dependencies": {
     "@ai-sdk/google": "^3.0.43",
