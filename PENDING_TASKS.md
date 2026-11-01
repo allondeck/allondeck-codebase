@@ -228,10 +228,19 @@ Search engine optimization (SEO), social media previews, and crawlability have a
 
 ---
 
-## 7. 👥 Owner Handoff & Tutorials
+## 7. 👥 Owner Handoff & Video Walkthroughs
 
 - [ ] **Lock Owner Setup Endpoint:**
   - Ensure the owner account has been registered via `/setup` so no other user can access this initial registration endpoint.
-- [ ] **Record Walkthrough Videos:**
-  - Record short videos demonstrating how to manage products, boat gallery photos, foam colors, and orders.
-  - Paste the URLs into the table in [`README.md`](./README.md).
+- [ ] **Record Walkthrough Videos (Teleprompter Scripts Available):**
+  - Full word-for-word recording scripts are ready in [`LOOM_RECORDING_SCRIPTS.md`](./LOOM_RECORDING_SCRIPTS.md).
+  - Walkthrough videos to record:
+    1. *Owner Dashboard Overview*
+    2. *Managing Services & Boat Gallery*
+    3. *Updating Foam Colors & Patterns*
+    4. *Adding Products, Variants & Stock*
+    5. *Fulfilling Orders & Tracking*
+    6. *Reviewing Free Estimate Requests*
+    7. *Storefront Settings & Maintenance*
+    8. *Pending Launch Items & Roadmap (Stripe account activation, shipping pricing model, buyer email domain verification, and deck visualizer)*
+  - Once recorded, paste the shareable Loom URLs into the table in [`README.md`](./README.md).

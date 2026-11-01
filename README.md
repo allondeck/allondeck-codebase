@@ -1,677 +1,672 @@
-# 🚤 All On Deck — Complete Platform & Owner Operations Manual
+# 🚤 All On Deck — Manual Completo de Operaciones y Plataforma para Propietarios
 
-Welcome to the **All On Deck** management manual! This document is the definitive guide for operating, updating, and maintaining the All On Deck digital platform. It covers everything that can be managed across the customer-facing storefront and the owner dashboard, alongside technical deployment references and video walkthrough guidelines.
-
----
-
-## 📑 Table of Contents
-
-1. [🌟 Platform Overview](#-platform-overview)
-2. [🔑 Access, Security & Initial Setup](#-access-security--initial-setup)
-   - [Logging In](#logging-in)
-   - [Initial Owner Account Setup](#initial-owner-account-setup)
-   - [Transferring Ownership](#transferring-ownership)
-3. [🧭 Master Navigation Map](#-master-navigation-map)
-4. [📊 Dashboard Home & Analytics Overview](#-dashboard-home--analytics-overview)
-   - [Key Metrics & Summary Cards](#key-metrics--summary-cards)
-   - [Visual Trend Charts](#visual-trend-charts)
-   - [Customizing Your Dashboard Widgets](#customizing-your-dashboard-widgets)
-5. [🛠️ Services Management](#️-services-management)
-   - [Adding or Editing a Service](#adding-or-editing-a-service)
-   - [Reordering & Activating Services](#reordering--activating-services)
-6. [📸 Project Gallery Showcase](#-project-gallery-showcase)
-   - [Adding a Completed Boat Project](#adding-a-completed-boat-project)
-   - [Categorizing by Service Type](#categorizing-by-service-type)
-   - [Reordering & Deleting Gallery Images](#reordering--deleting-gallery-images)
-7. [🎨 Designs: Foam Colors & CNC Routing Patterns](#-designs-foam-colors--cnc-routing-patterns)
-   - [Managing Foam Color Swatches](#managing-foam-color-swatches)
-   - [Managing Router Patterns](#managing-router-patterns)
-8. [🛍️ E-Commerce Products & Merch Catalog](#️-e-commerce-products--merch-catalog)
-   - [Browsing & Filtering Products](#browsing--filtering-products)
-   - [Adding a New Product (Step-by-Step)](#adding-a-new-product-step-by-step)
-   - [Managing Product Variants (Sizes & Colors)](#managing-product-variants-sizes--colors)
-   - [Stock Thresholds & Low Stock Warnings](#stock-thresholds--low-stock-warnings)
-   - [Editing, Unpublishing & Deleting Products](#editing-unpublishing--deleting-products)
-9. [📥 Bulk Inventory & Stock Import](#-bulk-inventory--stock-import)
-   - [CSV Stock File Format](#csv-stock-file-format)
-   - [Previewing and Applying Stock Updates](#previewing-and-applying-stock-updates)
-10. [🗂️ Product Categories](#️-product-categories)
-    - [Adding & Editing Categories](#adding--editing-categories)
-    - [Display Order & Visibility](#display-order--visibility)
-11. [📦 Orders, Invoices & Fulfillment](#-orders-invoices--fulfillment)
-    - [Order Tracking & Status Lifecycle](#order-tracking--status-lifecycle)
-    - [Viewing Order Details & Customer Shipping](#viewing-order-details--customer-shipping)
-    - [Stripe Payment Verification](#stripe-payment-verification)
-    - [Adding Carrier Tracking Numbers](#adding-carrier-tracking-numbers)
-    - [Cancelling Orders & Restoring Inventory](#cancelling-orders--restoring-inventory)
-    - [Creating Manual Orders (Phone / In-Person)](#creating-manual-orders-phone--in-person)
-    - [Importing Orders from Invoices (CSV / Excel)](#importing-orders-from-invoices-csv--excel)
-12. [👥 Customers & Private CRM Notes](#-customers--private-crm-notes)
-    - [Customer Directory & Lifetime Spend](#customer-directory--lifetime-spend)
-    - [Customer Purchase History](#customer-purchase-history)
-    - [Private Owner Notes per Customer](#private-owner-notes-per-customer)
-13. [⭐ Product Reviews & Moderation](#-product-reviews--moderation)
-    - [Filtering & Searching Reviews](#filtering--searching-reviews)
-    - [Hiding vs. Deleting Inappropriate Reviews](#hiding-vs-deleting-inappropriate-reviews)
-14. [🏷️ Coupons & Promotional Discounts](#️-coupons--promotional-discounts)
-    - [Creating a Discount Code](#creating-a-discount-code)
-    - [Setting Discount Scopes (All, Categories, Specific Products)](#setting-discount-scopes)
-    - [Setting Expiration Dates & Usage Limits](#setting-expiration-dates--usage-limits)
-15. [✉️ Inquiries & Free Estimate Leads](#️-inquiries--free-estimate-leads)
-    - [Reviewing Free Estimate Requests](#reviewing-free-estimate-requests)
-    - [Contact Form & Footer Messages](#contact-form--footer-messages)
-    - [Following Up & Deleting Messages](#following-up--deleting-messages)
-16. [⚙️ Storefront & System Settings](#️-storefront--system-settings)
-    - [Shipping & Estimated Delivery Text](#shipping--estimated-delivery-text)
-    - [Allowed Shipping Destination Countries](#allowed-shipping-destination-countries)
-    - [Storefront Display Options & Out-of-Stock Visibility](#storefront-display-options)
-    - [Product Filters Customization](#product-filters-customization)
-    - [Media Storage Cleanup Utility](#media-storage-cleanup-utility)
-    - [AI Chatbot Instructions](#ai-chatbot-instructions)
-17. [🎥 Video Tutorials & Walkthroughs](#-video-tutorials--walkthroughs)
-18. [💻 Technical Quick-Start (Developers & Deployment)](#-technical-quick-start-developers--deployment)
-    - [Tech Stack](#tech-stack)
-    - [Environment Variables](#environment-variables)
-    - [Running Locally](#running-locally)
-    - [Database & Migrations](#database--migrations)
-19. [📞 Support & Developer Contact](#-support--developer-contact)
+¡Bienvenido al manual oficial de administración de **All On Deck**! Este documento es la guía definitiva para operar, actualizar y mantener la plataforma web de All On Deck. Cubre todo lo que se puede gestionar tanto en la tienda pública como en el panel de control del propietario, junto con referencias técnicas de despliegue y videotutoriales.
 
 ---
 
-<a id="-platform-overview"></a>
-## 🌟 Platform Overview
+## 📑 Tabla de Contenidos
 
-The **All On Deck** web platform unites custom marine flooring fabrication with an integrated e-commerce catalog into a single high-performance website:
-
-1. **The Public Storefront & Portfolio:**
-   - **Custom Decking Presentation:** Highlights CAD templating, CNC marine manufacturing, and installation services.
-   - **Completed Boat Gallery:** Visual showcase categorized by craft and service.
-   - **Material & Color Palette:** Interactive swatches showing dual-color combinations and CNC patterns.
-   - **Free Estimate Estimator:** Lead capture form collecting boat make, model, length, and custom requests.
-   - **E-Commerce Store:** Full shopping cart, variant selections (sizes/colors), discounts, and Stripe Checkout.
-   - **Order Lookup:** Self-service tracking for customers by email and order ID.
-
-2. **The Owner Control Room (`/account/owner` & `/owner`):**
-   - Protected back-office where the owner updates services, uploads boat photos, edits foam color palettes, manages products and stock, fulfills orders, manages customer notes, moderates reviews, creates coupons, and tunes store settings without touching code.
+1. [🌟 Descripción General de la Plataforma](#-descripción-general-de-la-plataforma)
+2. [🔑 Acceso, Seguridad y Configuración Inicial](#-acceso-seguridad-y-configuración-inicial)
+   - [Cómo Iniciar Sesión](#cómo-iniciar-sesión)
+   - [Configuración Inicial de la Cuenta de Propietario](#configuración-inicial-de-la-cuenta-de-propietario)
+   - [Transferencia de Propiedad](#transferencia-de-propiedad)
+3. [🧭 Mapa Maestro de Navegación](#-mapa-maestro-de-navegación)
+4. [📊 Panel Principal y Métricas de Rendimiento](#-panel-principal-y-métricas-de-rendimiento)
+   - [Métricas Clave y Tarjetas de Resumen](#métricas-clave-y-tarjetas-de-resumen)
+   - [Gráficos Visuales de Tendencias](#gráficos-visuales-de-tendencias)
+   - [Personalización de Widgets del Panel](#personalización-de-widgets-del-panel)
+5. [🛠️ Gestión de Servicios](#️-gestión-de-servicios)
+   - [Añadir o Editar un Servicio](#añadir-o-editar-un-servicio)
+   - [Reordenar y Activar Servicios](#reordenar-y-activar-servicios)
+6. [📸 Galería de Proyectos y Embarcaciones Realizadas](#-galería-de-proyectos-y-embarcaciones-realizadas)
+   - [Añadir una Embarcación Terminada](#añadir-una-embarcación-terminada)
+   - [Categorización por Tipo de Servicio](#categorización-por-tipo-de-servicio)
+   - [Reordenar y Eliminar Fotos de la Galería](#reordenar-y-eliminar-fotos-de-la-galería)
+7. [🎨 Diseños: Colores de Espuma y Patrones de Fresado CNC](#-diseños-colores-de-espuma-y-patrones-de-fresado-cnc)
+   - [Gestión de Muestras de Color de Espuma EVA](#gestión-de-muestras-de-color-de-espuma-eva)
+   - [Gestión de Patrones de Fresado CNC](#gestión-de-patrones-de-fresado-cnc)
+8. [🛍️ Catálogo de Productos y Tienda Online](#️-catálogo-de-productos-y-tienda-online)
+   - [Exploración y Filtrado de Productos](#exploración-y-filtrado-de-productos)
+   - [Añadir un Nuevo Producto (Paso a Paso)](#añadir-un-nuevo-producto-paso-a-paso)
+   - [Gestión de Variantes (Tallas y Colores)](#gestión-de-variantes-tallas-y-colores)
+   - [Umbrales de Inventario y Alertas de Stock Bajo](#umbrales-de-inventario-y-alertas-de-stock-bajo)
+   - [Editar, Desactivar y Eliminar Productos](#editar-desactivar-y-eliminar-productos)
+9. [📥 Importación Masiva de Inventario (CSV)](#-importación-masiva-de-inventario-csv)
+   - [Formato del Archivo CSV](#formato-del-archivo-csv)
+   - [Vista Previa y Aplicación de Cambios](#vista-previa-y-aplicación-de-cambios)
+10. [🗂️ Categorías de Productos](#️-categorías-de-productos)
+    - [Añadir y Editar Categorías](#añadir-y-editar-categorías)
+    - [Orden de Aparición y Visibilidad](#orden-de-aparición-y-visibilidad)
+11. [📦 Pedidos, Facturación y Envíos](#-pedidos-facturación-y-envíos)
+    - [Seguimiento y Ciclo de Vida del Pedido](#seguimiento-y-ciclo-de-vida-del-pedido)
+    - [Detalles del Pedido y Dirección de Entrega](#detalles-del-pedido-y-dirección-de-entrega)
+    - [Verificación de Pagos con Stripe](#verificación-de-pagos-con-stripe)
+    - [Agregar Números de Guía y Transportistas](#agregar-números-de-guía-y-transportistas)
+    - [Cancelación de Pedidos y Devolución a Stock](#cancelación-de-pedidos-y-devolución-a-stock)
+    - [Creación de Pedidos Manuales (Teléfono o En Persona)](#creación-de-pedidos-manuales-teléfono-o-en-persona)
+    - [Importación de Pedidos desde Facturas (CSV / Excel)](#importación-de-pedidos-desde-facturas-csv--excel)
+12. [👥 Clientes y Notas Privadas de CRM](#-clientes-y-notas-privadas-de-crm)
+    - [Directorio de Clientes y Gasto Histórico](#directorio-de-clientes-y-gasto-histórico)
+    - [Historial de Compras del Cliente](#historial-de-compras-del-cliente)
+    - [Notas Privadas del Propietario por Cliente](#notas-privadas-del-propietario-por-cliente)
+13. [⭐ Reseñas y Moderación de Productos](#-reseñas-y-moderación-de-productos)
+    - [Filtros y Búsqueda de Reseñas](#filtros-y-búsqueda-de-reseñas)
+    - [Ocultar vs. Eliminar Reseñas Inapropiadas](#ocultar-vs-eliminar-reseñas-inapropiadas)
+14. [🏷️ Cupones y Descuentos Promocionales](#️-cupones-y-descuentos-promocionales)
+    - [Crear un Código de Descuento](#crear-un-código-de-descuento)
+    - [Configurar el Alcance del Descuento](#configurar-el-alcance-del-descuento)
+    - [Fechas de Expiración y Límites de Uso](#fechas-de-expiración-y-límites-de-uso)
+15. [✉️ Consultas y Solicitudes de Presupuesto](#️-consultas-y-solicitudes-de-presupuesto)
+    - [Revisión de Solicitudes de Presupuesto Gratis](#revisión-de-solicitudes-de-presupuesto-gratis)
+    - [Mensajes Generales de Contacto](#mensajes-generales-de-contacto)
+    - [Seguimiento y Limpieza de Mensajes](#seguimiento-y-limpieza-de-mensajes)
+16. [⚙️ Configuración de Tienda y del Sistema](#️-configuración-de-tienda-y-del-sistema)
+    - [Texto de Entrega Estimada](#texto-de-entrega-estimada)
+    - [Países Permitidos para Envíos](#países-permitidos-para-envíos)
+    - [Opciones de Visualización de Tienda](#opciones-de-visualización-de-tienda)
+    - [Filtros Visibles en el Catálogo](#filtros-visibles-en-el-catálogo)
+    - [Herramienta de Limpieza de Archivos no Utilizados](#herramienta-de-limpieza-de-archivos-no-utilizados)
+    - [Instrucciones para el Asistente Virtual IA](#instrucciones-para-el-asistente-virtual-ia)
+17. [🎥 Videotutoriales y Demostraciones](#-videotutoriales-y-demostraciones)
+18. [💻 Guía Rápida Técnica (Para Desarrolladores y Mantenimiento)](#-guía-rápida-técnica-para-desarrolladores-y-mantenimiento)
+    - [Stack Tecnológico](#stack-tecnológico)
+    - [Variables de Entorno](#variables-de-entorno)
+    - [Ejecución en Entorno Local](#ejecución-en-entorno-local)
+    - [Base de Datos y Migraciones](#base-de-datos-y-migraciones)
+19. [📞 Contacto y Soporte Técnico](#-contacto-y-soporte-técnico)
 
 ---
 
-<a id="-access-security--initial-setup"></a>
-## 🔑 Access, Security & Initial Setup
+<a id="-descripción-general-de-la-plataforma"></a>
+## 🌟 Descripción General de la Plataforma
 
-### Logging In
-1. Visit your site and click **Account / Sign In** (or navigate directly to `/login?redirect=/account/owner`).
-2. Enter your **Owner Email and Password**.
-3. Upon authentication, you will be redirected to the **Owner Dashboard**.
-4. The dashboard is accessible anytime via the **Owner Dashboard** button in the header or at `/account/owner`.
+La plataforma web de **All On Deck** combina la presentación y cotización de pisos marinos personalizados con una tienda de comercio electrónico completamente integrada:
+
+1. **La Web Pública y Tienda:**
+   - **Presentación de Suelos Marinos:** Destaca el escaneo y diseño digital en CAD, la fabricación robotizada CNC y la instalación profesional de espuma EVA.
+   - **Galería de Barcos:** Portafolio visual organizado por tipo de embarcación y servicio realizado.
+   - **Muestrario de Materiales:** Catálogo interactivo de colores bicapa y patrones de corte antideslizantes.
+   - **Solicitud de Presupuesto Gratis:** Formulario para captar clientes que solicita marca, modelo, eslora y detalles personalizados de la embarcación.
+   - **Tienda Online:** Carrito de compras, selección de variantes (tallas/colores), cupones de descuento y pasarela de pago seguro con Stripe.
+   - **Rastreador de Pedidos:** Sección de autoservicio para que los compradores verifiquen el estado de su envío con su correo y número de orden.
+
+2. **El Panel de Control del Propietario (`/account/owner` y `/owner`):**
+   - Centro de administración protegido por contraseña donde el propietario puede cambiar textos, subir fotos de barcos, actualizar colores de espuma, gestionar inventario, procesar pedidos, consultar notas de clientes, moderar reseñas y configurar la tienda sin necesidad de programar ni tocar código.
+
+---
+
+<a id="-acceso-seguridad-y-configuración-inicial"></a>
+## 🔑 Acceso, Seguridad y Configuración Inicial
+
+### Cómo Iniciar Sesión
+1. Entra a la página web y haz clic en **Cuenta / Iniciar Sesión** (o ve directo a `/login?redirect=/account/owner`).
+2. Ingresa tu **Correo Electrónico de Propietario y Contraseña**.
+3. Al autenticarte, accederás directamente al **Panel de Propietario**.
+4. Puedes volver a este panel en cualquier momento desde el botón en la barra superior o en `/account/owner`.
 
 > [!NOTE]
-> Owner routes are secured by database-level Row Level Security (RLS) and authentication guards (`OwnerGuard`). Non-owner users attempting to access `/account/owner` will be redirected to `/account`.
+> Las rutas de administración están protegidas a nivel de base de datos con políticas de seguridad RLS (*Row Level Security*) y protecciones de autenticación en la interfaz (`OwnerGuard`). Si un usuario no autorizado intenta entrar, será redirigido automáticamente a su cuenta pública.
 
-### Initial Owner Account Setup
-When setting up a brand-new database instance:
-1. Run the project locally (`npm run dev`) or visit the hosted site at `/setup`.
-2. Fill out your owner name, email address, and strong password.
-3. Click **Create owner account**.
-4. Once created, the `/setup` route is permanently locked.
+### Configuración Inicial de la Cuenta de Propietario
+En una instalación nueva o base de datos limpia:
+1. Inicia la aplicación en local (`npm run dev`) o visita la web en `/setup`.
+2. Completa tu nombre, correo electrónico y contraseña segura.
+3. Haz clic en **Crear cuenta de propietario**.
+4. Una vez creada la primera cuenta, la ruta `/setup` queda bloqueada permanentemente por seguridad.
 
-### Transferring Ownership
-If the owner account needs to be transferred to a new email address:
-1. Have the new owner sign up for a normal account on the site.
-2. In the Supabase SQL Editor, run [`002_transfer_owner.sql`](file:///Users/leandro.alfonso/Documents/GitHub/allondeck-codebase/supabase/migrations/002_transfer_owner.sql) with the new owner's email address.
+### Transferencia de Propiedad
+Si se requiere cambiar el correo electrónico del propietario principal:
+1. El nuevo titular debe registrarse primero con su correo en la página web.
+2. Desde el Editor SQL de Supabase, ejecuta el script [`002_transfer_owner.sql`](file:///Users/leandro.alfonso/Documents/GitHub/allondeck-codebase/supabase/migrations/002_transfer_owner.sql) indicando el nuevo correo.
 
 ---
 
-<a id="-master-navigation-map"></a>
-## 🧭 Master Navigation Map
+<a id="-mapa-maestro-de-navegación"></a>
+## 🧭 Mapa Maestro de Navegación
 
-All management areas are accessible from the sidebar menu inside the **Owner Dashboard** (or top scrolling pills on mobile):
+Todas las herramientas de administración están en el menú lateral del **Panel de Propietario** (o en la barra deslizable superior en dispositivos móviles):
 
 ```
 +----------------------------------------------------------------------------------------------------+
-|                                    OWNER DASHBOARD MENU                                            |
+|                                    MENÚ DEL PANEL DE CONTROL                                       |
 +----------------------+-----------------------------------+-----------------------------------------+
-| Sidebar Link         | URL Path                          | Primary Management Purpose              |
+| Enlace del Menú      | Ruta URL                          | Propósito Principal                     |
 +----------------------+-----------------------------------+-----------------------------------------+
-| 📊 Overview          | /account/owner                    | Sales KPIs, trend charts & quick alerts |
-| 📦 Orders            | /owner/orders                     | Order fulfillment, tracking & invoices  |
-| 🛍️ Products          | /account/owner/products           | Items, variants, prices & stock levels  |
-| 👥 Customers         | /account/owner/customers          | Directory, spend totals & private notes |
-| ⭐ Reviews           | /account/owner/reviews            | Moderate & hide product reviews         |
-| 🗂️ Categories        | /account/owner/categories         | Merch catalog organization & slugs      |
-| 🏷️ Discounts         | /account/owner/coupons            | Promotional coupon codes & limits       |
-| ✉️ Contact           | /account/owner/contact            | Free estimate leads & contact messages  |
-| 🎨 Designs           | /account/owner/designs            | Foam color swatches & CNC patterns      |
-| 🛠️ Services          | /account/owner/services           | Services cards & boat project gallery   |
-| ⚙️ Store Settings    | /account/owner/settings           | Shipping, filters, widgets & cleanup    |
+| 📊 Resumen           | /account/owner                    | Ventas, gráficas de tendencia y alertas |
+| 📦 Pedidos           | /owner/orders                     | Despacho, guías de envío y facturas     |
+| 🛍️ Productos         | /account/owner/products           | Artículos, variantes, precios y stock   |
+| 👥 Clientes          | /account/owner/customers          | Directorio, gasto total y notas CRM     |
+| ⭐ Reseñas           | /account/owner/reviews            | Moderar y ocultar opiniones de clientes |
+| 🗂️ Categorías        | /account/owner/categories         | Organización de la tienda y enlaces     |
+| 🏷️ Descuentos        | /account/owner/coupons            | Cupones promocionales y límites de uso  |
+| ✉️ Contacto          | /account/owner/contact            | Solicitudes de presupuesto y mensajes   |
+| 🎨 Diseños           | /account/owner/designs            | Muestras de color EVA y patrones CNC    |
+| 🛠️ Servicios         | /account/owner/services           | Tarjetas de servicios y fotos de barcos |
+| ⚙️ Ajustes Tienda    | /account/owner/settings           | Tiempos de envío, filtros y widgets     |
 +----------------------+-----------------------------------+-----------------------------------------+
 ```
 
 ---
 
-<a id="-dashboard-home--analytics-overview"></a>
-## 📊 Dashboard Home & Analytics Overview
+<a id="-panel-principal-y-métricas-de-rendimiento"></a>
+## 📊 Panel Principal y Métricas de Rendimiento
 
-**Path:** `/account/owner`  
-**All Widgets View:** `/account/owner/widgets`
+**Ruta:** `/account/owner`  
+**Vista Completa de Widgets:** `/account/owner/widgets`
 
-The dashboard overview gives you a real-time snapshot of your business health.
+El panel ofrece una visión instantánea del estado de tu negocio en tiempo real.
 
-### Key Metrics & Summary Cards
-- **Total Revenue:** Gross earnings from completed and paid Stripe transactions.
-- **Total Orders:** Count of all customer and manual orders.
-- **Product Catalog:** Number of active items in the merchandise store.
-- **Low Stock Summary:** High-priority warning badge displaying products at or below their alert threshold. Clicking this badge takes you directly to the low-stock inventory list.
+### Métricas Clave y Tarjetas de Resumen
+- **Ingresos Totales:** Ganancias acumuladas de compras pagadas mediante Stripe.
+- **Total de Pedidos:** Contador global de pedidos de la tienda online y manuales.
+- **Catálogo de Productos:** Cantidad de artículos activos en la tienda de mercancía.
+- **Alerta de Stock Bajo:** Indicador de alta prioridad que señala cuántos productos están en o por debajo de su umbral mínimo. Al hacer clic, te lleva directamente al inventario bajo.
 
-### Visual Trend Charts
-- **Revenue Trend (14 Days):** Day-by-day revenue progression.
-- **Orders by Status:** Visual breakdown of orders in *Pending*, *Paid*, *Processing*, *Shipped*, and *Completed* stages.
-- **Orders Over Time (14 Days):** Order volume trajectory.
-- **Average Order Value (AOV):** Mean spend per customer checkout.
-- **Orders by Day of Week:** Identifies your peak purchasing days.
-- **Top Selling Products:** Ranked list of your most popular store products.
-- **Low Stock Alerts List:** Direct list of products needing reordering.
+### Gráficos Visuales de Tendencias
+- **Tendencia de Ingresos (Últimos 14 días):** Evolución diaria de ventas en dólares.
+- **Pedidos por Estado:** Gráfica de distribución entre pedidos *Pendientes*, *Pagados*, *En proceso*, *Enviados* y *Completados*.
+- **Volumen de Pedidos (14 días):** Curva de actividad de compras.
+- **Valor Promedio del Pedido (AOV):** Gasto medio por cliente en cada compra.
+- **Pedidos por Día de la Semana:** Muestra cuáles son tus días de mayor demanda.
+- **Productos Más Vendidos:** Lista de los productos más populares.
+- **Lista de Alertas de Stock:** Listado directo de artículos que requieren reabastecimiento.
 
-### Customizing Your Dashboard Widgets
-You can choose which cards and charts appear on your overview screen:
-1. Go to **Store Settings** (`/account/owner/settings`).
-2. Scroll to the **Dashboard widgets** section.
-3. Toggle widgets on or off (up to 4 stats, 4 charts, and 2 lists).
-4. Drag and drop items into your preferred viewing order.
-5. Click **Save all settings** at the bottom.
-
----
-
-<a id="️-services-management"></a>
-## 🛠️ Services Management
-
-**Path:** `/account/owner/services?tab=services`
-
-This section controls the custom marine decking services highlighted on your homepage and the `/services` page (e.g. *Custom Deck Designs*, *Floor Manufacturing*, *Cutting & Installation*).
-
-### Adding or Editing a Service
-1. In the owner menu, click **Services** and ensure the **Services** tab is active.
-2. Click **Add Service** (or click the **Edit (pencil)** icon on an existing service).
-3. Fill out the fields:
-   - **Title:** The headline name of the service (e.g., `Custom Deck Designs`).
-   - **Card Title:** The abbreviated title used on visual cards (supports line breaks).
-   - **Description:** The primary service description.
-   - **Secondary Description:** Supplemental details or technical specifications.
-   - **Featured Image:** Click **Upload Image** to select a photo from your computer (automatically uploaded to your secure storage bucket).
-   - **Call-to-Action Text:** Text for the button (e.g., `View Gallery` or `Request Estimate`).
-   - **Call-to-Action Link:** Where the button directs (e.g., `/gallery?category=custom_deck_designs` or `/estimate`).
-   - **Display Order:** Number determining the display order (1, 2, 3...).
-   - **Active Status:** Check **Active** so it is visible to the public.
-4. Click **Save Service**.
-
-### Reordering & Activating Services
-- **Move Up / Down:** Click the **Up Arrow** or **Down Arrow** buttons to shift a service's position instantly.
-- **Hide / Unhide:** Click the **Eye icon** to toggle a service between active and inactive without deleting it.
-- **Delete:** Click the **Trash icon** to permanently remove a service.
+### Personalización de Widgets del Panel
+Puedes elegir qué tarjetas y gráficas aparecen en tu pantalla principal:
+1. Ve a **Ajustes de Tienda** (`/account/owner/settings`).
+2. Baja hasta la sección **Widgets del panel de control**.
+3. Activa o desactiva widgets (hasta 4 estadísticas, 4 gráficas y 2 listas).
+4. Arrastra y suelta para organizar el orden según tu preferencia.
+5. Haz clic en **Guardar ajustes**.
 
 ---
 
-<a id="-project-gallery-showcase"></a>
-## 📸 Project Gallery Showcase
+<a id="️-gestión-de-servicios"></a>
+## 🛠️ Gestión de Servicios
 
-**Path:** `/account/owner/services?tab=gallery` *(or `/gallery` for public view)*
+**Ruta:** `/account/owner/services?tab=services`
 
-The Gallery showcase gives boat owners visual proof of your precision craftsmanship across different boat styles and marine applications.
+Esta sección controla los servicios marinos destacados en la página principal y en `/services` (por ejemplo: *Custom Deck Designs*, *Floor Manufacturing*, *Cutting & Installation*).
 
-### Adding a Completed Boat Project
-1. Navigate to **Services** and switch to the **Gallery** tab.
-2. Click **Add Gallery Image**.
-3. Provide the project details:
-   - **Title:** e.g., `Sea Ray 320 Sundancer — Teak & Black Diamond`.
-   - **Description:** Details about the install (e.g., `Complete cockpit and swim platform laser scanning with custom helm pad`).
-   - **Service Type Category:** Select which service category this project belongs to:
-     - `Custom Deck Designs`
-     - `Floor Manufacturing`
-     - `Cutting & Installation`
-   - **Project Photo:** Click **Upload Image** to upload a high-resolution photo of the finished boat.
-   - **Display Order:** Enter a numeric rank for ordering.
-4. Click **Save Image**.
+### Añadir o Editar un Servicio
+1. En el menú lateral, haz clic en **Servicios** y verifica que esté seleccionada la pestaña **Servicios**.
+2. Haz clic en **Añadir Servicio** (o en el ícono del **lápiz** para editar uno existente).
+3. Completa los campos:
+   - **Título:** Nombre principal del servicio (ej. `Diseño Personalizado en CAD`).
+   - **Título en Tarjeta:** Título breve que aparece sobre las imágenes destacadas (permite saltos de línea).
+   - **Descripción:** Texto principal explicando el proceso y las ventajas.
+   - **Descripción Secundaria:** Especificaciones técnicas adicionales o notas del material.
+   - **Imagen Destacada:** Haz clic en **Subir imagen** para cargar una fotografía desde tu computadora.
+   - **Texto del Botón:** Texto de la llamada a la acción (ej. `Ver Galería` o `Solicitar Presupuesto`).
+   - **Enlace del Botón:** Destino del botón (ej. `/gallery?category=custom_deck_designs` o `/estimate`).
+   - **Orden de Aparición:** Número que define su posición (1, 2, 3...).
+   - **Estado Activo:** Marca la casilla para que sea visible públicamente en la web.
+4. Haz clic en **Guardar Servicio**.
 
-### Categorizing by Service Type
-Customers can filter the public gallery by category tabs. Selecting the correct **Service Type** ensures the photo shows up under the relevant filter on the public `/gallery` page.
-
-### Reordering & Deleting Gallery Images
-- Use the **Move Up** and **Move Down** buttons on any gallery item to reorder how pictures appear in the customer portfolio.
-- Click the **Trash icon** to delete a photo.
-
----
-
-<a id="-designs-foam-colors--cnc-routing-patterns"></a>
-## 🎨 Designs: Foam Colors & CNC Routing Patterns
-
-**Path:** `/account/owner/designs` *(or `/designs` for public view)*
-
-The Designs page allows potential clients to explore your dual-layer EVA foam color swatches and CNC router groove patterns.
-
-### Managing Foam Color Swatches
-1. In the sidebar, click **Designs** and select the **Colors** tab.
-2. Click **Add Color Swatch** (or click the **Edit** icon on an existing swatch).
-3. Configure the color swatch:
-   - **Color Name:** e.g., `Camel / Black`, `Slate Grey / Orange`, `Teak / White`.
-   - **Hex Color Code (Optional):** Enter a hex code (e.g., `#B58842`) to display a color accent dot.
-   - **Swatch Preview Image:** Upload a crisp close-up photo of the dual-layer foam material.
-4. Click **Save Swatch**.
-
-### Managing Router Patterns
-1. Switch to the **Patterns** tab under **Designs**.
-2. Click **Add Pattern** (or click **Edit** on an existing pattern).
-3. Configure the pattern:
-   - **Pattern Name:** e.g., `Classic Plank`, `Hexagon Diamond`, `Fish Scale`, `Faux Teak`.
-   - **Pattern Preview Image:** Upload a sample image or CAD render showing the routing groove style.
-4. Click **Save Pattern**.
-- You can delete any unused color or pattern anytime with the **Trash icon**.
+### Reordenar y Activar Servicios
+- **Mover Arriba / Abajo:** Usa las flechas de dirección para cambiar el orden de los servicios de forma inmediata.
+- **Ocultar / Mostrar:** Haz clic en el ícono del **ojo** para activar o pausar un servicio sin tener que borrarlo.
+- **Eliminar:** Usa el ícono de la **papelera** para borrar un servicio definitivamente.
 
 ---
 
-<a id="️-e-commerce-products--merch-catalog"></a>
-## 🛍️ E-Commerce Products & Merch Catalog
+<a id="-galería-de-proyectos-y-embarcaciones-realizadas"></a>
+## 📸 Galería de Proyectos y Embarcaciones Realizadas
 
-**Path:** `/account/owner/products`  
-**New Product Form:** `/account/owner/products/new`
+**Ruta:** `/account/owner/services?tab=gallery` *(o `/gallery` en la web pública)*
 
-Manage your online store merchandise (apparel, boat accessories, decking cleaner kits, branded gear).
+El portafolio visual permite que los dueños de botes comprueben la calidad de tus cortes y terminaciones en diferentes esloras y modelos de embarcaciones.
 
-### Browsing & Filtering Products
-- **Filter by Category:** Narrow down items by category.
-- **Filter by Featured:** View only products marked for the homepage spotlight.
-- **Low Stock Filter:** Check the **Low stock only** box to immediately isolate products needing replenishment.
-- **Sort By:** Sort by *Newest*, *Price: Low to High*, *Price: High to Low*, or *Stock: Low to High*.
+### Añadir una Embarcación Terminada
+1. Ve a **Servicios** y haz clic en la pestaña **Galería**.
+2. Presiona **Añadir Imagen a Galería**.
+3. Ingresa los datos del trabajo:
+   - **Título:** ej. `Sea Ray 320 Sundancer — Teca y Negro Diamante`.
+   - **Descripción:** Detalles de la instalación (ej. `Escaneo digital completo de bañera y plataforma de baño con pad de timonera personalizado`).
+   - **Categoría de Servicio:** Selecciona a qué área pertenece:
+     - `Custom Deck Designs` (Diseño CAD)
+     - `Floor Manufacturing` (Fabricación Marina)
+     - `Cutting & Installation` (Corte e Instalación)
+   - **Foto del Trabajo:** Haz clic en **Subir imagen** y selecciona una foto nítida de alta resolución.
+   - **Orden:** Define el número de prioridad en la lista.
+4. Haz clic en **Guardar Imagen**.
 
-### Adding a New Product (Step-by-Step)
-1. Click **Add product** (`/account/owner/products/new`).
-2. Fill out the core information:
-   - **Name:** e.g., `All On Deck Technical Performance Hoodie`.
-   - **Slug:** Auto-generated from name or customize the URL (e.g. `technical-hoodie`).
-   - **Description:** Detailed product write-up (fabric, sizing, marine UV rating).
-   - **Base Price ($):** Selling price (e.g., `49.99`).
-   - **Compare-at Price ($):** Optional original price to display a strike-through discount (e.g., `64.99`).
-   - **SKU:** Stock Keeping Unit code (e.g., `AOD-HD-001`).
-   - **Stock Quantity:** Starting inventory count.
-   - **Low Stock Threshold:** The number at which low-stock warnings fire (default: `5`).
-   - **Categories:** Check up to 3 categories that apply.
-   - **Published:** Check to make visible on the public store. Uncheck to save as draft.
-   - **Featured:** Check to spotlight this product on the home page and top of shop.
-   - **Product Image:** Upload the primary product photo (max 5 MB; compressed automatically).
+### Categorización por Tipo de Servicio
+Los visitantes pueden filtrar la galería pública por pestañas. Al asignar la categoría correcta, la foto se muestra automáticamente en el filtro correspondiente de `/gallery`.
 
-### Managing Product Variants (Sizes & Colors)
-If an item comes in multiple sizes, colors, or options:
-1. In the product form, locate the **Variants** section.
-2. Click **Add Variant**.
-3. Fill out the variant properties:
-   - **Variant Name:** e.g., `Medium / Navy Blue` or `XL / Heather Grey`.
-   - **Variant SKU:** e.g., `AOD-HD-NV-M`.
-   - **Price & Compare-at Price:** Can be the same as base price or customized.
-   - **Stock Quantity:** Specific stock count for this exact variant.
-   - **Variant Image:** Upload a dedicated picture for this option.
-   - **Default Variant:** Select which option is pre-selected when customers open the page.
-4. Repeat for all options.
-
-### Stock Thresholds & Low Stock Warnings
-Whenever a variant or base product drops to or below its **Low stock threshold**, the system:
-- Flags the product in the owner product table with a highlighted low-stock pill.
-- Surfaces it on the Owner Dashboard overview under **Low Stock Alerts**.
-
-### Editing, Unpublishing & Deleting Products
-- **Editing:** Click on any product name or its **Edit** link to modify info.
-- **Draft / Unpublish:** Simply uncheck **Published** and save. The product disappears from public view while preserving sales records.
-- **Deleting:** Open the product and click **Delete Product**. (Confirm when prompted).
+### Reordenar y Eliminar Fotos de la Galería
+- Usa los botones **Subir** y **Bajar** en cualquier foto para destacar tus mejores barcos al principio de la página.
+- Haz clic en la **papelera** para remover una foto cuando lo desees.
 
 ---
 
-<a id="-bulk-inventory--stock-import"></a>
-## 📥 Bulk Inventory & Stock Import
+<a id="-diseños-colores-de-espuma-y-patrones-de-fresado-cnc"></a>
+## 🎨 Diseños: Colores de Espuma y Patrones de Fresado CNC
 
-**Path:** `/account/owner/products/import`
+**Ruta:** `/account/owner/designs` *(o `/designs` en la web pública)*
 
-When you receive a new inventory shipment from suppliers, you can adjust stock quantities in seconds via CSV instead of clicking through products one-by-one.
+Permite a tus clientes explorar la variedad de combinaciones bicapa de espuma EVA y las geometrías de corte antideslizante realizadas con fresadora CNC.
 
-### CSV Stock File Format
-Prepare a simple CSV spreadsheet (`.csv`) with columns:
+### Gestión de Muestras de Color de Espuma EVA
+1. En el menú, haz clic en **Diseños** y elige la pestaña **Colores**.
+2. Presiona **Añadir Muestra de Color** (o el ícono de editar).
+3. Configura la muestra:
+   - **Nombre del Color:** ej. `Camel / Negro`, `Gris Pizarra / Naranja`, `Teca / Blanco`.
+   - **Código Hexadecimal (Opcional):** Código de color (ej. `#B58842`) para mostrar un círculo de referencia visual.
+   - **Imagen de la Muestra:** Sube una fotografía en primer plano de la textura bicapa.
+4. Presiona **Guardar Muestra**.
+
+### Gestión de Patrones de Fresado CNC
+1. Cambia a la pestaña **Patrones** en **Diseños**.
+2. Presiona **Añadir Patrón** (o editar).
+3. Completa los datos:
+   - **Nombre del Patrón:** ej. `Tablas Clásicas Tipo Teca`, `Nido de Abeja Hexagonal`, `Puntada de Diamante`, `Escamas de Pez`.
+   - **Imagen de Vista Previa:** Sube una foto o render CAD mostrando la profundidad y el patrón de las ranuras.
+4. Haz clic en **Guardar Patrón**.
+- Puedes borrar cualquier muestra o patrón descontinuado con el botón de **papelera**.
+
+---
+
+<a id="️-catálogo-de-productos-y-tienda-online"></a>
+## 🛍️ Catálogo de Productos y Tienda Online
+
+**Ruta:** `/account/owner/products`  
+**Nuevo Producto:** `/account/owner/products/new`
+
+Administra la venta de ropa oficial, gorras, kits de limpieza para cubiertas marinas y accesorios.
+
+### Exploración y Filtrado de Productos
+- **Filtrar por Categoría:** Encuentra artículos por departamento.
+- **Filtrar por Destacados:** Consulta qué productos están en la portada de la tienda.
+- **Filtro de Stock Bajo:** Marca la casilla **Solo stock bajo** para ver al instante lo que está a punto de agotarse.
+- **Ordenar:** Organiza por *Más nuevos*, *Precio: menor a mayor*, *Precio: mayor a menor*, o *Stock: menor a mayor*.
+
+### Añadir un Nuevo Producto (Paso a Paso)
+1. Haz clic en **Añadir producto** (`/account/owner/products/new`).
+2. Completa los datos principales:
+   - **Nombre:** ej. `Sudadera Técnica Marina All On Deck`.
+   - **Slug (URL):** Se genera automáticamente o puedes personalizarlo (ej. `sudadera-tecnica-marina`).
+   - **Descripción:** Detalle completo (material resistente a UV, secado rápido, guía de lavado).
+   - **Precio Base ($):** Precio regular de venta (ej. `49.99`).
+   - **Precio de Comparación ($):** Precio original tachado para mostrar ofertas (ej. `65.00`).
+   - **SKU:** Código de referencia único (ej. `AOD-SUD-001`).
+   - **Cantidad en Stock:** Unidades disponibles para la venta.
+   - **Umbral de Alerta de Stock Bajo:** Cantidad mínima antes de activar la advertencia (por defecto: `5`).
+   - **Categorías:** Marca hasta 3 categorías correspondientes.
+   - **Publicado:** Marca la casilla para que sea visible en la tienda. Desmárcala para guardarlo como borrador privado.
+   - **Destacado:** Actívalo para fijarlo en la página de inicio.
+   - **Imagen Principal:** Sube la fotografía del producto (tamaño máximo recomendado: 5 MB).
+
+### Gestión de Variantes (Tallas y Colores)
+Si el artículo tiene diferentes opciones (ej. tallas S, M, L o colores Azul y Gris):
+1. En el formulario, baja a la sección **Variantes**.
+2. Haz clic en **Añadir Variante**.
+3. Define los atributos de cada opción:
+   - **Nombre de la Variante:** ej. `Talla M - Azul Marino`.
+   - **SKU de Variante:** ej. `AOD-SUD-AZ-M`.
+   - **Precio y Precio Comparativo:** Puedes mantener el mismo precio base o diferenciarlo.
+   - **Cantidad en Stock:** Unidades exclusivas para esa talla/color.
+   - **Imagen de Variante:** Sube una foto específica del color seleccionado.
+   - **Variante por Defecto:** Marca cuál es la opción que se cargará preseleccionada para el comprador.
+4. Repite el proceso para cada opción.
+
+### Umbrales de Inventario y Alertas de Stock Bajo
+Cuando el stock de un producto o variante llega o baja de su **umbral de stock bajo**:
+- El producto se resalta en la tabla del panel con una insignia de advertencia.
+- Se refleja automáticamente en la tarjeta de **Alertas de Stock** del panel de control.
+
+### Editar, Desactivar y Eliminar Productos
+- **Editar:** Haz clic sobre el nombre del producto para actualizar precios, fotos o inventario.
+- **Desactivar:** Desmarca la casilla **Publicado** y guarda. El producto desaparecerá de la web pública pero se mantendrá tu historial de ventas intacto.
+- **Eliminar:** Abre el producto y haz clic en el botón rojo **Eliminar producto** (requiere confirmación).
+
+---
+
+<a id="-importación-masiva-de-inventario-csv"></a>
+## 📥 Importación Masiva de Inventario (CSV)
+
+**Ruta:** `/account/owner/products/import`
+
+Ideal para cuando recibes un nuevo lote de mercancía de proveedores y deseas actualizar decenas de cantidades en segundos sin entrar producto por producto.
+
+### Formato del Archivo CSV
+Prepara un archivo en Excel guardado como formato `.csv` con dos columnas:
 
 ```csv
 sku,quantity
-AOD-HD-NV-M,25
-AOD-HD-NV-L,30
-AOD-CAP-001,50
+AOD-SUD-AZ-M,25
+AOD-SUD-AZ-L,30
+AOD-GORRA-001,50
 ```
 
 > [!TIP]
-> The system automatically recognizes common column headers: `sku`, `item_sku`, `name`, `product_name`, `qty`, `quantity`, `add_quantity`, `stock`.
+> El sistema reconoce encabezados habituales automáticamente: `sku`, `item_sku`, `name`, `product_name`, `qty`, `quantity`, `add_quantity`, `stock`.
 
-### Previewing and Applying Stock Updates
-1. Navigate to **Products** and click **Import stock from CSV**.
-2. Choose your `.csv` file.
-3. The system parses the file and presents a **Live Match Preview**:
-   - **Matched Items:** Shows the product, current stock, and the incoming adjustment.
-   - **Unmatched Items:** Lists any SKUs not found in the database.
-4. You can edit any quantity directly in the preview table before applying.
-5. Click **Apply stock updates**. The database updates instantly.
-
----
-
-<a id="️-product-categories"></a>
-## 🗂️ Product Categories
-
-**Path:** `/account/owner/categories`  
-**New Category Form:** `/account/owner/categories/new`
-
-Organize your store merchandise into clean, browsable categories (e.g. *Apparel*, *Headwear*, *Boat Accessories*, *Care & Maintenance*).
-
-### Adding & Editing Categories
-1. Click **Categories** in the sidebar.
-2. Click **Add category**.
-3. Enter:
-   - **Name:** e.g., `Deck Care & Cleaning`.
-   - **Slug:** Auto-generated URL string (e.g., `deck-care-cleaning`).
-   - **Description:** Short customer-facing description.
-   - **Sort Order:** Numerical display rank (e.g., `1`, `2`, `3`).
-   - **Visible:** Toggle whether this category appears in the store sidebar and navigation.
-4. Click **Save category**.
+### Vista Previa y Aplicación de Cambios
+1. En la lista de productos, haz clic en **Importar stock desde CSV**.
+2. Elige el archivo `.csv` desde tu dispositivo.
+3. El sistema mostrará una **Vista Previa de Coincidencias**:
+   - **Artículos Coincidentes:** Muestra el producto encontrado, su stock actual y la cantidad que se sumará o establecerá.
+   - **Artículos No Encontrados:** Avisa si algún código SKU no existe en la base de datos.
+4. Puedes modificar cualquier número directamente en la tabla antes de guardar.
+5. Presiona **Aplicar actualización de stock** y el inventario se ajustará al instante.
 
 ---
 
-<a id="-orders-invoices--fulfillment"></a>
-## 📦 Orders, Invoices & Fulfillment
+<a id="️-categorías-de-productos"></a>
+## 🗂️ Categorías de Productos
 
-**Path:** `/owner/orders`  
-**Manual Order Entry:** `/owner/orders/create-manual`  
-**Invoice Import:** `/owner/orders/from-invoice`
+**Ruta:** `/account/owner/categories`  
+**Nueva Categoría:** `/account/owner/categories/new`
 
-The Orders center manages customer purchases from online checkouts, phone orders, and wholesale invoices.
+Estructura el catálogo de tu tienda en secciones lógicas (ej. *Ropa Oficial*, *Gorras y Viseras*, *Accesorios Náuticos*, *Cuidado de Cubiertas*).
 
-### Order Tracking & Status Lifecycle
-Every order moves through a standard fulfillment lifecycle:
+### Añadir y Editar Categorías
+1. Haz clic en **Categorías** en el menú.
+2. Selecciona **Añadir categoría**.
+3. Rellena los datos:
+   - **Nombre:** ej. `Limpieza y Cuidado Marino`.
+   - **Slug:** Enlace amigable generado automáticamente (ej. `limpieza-cuidado-marino`).
+   - **Descripción:** Breve resumen explicativo.
+   - **Orden de Clasificación:** Número para organizar la posición en la lista (ej. `1`, `2`, `3`).
+   - **Visible:** Permite mostrar u ocultar la categoría del menú público.
+4. Presiona **Guardar categoría**.
+
+---
+
+<a id="-pedidos-facturación-y-envíos"></a>
+## 📦 Pedidos, Facturación y Envíos
+
+**Ruta:** `/owner/orders`  
+**Pedido Manual:** `/owner/orders/create-manual`  
+**Importar desde Factura:** `/owner/orders/from-invoice`
+
+Gestiona todos los pedidos generados por la tienda online, llamadas telefónicas o ventas directas en el taller.
+
+### Seguimiento y Ciclo de Vida del Pedido
+Cada orden avanza de forma clara a través de diferentes etapas:
 
 ```
-[ pending ] ──▶ [ paid ] ──▶ [ processing ] ──▶ [ shipped ] ──▶ [ completed ]
+[ Pendiente ] ──▶ [ Pagado ] ──▶ [ En Proceso ] ──▶ [ Enviado ] ──▶ [ Completado ]
       │
-      └───▶ [ cancelled ] (Option to restore stock to inventory)
+      └───▶ [ Cancelado ] (Permite devolver los artículos al stock automáticamente)
       │
-      └───▶ [ refunded ]
+      └───▶ [ Reembolsado ]
 ```
 
-- **Pending:** Order placed, awaiting payment confirmation.
-- **Paid:** Customer paid successfully via Stripe Checkout.
-- **Processing / In Progress:** You are packing or manufacturing the merchandise.
-- **Shipped:** The parcel has been dispatched to the carrier.
-- **Completed / Delivered:** The order reached the customer.
-- **Cancelled:** The order was called off.
-- **Refunded:** Payment was returned to the buyer.
+- **Pendiente (Pending):** Pedido generado a la espera de confirmación de pago.
+- **Pagado (Paid):** Pago completado con éxito mediante Stripe Checkout.
+- **En Proceso (Processing):** Preparando el paquete o fabricando el pedido.
+- **Enviado (Shipped):** Entregado a la empresa de transporte o correo.
+- **Completado (Delivered):** Entregado satisfactoriamente al comprador.
+- **Cancelado (Cancelled):** Pedido anulado.
+- **Reembolsado (Refunded):** Dinero devuelto al cliente.
 
 > [!NOTE]
-> You can update an order's status directly from the orders list table using the inline status dropdown!
+> ¡Puedes cambiar el estado de cualquier orden directamente desde la tabla general usando el menú desplegable de cada fila!
 
-### Viewing Order Details & Customer Shipping
-Click on any order `#ID` to open the full order file (`/owner/orders/:id`):
-- **Customer Email & Contact Info.**
-- **Shipping Address:** Full mailing address and recipient telephone.
-- **Item Breakdown:** List of ordered products, variant selections, quantities, and line subtotals.
-- **Discount & Coupon:** Displays any applied coupon code and total discount saved.
-- **Financial Breakdown:** Subtotal, Tax, Shipping, and Final Total.
+### Detalles del Pedido y Dirección de Entrega
+Al hacer clic en el número de orden (`#ID`), se abre la ficha completa (`/owner/orders/:id`):
+- **Datos de Contacto:** Correo electrónico del cliente o invitado.
+- **Dirección de Envío:** Calle, ciudad, estado, código postal, país y teléfono del destinatario.
+- **Desglose de Artículos:** Tallas seleccionadas, cantidades y precio unitario.
+- **Descuentos y Cupones:** Refleja el código promocional utilizado y el ahorro aplicado.
+- **Liquidación Final:** Subtotal, Impuestos, Costo de Envío y Total Cobrado.
 
-### Stripe Payment Verification
-For online purchases, the order detail screen highlights a green **"Payment received via Stripe"** badge with the linked Stripe Checkout Session reference.
+### Verificación de Pagos con Stripe
+En las órdenes realizadas por la web, el sistema resalta una insignia verde: **"Pago recibido vía Stripe"** junto con el identificador oficial de la sesión de pago.
 
-### Adding Carrier Tracking Numbers
-When dispatching an order:
-1. Open the order detail page.
-2. Set status to **Shipped**.
-3. If tracking was provided during manual entry or fulfillment, the tracking number and carrier appear on the order file and in the customer's `/lookup-order` screen.
+### Agregar Números de Guía y Transportistas
+Cuando despaches el paquete:
+1. Abre el detalle de la orden.
+2. Cambia el estado a **Enviado** (*Shipped*).
+3. El número de rastreo y la empresa de paquetería quedarán vinculados a la orden y visibles en la herramienta pública de consulta (`/lookup-order`).
 
-### Cancelling Orders & Restoring Inventory
-If an order is cancelled:
-1. Change status to **Cancelled** and confirm the prompt.
-2. A button will appear: **"Add back to stock"**.
-3. Click it to automatically restore the purchased item quantities back into your product inventory.
-4. Once restored, the system records the timestamp (`Stock restored on [date]`).
+### Cancelación de Pedidos y Devolución a Stock
+Si un cliente cancela su pedido:
+1. Cambia el estado a **Cancelado** y confirma el aviso.
+2. Aparecerá el botón **"Devolver artículos al stock"**.
+3. Al presionarlo, el sistema reincorpora automáticamente las unidades al inventario de la tienda sin necesidad de ajustes manuales.
 
-### Creating Manual Orders (Phone / In-Person)
-If a client buys merchandise in your shop or orders over the phone:
-1. Navigate to `/owner/orders/create-manual`.
-2. Add products from your catalog and set quantities and prices.
-3. Enter the customer's email and shipping address.
-4. Click **Create order**. The inventory is deducted and the order is added to your records.
+### Creación de Pedidos Manuales (Teléfono o En Persona)
+Si un cliente compra mercancía directamente en tu taller o solicita un envío por teléfono:
+1. Entra a `/owner/orders/create-manual`.
+2. Elige los productos del catálogo y ajusta cantidades y precios acordados.
+3. Ingresa los datos del cliente y su dirección de entrega.
+4. Haz clic en **Crear pedido**. El inventario se descuenta y el registro queda archivado.
 
-### Importing Orders from Invoices (CSV / Excel)
-If you generate invoices through third-party accounting or POS tools:
-1. Navigate to `/owner/orders/from-invoice`.
-2. Upload a `.csv` or `.xlsx` spreadsheet.
-3. The parser detects customer emails, names, line items, and quantities.
-4. Confirm the preview to batch-generate the orders.
+### Importación de Pedidos desde Facturas (CSV / Excel)
+Si utilizas un software de facturación externo o punto de venta:
+1. Ve a `/owner/orders/from-invoice`.
+2. Sube el archivo `.csv` o `.xlsx`.
+3. El sistema detecta correos, nombres, artículos y cantidades para crear los pedidos en bloque.
 
 ---
 
-<a id="-customers--private-crm-notes"></a>
-## 👥 Customers & Private CRM Notes
+<a id="-clientes-y-notas-privadas-de-crm"></a>
+## 👥 Clientes y Notas Privadas de CRM
 
-**Path:** `/account/owner/customers`  
-**Customer Profile:** `/account/owner/customers/:customerKey`
+**Ruta:** `/account/owner/customers`  
+**Perfil del Cliente:** `/account/owner/customers/:customerKey`
 
-A lightweight built-in CRM that aggregates every client who has completed a purchase.
+Un registro de clientes enfocado en fidelización y seguimiento de trabajos náuticos.
 
-### Customer Directory & Lifetime Spend
-The customer directory ranks buyers by:
-- Customer email.
-- Total orders placed.
-- Lifetime gross spend.
-- Most recent order date.
+### Directorio de Clientes y Gasto Histórico
+Organiza a todos los compradores registrados y recurrentes:
+- Correo del cliente.
+- Número total de compras realizadas.
+- Dinero total invertido en All On Deck.
+- Fecha del último pedido.
 
-### Customer Purchase History
-Clicking any customer opens their complete transaction ledger:
-- Chronological list of every past order.
-- Current status of each order.
-- Direct links into individual order breakdowns.
+### Historial de Compras del Cliente
+Al hacer clic en cualquier cliente se abre su historial completo con cada pedido, montos y enlaces a sus facturas.
 
-### Private Owner Notes per Customer
-Every customer profile includes a **Private Owner Notes** workspace:
-- Keep track of their boat make and model (e.g., *2021 Boston Whaler 280 Outrage*).
-- Note preferred foam colors (*Teak over Black, Hexagon pattern*).
-- Log phone call notes and special requests.
-- Click **Save note** to store. Notes are private and never visible to the customer.
+### Notas Privadas del Propietario por Cliente
+Cada ficha de cliente incluye un bloc de **Notas Privadas**:
+- Anota la embarcación del cliente (ej. *Boston Whaler 280 Outrage año 2021*).
+- Registra sus preferencias de color (*Gris sobre Negro con patrón Hexagonal*).
+- Guarda acuerdos de llamadas o presupuestos futuros.
+- Haz clic en **Guardar nota**. Estas anotaciones son estrictamente confidenciales y nunca son visibles para el cliente.
 
 ---
 
-<a id="-product-reviews--moderation"></a>
-## ⭐ Product Reviews & Moderation
+<a id="-reseñas-y-moderación-de-productos"></a>
+## ⭐ Reseñas y Moderación de Productos
 
-**Path:** `/account/owner/reviews`
+**Ruta:** `/account/owner/reviews`
 
-Protect your brand reputation and monitor customer feedback on store merchandise.
+Supervisa las valoraciones y comentarios de los clientes sobre los productos de la tienda.
 
-### Filtering & Searching Reviews
-- **Filter by Product:** View reviews for a specific item.
-- **Filter by Rating:** Inspect 1-star through 5-star ratings.
-- **Date Range:** Filter by *Last 7 days*, *Last 30 days*, *Last 90 days*, or *All time*.
-- **Search:** Search review text by keyword.
-- **Status Filter:** Toggle between *All*, *Visible only*, and *Hidden only*.
+### Filtros y Búsqueda de Reseñas
+- **Por Producto:** Examina los comentarios de un artículo concreto.
+- **Por Calificación:** Filtra desde 1 hasta 5 estrellas.
+- **Rango de Fechas:** Últimos 7 días, 30 días, 90 días o histórico completo.
+- **Búsqueda por Palabra Clave:** Encuentra opiniones por términos específicos.
+- **Estado:** Alterna entre *Todas*, *Solo visibles* o *Solo ocultas*.
 
-### Hiding vs. Deleting Inappropriate Reviews
-- **Hide / Unhide (Recommended):** Click **Hide** on any questionable or spam review. The review will disappear immediately from the public product page while keeping a record in your dashboard. You can unhide it at any time.
-- **Delete:** Permanently remove the review from the database.
-
----
-
-<a id="️-coupons--promotional-discounts"></a>
-## 🏷️ Coupons & Promotional Discounts
-
-**Path:** `/account/owner/coupons`  
-**New Coupon Form:** `/account/owner/coupons/new`
-
-Drive sales with targeted discount codes for holiday events, boat shows, and social media campaigns.
-
-### Creating a Discount Code
-1. Click **Discounts** in the sidebar.
-2. Click **Create coupon**.
-3. Configure the discount:
-   - **Coupon Code:** The code the customer enters at checkout (e.g., `SUMMER20`, `BOATSHOW50`, `WELCOME10`).
-   - **Discount Type:**
-     - **Percentage:** Deducts a percentage (e.g., `20%`).
-     - **Fixed Amount:** Deducts a dollar amount (e.g., `$50.00`).
-   - **Discount Value:** Enter the numeric value (e.g., `20` or `50`).
-
-### Setting Discount Scopes
-You can control where the discount applies:
-- **All items:** Applies to any product in the store.
-- **Featured items only:** Applies only to items marked as Featured.
-- **Specific categories:** Select one or more categories eligible for the promotion.
-- **Specific products:** Select exact products eligible for the code.
-
-### Setting Expiration Dates & Usage Limits
-- **Start & End Dates:** Set valid date ranges. The code will activate and expire automatically.
-- **Usage Limit:** Maximum total times the code can be redeemed (e.g. `100` for the first 100 customers).
-- Click **Save Coupon**.
+### Ocultar vs. Eliminar Reseñas Inapropiadas
+- **Ocultar (Recomendado):** Haz clic en **Ocultar** en cualquier reseña con contenido inapropiado o spam. Desaparece de inmediato de la tienda pública pero queda archivada en tu panel por si necesitas consultarla.
+- **Eliminar:** Borra la reseña permanentemente de la base de datos.
 
 ---
 
-<a id="️-inquiries--free-estimate-leads"></a>
-## ✉️ Inquiries & Free Estimate Leads
+<a id="️-cupones-y-descuentos-promocionales"></a>
+## 🏷️ Cupones y Descuentos Promocionales
 
-**Path:** `/account/owner/contact`
+**Ruta:** `/account/owner/coupons`  
+**Nuevo Cupón:** `/account/owner/coupons/new`
 
-All customer leads and communications land in this unified inbox.
+Crea promociones para eventos náuticos, ferias (Boat Shows) o campañas en redes sociales.
 
-### Reviewing Free Estimate Requests
-Whenever a boater completes the **"Get Free Estimate"** form on `/estimate`:
-- The submission appears with a high-visibility orange **`ESTIMATE`** badge.
-- Contains:
-  - Customer name, email, and phone number.
-  - Vessel details: Make, model, boat length, and decking requirements.
-  - Timestamp of inquiry.
+### Crear un Código de Descuento
+1. Ve a **Descuentos** en el menú.
+2. Haz clic en **Crear cupón**.
+3. Configura las condiciones:
+   - **Código:** Texto que escribe el comprador (ej. `VERANO20`, `BOATSHOW50`, `BIENVENIDO10`).
+   - **Tipo de Descuento:**
+     - **Porcentaje (%):** Rebaja porcentual (ej. `20%`).
+     - **Monto Fijo ($):** Descuento directo en dólares (ej. `$50.00`).
+   - **Valor:** Número del descuento (ej. `20` o `50`).
 
-### Contact Form & Footer Messages
-- General questions from the contact form or footer appear alongside estimate requests, with their respective subject lines.
+### Configurar el Alcance del Descuento
+Define en qué partes de la tienda aplica la oferta:
+- **Todos los artículos:** Aplica a cualquier producto del catálogo.
+- **Solo destacados:** Aplica a los artículos de portada.
+- **Categorías específicas:** Aplica únicamente a los departamentos seleccionados.
+- **Productos específicos:** Aplica solo a productos determinados.
 
-### Following Up & Deleting Messages
-- Click any message row to expand the full text.
-- Click the customer's email or phone number to initiate direct follow-up.
-- Once handled, click **Delete message** to keep your inbox clean.
-
----
-
-<a id="️-storefront--system-settings"></a>
-## ⚙️ Storefront & System Settings
-
-**Path:** `/account/owner/settings`
-
-Fine-tune global storefront behaviors, checkout countries, filter widgets, and database storage.
-
-### Shipping & Estimated Delivery Text
-- **Estimated Delivery:** Customize the delivery estimate shown to customers during browsing and checkout (e.g., `2–3 business days` or `Ships within 48 hours`).
-
-### Allowed Shipping Destination Countries
-- Choose which countries appear in the checkout address selector.
-- Add or remove countries depending on your shipping capabilities (United States, Canada, Bahamas, etc.).
-
-### Storefront Display Options
-- **Show Out-of-Stock Items:** 
-  - *Checked:* Products with 0 stock remain visible on the storefront with an "Out of stock" indicator.
-  - *Unchecked:* Out-of-stock products are hidden from the catalog automatically.
-- **New Arrivals Window:** Number of days a product is considered "New" for the *New Arrivals* filter (default: `30` days).
-- **Collapsible Sidebar Defaults:**
-  - *Categories collapsed by default.*
-  - *Filters collapsed by default.*
-
-### Product Filters Customization
-Select which filter checkboxes are available to customers on the `/products` page:
-- Price range (`price`)
-- On sale (`sale`)
-- In stock only (`in_stock`)
-- Featured only (`featured`)
-- New arrivals (`new_arrivals`)
-- Low stock (`low_stock`)
-- Deals (`deals`)
-
-### Media Storage Cleanup Utility
-Over time, uploading new product pictures or logos can leave unreferenced files in storage.
-- Click **Clean up unused storage** in the **Maintenance** section.
-- The utility scans the Supabase `products` and `store` storage buckets, detects files not linked to any active product or setting, and safely deletes them to prevent storage bloat.
-
-### AI Chatbot Instructions
-Provide guidance or custom business facts for the AI customer assistant widget.
+### Fechas de Expiración y Límites de Uso
+- **Fechas de Inicio y Término:** El cupón se activa y desactiva de manera automática en el calendario.
+- **Límite de Usos:** Número máximo de veces que el cupón puede ser canjeado (ej. para los primeros 50 compradores).
+- Presiona **Guardar cupón**.
 
 ---
 
-<a id="-video-tutorials--walkthroughs"></a>
-## 🎥 Video Tutorials & Walkthroughs
+<a id="️-consultas-y-solicitudes-de-presupuesto"></a>
+## ✉️ Consultas y Solicitudes de Presupuesto
 
-The following video walkthroughs provide visual demonstrations of key owner management workflows:
+**Ruta:** `/account/owner/contact`
 
-| # | Tutorial Topic | Description | Video Link |
-|---|----------------|-------------|------------|
-| 1 | 🎬 **Owner Dashboard Overview** | Tour of the sidebar menu, sales metrics, and customizing widgets. | _[Coming Soon]_ |
-| 2 | 🛠️ **Managing Services & Gallery** | Editing service descriptions, uploading boat photos, and reordering. | _[Coming Soon]_ |
-| 3 | 🎨 **Updating Foam Colors & Patterns** | Adding new EVA foam swatches, hex codes, and CNC router styles. | _[Coming Soon]_ |
-| 4 | 🛍️ **Adding Products & Managing Stock** | Creating merch, setting variants (sizes/colors), and CSV stock import. | _[Coming Soon]_ |
-| 5 | 📦 **Fulfilling Orders & Tracking** | Updating order statuses, viewing Stripe receipts, and adding tracking. | _[Coming Soon]_ |
-| 6 | ✉️ **Reviewing Quotes & Estimate Requests** | Checking free estimate submissions and boat details. | _[Coming Soon]_ |
-| 7 | ⚙️ **Storefront Settings & Maintenance** | Configuring delivery time, shipping countries, and storage cleanup. | _[Coming Soon]_ |
+Bandeja unificada para la captación de nuevos proyectos de cubiertas de barcos.
+
+### Revisión de Solicitudes de Presupuesto Gratis
+Cada vez que un cliente llena el formulario en `/estimate`:
+- La solicitud aparece destacada con una insignia naranja de **`ESTIMATE`**.
+- Muestra:
+  - Nombre completo, correo electrónico y número de teléfono del cliente.
+  - Datos del barco: Marca, modelo, eslora y zonas deseadas (plataforma de baño, bañera, proa, timonera).
+  - Fecha y hora exacta de recepción.
+
+### Mensajes Generales de Contacto
+Las preguntas generales provenientes de la página de contacto o del pie de página se listan con su asunto correspondiente.
+
+### Seguimiento y Limpieza de Mensajes
+- Haz clic sobre cualquier fila para desplegar el mensaje completo.
+- Puedes contactar al cliente de inmediato por teléfono o correo para coordinar la toma de medidas digital en el barco.
+- Una vez atendida la solicitud, haz clic en **Eliminar mensaje** para mantener la bandeja despejada.
 
 ---
 
-<a id="-technical-quick-start-developers--deployment"></a>
-## 💻 Technical Quick-Start (Developers & Deployment)
+<a id="️-configuración-de-tienda-y-del-sistema"></a>
+## ⚙️ Configuración de Tienda y del Sistema
 
-### Tech Stack
+**Ruta:** `/account/owner/settings`
+
+Ajustes globales para la logística de envíos, filtros visibles y mantenimiento del almacenamiento.
+
+### Texto de Entrega Estimada
+- **Tiempo de Entrega:** Define el plazo estimado que se muestra en fichas de producto y checkout (ej. `2 a 3 días hábiles` o `Despacho en 48 horas`).
+
+### Países Permitidos para Envíos
+- Selecciona qué países están habilitados en la lista desplegable durante el pago.
+- Añade o remueve destinos según tu cobertura de paquetería (Estados Unidos, Canadá, Bahamas, etc.).
+
+### Opciones de Visualización de Tienda
+- **Mostrar Productos Agotados:**
+  - *Activado:* Los artículos con stock en 0 siguen mostrándose con el rótulo "Agotado".
+  - *Desactivado:* Los artículos sin existencias se ocultan de inmediato para mantener limpio el catálogo.
+- **Días para 'Novedades':** Número de días durante los cuales un producto recién creado se considera nuevo en el filtro (por defecto: `30` días).
+- **Colapso de Menús Laterales:** Define si los acordeones de filtros y categorías comienzan abiertos o cerrados en la tienda.
+
+### Filtros Visibles en el Catálogo
+Marca cuáles casillas de filtro deseas poner a disposición de los usuarios en la página `/products`:
+- Rango de precio (`price`)
+- En oferta (`sale`)
+- Solo en stock (`in_stock`)
+- Solo destacados (`featured`)
+- Novedades (`new_arrivals`)
+- Stock bajo (`low_stock`)
+- Ofertas especiales (`deals`)
+
+### Herramienta de Limpieza de Archivos no Utilizados
+Con el paso del tiempo, cambiar fotos de productos o servicios puede dejar imágenes huérfanas en la nube:
+- Presiona **Limpiar almacenamiento no utilizado** en la sección de **Mantenimiento**.
+- El sistema revisa los archivos de Supabase Storage, identifica fotos que ya no están vinculadas a ningún producto activo y las elimina de forma segura para ahorrar espacio.
+
+### Instrucciones para el Asistente Virtual IA
+Espacio para definir pautas de atención o datos de la empresa para el asistente inteligente de la web.
+
+---
+
+<a id="-videotutoriales-y-demostraciones"></a>
+## 🎥 Videotutoriales y Demostraciones
+
+Los siguientes videos proporcionan demostraciones visuales de los flujos de administración:
+
+| # | Tema del Tutorial | Descripción del Contenido | Enlace al Video |
+|---|-------------------|---------------------------|-----------------|
+| 1 | 🎬 **Visión General del Panel de Propietario** | Recorrido por el menú, métricas de venta y personalización de widgets. | _[Próximamente]_ |
+| 2 | 🛠️ **Gestión de Servicios y Galería de Barcos** | Cómo modificar servicios, subir fotos de barcos y ordenarlas. | _[Próximamente]_ |
+| 3 | 🎨 **Actualización de Colores de Espuma y Patrones** | Agregar nuevas muestras de color bicapa EVA y estilos de corte CNC. | _[Próximamente]_ |
+| 4 | 🛍️ **Añadir Productos y Control de Inventario** | Creación de artículos, variantes (tallas/colores) e importación con CSV. | _[Próximamente]_ |
+| 5 | 📦 **Despacho de Pedidos y Números de Guía** | Actualización de estados, comprobante de Stripe y números de rastreo. | _[Próximamente]_ |
+| 6 | ✉️ **Revisión de Solicitudes de Presupuesto** | Cómo atender leads de cotización de cubiertas y datos del barco. | _[Próximamente]_ |
+| 7 | ⚙️ **Ajustes de Tienda y Mantenimiento** | Configurar tiempos de entrega, países de envío y limpieza de fotos. | _[Próximamente]_ |
+| 8 | 🚀 **Hoja de Ruta de Lanzamiento (Stripe y Envíos)** | Decisiones pendientes: activación de Stripe para depósitos y reglas de envío. | _[Próximamente]_ |
+
+---
+
+<a id="-guía-rápida-técnica-para-desarrolladores-y-mantenimiento"></a>
+## 💻 Guía Rápida Técnica (Para Desarrolladores y Mantenimiento)
+
+### Stack Tecnológico
 - **Frontend:** React 18, TypeScript, Vite
-- **Styling:** Tailwind CSS, Lucide Icons, Framer Motion
-- **Backend & Database:** Supabase (PostgreSQL, Row-Level Security, Storage, Edge Functions)
-- **Payment Processing:** Stripe Checkout + Supabase Edge Functions (`create-checkout-session`, `stripe-webhook`)
-- **Hosting & CI/CD:** Vercel
+- **Estilos e Iconos:** Tailwind CSS, Lucide Icons, Framer Motion
+- **Base de Datos y Backend:** Supabase (PostgreSQL, Políticas RLS, Storage, Edge Functions)
+- **Procesamiento de Pagos:** Stripe Checkout + Supabase Edge Functions (`create-checkout-session`, `stripe-webhook`)
+- **Alojamiento y Despliegue:** Vercel
 
-### Environment Variables
-Create a `.env` file in the root directory:
+### Variables de Entorno
+Crea un archivo `.env` en la raíz del proyecto:
 
 ```env
-VITE_SUPABASE_URL=https://your-project-id.supabase.co
+VITE_SUPABASE_URL=https://tu-proyecto.supabase.co
 VITE_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
-# Optional (only needed if using Stripe Elements on client):
+# Opcional (solo requerido si se utiliza Stripe Elements en el cliente):
 VITE_STRIPE_PUBLISHABLE_KEY=pk_test_...
 ```
 
-### Running Locally
-1. Ensure [Node.js](https://nodejs.org) (v18+) is installed.
-2. Clone repository and install dependencies:
+### Ejecución en Entorno Local
+1. Asegúrate de tener instalado [Node.js](https://nodejs.org) (v18 o superior).
+2. Clona el repositorio e instala las dependencias:
    ```bash
    npm install
    ```
-3. Start the Vite development server:
+3. Inicia el servidor de desarrollo Vite:
    ```bash
    npm run dev
    ```
-4. Open [http://localhost:5173](http://localhost:5173) in your browser.
+4. Abre [http://localhost:5173](http://localhost:5173) en tu navegador.
 
-### Database & Migrations
-Database migrations are located in [`supabase/migrations/`](file:///Users/leandro.alfonso/Documents/GitHub/allondeck-codebase/supabase/migrations):
-- `001_schema.sql`: Core schema (products, categories, store settings, profiles, cart, orders, coupons, reviews).
-- `002_transfer_owner.sql`: Store owner permission transfer helper.
-- `003_contact_requests_extra_fields.sql`: Estimate requests & phone fields.
-- `004_product_variants.sql`: Product sizes, colors, and SKU variants.
-- `005_variant_images.sql`: Variant image mapping.
-- `006_designs_tables.sql`: `design_colors` and `design_patterns`.
-- `007_gallery_images.sql`: Completed vessel gallery and service category tags.
-- `008_services.sql`: Dynamic services table, card titles, CTA links, and RLS policies.
+### Base de Datos y Migraciones
+Las migraciones de la base de datos se encuentran en [`supabase/migrations/`](file:///Users/leandro.alfonso/Documents/GitHub/allondeck-codebase/supabase/migrations):
+- `001_schema.sql`: Esquema base (productos, categorías, ajustes, perfiles, carrito, pedidos, cupones, reseñas).
+- `002_transfer_owner.sql`: Utilidad para transferir el rol de propietario a otro correo.
+- `003_contact_requests_extra_fields.sql`: Campos de cotizaciones y teléfono.
+- `004_product_variants.sql`: Variantes de talla, color y SKU.
+- `005_variant_images.sql`: Asignación de imágenes a variantes.
+- `006_designs_tables.sql`: Tablas de `design_colors` y `design_patterns`.
+- `007_gallery_images.sql`: Portafolio de proyectos de barcos y etiquetas de servicio.
+- `008_services.sql`: Servicios dinámicos, títulos para tarjetas y enlaces CTA.
 
-To apply migrations using the Supabase CLI:
+Para aplicar migraciones mediante Supabase CLI:
 ```bash
 supabase db push
 ```
 
-For Stripe payment setup instructions and Edge Function deployment, refer to [`PAYMENTS.md`](file:///Users/leandro.alfonso/Documents/GitHub/allondeck-codebase/PAYMENTS.md).  
-For client account handoff procedures, refer to [`TRANSITION.md`](file:///Users/leandro.alfonso/Documents/GitHub/allondeck-codebase/TRANSITION.md).  
-For the checklist of pending launch items and email automations, refer to [`PENDING_TASKS.md`](file:///Users/leandro.alfonso/Documents/GitHub/allondeck-codebase/PENDING_TASKS.md).
+Para consultar la configuración detallada de Stripe y Edge Functions, revisa [`PAYMENTS.md`](file:///Users/leandro.alfonso/Documents/GitHub/allondeck-codebase/PAYMENTS.md).  
+Para los pasos de traspaso de cuentas al cliente, revisa [`TRANSITION.md`](file:///Users/leandro.alfonso/Documents/GitHub/allondeck-codebase/TRANSITION.md).  
+Para la lista de tareas de lanzamiento y automatizaciones de correos, revisa [`PENDING_TASKS.md`](file:///Users/leandro.alfonso/Documents/GitHub/allondeck-codebase/PENDING_TASKS.md).  
+Para los guiones de grabación de los videotutoriales, revisa [`LOOM_RECORDING_SCRIPTS.md`](file:///Users/leandro.alfonso/Documents/GitHub/allondeck-codebase/LOOM_RECORDING_SCRIPTS.md).
 
 ---
 
-<a id="-support--developer-contact"></a>
-## 📞 Support & Developer Contact
+<a id="-contacto-y-soporte-técnico"></a>
+## 📞 Contacto y Soporte Técnico
 
-For technical assistance, architecture inquiries, or custom feature expansion, reach out to your engineering team:
+Para asistencia técnica, consultas de arquitectura o ampliación de funciones personalizadas, contacta con tu equipo de desarrollo:
 
-- 📞 **Phone:** (561) 410-6673
-- ✉️ **Email:** [leandroalfonso14@gmail.com](mailto:leandroalfonso14@gmail.com)
-- 🌐 **Project Repository:** [All On Deck Codebase](https://github.com/leandroalfonso/allondeck-codebase)
+- 📞 **Teléfono:** (561) 410-6673
+- ✉️ **Correo:** [leandroalfonso14@gmail.com](mailto:leandroalfonso14@gmail.com)
+- 🌐 **Repositorio del Proyecto:** [All On Deck Codebase](https://github.com/leandroalfonso/allondeck-codebase)
