@@ -222,12 +222,21 @@ export default function ProductDetail() {
     }
   }
 
+  const productImageUrl = useMemo(() => {
+    if (!product?.image_url) return undefined;
+    if (product.image_url.startsWith("http") || product.image_url.startsWith("/")) {
+      return product.image_url;
+    }
+    const supabaseUrl = import.meta.env.VITE_SUPABASE_URL ?? "";
+    return `${supabaseUrl}/storage/v1/object/public/products/${product.image_url}`;
+  }, [product?.image_url]);
+
   return (
     <div className="mx-auto max-w-content px-6 py-8 sm:px-6 lg:px-8 w-full">
       <SEO
         title={`${product.name} | All On Deck`}
         description={product.description?.slice(0, 160) || `${product.name} - Premium marine deck flooring and boating accessories from All On Deck.`}
-        image={product.image_url ? `https://rckxskncdxobolhctnfw.supabase.co/storage/v1/object/public/products/${product.image_url}` : undefined}
+        image={productImageUrl}
       />
       {/* Product JSON-LD Structured Data */}
       <script
@@ -237,9 +246,7 @@ export default function ProductDetail() {
             "@context": "https://schema.org",
             "@type": "Product",
             name: product.name,
-            image: product.image_url
-              ? `https://rckxskncdxobolhctnfw.supabase.co/storage/v1/object/public/products/${product.image_url}`
-              : undefined,
+            image: productImageUrl,
             description: product.description || undefined,
             offers: {
               "@type": "Offer",

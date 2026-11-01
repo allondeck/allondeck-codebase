@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Button } from "../../../../components/ui/Button";
 import { formatPrice } from "../../../../lib/utils";
 import { getSupabaseImageTransformUrl } from "../../../../lib/imageUtils";
+import { AnimatedSection } from "../../../../components/ui/AnimatedSection";
 import type { ProductRow } from "../../../../types/database";
 import type { DealWithItems } from "../../../../hooks/useDeals";
 
@@ -23,7 +24,7 @@ export function ProductDealSection({
   if (!dealContainingProduct) return null;
 
   return (
-    <section className="mt-12 border-t border-brand-medium/35 pt-10">
+    <AnimatedSection className="mt-12 border-t border-brand-medium/35 pt-10">
       <h2 className="mb-3 text-xl font-semibold text-white">Deal</h2>
       <p className="mb-4 text-sm text-brand-cream">
         This product is part of{" "}
@@ -110,6 +111,6 @@ export function ProductDealSection({
           </div>
         </>
       )}
-    </section>
+    </AnimatedSection>
   );
 }

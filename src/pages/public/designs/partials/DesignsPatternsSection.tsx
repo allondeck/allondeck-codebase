@@ -1,5 +1,7 @@
 import { useState } from "react";
+import { motion } from "framer-motion";
 import { WaveButton } from "../../../../components/ui/WaveButton";
+import { getSupabaseImageTransformUrl } from "../../../../lib/imageUtils";
 
 export type PatternType =
   | "stepped"
@@ -298,7 +300,13 @@ export function DesignsPatternsSection({
       <div className="mx-auto max-w-content px-6 lg:px-12">
         <div className="flex flex-col-reverse lg:flex-row items-center justify-between gap-12 lg:gap-0">
           {/* Patterns Sample Grid: Uniform Cards with 9/16 Aspect Ratio */}
-          <div className="w-full lg:w-[55%] relative z-10">
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            className="w-full lg:w-[55%] relative z-10"
+          >
             <div className="grid grid-cols-3 gap-3.5 sm:gap-5 md:gap-6 items-stretch">
               {displayPatterns.slice(0, 6).map((pattern) => {
                 const isSelected = selectedPatternId === pattern.id;
@@ -324,7 +332,11 @@ export function DesignsPatternsSection({
                       <div className="w-full h-full bg-[#044155] rounded-xl sm:rounded-2xl relative overflow-hidden flex items-center justify-center border border-[#066175]/30 shadow-inner">
                         {pattern.image_url ? (
                           <img
-                            src={pattern.image_url}
+                            src={getSupabaseImageTransformUrl(pattern.image_url, {
+                              width: 400,
+                              height: 400,
+                              bucket: "store",
+                            })}
                             alt={pattern.name}
                             loading="lazy"
                             decoding="async"
@@ -352,10 +364,16 @@ export function DesignsPatternsSection({
                 );
               })}
             </div>
-          </div>
+          </motion.div>
 
           {/* Text Content */}
-          <div className="w-full lg:w-[40%] text-left relative z-10">
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+            className="w-full lg:w-[40%] text-left relative z-10"
+          >
             <h2 className="font-heading text-4xl md:text-6xl font-black tracking-widest text-brand-cream uppercase leading-none">
               PATTERNS
             </h2>
@@ -389,7 +407,7 @@ export function DesignsPatternsSection({
                 </WaveButton>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </div>

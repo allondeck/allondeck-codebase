@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { getSupabaseImageTransformUrl } from "../../lib/imageUtils";
 import type { ProductRow } from "../../types/database";
 
 interface ShopCardProps {
@@ -21,7 +22,11 @@ export function ShopCard({ product, className = "" }: ShopCardProps) {
       <div className="relative bg-white aspect-[4/5] rounded-[1.25rem] sm:rounded-2xl overflow-hidden shadow-inner">
         {product.image_url ? (
           <img
-            src={`https://rckxskncdxobolhctnfw.supabase.co/storage/v1/object/public/products/${product.image_url}`}
+            src={getSupabaseImageTransformUrl(product.image_url, {
+              width: 320,
+              height: 400,
+              bucket: "products",
+            })}
             alt={product.name}
             width={320}
             height={400}

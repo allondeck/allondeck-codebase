@@ -1,7 +1,13 @@
 import { useState, useEffect, useCallback } from "react";
 import { useSearchParams } from "react-router-dom";
+import { motion } from "framer-motion";
 import { supabase } from "../../../lib/supabase";
 import { SEO } from "../../../components/ui/SEO";
+import { getSupabaseImageTransformUrl } from "../../../lib/imageUtils";
+import {
+  staggerContainerVariants,
+  staggerCardVariants,
+} from "../../../components/ui/AnimatedSection";
 import { X, ChevronLeft, ChevronRight, Maximize2 } from "lucide-react";
 import { ServicesGalleryBannerSection } from "../services/partials/ServicesGalleryBannerSection";
 
@@ -193,20 +199,31 @@ export default function Gallery() {
 
       {/* Hero Header */}
       <section className="relative overflow-hidden border-b border-brand-medium/35 bg-gradient-to-b from-brand-dark-alt to-brand-dark py-16 sm:py-24">
-        <div className="mx-auto max-w-content px-6 lg:px-12 text-center relative z-10">
+        <motion.div
+          initial={{ opacity: 0, y: 25 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.65, ease: "easeOut" }}
+          className="mx-auto max-w-content px-6 lg:px-12 text-center relative z-10"
+        >
           <h1 className="font-heading text-4xl md:text-6xl font-black tracking-widest text-brand-orange uppercase">
             GALLERY
           </h1>
           <p className="mx-auto mt-4 max-w-2xl text-sm md:text-base italic leading-relaxed text-brand-light">
             Explore our portfolio of custom marine decking installations, handcrafted finishes, and precision CNC work.
           </p>
-        </div>
+          <div className="mx-auto mt-3 h-1 w-16 bg-brand-cream/60 rounded-full" />
+        </motion.div>
       </section>
 
       {/* Main Gallery Area */}
       <div id="gallery-section" className="scroll-mt-6 mx-auto max-w-content px-6 lg:px-12 pt-12">
         {/* Category Filters */}
-        <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-10">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
+          className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-10"
+        >
           {SERVICE_CATEGORIES.map((cat) => {
             const isActive = activeCategory === cat.id;
             return (
@@ -238,7 +255,7 @@ export default function Gallery() {
               </button>
             );
           })}
-        </div>
+        </motion.div>
 
         {/* Gallery Grid */}
         {loading ? (
@@ -250,10 +267,16 @@ export default function Gallery() {
             <p className="text-brand-light text-lg">No gallery images found for this category.</p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+          <motion.div
+            variants={staggerContainerVariants}
+            initial="hidden"
+            animate="visible"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
+          >
             {filteredImages.map((img, idx) => (
-              <div
+              <motion.div
                 key={img.id}
+                variants={staggerCardVariants}
                 role="button"
                 tabIndex={0}
                 aria-label={`View enlarged image: ${img.title}`}
@@ -269,7 +292,11 @@ export default function Gallery() {
                 {/* Aspect Ratio Container */}
                 <div className="relative aspect-[4/3] w-full overflow-hidden bg-brand-dark">
                   <img
-                    src={img.image_url}
+                    src={getSupabaseImageTransformUrl(img.image_url, {
+                      width: 800,
+                      height: 600,
+                      bucket: "store",
+                    })}
                     alt={img.title}
                     width={400}
                     height={300}
@@ -303,9 +330,9 @@ export default function Gallery() {
                     </p>
                   )}
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         )}
       </div>
 
@@ -354,8 +381,14 @@ export default function Gallery() {
           <div className="relative max-h-[90vh] max-w-5xl w-full flex flex-col items-center justify-center overflow-hidden rounded-2xl border border-brand-medium/40 bg-brand-dark-alt shadow-2xl">
             <div className="relative flex max-h-[70vh] w-full items-center justify-center bg-black overflow-hidden">
               <img
-                src={currentImage.image_url}
+                src={getSupabaseImageTransformUrl(currentImage.image_url, {
+                  width: 1400,
+                  height: 1050,
+                  bucket: "store",
+                })}
                 alt={currentImage.title}
+                loading="eager"
+                decoding="async"
                 className="max-h-[70vh] w-auto max-w-full object-contain"
               />
             </div>

@@ -244,3 +244,45 @@ Search engine optimization (SEO), social media previews, and crawlability have a
     7. *Storefront Settings & Maintenance*
     8. *Pending Launch Items & Roadmap (Stripe account activation, shipping pricing model, buyer email domain verification, and deck visualizer)*
   - Once recorded, paste the shareable Loom URLs into the table in [`README.md`](./README.md).
+
+---
+
+## 8. 🛠️ Developer Setup & Administrative Commands (Fresh Environment Runbook)
+
+This section serves as the developer runbook for setting up a fresh database instance or reproducing the environment from scratch:
+
+### 8.1 Supabase Project Provisioning & Baseline Migration
+1. Create a new project on [supabase.com](https://supabase.com).
+2. In the Supabase Dashboard, open the **SQL Editor** tab from the left sidebar.
+3. Open [`001_schema.sql`](./supabase/migrations/001_schema.sql), copy its contents, paste it into the SQL editor, and click **Run**.
+   - This provisions all core tables, RLS policies, triggers, and seed data.
+
+### 8.2 Environment Variables
+Copy `.env.example` in the root of the project to `.env`:
+```bash
+cp .env.example .env
+```
+Copy your Supabase Project URL and public anon key from **Project Settings** ➔ **API**:
+```env
+VITE_SUPABASE_URL=https://your-project-id.supabase.co
+VITE_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+```
+
+### 8.3 Create the Store Owner
+1. Launch the application locally:
+   ```bash
+   npm run dev
+   ```
+2. Visit [http://localhost:5173/setup](http://localhost:5173/setup).
+3. Sign up with your preferred owner email, password, and name.
+4. Click **Create owner account**.
+
+Only one owner account is permitted. Once created, the `/setup` endpoint is locked.
+
+---
+
+### 8.4 Administrative Commands: Transferring Store Ownership
+To transfer the single owner permission to a different email address:
+1. Open the Supabase **SQL Editor**.
+2. Run the contents of [`002_transfer_owner.sql`](./supabase/migrations/002_transfer_owner.sql) after updating the target email address at the bottom of the script.
+3. The new owner must already have signed up on the store before you run the transfer.

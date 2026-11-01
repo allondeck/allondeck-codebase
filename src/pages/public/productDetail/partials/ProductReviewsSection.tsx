@@ -1,4 +1,5 @@
 import { Button } from "../../../../components/ui/Button";
+import { AnimatedSection } from "../../../../components/ui/AnimatedSection";
 import type { ProductReviewRow } from "../../../../hooks/useProductReviews";
 
 function Stars({ value }: { value: number }) {
@@ -60,7 +61,7 @@ export function ProductReviewsSection({
   reviewsTotalCount,
 }: ProductReviewsSectionProps) {
   return (
-    <section className="mt-16 border-t border-brand-medium/35 pt-12">
+    <AnimatedSection className="mt-16 border-t border-brand-medium/35 pt-12">
       <h2 className="mb-4 text-xl font-semibold text-white">Reviews</h2>
       {user &&
         !hasPurchasedLoading &&
@@ -176,6 +177,6 @@ export function ProductReviewsSection({
           )}
         </>
       )}
-    </section>
+    </AnimatedSection>
   );
 }

@@ -1,4 +1,5 @@
 import { ProductCard } from "../../../../components/features/ProductCard";
+import { AnimatedSection } from "../../../../components/ui/AnimatedSection";
 import type { ProductRow } from "../../../../types/database";
 
 interface ProductSuggestedSectionProps {
@@ -13,7 +14,7 @@ export function ProductSuggestedSection({
   if (!suggestedLoading && suggested.length === 0) return null;
 
   return (
-    <section className="mt-16 border-t border-brand-medium/35 pt-12">
+    <AnimatedSection className="mt-16 border-t border-brand-medium/35 pt-12">
       <h2 className="mb-6 text-xl font-semibold text-white">
         You might also like
       </h2>
@@ -33,6 +34,6 @@ export function ProductSuggestedSection({
           ))}
         </div>
       )}
-    </section>
+    </AnimatedSection>
   );
 }

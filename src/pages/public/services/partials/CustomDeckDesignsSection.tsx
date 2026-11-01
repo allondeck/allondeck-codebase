@@ -8,11 +8,13 @@ export function CustomDeckDesignsSection() {
     >
       <div className="mx-auto max-w-content px-6 lg:px-12">
         <div className="grid gap-12 grid-cols-1 md:grid-cols-2 items-center">
-          <div className="overflow-hidden rounded-3xl shadow-xl border border-brand-medium/30">
+          <div className="overflow-hidden rounded-3xl shadow-xl border border-brand-medium/30 aspect-[4/3] w-full bg-brand-dark">
             <img
               src="/assets/images/1.jpg"
               alt="Custom DECK Designs"
-              className="h-64 md:h-96 w-full object-cover"
+              loading="lazy"
+              decoding="async"
+              className="h-full w-full object-cover"
             />
           </div>
           <div>

@@ -53,6 +53,9 @@ export function HeroSection() {
       <div className="relative z-10 mx-auto max-w-[360px] sm:max-w-[560px] md:max-w-[620px] w-full perspective-[1200px] mt-6 sm:mt-8 px-3 sm:px-0">
         <motion.div
           ref={cardRef}
+          initial={{ opacity: 0, y: 35 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           onMouseMove={handleCardMouseMove}
           onMouseLeave={handleCardMouseLeave}
           style={{

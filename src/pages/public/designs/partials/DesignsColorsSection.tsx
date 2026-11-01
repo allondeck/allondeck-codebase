@@ -1,5 +1,7 @@
 import { useState } from "react";
+import { motion } from "framer-motion";
 import { WaveButton } from "../../../../components/ui/WaveButton";
+import { getSupabaseImageTransformUrl } from "../../../../lib/imageUtils";
 
 export type DesignColor = {
   id: string;
@@ -100,7 +102,13 @@ export function DesignsColorsSection({ colors }: DesignsColorsSectionProps) {
       <div className="mx-auto max-w-content px-6 lg:px-12">
         <div className="flex flex-col-reverse lg:flex-row items-center justify-between gap-12 lg:gap-0">
           {/* Color Swatch Grid */}
-          <div className="w-full lg:w-[55%] relative z-10">
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            className="w-full lg:w-[55%] relative z-10"
+          >
             <div className="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-7 gap-x-3 sm:gap-x-4 md:gap-x-5 gap-y-6 sm:gap-y-8 items-start justify-items-center">
               {displayColors.map((color, index) => {
                 const isSelected = activeColorId === color.id;
@@ -142,7 +150,11 @@ export function DesignsColorsSection({ colors }: DesignsColorsSectionProps) {
                       >
                         {/* High-res Foam Texture Overlay */}
                         <img
-                          src={color.image_url || "/assets/images/3.jpg"}
+                          src={getSupabaseImageTransformUrl(color.image_url || "/assets/images/3.jpg", {
+                            width: 200,
+                            height: 200,
+                            bucket: "store",
+                          })}
                           alt={color.name}
                           loading="lazy"
                           decoding="async"
@@ -184,8 +196,14 @@ export function DesignsColorsSection({ colors }: DesignsColorsSectionProps) {
                           />
                           {/* 3.2x Zoomed Texture */}
                           <img
-                            src={color.image_url || "/assets/images/3.jpg"}
+                            src={getSupabaseImageTransformUrl(color.image_url || "/assets/images/3.jpg", {
+                              width: 400,
+                              height: 400,
+                              bucket: "store",
+                            })}
                             alt={color.name}
+                            loading="lazy"
+                            decoding="async"
                             className="absolute inset-0 w-full h-full object-cover mix-blend-multiply opacity-95 contrast-150 scale-[3.2] origin-center"
                           />
                           {/* Lens Glare Reflection */}
@@ -219,10 +237,16 @@ export function DesignsColorsSection({ colors }: DesignsColorsSectionProps) {
                 );
               })}
             </div>
-          </div>
+          </motion.div>
 
           {/* Text Content */}
-          <div className="w-full lg:w-[40%] text-left relative z-10">
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+            className="w-full lg:w-[40%] text-left relative z-10"
+          >
             <h2 className="font-heading text-4xl md:text-6xl font-black tracking-widest text-brand-cream uppercase leading-none">
               COLORS
             </h2>
@@ -251,7 +275,7 @@ export function DesignsColorsSection({ colors }: DesignsColorsSectionProps) {
                 </WaveButton>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </div>

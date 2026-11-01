@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { CheckCircle2 } from 'lucide-react';
 import { formatPrice } from '../../../../lib/utils';
+import { AnimatedSection } from '../../../../components/ui/AnimatedSection';
 
 interface OrderConfirmationDetailsSectionProps {
   order: { total: number | string; status: string } | null;
@@ -11,7 +12,7 @@ export function OrderConfirmationDetailsSection({ order }: OrderConfirmationDeta
   const isPending = order?.status === 'pending';
 
   return (
-    <div className="w-full max-w-lg rounded-2xl border border-brand-medium/35 bg-brand-dark-alt p-8 sm:p-10 lg:p-12 text-center shadow-2xl">
+    <AnimatedSection className="w-full max-w-lg rounded-2xl border border-brand-medium/35 bg-brand-dark-alt p-8 sm:p-10 lg:p-12 text-center shadow-2xl">
       <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 shadow-inner">
         <CheckCircle2 className="h-9 w-9 stroke-[2.2]" />
       </div>
@@ -43,6 +44,6 @@ export function OrderConfirmationDetailsSection({ order }: OrderConfirmationDeta
           View order history
         </Link>
       </div>
-    </div>
+    </AnimatedSection>
   );
 }

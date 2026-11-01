@@ -2,10 +2,10 @@ import { supabase } from "./supabase";
 
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL ?? "";
 
-/** Max file size for product images (bytes). */
-export const MAX_IMAGE_SIZE_PRODUCTS = 5 * 1024 * 1024; // 5MB
-/** Max file size for store assets: logo, banner images (bytes). */
-export const MAX_IMAGE_SIZE_STORE = 2 * 1024 * 1024; // 2MB
+/** Max raw file size allowed for selection before client compression (25MB). */
+export const MAX_IMAGE_SIZE_PRODUCTS = 25 * 1024 * 1024;
+/** Max raw file size allowed for store assets before client compression (25MB). */
+export const MAX_IMAGE_SIZE_STORE = 25 * 1024 * 1024;
 
 export function getMaxImageSizeLabel(maxBytes: number): string {
   if (maxBytes >= 1024 * 1024) return `${maxBytes / (1024 * 1024)}MB`;

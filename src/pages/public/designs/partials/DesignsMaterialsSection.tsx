@@ -1,10 +1,22 @@
+import { motion } from "framer-motion";
+import {
+  staggerContainerVariants,
+  staggerCardVariants,
+} from "../../../../components/ui/AnimatedSection";
+
 export function DesignsMaterialsSection() {
   return (
     <div
       id="materials"
       className="scroll-mt-20 mx-auto max-w-content px-6 lg:px-12 pt-20 pb-6 md:py-20 border-t border-brand-medium/30"
     >
-      <div className="text-center mb-12">
+      <motion.div
+        initial={{ opacity: 0, y: 25 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-40px" }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        className="text-center mb-12"
+      >
         <span className="text-xs font-bold uppercase tracking-widest text-brand-orange">
           Engineering
         </span>
@@ -16,12 +28,18 @@ export function DesignsMaterialsSection() {
           Engineered for high performance, maximum comfort, and ultimate
           durability at sea. Learn about our marine-grade raw materials.
         </p>
-      </div>
+      </motion.div>
 
       {/* Materials details layout */}
-      <div className="grid gap-10 md:gap-8 grid-cols-1 md:grid-cols-3 max-w-6xl mx-auto mb-16">
+      <motion.div
+        variants={staggerContainerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-50px" }}
+        className="grid gap-10 md:gap-8 grid-cols-1 md:grid-cols-3 max-w-6xl mx-auto mb-16"
+      >
         {/* Material 1 */}
-        <div className="rounded-3xl border border-brand-medium/40 bg-brand-dark-alt p-8 flex flex-col shadow-lg">
+        <motion.div variants={staggerCardVariants} className="rounded-3xl border border-brand-medium/40 bg-brand-dark-alt p-8 flex flex-col shadow-lg">
           <div className="h-12 w-12 rounded-2xl bg-brand-medium/40 flex items-center justify-center text-brand-orange font-black text-xl mb-6">
             01
           </div>
@@ -44,10 +62,10 @@ export function DesignsMaterialsSection() {
               Multi-color dual layers
             </li>
           </ul>
-        </div>
+        </motion.div>
 
         {/* Material 2 */}
-        <div className="rounded-3xl border border-brand-medium/40 bg-brand-dark-alt p-8 flex flex-col shadow-lg">
+        <motion.div variants={staggerCardVariants} className="rounded-3xl border border-brand-medium/40 bg-brand-dark-alt p-8 flex flex-col shadow-lg">
           <div className="h-12 w-12 rounded-2xl bg-brand-medium/40 flex items-center justify-center text-brand-orange font-black text-xl mb-6">
             02
           </div>
@@ -70,10 +88,10 @@ export function DesignsMaterialsSection() {
               Oiling or Sanding
             </li>
           </ul>
-        </div>
+        </motion.div>
 
         {/* Material 3 */}
-        <div className="rounded-3xl border border-brand-medium/40 bg-brand-dark-alt p-8 flex flex-col shadow-lg">
+        <motion.div variants={staggerCardVariants} className="rounded-3xl border border-brand-medium/40 bg-brand-dark-alt p-8 flex flex-col shadow-lg">
           <div className="h-12 w-12 rounded-2xl bg-brand-medium/40 flex items-center justify-center text-brand-orange font-black text-xl mb-6">
             03
           </div>
@@ -96,8 +114,8 @@ export function DesignsMaterialsSection() {
               Saltwater & Heat Certified
             </li>
           </ul>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </div>
   );
 }

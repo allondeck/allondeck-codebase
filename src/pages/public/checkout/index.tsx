@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { SEO } from "../../../components/ui/SEO";
+import { AnimatedSection } from "../../../components/ui/AnimatedSection";
 import { useCart } from "../../../context/CartContext";
 import { isProductCartItem } from "../../../types/cart";
 import { useAuth } from "../../../context/AuthContext";
@@ -246,38 +247,40 @@ export default function Checkout() {
         title="Secure Checkout | All On Deck"
         description="Complete your custom marine deck flooring order securely with All On Deck."
       />
-      <h1 className="mb-8 text-2xl font-bold text-white">Checkout</h1>
-      <form onSubmit={handlePlaceOrder}>
-        {!user && (
-          <GuestEmailSection guestEmail={guestEmail} onChange={setGuestEmail} />
-        )}
-        <ShippingAddressSection
-          address={address}
-          countryOptions={countryOptions}
-          setAddress={setAddress}
-        />
-        {error && (
-          <div className="mb-6 rounded-lg bg-red-900/50 p-3 text-sm text-red-200 border border-red-500/30">
-            {error}
-          </div>
-        )}
-        <CouponSection
-          couponCode={couponCode}
-          couponResult={couponResult}
-          couponApplying={couponApplying}
-          setCouponCode={setCouponCode}
-          onApplyCoupon={handleApplyCoupon}
-          onRemoveCoupon={handleRemoveCoupon}
-        />
-        <CheckoutSummarySection
-          items={items}
-          subtotal={subtotal}
-          discountAmount={discountAmount}
-          total={total}
-          estimatedDelivery={estimatedDelivery}
-          loading={loading}
-        />
-      </form>
+      <AnimatedSection>
+        <h1 className="mb-8 text-2xl font-bold text-white">Checkout</h1>
+        <form onSubmit={handlePlaceOrder}>
+          {!user && (
+            <GuestEmailSection guestEmail={guestEmail} onChange={setGuestEmail} />
+          )}
+          <ShippingAddressSection
+            address={address}
+            countryOptions={countryOptions}
+            setAddress={setAddress}
+          />
+          {error && (
+            <div className="mb-6 rounded-lg bg-red-900/50 p-3 text-sm text-red-200 border border-red-500/30">
+              {error}
+            </div>
+          )}
+          <CouponSection
+            couponCode={couponCode}
+            couponResult={couponResult}
+            couponApplying={couponApplying}
+            setCouponCode={setCouponCode}
+            onApplyCoupon={handleApplyCoupon}
+            onRemoveCoupon={handleRemoveCoupon}
+          />
+          <CheckoutSummarySection
+            items={items}
+            subtotal={subtotal}
+            discountAmount={discountAmount}
+            total={total}
+            estimatedDelivery={estimatedDelivery}
+            loading={loading}
+          />
+        </form>
+      </AnimatedSection>
     </div>
   );
 }

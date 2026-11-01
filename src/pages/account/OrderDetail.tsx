@@ -11,6 +11,8 @@ import {
 } from "lucide-react";
 import { supabase } from "../../lib/supabase";
 import { formatPrice, parsePrice } from "../../lib/utils";
+import { getSupabaseImageTransformUrl } from "../../lib/imageUtils";
+import { AnimatedSection } from "../../components/ui/AnimatedSection";
 import type { OrderRow, OrderItemRow } from "../../types/database";
 
 type OrderWithDetails = OrderRow & {
@@ -135,7 +137,7 @@ export default function OrderDetail() {
   const isCancelled = order.status === "cancelled";
 
   return (
-    <div className="mx-auto max-w-4xl space-y-8 pb-12 text-left">
+    <AnimatedSection className="mx-auto max-w-4xl space-y-8 pb-12 text-left">
       {/* Header */}
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
@@ -227,8 +229,14 @@ export default function OrderDetail() {
                 <div className="h-20 w-20 flex-shrink-0 overflow-hidden rounded-xl bg-brand-dark">
                   {item.products?.image_url ? (
                     <img
-                      src={item.products.image_url}
+                      src={getSupabaseImageTransformUrl(item.products.image_url, {
+                        width: 160,
+                        height: 160,
+                        bucket: "products",
+                      })}
                       alt={item.products.name}
+                      loading="lazy"
+                      decoding="async"
                       className="h-full w-full object-cover"
                     />
                   ) : (
@@ -366,6 +374,6 @@ export default function OrderDetail() {
           </div>
         </div>
       </div>
-    </div>
+    </AnimatedSection>
   );
 }

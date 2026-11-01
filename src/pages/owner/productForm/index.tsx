@@ -10,6 +10,7 @@ import {
 } from "../../../lib/storage";
 import { useCategoriesAdmin } from "../../../hooks/useCategoriesAdmin";
 import { slugify } from "../../../lib/utils";
+import { compressImageForUpload } from "../../../lib/imageUtils";
 import type { ProductRow, ProductVariantRow } from "../../../types/database";
 
 const MAX_CATEGORIES = 3;
@@ -155,11 +156,17 @@ export default function ProductForm() {
     }
     setError(null);
     setUploading(true);
-    const ext = file.name.split(".").pop() || "jpg";
+    let fileToUpload = file;
+    try {
+      fileToUpload = await compressImageForUpload(file);
+    } catch {
+      // Fallback to original file
+    }
+    const ext = fileToUpload.name.split(".").pop() || "webp";
     const path = `${crypto.randomUUID()}.${ext}`;
     const { data, error: err } = await supabase.storage
       .from("products")
-      .upload(path, file, {
+      .upload(path, fileToUpload, {
         cacheControl: "3600",
         upsert: false,
       });
@@ -191,11 +198,17 @@ export default function ProductForm() {
     }
     setError(null);
     setUploading(true);
-    const ext = file.name.split(".").pop() || "jpg";
+    let fileToUpload = file;
+    try {
+      fileToUpload = await compressImageForUpload(file);
+    } catch {
+      // Fallback to original file
+    }
+    const ext = fileToUpload.name.split(".").pop() || "webp";
     const path = `${crypto.randomUUID()}.${ext}`;
     const { data, error: err } = await supabase.storage
       .from("products")
-      .upload(path, file, {
+      .upload(path, fileToUpload, {
         cacheControl: "3600",
         upsert: false,
       });

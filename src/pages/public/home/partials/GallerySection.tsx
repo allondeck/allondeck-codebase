@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import { Wave } from "../../../../components/ui/Wave";
 import { Button } from "../../../../components/ui/Button";
 
@@ -20,7 +21,13 @@ export function GallerySection() {
 
       <div className="relative z-10 mx-auto max-w-content px-4 sm:px-6 lg:px-8 text-center w-full flex justify-center">
         {/* Gallery Centerpiece Card */}
-        <div className="relative w-full max-w-2xl sm:max-w-3xl md:max-w-[820px] lg:max-w-[860px] rounded-[2.25rem] md:rounded-[3rem] bg-brand-dark/80 pt-8 sm:pt-11 md:pt-14 pb-12 sm:pb-15 md:pb-18 px-4 sm:px-6 md:px-8 shadow-2xl overflow-visible text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          className="relative w-full max-w-2xl sm:max-w-3xl md:max-w-[820px] lg:max-w-[860px] rounded-[2.25rem] md:rounded-[3rem] bg-brand-dark/80 pt-8 sm:pt-11 md:pt-14 pb-12 sm:pb-15 md:pb-18 px-4 sm:px-6 md:px-8 shadow-2xl overflow-visible text-center"
+        >
           {/* Title - CHECK OUR (Brand Light) / GALLERY (Brand Cream) */}
           <h2 className="relative z-10 font-heading uppercase text-center leading-none">
             <span className="block text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-[5.5rem] font-normal tracking-[0.16em] sm:tracking-[0.18em] md:tracking-[0.2em] text-brand-light">
@@ -57,7 +64,7 @@ export function GallerySection() {
               <Wave />
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

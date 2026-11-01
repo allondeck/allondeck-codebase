@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
+import { AnimatedSection } from "../../../../components/ui/AnimatedSection";
 
 export function CartEmptySection() {
   return (
-    <div className="rounded-xl border border-brand-medium/35 bg-brand-dark-alt p-12 text-center">
+    <AnimatedSection className="rounded-xl border border-brand-medium/35 bg-brand-dark-alt p-12 text-center">
       <h2 className="text-xl font-semibold text-white">
         Your cart is empty
       </h2>
@@ -21,6 +22,6 @@ export function CartEmptySection() {
           View Wishlist
         </Link>
       </div>
-    </div>
+    </AnimatedSection>
   );
 }

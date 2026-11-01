@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import { Button } from "../../../components/ui/Button";
+import { AnimatedSection } from "../../../components/ui/AnimatedSection";
 
 export default function NotFound() {
   const [ripples, setRipples] = useState<
@@ -41,7 +42,7 @@ export default function NotFound() {
         />
       ))}
 
-      <div className="relative z-10 text-center pointer-events-none p-6">
+      <AnimatedSection className="relative z-10 text-center pointer-events-none p-6">
         <h1 className="font-heading text-[120px] leading-none font-black text-white drop-shadow-xl opacity-90">
           404
         </h1>
@@ -54,7 +55,7 @@ export default function NotFound() {
             Back to home
           </Button>
         </div>
-      </div>
+      </AnimatedSection>
 
       <style>{`
         @keyframes ripple-fade {

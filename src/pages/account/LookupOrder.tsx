@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "../../components/ui/Button";
 import { SEO } from "../../components/ui/SEO";
+import { AnimatedSection } from "../../components/ui/AnimatedSection";
 import { supabase } from "../../lib/supabase";
 import { formatPrice, parsePrice, orderStatusLabel } from "../../lib/utils";
 import { getTrackingUrl } from "../../lib/tracking";
@@ -95,7 +96,8 @@ export default function LookupOrder() {
         title="Track & Look Up Order | All On Deck"
         description="Check the status, shipment tracking, and details of your All On Deck order."
       />
-      <h1 className="text-2xl font-bold text-white">Look up your order</h1>
+      <AnimatedSection>
+        <h1 className="text-2xl font-bold text-white">Look up your order</h1>
       <p className="mt-1 text-sm text-brand-light">
         Enter the order ID and email address used when you placed the order.
       </p>
@@ -242,6 +244,7 @@ export default function LookupOrder() {
           Back to store
         </Link>
       </p>
+      </AnimatedSection>
     </div>
   );
 }

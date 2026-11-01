@@ -2,6 +2,7 @@ import { useCart } from "../../../context/CartContext";
 import { isProductCartItem, isComboCartItem } from "../../../types/cart";
 import { parsePrice } from "../../../lib/utils";
 import { SEO } from "../../../components/ui/SEO";
+import { AnimatedSection } from "../../../components/ui/AnimatedSection";
 import { CartEmptySection } from "./partials/CartEmptySection";
 import { CartItemListSection } from "./partials/CartItemListSection";
 import { CartSummarySection } from "./partials/CartSummarySection";
@@ -30,14 +31,14 @@ export default function Cart() {
       {itemCount === 0 ? (
         <CartEmptySection />
       ) : (
-        <div className="flex flex-col gap-8 lg:flex-row">
+        <AnimatedSection className="flex flex-col gap-8 lg:flex-row">
           <CartItemListSection
             items={items}
             updateQuantity={updateQuantity}
             removeItem={removeItem}
           />
           <CartSummarySection itemCount={itemCount} subtotal={subtotal} />
-        </div>
+        </AnimatedSection>
       )}
     </div>
   );

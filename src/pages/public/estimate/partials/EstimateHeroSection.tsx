@@ -1,10 +1,16 @@
+import { motion } from "framer-motion";
 import { Icon } from "../../../../components/ui/Icon";
 
 export function EstimateHeroSection() {
   return (
     <>
       {/* HEADER SECTION */}
-      <div className="mx-auto max-w-content px-6 lg:px-12 text-center">
+      <motion.div
+        initial={{ opacity: 0, y: 25 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.65, ease: "easeOut" }}
+        className="mx-auto max-w-content px-6 lg:px-12 text-center"
+      >
         <span className="text-xs font-bold uppercase tracking-widest text-brand-orange">
           Renewing your boat's deck has never been EASIER!
         </span>
@@ -16,7 +22,7 @@ export function EstimateHeroSection() {
           Fill out the form below to get started. Our specialized design team
           will contact you shortly to review your project specs.
         </p>
-      </div>
+      </motion.div>
 
       {/* WAVE DIVIDER */}
       <div className="my-12 mx-auto max-w-content px-6 lg:px-12 opacity-30 text-brand-light">

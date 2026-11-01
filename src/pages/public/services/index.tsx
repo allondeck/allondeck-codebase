@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+import { motion } from "framer-motion";
 import { supabase } from "../../../lib/supabase";
 import { ServiceRow } from "../../../types/database";
 import { SEO } from "../../../components/ui/SEO";
+import { getSupabaseImageTransformUrl } from "../../../lib/imageUtils";
 import { WaveButton } from "../../../components/ui/WaveButton";
 import { ServicesHeroSection } from "./partials/ServicesHeroSection";
 import { ServicesGalleryBannerSection } from "./partials/ServicesGalleryBannerSection";
@@ -141,16 +143,26 @@ export default function Services() {
                   />
                 </div>
 
-                <div className="relative mx-auto max-w-content px-6 lg:px-12">
+                <motion.div
+                  initial={{ opacity: 0, y: 35 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{ duration: 0.65, ease: "easeOut" }}
+                  className="relative mx-auto max-w-content px-6 lg:px-12"
+                >
                   <div className="grid gap-12 grid-cols-1 md:grid-cols-2 items-center">
                     {/* Image on Right */}
-                    <div className="md:order-last overflow-hidden rounded-3xl shadow-xl border border-brand-dark/40">
+                    <div className="md:order-last overflow-hidden rounded-3xl shadow-xl border border-brand-dark/40 aspect-[4/3] w-full bg-brand-dark">
                       <img
-                        src={service.image_url}
+                        src={getSupabaseImageTransformUrl(service.image_url, {
+                          width: 800,
+                          height: 600,
+                          bucket: "store",
+                        })}
                         alt={service.title}
                         loading="lazy"
                         decoding="async"
-                        className="h-64 md:h-96 w-full object-cover"
+                        className="h-full w-full object-cover"
                       />
                     </div>
 
@@ -178,7 +190,7 @@ export default function Services() {
                       </div>
                     </div>
                   </div>
-                </div>
+                </motion.div>
               </div>
             );
           }
@@ -203,17 +215,27 @@ export default function Services() {
                 />
               </div>
 
-              <div className="relative mx-auto max-w-content px-6 lg:px-12">
+              <motion.div
+                initial={{ opacity: 0, y: 35 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.65, ease: "easeOut" }}
+                className="relative mx-auto max-w-content px-6 lg:px-12"
+              >
                 <div className="grid gap-12 grid-cols-1 md:grid-cols-2 items-center">
                   {/* Image on Left */}
-                  <div className="overflow-hidden rounded-3xl shadow-xl border border-brand-medium/30">
+                  <div className="overflow-hidden rounded-3xl shadow-xl border border-brand-medium/30 aspect-[4/3] w-full bg-brand-dark">
                     <img
-                      src={service.image_url}
+                      src={getSupabaseImageTransformUrl(service.image_url, {
+                        width: 800,
+                        height: 600,
+                        bucket: "store",
+                      })}
                       alt={service.title}
                       loading={index === 0 ? "eager" : "lazy"}
                       fetchPriority={index === 0 ? "high" : "auto"}
                       decoding="async"
-                      className="h-64 md:h-96 w-full object-cover"
+                      className="h-full w-full object-cover"
                     />
                   </div>
 
@@ -241,7 +263,7 @@ export default function Services() {
                     </div>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             </div>
           );
         })}

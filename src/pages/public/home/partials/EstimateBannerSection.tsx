@@ -1,4 +1,5 @@
 import { WaveButton } from "../../../../components/ui/WaveButton";
+import { AnimatedSection } from "../../../../components/ui/AnimatedSection";
 
 export function EstimateBannerSection() {
   return (
@@ -14,7 +15,7 @@ export function EstimateBannerSection() {
         />
       </div>
 
-      <div className="relative z-10 w-full max-w-3xl mx-auto flex flex-col items-center text-center">
+      <AnimatedSection className="relative z-10 w-full max-w-3xl mx-auto flex flex-col items-center text-center">
         {/* Title above card */}
         <h2 className="font-heading text-3xl sm:text-4xl md:text-6xl font-black tracking-wider sm:tracking-widest text-brand-orange uppercase drop-shadow-lg mb-6">
           FREE ESTIMATE
@@ -40,7 +41,7 @@ export function EstimateBannerSection() {
             TAKE YOUR BOAT TO THE NEXT LEVEL
           </p>
         </div>
-      </div>
+      </AnimatedSection>
     </section>
   );
 }

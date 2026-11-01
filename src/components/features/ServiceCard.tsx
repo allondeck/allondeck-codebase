@@ -2,6 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Wave } from "../ui/Wave";
 import { Button } from "../ui/Button";
+import { getSupabaseImageTransformUrl } from "../../lib/imageUtils";
 
 /**
  * ServiceCard.tsx
@@ -99,7 +100,11 @@ export function ServiceCard({
           className={`overflow-hidden rounded-[1.25rem] sm:rounded-[1.75rem] ${aspectRatio} w-full shadow-md ${imageClassName}`.trim()}
         >
           <img
-            src={imageSrc}
+            src={getSupabaseImageTransformUrl(imageSrc, {
+              width: 600,
+              height: 800,
+              bucket: "store",
+            })}
             alt={typeof title === "string" ? title : "Service"}
             loading="lazy"
             decoding="async"

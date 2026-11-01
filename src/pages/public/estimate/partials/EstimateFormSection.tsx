@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { motion } from "framer-motion";
 import { supabase } from "../../../../lib/supabase";
 import type { ContactRequestInsert } from "../../../../types/database";
 import { Button } from "../../../../components/ui/Button";
@@ -58,7 +59,12 @@ export function EstimateFormSection() {
 
   return (
     <div className="mx-auto max-w-3xl px-6 lg:px-12">
-      <div className="rounded-[2.5rem] bg-brand-medium/50 border border-brand-light/20 p-6 md:p-12 shadow-2xl text-white backdrop-blur-md">
+      <motion.div
+        initial={{ opacity: 0, y: 35 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.65, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+        className="rounded-[2.5rem] bg-brand-medium/50 border border-brand-light/20 p-6 md:p-12 shadow-2xl text-white backdrop-blur-md"
+      >
         {submitted ? (
           <div className="text-center py-8">
             <span className="text-4xl text-brand-orange">✓</span>
@@ -251,7 +257,7 @@ export function EstimateFormSection() {
             </div>
           </form>
         )}
-      </div>
+      </motion.div>
     </div>
   );
 }

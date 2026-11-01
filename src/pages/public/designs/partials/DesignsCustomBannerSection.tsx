@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { AnimatedSection } from "../../../../components/ui/AnimatedSection";
 
 export function DesignsCustomBannerSection() {
   return (
@@ -10,7 +11,7 @@ export function DesignsCustomBannerSection() {
           className="w-full h-full object-cover"
         />
       </div>
-      <div className="relative mx-auto max-w-content px-6 lg:px-12 text-center">
+      <AnimatedSection className="relative mx-auto max-w-content px-6 lg:px-12 text-center">
         <span className="inline-block rounded-full bg-brand-orange/20 border border-brand-orange/40 px-4 py-1 text-xs font-bold uppercase tracking-widest text-brand-orange mb-4">
           No Additional Cost
         </span>
@@ -19,7 +20,8 @@ export function DesignsCustomBannerSection() {
         </h2>
         <p className="mt-4 text-base text-brand-light leading-relaxed">
           Every order includes custom design consultation at no extra charge.
-          Our team will work with you to achieve the perfect look for your boat.
+          Work directly with our team to achieve the perfect custom look for
+          your boat.
         </p>
         <div className="mt-8 flex justify-center gap-4 flex-wrap">
           <Link
@@ -41,7 +43,7 @@ export function DesignsCustomBannerSection() {
             View Gallery
           </Link>
         </div>
-      </div>
+      </AnimatedSection>
     </div>
   );
 }

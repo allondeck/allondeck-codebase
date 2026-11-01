@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { ProductCard } from "../../components/features/ProductCard";
 import { SEO } from "../../components/ui/SEO";
+import { AnimatedSection } from "../../components/ui/AnimatedSection";
 import { useWishlist } from "../../hooks/useWishlist";
 import { supabase } from "../../lib/supabase";
 import type { ProductRow } from "../../types/database";
@@ -43,40 +44,42 @@ export default function Wishlist() {
         title="Saved Wishlist | All On Deck"
         description="View and manage your saved marine flooring products and boating accessories."
       />
-      <h1 className="text-2xl font-bold text-white">Wishlist</h1>
-      <p className="mt-1 text-sm text-brand-light">
-        {wishlistIds.length === 0
-          ? "No items saved yet."
-          : `${wishlistIds.length} ${
-              wishlistIds.length === 1 ? "item" : "items"
-            } saved for later.`}
-      </p>
-      {loading ? (
-        <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {[1, 2, 3, 4].map((i) => (
-            <div
-              key={i}
-              className="h-80 animate-pulse rounded-lg bg-brand-dark-alt"
-            />
-          ))}
-        </div>
-      ) : products.length === 0 ? (
-        <div className="mt-8 rounded-lg border border-brand-medium/35 bg-brand-dark-alt p-12 text-center">
-          <p className="text-brand-light">Your wishlist is empty.</p>
-          <Link
-            to="/products"
-            className="mt-4 inline-block rounded-lg bg-brand-orange px-6 py-3 font-medium text-white hover:bg-orange-600 transition-all duration-200 hover:scale-105 active:scale-95"
-          >
-            Browse products
-          </Link>
-        </div>
-      ) : (
-        <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {products.map((p) => (
-            <ProductCard key={p.id} product={p} />
-          ))}
-        </div>
-      )}
+      <AnimatedSection>
+        <h1 className="text-2xl font-bold text-white">Wishlist</h1>
+        <p className="mt-1 text-sm text-brand-light">
+          {wishlistIds.length === 0
+            ? "No items saved yet."
+            : `${wishlistIds.length} ${
+                wishlistIds.length === 1 ? "item" : "items"
+              } saved for later.`}
+        </p>
+        {loading ? (
+          <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {[1, 2, 3, 4].map((i) => (
+              <div
+                key={i}
+                className="h-80 animate-pulse rounded-lg bg-brand-dark-alt"
+              />
+            ))}
+          </div>
+        ) : products.length === 0 ? (
+          <div className="mt-8 rounded-lg border border-brand-medium/35 bg-brand-dark-alt p-12 text-center">
+            <p className="text-brand-light">Your wishlist is empty.</p>
+            <Link
+              to="/products"
+              className="mt-4 inline-block rounded-lg bg-brand-orange px-6 py-3 font-medium text-white hover:bg-orange-600 transition-all duration-200 hover:scale-105 active:scale-95"
+            >
+              Browse products
+            </Link>
+          </div>
+        ) : (
+          <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {products.map((p) => (
+              <ProductCard key={p.id} product={p} />
+            ))}
+          </div>
+        )}
+      </AnimatedSection>
     </div>
   );
 }

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { supabase } from "../../../lib/supabase";
+import { compressImageForUpload } from "../../../lib/imageUtils";
 import { Plus, Trash2, Edit2, Loader2, Image as ImageIcon, Upload, MoveUp, MoveDown } from "lucide-react";
 
 export type GalleryImageItem = {
@@ -94,13 +95,19 @@ export default function OwnerGallery() {
 
     setUploading(true);
     try {
-      const fileExt = file.name.split(".").pop();
+      let fileToUpload = file;
+      try {
+        fileToUpload = await compressImageForUpload(file);
+      } catch {
+        // Fallback to original
+      }
+      const fileExt = fileToUpload.name.split(".").pop() || "webp";
       const fileName = `${Date.now()}_${Math.random().toString(36).substring(2, 7)}.${fileExt}`;
       const filePath = `gallery/${fileName}`;
 
       const { error: uploadError } = await supabase.storage
         .from("store")
-        .upload(filePath, file, { cacheControl: "3600", upsert: true });
+        .upload(filePath, fileToUpload, { cacheControl: "3600", upsert: true });
 
       if (uploadError) throw uploadError;
 

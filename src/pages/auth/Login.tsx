@@ -3,6 +3,7 @@ import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { Button } from "../../components/ui/Button";
 import { GoogleIcon } from "../../components/ui/GoogleIcon";
 import { SEO } from "../../components/ui/SEO";
+import { AnimatedSection } from "../../components/ui/AnimatedSection";
 import { useAuth } from "../../context/AuthContext";
 
 export default function Login() {
@@ -36,7 +37,8 @@ export default function Login() {
         title="Sign In | All On Deck"
         description="Sign in to your All On Deck account to manage your profile and view orders."
       />
-      <h1 className="text-2xl font-bold text-white">Sign in</h1>
+      <AnimatedSection>
+        <h1 className="text-2xl font-bold text-white">Sign in</h1>
       <p className="mt-1 text-brand-cream">
         Sign in to your account to view orders and manage your profile.
       </p>
@@ -176,6 +178,7 @@ export default function Login() {
           Sign up
         </Link>
       </p>
+      </AnimatedSection>
     </div>
   );
 }

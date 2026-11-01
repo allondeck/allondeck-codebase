@@ -116,28 +116,58 @@ The actual code for both functions lives in `supabase/functions/` (see repositor
 
 ## 7. Checklist
 
-- [ ] Stripe account created; test (and optionally live) keys available.
+- [ ] Stripe account created and activated for live payments (`sk_live_...`).
 - [ ] Migration `014_orders_stripe_checkout_session.sql` run in Supabase.
 - [ ] Edge Functions `create-checkout-session` and `stripe-webhook` deployed.
-- [ ] Secrets `STRIPE_SECRET_KEY` and `STRIPE_WEBHOOK_SECRET` set in Supabase Edge Functions.
-- [ ] Stripe webhook endpoint added with URL `https://<PROJECT_REF>.supabase.co/functions/v1/stripe-webhook`, event `checkout.session.completed`, and signing secret stored as `STRIPE_WEBHOOK_SECRET`.
+- [ ] Secrets `STRIPE_SECRET_KEY` (live secret key) and `STRIPE_WEBHOOK_SECRET` (live webhook signing secret) set in Supabase Edge Functions.
+- [ ] Stripe live webhook endpoint added with URL `https://<PROJECT_REF>.supabase.co/functions/v1/stripe-webhook`, event `checkout.session.completed`, and signing secret stored as `STRIPE_WEBHOOK_SECRET`.
 - [ ] Frontend env (e.g. Vercel): `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY` (and optional `VITE_STRIPE_PUBLISHABLE_KEY` if using Stripe.js).
 - [ ] In Edge Function, `success_url` and `cancel_url` use your real site URL (e.g. production domain).
 
 ---
 
-## 8. Testing
+## 8. Live Testing (Real Money)
 
-1. Use Stripe **test** keys and **test** cards (e.g. `4242 4242 4242 4242`).
-2. For local webhook testing, use [Stripe CLI](https://stripe.com/docs/stripe-cli):  
-   `stripe listen --forward-to https://<PROJECT_REF>.supabase.co/functions/v1/stripe-webhook`  
-   and use the printed `whsec_...` as `STRIPE_WEBHOOK_SECRET` locally.
-3. Place a test order: you should be redirected to Stripe Checkout, pay with a test card, then land on the order confirmation page; after the webhook runs, the order should show as **paid** in the dashboard and in the app.
+Because payments are tested directly with real money in **Live mode**, follow these steps:
+
+> **Important — Stripe Minimum Charge ($0.50 USD):**  
+> Stripe enforces a strict minimum transaction amount of **$0.50 USD** (50¢) for card charges. Attempting to charge $0.05 will cause Stripe Checkout creation to fail with an API error (`Amount must be at least $0.50 usd`). Set your test product price to **$0.50** (or your currency's minimum).
+
+1. **Configure Live Mode Secrets in Supabase:**
+   - In **Stripe Dashboard**, ensure **Live mode** is active (toggle off "Test mode").
+   - Copy your live secret key (`sk_live_...`).
+   - In **Developers** → **Webhooks**, add your live endpoint:
+     `https://<PROJECT_REF>.supabase.co/functions/v1/stripe-webhook`
+     listening for `checkout.session.completed`. Copy its signing secret (`whsec_...`).
+   - In **Supabase** → **Project Settings** → **Edge Functions** → **Secrets**, save:
+     - `STRIPE_SECRET_KEY` = `sk_live_...`
+     - `STRIPE_WEBHOOK_SECRET` = `whsec_...`
+
+2. **Create a Nominal Test Item ($0.50):**
+   - Create a temporary or unlisted test item priced at **$0.50** in your catalog.
+
+3. **Execute Real Test Purchase:**
+   - Add the $0.50 test item to your cart and proceed to checkout.
+   - Click "Place order" to redirect to Stripe Checkout.
+   - Complete checkout with a real credit or debit card ($0.50 charge).
+   - Ensure Stripe redirects back to `/order-confirmation/<orderId>`.
+
+4. **Verify Order Status & Webhook:**
+   - Confirm the order status transitions to **paid** in Supabase and displays as "Paid" on the confirmation screen.
+   - In **Stripe Dashboard** → **Payments**, confirm the live $0.50 transaction shows as **Succeeded**.
+   - In **Developers** → **Webhooks** → your live webhook, check that the `checkout.session.completed` event logged a `200 OK` response.
+
+5. **Refund & Cleanup:**
+   - In Stripe Dashboard → **Payments**, select the $0.50 test transaction and click **Refund payment** (optional).
+   - Remove or archive the test item from your store.
 
 ---
 
-## 9. Going live
+## 9. Going Live / Production Verification
 
-- Switch to Stripe **live** keys and set `STRIPE_SECRET_KEY` (and live webhook secret) in Supabase.
-- In Stripe Dashboard, add a **live** webhook endpoint with the same URL and event.
-- Ensure `success_url` and `cancel_url` in `create-checkout-session` use your production domain.
+Once the live test transaction has succeeded:
+
+- [ ] Ensure all store catalog products have their final production prices.
+- [ ] Ensure `success_url` and `cancel_url` in `create-checkout-session` point to your live domain (e.g. `https://yourdomain.com`).
+- [ ] (Optional) In **Stripe Dashboard** → **Settings** → **Customer emails**, enable automated customer receipts for successful payments.
+- [ ] Monitor incoming live transactions and webhook delivery under **Stripe Dashboard** → **Payments** and **Developers** → **Webhooks**.

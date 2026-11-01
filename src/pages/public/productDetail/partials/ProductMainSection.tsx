@@ -3,6 +3,7 @@ import { formatPrice } from "../../../../lib/utils";
 import { getSupabaseImageTransformUrl } from "../../../../lib/imageUtils";
 import { useWishlist } from "../../../../hooks/useWishlist";
 import { useCastAndReel } from "../../../../components/ui/CastAndReelSplash";
+import { AnimatedSection } from "../../../../components/ui/AnimatedSection";
 import type { ProductRow } from "../../../../types/database";
 
 type VariantType = {
@@ -57,7 +58,7 @@ export function ProductMainSection({
   const { triggerSplash } = useCastAndReel();
 
   return (
-    <div className="flex flex-col gap-8 lg:flex-row">
+    <AnimatedSection className="flex flex-col gap-8 lg:flex-row">
       <div className="relative aspect-square w-full max-w-lg shrink-0 overflow-hidden rounded-2xl bg-brand-dark-alt shadow-xl border border-brand-medium/30">
         {selectedVariant?.image_url || product.image_url ? (
           <img
@@ -221,7 +222,7 @@ export function ProductMainSection({
           </div>
         )}
       </div>
-    </div>
+    </AnimatedSection>
   );
 }
 

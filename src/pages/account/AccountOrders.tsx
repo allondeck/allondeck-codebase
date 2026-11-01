@@ -2,6 +2,8 @@ import { Navigate, Link } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { useCustomerOrders } from "../../hooks/useCustomerOrders";
 import { formatPrice } from "../../lib/utils";
+import { getSupabaseImageTransformUrl } from "../../lib/imageUtils";
+import { AnimatedSection } from "../../components/ui/AnimatedSection";
 
 export default function AccountOrders() {
   const { user, loading: authLoading } = useAuth();
@@ -23,9 +25,10 @@ export default function AccountOrders() {
 
   return (
     <div className="mx-auto max-w-content px-6 lg:px-12 py-8 sm:px-6 lg:px-8 w-full text-left">
-      <Link to="/account" className="text-sm text-brand-light hover:text-white">
-        ← Back to account
-      </Link>
+      <AnimatedSection>
+        <Link to="/account" className="text-sm text-brand-light hover:text-white">
+          ← Back to account
+        </Link>
       <h1 className="mt-4 text-2xl font-bold text-white">All orders</h1>
       <p className="mt-1 text-sm text-brand-light">
         {orders.length} {orders.length === 1 ? "order" : "orders"} total
@@ -45,7 +48,11 @@ export default function AccountOrders() {
               <div className="h-14 w-14 shrink-0 overflow-hidden rounded-md bg-brand-dark">
                 {order.first_item?.image_url ? (
                   <img
-                    src={order.first_item.image_url}
+                    src={getSupabaseImageTransformUrl(order.first_item.image_url, {
+                      width: 112,
+                      height: 112,
+                      bucket: "products",
+                    })}
                     alt=""
                     width={56}
                     height={56}
@@ -94,6 +101,7 @@ export default function AccountOrders() {
           ))}
         </ul>
       )}
+      </AnimatedSection>
     </div>
   );
 }

@@ -3,6 +3,7 @@ import { useSearchParams } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { supabase } from "../../../lib/supabase";
 import { ServiceRow, GalleryImageRow } from "../../../types/database";
+import { compressImageForUpload } from "../../../lib/imageUtils";
 import {
   Plus,
   Trash2,
@@ -168,13 +169,19 @@ export default function OwnerServices() {
 
     setUploadingServiceImg(true);
     try {
-      const fileExt = file.name.split(".").pop();
+      let fileToUpload = file;
+      try {
+        fileToUpload = await compressImageForUpload(file);
+      } catch {
+        // Fallback to original
+      }
+      const fileExt = fileToUpload.name.split(".").pop() || "webp";
       const fileName = `service_${Date.now()}_${Math.random().toString(36).substring(2, 7)}.${fileExt}`;
       const filePath = `services/${fileName}`;
 
       const { error: uploadError } = await supabase.storage
         .from("store")
-        .upload(filePath, file, { cacheControl: "3600", upsert: true });
+        .upload(filePath, fileToUpload, { cacheControl: "3600", upsert: true });
 
       if (uploadError) throw uploadError;
 
@@ -337,13 +344,19 @@ export default function OwnerServices() {
 
     setUploadingGalleryImg(true);
     try {
-      const fileExt = file.name.split(".").pop();
+      let fileToUpload = file;
+      try {
+        fileToUpload = await compressImageForUpload(file);
+      } catch {
+        // Fallback to original
+      }
+      const fileExt = fileToUpload.name.split(".").pop() || "webp";
       const fileName = `${Date.now()}_${Math.random().toString(36).substring(2, 7)}.${fileExt}`;
       const filePath = `gallery/${fileName}`;
 
       const { error: uploadError } = await supabase.storage
         .from("store")
-        .upload(filePath, file, { cacheControl: "3600", upsert: true });
+        .upload(filePath, fileToUpload, { cacheControl: "3600", upsert: true });
 
       if (uploadError) throw uploadError;
 

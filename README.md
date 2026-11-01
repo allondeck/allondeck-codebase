@@ -110,15 +110,16 @@ La plataforma web de **All On Deck** combina la presentación y cotización de p
 
 ### Configuración Inicial de la Cuenta de Propietario
 En una instalación nueva o base de datos limpia:
-1. Inicia la aplicación en local (`npm run dev`) o visita la web en `/setup`.
-2. Completa tu nombre, correo electrónico y contraseña segura.
+1. Inicia la aplicación en local (`npm run dev`) y visita [http://localhost:5173/setup](http://localhost:5173/setup) (o `/setup` en el dominio publicado).
+2. Completa tu nombre, correo electrónico de preferencia y contraseña segura.
 3. Haz clic en **Crear cuenta de propietario**.
-4. Una vez creada la primera cuenta, la ruta `/setup` queda bloqueada permanentemente por seguridad.
+4. Solo se permite una única cuenta de propietario en toda la tienda. Una vez creada la primera cuenta, la ruta `/setup` queda bloqueada permanentemente por seguridad.
 
 ### Transferencia de Propiedad
-Si se requiere cambiar el correo electrónico del propietario principal:
-1. El nuevo titular debe registrarse primero con su correo en la página web.
-2. Desde el Editor SQL de Supabase, ejecuta el script [`002_transfer_owner.sql`](file:///Users/leandro.alfonso/Documents/GitHub/allondeck-codebase/supabase/migrations/002_transfer_owner.sql) indicando el nuevo correo.
+Si en algún momento se requiere transferir el acceso de propietario principal a un nuevo titular o correo electrónico:
+1. El nuevo titular debe registrarse primero como usuario con su correo en la página web.
+2. Desde el panel de Supabase (**SQL Editor**), ejecuta el script [`002_transfer_owner.sql`](file:///Users/leandro.alfonso/Documents/GitHub/allondeck-codebase/supabase/migrations/002_transfer_owner.sql) tras actualizar la dirección de correo indicada al final del archivo.
+3. El rol de propietario se reasignará de inmediato a la nueva cuenta.
 
 ---
 
@@ -638,6 +639,7 @@ VITE_STRIPE_PUBLISHABLE_KEY=pk_test_...
    npm run dev
    ```
 4. Abre [http://localhost:5173](http://localhost:5173) en tu navegador.
+5. Para registrar la cuenta inicial de propietario en local, visita [http://localhost:5173/setup](http://localhost:5173/setup).
 
 ### Base de Datos y Migraciones
 Las migraciones de la base de datos se encuentran en [`supabase/migrations/`](file:///Users/leandro.alfonso/Documents/GitHub/allondeck-codebase/supabase/migrations):

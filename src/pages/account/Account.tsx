@@ -2,9 +2,11 @@ import { useState } from "react";
 import { Navigate, Link, useNavigate } from "react-router-dom";
 import { Button } from "../../components/ui/Button";
 import { SEO } from "../../components/ui/SEO";
+import { AnimatedSection } from "../../components/ui/AnimatedSection";
 import { useAuth } from "../../context/AuthContext";
 import { useCustomerOrders } from "../../hooks/useCustomerOrders";
 import { formatPrice } from "../../lib/utils";
+import { getSupabaseImageTransformUrl } from "../../lib/imageUtils";
 
 export default function Account() {
   const { user, profile, loading, signOut, deleteAccount, isOwner } = useAuth();
@@ -32,7 +34,8 @@ export default function Account() {
         title="My Account | All On Deck"
         description="Manage your All On Deck profile, view orders, and manage preferences."
       />
-      <h1 className="text-2xl font-bold text-white">Account</h1>
+      <AnimatedSection>
+        <h1 className="text-2xl font-bold text-white">Account</h1>
       <p className="mt-1 text-brand-cream">{profile?.full_name || user.email}</p>
 
       <div className="mt-8 space-y-6">
@@ -77,7 +80,11 @@ export default function Account() {
                     <div className="h-14 w-14 shrink-0 overflow-hidden rounded-md bg-brand-dark-alt">
                       {order.first_item?.image_url ? (
                         <img
-                          src={order.first_item.image_url}
+                          src={getSupabaseImageTransformUrl(order.first_item.image_url, {
+                            width: 112,
+                            height: 112,
+                            bucket: "products",
+                          })}
                           alt=""
                           width={56}
                           height={56}
@@ -207,6 +214,7 @@ export default function Account() {
           Sign out
         </Button>
       </div>
+      </AnimatedSection>
     </div>
   );
 }

@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import { useProducts } from "../../../../hooks/useProducts";
 import { Button } from "../../../../components/ui/Button";
 import { Icon } from "../../../../components/ui/Icon";
@@ -13,7 +14,13 @@ export function ShopSection() {
       id="shop"
     >
       <div className="mx-auto max-w-content px-6 lg:px-12">
-        <div className="text-center flex flex-col items-center">
+        <motion.div
+          initial={{ opacity: 0, y: 25 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-40px" }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="text-center flex flex-col items-center"
+        >
           <div className="flex items-center justify-center gap-3 sm:gap-4">
             <Icon
               name="cart"
@@ -29,26 +36,33 @@ export function ShopSection() {
             Join the community and carry our spirit on every journey. We'll see
             you out on the water!
           </p>
-        </div>
+        </motion.div>
 
-        <ProductCarousel className="mt-5 sm:mt-6">
-          {loading
-            ? Array.from({ length: 8 }).map((_, i) => (
-                <div
-                  key={i}
-                  className="snap-start shrink-0 w-[220px] sm:w-[240px] md:w-[250px] lg:w-[260px] xl:w-[270px] h-72 sm:h-80 animate-pulse rounded-[1.5rem] sm:rounded-[1.75rem] bg-brand-medium/50 shadow-md"
-                />
-              ))
-            : products.map((product) => (
-                <ShopCard key={product.id} product={product} />
-              ))}
-        </ProductCarousel>
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.6, delay: 0.15, ease: "easeOut" }}
+        >
+          <ProductCarousel className="mt-5 sm:mt-6">
+            {loading
+              ? Array.from({ length: 8 }).map((_, i) => (
+                  <div
+                    key={i}
+                    className="snap-start shrink-0 w-[220px] sm:w-[240px] md:w-[250px] lg:w-[260px] xl:w-[270px] h-72 sm:h-80 animate-pulse rounded-[1.5rem] sm:rounded-[1.75rem] bg-brand-medium/50 shadow-md"
+                  />
+                ))
+              : products.map((product) => (
+                  <ShopCard key={product.id} product={product} />
+                ))}
+          </ProductCarousel>
 
-        <div className="mt-4 sm:mt-5 text-center">
-          <Button to="/products" variant="outline" size="md">
-            View All Products
-          </Button>
-        </div>
+          <div className="mt-4 sm:mt-5 text-center">
+            <Button to="/products" variant="outline" size="md">
+              View All Products
+            </Button>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

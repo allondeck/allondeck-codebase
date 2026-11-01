@@ -1,6 +1,11 @@
 import React from "react";
+import { motion } from "framer-motion";
 import { ServiceCard } from "../../../../components/features/ServiceCard";
 import { ServiceRow } from "../../../../types/database";
+import {
+  staggerContainerVariants,
+  staggerCardVariants,
+} from "../../../../components/ui/AnimatedSection";
 
 interface ServicesHeroSectionProps {
   services: ServiceRow[];
@@ -28,22 +33,35 @@ export function ServicesHeroSection({ services, onActionClick }: ServicesHeroSec
 
   return (
     <div className="mx-auto max-w-content px-6 lg:px-12 pt-10 sm:pt-12 md:pt-14 pb-20 text-center">
-      <h1 className="font-heading text-4xl md:text-6xl font-black tracking-widest text-brand-orange uppercase">
-        SERVICES
-      </h1>
+      <motion.div
+        initial={{ opacity: 0, y: 25 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.65, ease: "easeOut" }}
+      >
+        <h1 className="font-heading text-4xl md:text-6xl font-black tracking-widest text-brand-orange uppercase">
+          SERVICES
+        </h1>
+        <div className="mx-auto mt-2.5 sm:mt-3 h-1 w-16 bg-brand-cream/60 rounded-full" />
+      </motion.div>
 
       {/* Services Grid */}
-      <div className="mt-8 sm:mt-10 md:mt-12 grid gap-8 md:gap-10 lg:gap-8 xl:gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 max-w-[480px] sm:max-w-[550px] md:max-w-[820px] lg:max-w-[1030px] xl:max-w-[1220px] 2xl:max-w-[1260px] mx-auto text-left">
+      <motion.div
+        variants={staggerContainerVariants}
+        initial="hidden"
+        animate="visible"
+        className="mt-8 sm:mt-10 md:mt-12 grid gap-8 md:gap-10 lg:gap-8 xl:gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 max-w-[480px] sm:max-w-[550px] md:max-w-[820px] lg:max-w-[1030px] xl:max-w-[1220px] 2xl:max-w-[1260px] mx-auto text-left"
+      >
         {services.map((service, idx) => (
-          <ServiceCard
-            key={service.id || `srv-${idx}`}
-            title={formatCardTitle(service.title, service.card_title)}
-            imageSrc={service.image_url}
-            targetId={`service-${idx + 1}`}
-            onActionClick={onActionClick}
-          />
+          <motion.div key={service.id || `srv-${idx}`} variants={staggerCardVariants} className="h-full">
+            <ServiceCard
+              title={formatCardTitle(service.title, service.card_title)}
+              imageSrc={service.image_url}
+              targetId={`service-${idx + 1}`}
+              onActionClick={onActionClick}
+            />
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
     </div>
   );
 }

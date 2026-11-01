@@ -1,4 +1,5 @@
 import { ProductCard } from "./ProductCard";
+import { AnimatedSection } from "../ui/AnimatedSection";
 import type { ProductRow } from "../../types/database";
 
 type RecentlyViewedStripProps = {
@@ -18,7 +19,7 @@ export function RecentlyViewedStrip({
   if (!loading && products.length === 0) return null;
 
   return (
-    <section id={id} className="min-w-0 border-t border-gray-200 pt-8">
+    <AnimatedSection id={id} className="min-w-0 border-t border-gray-200 pt-8">
       <h2 className="mb-4 break-words text-xl font-semibold text-gray-900">
         {title}
       </h2>
@@ -43,6 +44,6 @@ export function RecentlyViewedStrip({
           ))}
         </div>
       )}
-    </section>
+    </AnimatedSection>
   );
 }

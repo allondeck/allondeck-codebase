@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Button } from "../../components/ui/Button";
 import { GoogleIcon } from "../../components/ui/GoogleIcon";
 import { SEO } from "../../components/ui/SEO";
+import { AnimatedSection } from "../../components/ui/AnimatedSection";
 import { useAuth } from "../../context/AuthContext";
 import {
   validatePassword,
@@ -50,7 +51,8 @@ export default function Signup() {
         title="Create Account | All On Deck"
         description="Create an All On Deck account to track your marine decking orders and customize your experience."
       />
-      <h1 className="text-2xl font-bold text-white">Create account</h1>
+      <AnimatedSection>
+        <h1 className="text-2xl font-bold text-white">Create account</h1>
       <p className="mt-1 text-brand-cream">
         Create an account to track orders and manage your profile.
       </p>
@@ -225,6 +227,7 @@ export default function Signup() {
           Sign in
         </Link>
       </p>
+      </AnimatedSection>
     </div>
   );
 }

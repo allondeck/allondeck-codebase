@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { AnimatedSection } from "../../../../components/ui/AnimatedSection";
 
 export interface ServicesGalleryBannerSectionProps {
   variant?: "dark" | "medium";
@@ -28,7 +29,7 @@ export function ServicesGalleryBannerSection({
     <div
       className={`mx-auto max-w-content px-6 lg:px-12 mt-16 sm:mt-20 ${className}`}
     >
-      <div
+      <AnimatedSection
         className={`relative overflow-hidden rounded-3xl border ${bgClasses} p-8 sm:p-12 text-center shadow-2xl`}
       >
         {/* Subtle wave texture */}
@@ -59,7 +60,7 @@ export function ServicesGalleryBannerSection({
             </Link>
           </div>
         </div>
-      </div>
+      </AnimatedSection>
     </div>
   );
 }
