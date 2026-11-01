@@ -132,6 +132,15 @@ export default function ProductDetail() {
     if (product?.id) recordView(product.id);
   }, [product?.id, recordView]);
 
+  const productImageUrl = useMemo(() => {
+    if (!product?.image_url) return undefined;
+    if (product.image_url.startsWith("http") || product.image_url.startsWith("/")) {
+      return product.image_url;
+    }
+    const supabaseUrl = import.meta.env.VITE_SUPABASE_URL ?? "";
+    return `${supabaseUrl}/storage/v1/object/public/products/${product.image_url}`;
+  }, [product?.image_url]);
+
   if (loading) {
     return (
       <div className="animate-pulse">
@@ -221,15 +230,6 @@ export default function ProductDetail() {
       setReviewSubmitting(false);
     }
   }
-
-  const productImageUrl = useMemo(() => {
-    if (!product?.image_url) return undefined;
-    if (product.image_url.startsWith("http") || product.image_url.startsWith("/")) {
-      return product.image_url;
-    }
-    const supabaseUrl = import.meta.env.VITE_SUPABASE_URL ?? "";
-    return `${supabaseUrl}/storage/v1/object/public/products/${product.image_url}`;
-  }, [product?.image_url]);
 
   return (
     <div className="mx-auto max-w-content px-6 py-8 sm:px-6 lg:px-8 w-full">
