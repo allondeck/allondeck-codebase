@@ -27,11 +27,13 @@ type OrderWithDetails = OrderRow & {
   } | null;
 };
 
+import { getOrderTimelineStepIndex } from "../../lib/orderStatus";
+
 const statusSteps = [
   { id: "pending", label: "Order Placed", icon: ShoppingBag },
   { id: "processing", label: "Processing", icon: Package },
   { id: "shipped", label: "Shipped", icon: Truck },
-  { id: "completed", label: "Delivered", icon: CheckCircle2 },
+  { id: "delivered", label: "Delivered", icon: CheckCircle2 },
 ];
 
 export default function OrderDetail() {
@@ -133,7 +135,7 @@ export default function OrderDetail() {
     );
   }
 
-  const currentStepIndex = statusSteps.findIndex((s) => s.id === order.status);
+  const currentStepIndex = getOrderTimelineStepIndex(order.status);
   const isCancelled = order.status === "cancelled";
 
   return (

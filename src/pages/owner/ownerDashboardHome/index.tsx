@@ -8,6 +8,7 @@ import {
   parseDashboardWidgets,
   DASHBOARD_OVERVIEW_LIMITS,
 } from "../../../lib/dashboardWidgets";
+import { getOrderStatusHexColor, orderStatusLabel } from "../../../lib/orderStatus";
 
 const OwnerDashboardCharts = lazy(
   () => import("./components/OwnerDashboardCharts"),
@@ -16,16 +17,6 @@ const OwnerDashboardCharts = lazy(
 const MAX_STAT_CARDS = DASHBOARD_OVERVIEW_LIMITS.stats;
 const MAX_CHARTS = DASHBOARD_OVERVIEW_LIMITS.charts;
 const MAX_LIST_WIDGETS = DASHBOARD_OVERVIEW_LIMITS.lists;
-
-const STATUS_COLORS: Record<string, string> = {
-  pending: "#f59e0b",
-  paid: "#3b82f6",
-  processing: "#8b5cf6",
-  shipped: "#06b6d4",
-  delivered: "#22c55e",
-  cancelled: "#6b7280",
-  refunded: "#ef4444",
-};
 
 function formatCurrency(n: number) {
   return new Intl.NumberFormat("en-US", {
@@ -58,9 +49,9 @@ export default function OwnerDashboardHome({
 
   const ordersByStatusData = Object.entries(stats.ordersByStatus).map(
     ([status, count]) => ({
-      name: status.charAt(0).toUpperCase() + status.slice(1),
+      name: orderStatusLabel(status),
       count,
-      fill: STATUS_COLORS[status] ?? "#94a3b8",
+      fill: getOrderStatusHexColor(status),
     }),
   );
 

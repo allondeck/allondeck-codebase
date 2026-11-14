@@ -1,3 +1,6 @@
+import type { OrderStatus } from "../lib/orderStatus";
+export type { OrderStatus } from "../lib/orderStatus";
+
 export type Json =
   | string
   | number
@@ -102,7 +105,7 @@ export type OrderRow = {
   user_id: string | null;
   guest_email: string | null;
   customer_email: string | null;
-  status: string;
+  status: OrderStatus | string;
   total: number | string;
   subtotal: number | string;
   shipping_total: number | string;

@@ -1,5 +1,6 @@
 import { useEffect, useState, useMemo } from 'react'
 import { supabase } from '../lib/supabase'
+import { REVENUE_ORDER_STATUSES } from '../lib/orderStatus'
 
 type OrderWithItems = {
   id: string
@@ -18,7 +19,7 @@ type ProductRow = {
 
 const DEFAULT_LOW_STOCK_THRESHOLD = 10
 
-const REVENUE_STATUSES = ['paid', 'processing', 'shipped', 'delivered']
+const REVENUE_STATUSES = REVENUE_ORDER_STATUSES;
 
 export function useDashboardStats() {
   const [orders, setOrders] = useState<OrderWithItems[]>([])

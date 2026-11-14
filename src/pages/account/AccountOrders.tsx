@@ -1,7 +1,7 @@
 import { Navigate, Link } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { useCustomerOrders } from "../../hooks/useCustomerOrders";
-import { formatPrice } from "../../lib/utils";
+import { formatPrice, orderStatusLabel } from "../../lib/utils";
 import { getSupabaseImageTransformUrl } from "../../lib/imageUtils";
 import { AnimatedSection } from "../../components/ui/AnimatedSection";
 
@@ -75,11 +75,7 @@ export default function AccountOrders() {
                 </Link>
                 <p className="text-sm text-brand-light">
                   {new Date(order.created_at).toLocaleDateString()} ·{" "}
-                  {order.status === "processing"
-                    ? "In progress"
-                    : order.status === "delivered"
-                    ? "Completed"
-                    : order.status}
+                  {orderStatusLabel(order.status)}
                   {order.item_count != null && order.item_count > 0 && (
                     <>
                       {" "}

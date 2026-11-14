@@ -6,22 +6,8 @@ import {
   useOrdersByCustomerKey,
   type OrderRow,
 } from "../../../hooks/useOrdersByCustomerKey";
-import { formatPrice, orderStatusLabel } from "../../../lib/utils";
-
-const statusColors: Record<string, string> = {
-  pending: "bg-amber-950/40 text-amber-400 border border-amber-900/30",
-  paid: "bg-blue-950/40 text-blue-400 border border-blue-900/30",
-  processing: "bg-indigo-950/40 text-indigo-400 border border-indigo-900/30",
-  shipped: "bg-purple-950/40 text-purple-400 border border-purple-900/30",
-  delivered: "bg-green-950/40 text-green-400 border border-green-900/30",
-  completed: "bg-green-950/40 text-green-400 border border-green-900/30",
-  cancelled: "bg-red-950/40 text-red-400 border border-red-900/30",
-  refunded: "bg-brand-medium/30 text-brand-light border border-brand-medium/35",
-};
-
-function getStatusClass(status: string): string {
-  return statusColors[status] ?? "bg-brand-medium/30 text-brand-light border border-brand-medium/35";
-}
+import { formatPrice } from "../../../lib/utils";
+import { orderStatusLabel, getOrderStatusBadgeClass } from "../../../lib/orderStatus";
 
 export default function OwnerCustomerDetail() {
   const { customerKey: encodedKey } = useParams<{ customerKey: string }>();
@@ -213,7 +199,7 @@ export default function OwnerCustomerDetail() {
                       </td>
                       <td className="px-4 py-3">
                         <span
-                          className={`inline-flex rounded-full px-2 py-0.5 text-xs font-medium border ${getStatusClass(
+                          className={`inline-flex rounded-full px-2 py-0.5 text-xs font-medium border ${getOrderStatusBadgeClass(
                             order.status
                           )}`}
                         >

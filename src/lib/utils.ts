@@ -1,18 +1,4 @@
-/** User-facing label for order status. Use everywhere so "delivered" always shows as "Completed". */
-export const ORDER_STATUS_LABELS: Record<string, string> = {
-  pending: "Pending",
-  paid: "Paid",
-  processing: "In progress",
-  shipped: "Shipped",
-  delivered: "Completed",
-  completed: "Completed", // alias if ever stored
-  cancelled: "Cancelled",
-  refunded: "Refunded",
-};
-
-export function orderStatusLabel(status: string): string {
-  return ORDER_STATUS_LABELS[status] ?? status;
-}
+export * from "./orderStatus";
 
 /** Parse price from Supabase (PostgreSQL DECIMAL returns as string) */
 export function parsePrice(value: number | string | null | undefined): number {

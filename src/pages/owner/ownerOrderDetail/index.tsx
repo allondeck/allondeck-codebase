@@ -3,19 +3,9 @@ import { useState } from "react";
 import { Button } from "../../../components/ui/Button";
 import { Select } from "../../../components/ui/Select";
 import { useOrderDetail } from "../../../hooks/useOrderDetail";
-import { formatPrice, parsePrice } from "../../../lib/utils";
-import { orderStatusLabel } from "../../../lib/utils";
+import { formatPrice, parsePrice, orderStatusLabel } from "../../../lib/utils";
+import { ORDER_STATUS_OPTIONS, normalizeOrderStatus } from "../../../lib/orderStatus";
 import { supabase } from "../../../lib/supabase";
-
-const STATUS_OPTIONS: { value: string; label: string }[] = [
-  { value: "pending", label: "Pending" },
-  { value: "paid", label: "Paid" },
-  { value: "processing", label: "In progress" },
-  { value: "shipped", label: "Shipped" },
-  { value: "delivered", label: "Completed" },
-  { value: "cancelled", label: "Cancelled" },
-  { value: "refunded", label: "Refunded" },
-];
 
 type ShippingAddress = {
   full_name?: string;
@@ -184,13 +174,13 @@ export default function OwnerOrderDetail() {
           ) : (
             <>
               <Select
-                value={order.status}
+                value={normalizeOrderStatus(order.status)}
                 onChange={(e) => handleStatusChange(e.target.value)}
                 disabled={updatingStatus}
                 className="max-w-[11rem]"
                 aria-label="Order status"
               >
-                {STATUS_OPTIONS.map((opt) => (
+                {ORDER_STATUS_OPTIONS.map((opt) => (
                   <option key={opt.value} value={opt.value}>
                     {opt.label}
                   </option>
