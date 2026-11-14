@@ -1,13 +1,19 @@
-import { useEffect } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useLayoutEffect } from "react";
+import { useLocation } from "react-router-dom";
 
-/** Scrolls to top when the route changes. Place inside a Router. */
+/**
+ * Scrolls to top synchronously before paint when the route changes,
+ * preventing below-the-fold intersection triggers from firing prematurely.
+ * Preserves anchor scroll if a hash is present (e.g. #service-1).
+ */
 export function ScrollToTop() {
-  const { pathname } = useLocation()
+  const { pathname, hash } = useLocation();
 
-  useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [pathname])
+  useLayoutEffect(() => {
+    if (!hash) {
+      window.scrollTo(0, 0);
+    }
+  }, [pathname, hash]);
 
-  return null
+  return null;
 }

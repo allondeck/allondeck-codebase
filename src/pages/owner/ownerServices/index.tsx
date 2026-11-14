@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { supabase } from "../../../lib/supabase";
 import { ServiceRow, GalleryImageRow } from "../../../types/database";
 import { compressImageForUpload } from "../../../lib/imageUtils";
+import { Select } from "../../../components/ui/Select";
 import {
   Plus,
   Trash2,
@@ -961,7 +962,7 @@ export default function OwnerServices() {
                           <label className="block text-xs font-semibold uppercase text-brand-light mb-1.5">
                             Service Category <span className="text-brand-orange">*</span>
                           </label>
-                          <select
+                          <Select
                             required
                             value={galleryFormData.service_type}
                             onChange={(e) =>
@@ -970,14 +971,13 @@ export default function OwnerServices() {
                                 service_type: e.target.value,
                               })
                             }
-                            className="w-full rounded-lg border border-brand-medium/50 bg-brand-dark px-3.5 py-2.5 text-sm text-white shadow-sm focus:border-brand-orange focus:outline-none focus:ring-1 focus:ring-brand-orange transition-all"
                           >
                             {SERVICE_TYPE_OPTIONS.map((opt) => (
                               <option key={opt.value} value={opt.value}>
                                 {opt.label}
                               </option>
                             ))}
-                          </select>
+                          </Select>
                         </div>
 
                         <div>

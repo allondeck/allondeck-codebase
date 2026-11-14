@@ -1,60 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
-import { supabase } from "../../../lib/supabase";
-import { ServiceRow } from "../../../types/database";
+import { useServices } from "../../../hooks/useServices";
 import { SEO } from "../../../components/ui/SEO";
 import { getSupabaseImageTransformUrl } from "../../../lib/imageUtils";
 import { WaveButton } from "../../../components/ui/WaveButton";
 import { ServicesHeroSection } from "./partials/ServicesHeroSection";
 import { ServicesGalleryBannerSection } from "./partials/ServicesGalleryBannerSection";
-
-const DEFAULT_SERVICES: ServiceRow[] = [
-  {
-    id: "default-1",
-    title: "Custom DECK Designs",
-    card_title: "Custom\nDeck Designs",
-    description:
-      "Each vessel is unique. Our CAD team designs custom marine deck templates tailored to your boat's specific layouts and configuration. We offer custom logo engraving, unique patterns, and stylized borders that fit your style perfectly.",
-    secondary_description:
-      "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit.",
-    image_url: "/assets/images/1.jpg",
-    cta_text: "View Gallery",
-    cta_link: "/gallery?category=custom_deck_designs",
-    display_order: 1,
-    is_active: true,
-    created_at: new Date().toISOString(),
-  },
-  {
-    id: "default-2",
-    title: "Floor Manufacturing",
-    card_title: "Floor\nManufacturing",
-    description:
-      "We manufacture using MarineMat, the leading closed-cell EVA/PE foam material. Resilient to UV rays, salt water, and chemical stains, our materials provide superior non-skid traction even when wet, outstanding noise reduction, and excellent shock absorption.",
-    secondary_description:
-      "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit.",
-    image_url: "/assets/images/2.jpg",
-    cta_text: "View Gallery",
-    cta_link: "/gallery?category=floor_manufacturing",
-    display_order: 2,
-    is_active: true,
-    created_at: new Date().toISOString(),
-  },
-  {
-    id: "default-3",
-    title: "Cutting and Installation",
-    card_title: "Cutting and\nInstallation",
-    description:
-      "With over two years of experience and outstanding results in Florida, we elevate your boat’s standard through high-precision CNC cutting. Our specialized team, using CAD and CAM software, ensures the millimeter-perfect fabrication of each MarineMat piece, followed by a professional and meticulous installation that guarantees a flawless fit, impeccable aesthetics, and maximum durability at sea.",
-    secondary_description: null,
-    image_url: "/assets/images/3.jpg",
-    cta_text: "View Gallery",
-    cta_link: "/gallery?category=cutting_installation",
-    display_order: 3,
-    is_active: true,
-    created_at: new Date().toISOString(),
-  },
-];
 
 function scrollToSection(id: string) {
   const el = document.getElementById(id);
@@ -63,40 +15,7 @@ function scrollToSection(id: string) {
 
 export default function Services() {
   const location = useLocation();
-  const [services, setServices] = useState<ServiceRow[]>(DEFAULT_SERVICES);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    async function fetchServices() {
-      try {
-        const { data, error } = await supabase
-          .from("services")
-          .select("*")
-          .eq("is_active", true)
-          .order("display_order", { ascending: true })
-          .order("created_at", { ascending: true });
-
-        if (error) {
-          console.warn(
-            "Using default services (could not fetch from DB):",
-            error,
-          );
-          setServices(DEFAULT_SERVICES);
-        } else if (data && data.length > 0) {
-          setServices(data);
-        } else {
-          setServices(DEFAULT_SERVICES);
-        }
-      } catch (err) {
-        console.error("Error loading services:", err);
-        setServices(DEFAULT_SERVICES);
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    fetchServices();
-  }, []);
+  const { services, loading } = useServices();
 
   useEffect(() => {
     if (location.hash) {

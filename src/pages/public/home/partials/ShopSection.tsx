@@ -15,10 +15,10 @@ export function ShopSection() {
     >
       <div className="mx-auto max-w-content px-6 lg:px-12">
         <motion.div
-          initial={{ opacity: 0, y: 25 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-40px" }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
           className="text-center flex flex-col items-center"
         >
           <div className="flex items-center justify-center gap-3 sm:gap-4">
@@ -38,23 +38,24 @@ export function ShopSection() {
           </p>
         </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-50px" }}
-          transition={{ duration: 0.6, delay: 0.15, ease: "easeOut" }}
-        >
+        <div>
           <ProductCarousel className="mt-5 sm:mt-6">
-            {loading
-              ? Array.from({ length: 8 }).map((_, i) => (
-                  <div
-                    key={i}
-                    className="snap-start shrink-0 w-[220px] sm:w-[240px] md:w-[250px] lg:w-[260px] xl:w-[270px] h-72 sm:h-80 animate-pulse rounded-[1.5rem] sm:rounded-[1.75rem] bg-brand-medium/50 shadow-md"
-                  />
-                ))
-              : products.map((product) => (
-                  <ShopCard key={product.id} product={product} />
-                ))}
+            {loading ? (
+              Array.from({ length: 8 }).map((_, i) => (
+                <div
+                  key={i}
+                  className="snap-start shrink-0 w-[220px] sm:w-[240px] md:w-[250px] lg:w-[260px] xl:w-[270px] h-72 sm:h-80 animate-pulse rounded-[1.5rem] sm:rounded-[1.75rem] bg-brand-medium/50 shadow-md"
+                />
+              ))
+            ) : products.length > 0 ? (
+              products.map((product) => (
+                <ShopCard key={product.id} product={product} />
+              ))
+            ) : (
+              <div className="py-12 w-full text-center text-brand-light/70 italic text-sm">
+                No featured products currently on display. Explore our full catalog below!
+              </div>
+            )}
           </ProductCarousel>
 
           <div className="mt-4 sm:mt-5 text-center">
@@ -62,7 +63,7 @@ export function ShopSection() {
               View All Products
             </Button>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

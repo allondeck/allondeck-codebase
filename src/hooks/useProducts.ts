@@ -17,18 +17,48 @@ export type ProductSortBy =
   | "stock_asc"
   | "stock_desc";
 
-export function useProducts(options?: {
+export interface UseProductsOptions {
   categorySlug?: string;
   featured?: boolean;
   search?: string;
   sortBy?: ProductSortBy;
   limit?: number;
-}) {
-  const [products, setProducts] = useState<ProductRow[]>([]);
-  const [loading, setLoading] = useState(true);
+}
+
+// In-memory cache by query key to prevent re-fetching and empty section states on client navigation
+const productsCache = new Map<string, ProductRow[]>();
+const activeProductPromises = new Map<string, Promise<ProductRow[]>>();
+
+function getCacheKey(options?: UseProductsOptions): string {
+  return JSON.stringify({
+    categorySlug: options?.categorySlug ?? null,
+    featured: options?.featured ?? null,
+    search: options?.search ?? null,
+    sortBy: options?.sortBy ?? "newest",
+    limit: options?.limit ?? null,
+  });
+}
+
+export function useProducts(options?: UseProductsOptions) {
+  const cacheKey = getCacheKey(options);
+  const cached = productsCache.get(cacheKey);
+
+  const [products, setProducts] = useState<ProductRow[]>(() => cached ?? []);
+  const [loading, setLoading] = useState<boolean>(() => cached === undefined);
   const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
+    let isMounted = true;
+    const currentKey = getCacheKey(options);
+    const existing = productsCache.get(currentKey);
+
+    if (existing) {
+      setProducts(existing);
+      setLoading(false);
+    } else {
+      setLoading(true);
+    }
+
     const selectStr = options?.categorySlug
       ? "*, product_categories!inner(categories!inner(slug, id))"
       : "*, product_categories(categories(id, slug))";
@@ -69,8 +99,9 @@ export function useProducts(options?: {
       query = query.limit(options.limit);
     }
 
-    void (async () => {
-      try {
+    let promise = activeProductPromises.get(currentKey);
+    if (!promise) {
+      promise = (async () => {
         const { data, error: err } = await query;
         if (err) throw err;
         const raw = (data ?? []) as ProductWithCategories[];
@@ -83,13 +114,32 @@ export function useProducts(options?: {
                   .map((pc) => pc.categories?.id)
                   .filter(Boolean) as string[],
             );
-        setProducts(limited);
-      } catch (e) {
-        setError(e instanceof Error ? e : new Error(String(e)));
-      } finally {
-        setLoading(false);
-      }
-    })();
+        productsCache.set(currentKey, limited);
+        return limited;
+      })().finally(() => {
+        activeProductPromises.delete(currentKey);
+      });
+      activeProductPromises.set(currentKey, promise);
+    }
+
+    void promise
+      .then((data) => {
+        if (isMounted) {
+          setProducts(data);
+          setError(null);
+          setLoading(false);
+        }
+      })
+      .catch((e) => {
+        if (isMounted) {
+          setError(e instanceof Error ? e : new Error(String(e)));
+          setLoading(false);
+        }
+      });
+
+    return () => {
+      isMounted = false;
+    };
   }, [
     options?.categorySlug,
     options?.featured,

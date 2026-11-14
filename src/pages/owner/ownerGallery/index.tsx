@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { supabase } from "../../../lib/supabase";
 import { compressImageForUpload } from "../../../lib/imageUtils";
 import { Plus, Trash2, Edit2, Loader2, Image as ImageIcon, Upload, MoveUp, MoveDown } from "lucide-react";
+import { Select } from "../../../components/ui/Select";
 
 export type GalleryImageItem = {
   id: string;
@@ -290,20 +291,19 @@ export default function OwnerGallery() {
                 <label className="block text-xs font-semibold uppercase text-brand-light mb-1">
                   Service Type *
                 </label>
-                <select
+                <Select
                   required
                   value={formData.service_type}
                   onChange={(e) =>
                     setFormData({ ...formData, service_type: e.target.value })
                   }
-                  className="w-full rounded-md border border-brand-medium/50 bg-brand-dark px-3 py-2 text-sm text-white shadow-sm focus:border-brand-orange focus:outline-none focus:ring-1 focus:ring-brand-orange"
                 >
                   {SERVICE_TYPE_OPTIONS.map((opt) => (
                     <option key={opt.value} value={opt.value}>
                       {opt.label}
                     </option>
                   ))}
-                </select>
+                </Select>
               </div>
             </div>
 

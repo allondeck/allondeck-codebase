@@ -650,6 +650,11 @@ export function Layout({ children }: LayoutProps) {
             )}
           </div>
         </div>
+
+        {/* Copyright sub-footer */}
+        <div className="border-t border-brand-medium/40 bg-brand-dark py-4 text-center text-xs text-brand-light/70">
+          <p>© {new Date().getFullYear()} {storeName}. All rights reserved.</p>
+        </div>
       </footer>
     </div>
   );

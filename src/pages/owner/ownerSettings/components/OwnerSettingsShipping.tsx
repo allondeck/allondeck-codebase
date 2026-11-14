@@ -1,5 +1,6 @@
 import React from "react";
 import { Button } from "../../../../components/ui/Button";
+import { Select } from "../../../../components/ui/Select";
 import { ALL_COUNTRIES } from "../../../../lib/shippingCountries";
 import { SectionCard } from "../../../../components/layouts/SectionCard";
 
@@ -96,7 +97,7 @@ export function OwnerSettingsShipping({
             <label htmlFor="add-shipping-country" className="sr-only">
               Add country
             </label>
-            <select
+            <Select
               id="add-shipping-country"
               value=""
               onChange={(e) => {
@@ -108,7 +109,7 @@ export function OwnerSettingsShipping({
                 );
                 e.target.value = "";
               }}
-              className="min-h-[44px] min-w-[200px] rounded-lg bg-brand-dark border border-brand-medium/60 px-3 py-2 text-sm text-white focus:border-brand-orange focus:outline-none"
+              className="min-h-[44px] sm:min-w-[200px]"
             >
               <option value="">Add a country…</option>
               {ALL_COUNTRIES.filter((c) => !shippingCountries.includes(c)).map(
@@ -118,7 +119,7 @@ export function OwnerSettingsShipping({
                   </option>
                 )
               )}
-            </select>
+            </Select>
             <span className="text-xs text-brand-light">
               {ALL_COUNTRIES.length} countries available to add.
             </span>

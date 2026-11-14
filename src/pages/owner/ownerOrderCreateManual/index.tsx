@@ -214,7 +214,13 @@ export default function OwnerOrderCreateManual() {
                       onChange={(e) =>
                         updateLine(idx, "productId", e.target.value)
                       }
-                      className="w-full min-w-[180px] rounded border border-gray-300 px-2 py-1.5 text-sm"
+                      className="w-full min-w-[180px] appearance-none rounded border border-gray-300 bg-white pl-2.5 pr-8 py-1.5 text-sm text-gray-900"
+                      style={{
+                        backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23374151'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E")`,
+                        backgroundRepeat: "no-repeat",
+                        backgroundPosition: "right 0.65rem center",
+                        backgroundSize: "1rem 1rem",
+                      }}
                     >
                       <option value="">Select product</option>
                       {products.map((p) => (

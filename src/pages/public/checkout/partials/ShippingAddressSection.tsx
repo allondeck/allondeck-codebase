@@ -1,4 +1,5 @@
 import type { ShippingAddressInput } from "../../../../lib/orders";
+import { Select } from "../../../../components/ui/Select";
 
 function capitalizeWords(s: string): string {
   return s
@@ -195,7 +196,7 @@ export function ShippingAddressSection({
             >
               Country <span className="text-red-500">*</span>
             </label>
-            <select
+            <Select
               id="country"
               name="country"
               autoComplete="country"
@@ -208,7 +209,7 @@ export function ShippingAddressSection({
               onChange={(e) =>
                 setAddress((a) => ({ ...a, country: e.target.value }))
               }
-              className="mt-1 w-full rounded-lg border border-brand-medium/50 bg-brand-dark px-3 py-2.5 text-base sm:text-sm text-white focus:border-brand-orange focus:outline-none focus:ring-2 focus:ring-brand-orange min-h-[44px]"
+              className="mt-1 min-h-[44px]"
             >
               <option value="">Select country</option>
               {countryOptions.map((c) => (
@@ -216,7 +217,7 @@ export function ShippingAddressSection({
                   {c}
                 </option>
               ))}
-            </select>
+            </Select>
           </div>
         </div>
         <div>

@@ -4,6 +4,18 @@ import { supabase } from "../../../lib/supabase";
 import { formatPrice } from "../../../lib/utils";
 import type { OrderRow } from "../../../types/database";
 
+const getStatusChevronSvg = (status: string) => {
+  const strokeColor =
+    status === "completed"
+      ? "%234ade80"
+      : status === "cancelled"
+        ? "%23f87171"
+        : status === "shipped"
+          ? "%2360a5fa"
+          : "%23facc15";
+  return `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='${strokeColor}'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E")`;
+};
+
 export default function OwnerOrders() {
   const [orders, setOrders] = useState<OrderRow[]>([]);
   const [loading, setLoading] = useState(true);
@@ -103,7 +115,7 @@ export default function OwnerOrders() {
                   <select
                     value={order.status}
                     onChange={(e) => updateStatus(order.id, e.target.value)}
-                    className={`rounded-full px-3 py-1 text-xs font-semibold border ${
+                    className={`rounded-full pl-3.5 pr-8 py-1 text-xs font-semibold border appearance-none cursor-pointer ${
                       order.status === "completed"
                         ? "bg-green-950/40 text-green-400 border-green-900/30"
                         : order.status === "cancelled"
@@ -112,6 +124,12 @@ export default function OwnerOrders() {
                             ? "bg-blue-950/40 text-blue-400 border-blue-900/30"
                             : "bg-yellow-950/40 text-yellow-400 border-yellow-900/30"
                     } focus:outline-none focus:ring-1 focus:ring-brand-orange`}
+                    style={{
+                      backgroundImage: getStatusChevronSvg(order.status),
+                      backgroundRepeat: "no-repeat",
+                      backgroundPosition: "right 0.75rem center",
+                      backgroundSize: "0.875rem 0.875rem",
+                    }}
                   >
                     <option className="bg-brand-dark-alt text-white" value="pending">Pending</option>
                     <option className="bg-brand-dark-alt text-white" value="processing">Processing</option>

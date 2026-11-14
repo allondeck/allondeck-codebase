@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Button } from "../../../components/ui/Button";
+import { Select } from "../../../components/ui/Select";
 import { supabase } from "../../../lib/supabase";
 import { useCategoriesAdmin } from "../../../hooks/useCategoriesAdmin";
 import { useProductsAdmin } from "../../../hooks/useProductsAdmin";
@@ -192,7 +193,7 @@ export default function CouponForm() {
             <label className="block text-sm font-medium text-white">
               Discount type
             </label>
-            <select
+            <Select
               value={form.discount_type}
               onChange={(e) =>
                 setForm((f) => ({
@@ -200,11 +201,11 @@ export default function CouponForm() {
                   discount_type: e.target.value as "percent" | "fixed",
                 }))
               }
-              className="mt-1 w-full rounded-lg bg-brand-dark border border-brand-medium/60 text-white px-3 py-2 focus:border-brand-orange focus:outline-none"
+              className="mt-1"
             >
               <option value="percent" className="bg-brand-dark-alt text-white">Percentage off</option>
               <option value="fixed" className="bg-brand-dark-alt text-white">Fixed amount off</option>
-            </select>
+            </Select>
           </div>
           <div>
             <label className="block text-sm font-medium text-white">
@@ -230,7 +231,7 @@ export default function CouponForm() {
           <label className="block text-sm font-medium text-white">
             Applies to
           </label>
-          <select
+          <Select
             value={form.scope}
             onChange={(e) =>
               setForm((f) => ({
@@ -239,14 +240,14 @@ export default function CouponForm() {
                 scope_ids: [],
               }))
             }
-            className="mt-1 w-full rounded-lg bg-brand-dark border border-brand-medium/60 text-white px-3 py-2 focus:border-brand-orange focus:outline-none"
+            className="mt-1"
           >
             {SCOPE_OPTIONS.map((o) => (
               <option key={o.value} value={o.value} className="bg-brand-dark-alt text-white">
                 {o.label}
               </option>
             ))}
-          </select>
+          </Select>
         </div>
 
         {form.scope === "categories" && (

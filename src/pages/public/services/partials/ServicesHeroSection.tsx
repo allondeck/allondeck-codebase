@@ -46,6 +46,7 @@ export function ServicesHeroSection({ services, onActionClick }: ServicesHeroSec
 
       {/* Services Grid */}
       <motion.div
+        key={services.map((s) => s.id).join("-")}
         variants={staggerContainerVariants}
         initial="hidden"
         animate="visible"
