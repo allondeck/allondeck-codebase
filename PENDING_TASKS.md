@@ -17,7 +17,7 @@ This document serves as the master checklist for all remaining operational, inte
 | 🔍 **SEO** | On-Page SEO, OpenGraph & Sitemaps | 🟢 **90% Done** | Medium | Dynamic tags & schema active; submit to Google on launch |
 | 🌐 **Domain & DNS** | Custom Domain & SSL | ⏳ **Pending** | High | Connect domain in Vercel settings |
 | 📧 **Domain & DNS** | Email Domain Verification (DKIM/SPF) | ⏳ **Pending** | Medium | Verify domain in Resend to prevent spam filtering |
-| 🎥 **Documentation**| Owner Video Tutorials | ⏳ **Pending** | Low | Record short walkthroughs and link in `README.md` |
+| 🎥 **Documentation**| Owner Video Tutorials | ✅ **Complete** | Low | 5 Loom walkthrough videos recorded and linked in `README.md` |
 
 ---
 
@@ -232,18 +232,13 @@ Search engine optimization (SEO), social media previews, and crawlability have a
 
 - [ ] **Lock Owner Setup Endpoint:**
   - Ensure the owner account has been registered via `/setup` so no other user can access this initial registration endpoint.
-- [ ] **Record Walkthrough Videos (Teleprompter Scripts Available):**
-  - Full word-for-word recording scripts are ready in [`LOOM_RECORDING_SCRIPTS.md`](./LOOM_RECORDING_SCRIPTS.md).
-  - Walkthrough videos to record:
-    1. *Owner Dashboard Overview*
-    2. *Managing Services & Boat Gallery*
-    3. *Updating Foam Colors & Patterns*
-    4. *Adding Products, Variants & Stock*
-    5. *Fulfilling Orders & Tracking*
-    6. *Reviewing Free Estimate Requests*
-    7. *Storefront Settings & Maintenance*
-    8. *Pending Launch Items & Roadmap (Stripe account activation, shipping pricing model, buyer email domain verification, and deck visualizer)*
-  - Once recorded, paste the shareable Loom URLs into the table in [`README.md`](./README.md).
+- [x] **Record Walkthrough Videos:**
+  - 5 official Loom walkthrough videos recorded and linked directly in [`README.md`](./README.md):
+    1. *Recorrido completo de la página y opciones*
+    2. *Configuración de Stripe y Dashboard de pedidos*
+    3. *Guía de categorías, descuentos y servicios*
+    4. *Configuración de tienda, productos y Stripe*
+    5. *Actualización de contenido y correos automáticos*
 
 ---
 

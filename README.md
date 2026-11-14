@@ -593,18 +593,15 @@ Espacio para definir pautas de atención o datos de la empresa para el asistente
 <a id="-videotutoriales-y-demostraciones"></a>
 ## 🎥 Videotutoriales y Demostraciones
 
-Los siguientes videos proporcionan demostraciones visuales de los flujos de administración:
+Los siguientes videos proporcionan demostraciones visuales de los flujos de administración y operación de la plataforma:
 
 | # | Tema del Tutorial | Descripción del Contenido | Enlace al Video |
 |---|-------------------|---------------------------|-----------------|
-| 1 | 🎬 **Visión General del Panel de Propietario** | Recorrido por el menú, métricas de venta y personalización de widgets. | _[Próximamente]_ |
-| 2 | 🛠️ **Gestión de Servicios y Galería de Barcos** | Cómo modificar servicios, subir fotos de barcos y ordenarlas. | _[Próximamente]_ |
-| 3 | 🎨 **Actualización de Colores de Espuma y Patrones** | Agregar nuevas muestras de color bicapa EVA y estilos de corte CNC. | _[Próximamente]_ |
-| 4 | 🛍️ **Añadir Productos y Control de Inventario** | Creación de artículos, variantes (tallas/colores) e importación con CSV. | _[Próximamente]_ |
-| 5 | 📦 **Despacho de Pedidos y Números de Guía** | Actualización de estados, comprobante de Stripe y números de rastreo. | _[Próximamente]_ |
-| 6 | ✉️ **Revisión de Solicitudes de Presupuesto** | Cómo atender leads de cotización de cubiertas y datos del barco. | _[Próximamente]_ |
-| 7 | ⚙️ **Ajustes de Tienda y Mantenimiento** | Configurar tiempos de entrega, países de envío y limpieza de fotos. | _[Próximamente]_ |
-| 8 | 🚀 **Hoja de Ruta de Lanzamiento (Stripe y Envíos)** | Decisiones pendientes: activación de Stripe para depósitos y reglas de envío. | _[Próximamente]_ |
+| 1 | 🎬 **Recorrido completo de la página y opciones** | Recorrido guiado de la web pública, flujo de usuario y visión general del Panel de Control de Propietario. | [Ver en Loom ↗](https://www.loom.com/share/93cdd52235d5453d8ebe0814fa5b78cc) |
+| 2 | 💳 **Configuración de Stripe y Dashboard de pedidos** | Seguimiento y despacho de pedidos, verificación de pagos con Stripe, estados de entrega y números de guía. | [Ver en Loom ↗](https://www.loom.com/share/d4add59bf54244cfbe1bf88dbfff3c01) |
+| 3 | 🗂️ **Guía de categorías, descuentos y servicios** | Organización de categorías del catálogo, creación de cupones de descuento y gestión de servicios náuticos y galería. | [Ver en Loom ↗](https://www.loom.com/share/3e458e11a81f43c89c6c9dba09be66be) |
+| 4 | 🛍️ **Configuración de tienda, productos y Stripe** | Creación de artículos, variantes (tallas/colores), alertas de stock bajo, importación con CSV y configuración de tienda con Stripe. | [Ver en Loom ↗](https://www.loom.com/share/a75a6ddc2c99467f86ad60286fb89894) |
+| 5 | ✉️ **Actualización de contenido y correos automáticos** | Muestrario de colores EVA y patrones CNC, revisión de solicitudes de presupuesto (*Estimate*) y avisos automáticos por correo. | [Ver en Loom ↗](https://www.loom.com/share/872b28b87c464171a68efa90295faf50) |
 
 ---
 
@@ -659,8 +656,7 @@ supabase db push
 
 Para consultar la configuración detallada de Stripe y Edge Functions, revisa [`PAYMENTS.md`](file:///Users/leandro.alfonso/Documents/GitHub/allondeck-codebase/PAYMENTS.md).  
 Para los pasos de traspaso de cuentas al cliente, revisa [`TRANSITION.md`](file:///Users/leandro.alfonso/Documents/GitHub/allondeck-codebase/TRANSITION.md).  
-Para la lista de tareas de lanzamiento y automatizaciones de correos, revisa [`PENDING_TASKS.md`](file:///Users/leandro.alfonso/Documents/GitHub/allondeck-codebase/PENDING_TASKS.md).  
-Para los guiones de grabación de los videotutoriales, revisa [`LOOM_RECORDING_SCRIPTS.md`](file:///Users/leandro.alfonso/Documents/GitHub/allondeck-codebase/LOOM_RECORDING_SCRIPTS.md).
+Para la lista de tareas de lanzamiento y automatizaciones de correos, revisa [`PENDING_TASKS.md`](file:///Users/leandro.alfonso/Documents/GitHub/allondeck-codebase/PENDING_TASKS.md).
 
 ---
 
